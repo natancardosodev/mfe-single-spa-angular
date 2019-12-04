@@ -1,0 +1,38 @@
+
+
+$_color_primaria: #286935;
+
+.form-group {
+  font-size: 0.9rem;
+}
+.titulo-principal {
+  margin-top: 20px;
+  padding: 8px 0 8px 8px;
+  border-left: solid 1px $_color_primaria;
+  border-bottom: solid 1px $_color_primaria;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: $_color_primaria;
+  text-transform: uppercase;
+}
+
+.titulo-secundario {
+  font-size: 0.8rem;
+  background-color: #e6f2ee;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 10px;
+  color: #003925;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.texto-obrigatorio {
+  color: red;
+}
+
+.align-center-flex {
+  display: flex;
+  align-items: center;
+}

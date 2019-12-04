@@ -1,1 +1,237 @@
-/* You can add global styles to this file, and also import other style files */
+/********************************************************************
+Scaffolding
+********************************************************************/
+.card-box-content {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid #005b34;
+  padding: 2em;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin-bottom: .75rem;
+}
+
+.form-control:focus {
+  border-color: #97bfae;
+  box-shadow: 0 0 0 0.2rem #e7f2ee;
+}
+
+.input-invalid,
+.input-invalid:focus {
+  border: solid 1px #e64757;
+  box-shadow: 0 0 0 0.2rem #dc354538;
+}
+
+/********************************************************************
+buttons
+********************************************************************/
+button,
+input {
+  -webkit-transition: all .7s ease;
+  -moz-transition: all .7s ease;
+  -ms-transition: all .7s ease;
+  -o-transition: all .7s ease;
+  transition: all .7s ease;
+}
+
+.btn-nav-base {
+  margin-bottom: 5px;
+  position: relative;
+  background: #005B34;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: .9em;
+  overflow: hidden;
+}
+
+.btn-nav-secondary {
+  margin-bottom: 5px;
+  position: relative;
+  background: #6c757d;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: .9em;
+  overflow: hidden;
+}
+
+.btn-nav-base:hover {
+  background: #00361f;
+  color: #fff
+}
+
+.btn-nav-ico-right {
+  padding-right: 3.5em;
+}
+
+.btn-nav-ico-left {
+  padding-left: 3.5em;
+}
+
+.btn-acao {
+  margin: 0 0 .5em .5em;
+}
+
+
+.btn-acao-group {
+  float: right;
+  width: 84%;
+  text-align: right;
+}
+
+.btn-singout {
+  right: 17em;
+  font-size: 1.3em !important
+}
+
+/********************************************************************
+header
+********************************************************************/
+body {
+  color: #4f4f4f
+}
+
+body::before,
+body::after {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  content: '';
+}
+
+body::before {
+  top: 0;
+  height: 10em;
+  background: #e7f2ee;
+  background: -moz-linear-gradient(top, #e7f2ee 66%, #ffffff 100%);
+  background: -webkit-linear-gradient(top, #e7f2ee 66%, #ffffff 100%);
+  background: linear-gradient(to bottom, #e7f2ee 66%, #ffffff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e7f2ee', endColorstr='#ffffff', GradientType=0);
+}
+
+body::after {
+  top: 5.7em;
+  height: 0.5em;
+  background: #9abeb2;
+  z-index: 5;
+}
+
+#permission-client {
+  position: relative;
+  z-index: 10;
+}
+
+.name-user,
+.time {
+  color: #005b34;
+}
+
+#permission-system {
+  top: 4px !important;
+}
+
+#permission-system .nav-item {
+  font-size: 1.2em;
+}
+
+.page-header,
+.container-base {
+  width: 997px
+}
+
+.container-base {
+  font-size: .9em
+}
+
+a {
+  color: #005B34;
+}
+
+a:hover {
+  color: #00361f;
+}
+
+.ico {
+  position: absolute;
+  padding: 0.3em 0.7em;
+  background: #00361f;
+  font-size: 1.2em;
+}
+
+.ico-right,
+.ico-left {
+  top: 0;
+}
+
+.ico-right {
+  right: 0
+}
+
+.ico-left {
+  left: 0;
+}
+
+.form-control {
+  padding: .4em .2em;
+}
+
+.col-form-label {
+  text-align: right;
+}
+
+/********************************************************************
+Nav
+********************************************************************/
+#permission-navigation {
+  border: 0;
+  background-color: #e5e5e5;
+}
+
+.permission-navigation-title {
+  padding: .4em 0 .3em .8em;
+  background: #ccc;
+}
+
+.permission-navigation-title h5 {
+  margin: 0;
+  font-size: 1em;
+}
+
+.nav-tabs .nav-item {
+  margin-top: 0;
+  border-bottom: .1em solid #286834;
+}
+
+.nav-tabs .nav-link {
+  color: #24592fc4;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  border: 1px solid #9292922e;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  background-color: #e8f3f047;
+}
+
+.nav-tabs .nav-link:hover {
+  background: #ddece6;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #215827;
+}
+
+.nav-item {
+  margin-top: 0;
+  border-bottom: .1em solid #215827;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: #286935;
+  background-color: #e9f3f0;
+  border-color: #286935 #276432 #fff;
+  font-weight: 600;
+}
+
+#permission-system {
+  font-size: 1em;
+}
