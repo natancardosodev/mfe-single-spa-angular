@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 const appRoutes: Routes = [
   {
     path: 'funcionalidade',
-    loadChildren: () => import('./components/funcionalidade/funcionalidade.module').then(m => m.FuncionalidadeModule),
+    loadChildren: () => import('./pages/funcionalidade/funcionalidade.module').then(m => m.FuncionalidadeModule),
   },
   { path: '',  redirectTo: 'funcionalidade', pathMatch: 'full' }
 ];

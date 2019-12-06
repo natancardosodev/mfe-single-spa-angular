@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'visualizar',
-    loadChildren: () => import('../../pages/visualizar-pesquisa/visualizar-pesquisa.module').then(m => m.VisualizarPesquisaModule)
+    loadChildren: () => import('./visualizar-pesquisa/visualizar-pesquisa.module').then(m => m.VisualizarPesquisaModule)
   }
 ];
 @NgModule({

@@ -1,3 +1,4 @@
+import { AlertMessage } from './../../util/alert-message';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -6,12 +7,11 @@ import { finalize } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
 import { GridColumnDefs, GridSearchParams } from 'grid';
-import { AlertService } from 'lib-alert';
 import { GridOptions } from 'ag-grid';
 
-import { FuncionalidadeService } from '../../services/funcionalidade.service';
+import { FuncionalidadeService } from '../../services/funcionalidade/funcionalidade.service';
 import { PesquisaInterface } from '../../interfaces/pesquisa-interface';
-import { RotasEnum } from './../../enum/rotas-enum';
+import { RotasEnum } from '../../enum/rotas-enum';
 
 @Component({
   selector: 'app-funcionalidade',
@@ -30,7 +30,7 @@ export class FuncionalidadeComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private alertService: AlertService,
+    private alertMessage: AlertMessage,
     private funcionalidadeService: FuncionalidadeService
   ) {
     this.$dadosGrid = new Subject();
@@ -107,19 +107,11 @@ export class FuncionalidadeComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.$dadosGrid.next(response);
       }, (erro: HttpErrorResponse) => {
-        this.alert(erro.message);
+        this.alertMessage.alert(erro.message, 'danger');
         this.$dadosGrid.next([]);
       });
     this.gridView = true;
     return this.$sub;
-  }
-
-  private alert(message: any): void {
-    this.alertService.openModal({
-      message: `<strong>${message}</strong>`,
-      title: 'Atenção',
-      alert: 'warning',
-    });
   }
 
 }

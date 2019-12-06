@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
-import { AlertService } from 'lib-alert';
-
-import { TextMaskFactory } from './../../../util/mask/text-mask-factory';
-import { PesquisaForm } from './pesquisa.form';
 import { FormGroup } from '@angular/forms';
+
+import { AlertMessage } from './../../../util/alert-message';
+import { TextMaskFactory } from '../../../util/mask/text-mask-factory';
+import { PesquisaForm } from './pesquisa.form';
 
 @Component({
   selector: 'app-pesquisa-form',
@@ -18,7 +17,9 @@ export class PesquisaFormComponent implements OnInit {
   private $pesquisaForm: PesquisaForm;
   private $maskFactory: TextMaskFactory;
 
-  constructor(private alertService: AlertService) {
+  constructor(
+    private alertMessage: AlertMessage
+  ) {
     this.dataForm = new EventEmitter();
     this.$maskFactory = new TextMaskFactory();
     this.$pesquisaForm = new PesquisaForm();
@@ -47,7 +48,7 @@ export class PesquisaFormComponent implements OnInit {
       return;
     }
 
-    this.alert('Informe pelo menos um campo para pesquisa');
+    this.alertMessage.alert('Informe pelo menos um campo para pesquisa');
   }
 
   public isFieldValid(form: FormGroup, field: string) {
@@ -56,14 +57,6 @@ export class PesquisaFormComponent implements OnInit {
 
   public isEmpty(dado): boolean {
     return JSON.stringify(dado) === '{}';
-  }
-
-  private alert(message: any): void {
-    this.alertService.openModal({
-      message: `<strong>${message}</strong>`,
-      title: 'Atenção',
-      alert: 'warning',
-    });
   }
 
 }

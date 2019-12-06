@@ -1,6 +1,6 @@
-import { HttpUtil } from '../util/http-util';
-import { RespostaPesquisa } from '../interfaces/resposta-pesquisa-interface';
-import { UrlUtilService } from './url-util.service';
+import { HttpUtil } from '../../util/http-util';
+import { RespostaPesquisa } from '../../interfaces/resposta-pesquisa-interface';
+import { UrlUtilService } from '../url-util.service';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';

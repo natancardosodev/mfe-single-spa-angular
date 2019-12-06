@@ -1,14 +1,15 @@
-import { UrlUtilService } from './services/url-util.service';
-import { UsuarioLogadoInterface } from './interfaces/usuario-logado.interface';
-import { SystemInterface } from './interfaces/system.interfece';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+import { Subject, Subscription, forkJoin } from 'rxjs';
 import { LoadingGlobalService } from '@voxtecnologia/vox-preload';
 import { Menu } from 'lib-menu';
 import { LogoInterface } from 'lib-header';
-import { AlertService } from 'lib-alert';
+
+import { AlertMessage } from './util/alert-message';
+import { UrlUtilService } from './services/url-util.service';
+import { UsuarioLogadoInterface } from './interfaces/usuario-logado.interface';
+import { SystemInterface } from './interfaces/system.interfece';
 import { UserService } from './services/user.service';
-import { Subject, Subscription, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private $itensMenu: Menu[];
 
   constructor(
-    private alertService: AlertService,
+    private alertMessage: AlertMessage,
     private userService: UserService,
     private urlUtilService: UrlUtilService,
     private loadingGlobal: LoadingGlobalService
@@ -92,11 +93,7 @@ export class AppComponent implements OnInit, OnDestroy {
       (error: any) => {
         if (!error.naoAutorizado) {
           this.loadingGlobal.hide();
-          this.alertService.openModal({
-            message: `<strong>${error.message}</strong>`,
-            title: 'Atenção',
-            alert: 'danger',
-          });
+          this.alertMessage.alert(error.message, 'danger');
         }
       });
   }

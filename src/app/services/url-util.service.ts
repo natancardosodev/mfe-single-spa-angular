@@ -22,7 +22,7 @@ export class UrlUtilService {
   /**
    * monta a url base do projeto
    * @static
-   * @returns {string}
+   * @returns string
    * @memberof UrlUtilService
    */
   public mountUrl(rota: string): string {
