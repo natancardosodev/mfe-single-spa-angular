@@ -621,6 +621,75 @@
           "configurations": {
             "production": {
               "browserTarget": "skeleton-interno-angular:build:production"
+            },
+            "homologacao": {
+              "browserTarget": "skeleton-interno-angular:build:homologacao"
+            },
+            "demo": {
+              "browserTarget": "skeleton-interno-angular:build:demo"
+            },
+            "docker": {
+              "browserTarget": "skeleton-interno-angular:build:docker"
+            },
+            "deve-um": {
+              "browserTarget": "skeleton-interno-angular:build:deve-um"
+            },
+            "deve-dois": {
+              "browserTarget": "skeleton-interno-angular:build:deve-dois"
+            },
+            "deve-tres": {
+              "browserTarget": "skeleton-interno-angular:build:deve-tres"
+            },
+            "deve-quatro": {
+              "browserTarget": "skeleton-interno-angular:build:deve-quatro"
+            },
+            "deve-cinco": {
+              "browserTarget": "skeleton-interno-angular:build:deve-cinco"
+            },
+            "deve-seis": {
+              "browserTarget": "skeleton-interno-angular:build:deve-seis"
+            },
+            "deve-sete": {
+              "browserTarget": "skeleton-interno-angular:build:deve-sete"
+            },
+            "deve-oito": {
+              "browserTarget": "skeleton-interno-angular:build:deve-oito"
+            },
+            "deve-nove": {
+              "browserTarget": "skeleton-interno-angular:build:deve-nove"
+            },
+            "deve-dez": {
+              "browserTarget": "skeleton-interno-angular:build:deve-dez"
+            },
+            "qa-um": {
+              "browserTarget": "skeleton-interno-angular:build:qa-um"
+            },
+            "qa-dois": {
+              "browserTarget": "skeleton-interno-angular:build:qa-dois"
+            },
+            "qa-tres": {
+              "browserTarget": "skeleton-interno-angular:build:qa-tres"
+            },
+            "qa-quatro": {
+              "browserTarget": "skeleton-interno-angular:build:qa-quatro"
+            },
+            "qa-cinco": {
+              "browserTarget": "skeleton-interno-angular:build:qa-dois"
+            },
+            "qa-seis": {
+              "browserTarget": "skeleton-interno-angular:build:qa-seis"
+            },
+            "qa-sete": {
+              "browserTarget": "skeleton-interno-angular:build:qa-sete"
+            },
+            "qa-oito": {
+              "browserTarget": "skeleton-interno-angular:build:qa-oito"
+            },
+            "qa-nove": {
+              "browserTarget": "skeleton-interno-angular:build:qa-nove"
+            },
+            "qa-dez": {
+              "browserTarget": "skeleton-interno-angular:build:qa-dez"
             }
           }
         },

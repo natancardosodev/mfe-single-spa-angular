@@ -129,15 +129,22 @@ body {
   margin-bottom: .75rem;
 }
 
-.form-control:focus {
-  border-color: $primary-border;
-  box-shadow: 0 0 0 0.2rem $primary-lighter;
+.form-control {
+  padding: .4em .2em;
+
+  &:focus {
+    border-color: $primary-border;
+    box-shadow: 0 0 0 0.2rem $primary-lighter;
+  }
 }
 
-.input-invalid,
-.input-invalid:focus {
+.input-invalid {
   border: solid 1px $error-border;
   box-shadow: 0 0 0 0.2rem $error-shadow;
+
+  &:focus{
+    @extend .input-invalid;
+  }
 }
 
 /********************************************************************
@@ -242,23 +249,17 @@ a {
   padding: 0.3em 0.7em;
   background: $primary-focus;
   font-size: 1.2em;
-}
-
-.ico-right,
-.ico-left {
   top: 0;
 }
 
 .ico-right {
+  @extend .ico;
   right: 0
 }
 
 .ico-left {
+  @extend .ico;
   left: 0;
-}
-
-.form-control {
-  padding: .4em .2em;
 }
 
 .col-form-label {
