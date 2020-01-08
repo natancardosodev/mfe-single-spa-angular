@@ -18,6 +18,7 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+  public funcionalidade: string;
   public idUsuario: Subject<number>;
   private $sistema: SystemInterface[];
   private $usuario: UsuarioLogadoInterface;
@@ -73,6 +74,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public get itensMenu(): Array<Menu> {
     return this.$itensMenu;
+  }
+
+  public getFuncionalidadeAtual(funcionalidadeAtual: any): void {
+    this.funcionalidade = funcionalidadeAtual;
   }
 
   private getSystemInfo(): Subscription {

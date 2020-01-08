@@ -15,11 +15,13 @@
     <div class="row">
       <aside class="col-md-3">
         <lib-menu
-          [modulos]="itensMenu">
+          [modulos]="itensMenu"
+          (funcionalidadeAtual)="getFuncionalidadeAtual($event)">
         </lib-menu>
       </aside>
       <section class="col-9 content-app">
         <div class="system-content">
+            <app-breadcrumbs [getFuncionalidade]="funcionalidade"></app-breadcrumbs>
             <router-outlet></router-outlet>
         </div>
       </section>

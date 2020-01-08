@@ -1,0 +1,38 @@
+.breadcrumb-content {
+  position: relative;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  .breadcrumb-nav {
+    padding: 0 0 1.15em 0.6em;
+    float: left;
+
+    a {
+      font-weight: bold
+    }
+
+    .breadcrumb-arrow {
+      color: #c2c1c1;
+      font-size: 0.8em;
+      margin: 0 .9em 0 .2em;
+    }
+
+    &:first-child .breadcrumb-arrow {
+      display: none
+    }
+  }
+
+  .breadcrumb-detail {
+    left: 0.6em;
+    top: .95em;
+    position: absolute;
+    background: #fff;
+    color: #005b34;
+    font-size: 0;
+    z-index: 10;
+  }
+}

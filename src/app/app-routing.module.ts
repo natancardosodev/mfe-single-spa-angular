@@ -4,10 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
   {
-    path: 'funcionalidade',
+    path: 'nova-funcionalidade',
     loadChildren: () => import('./pages/funcionalidade/funcionalidade.module').then(m => m.FuncionalidadeModule),
   },
-  { path: '',  redirectTo: 'funcionalidade', pathMatch: 'full' }
+  { path: '',  redirectTo: 'nova-funcionalidade', pathMatch: 'full' }
 ];
 
 @NgModule({
