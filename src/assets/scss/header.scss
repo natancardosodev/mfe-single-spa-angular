@@ -1,0 +1,56 @@
+#permission-client {
+  position: relative;
+  z-index: 10;
+}
+
+.name-user,
+.time {
+  color: $primary;
+}
+
+#permission-system {
+  top: 4px !important;
+
+  .nav-item {
+    font-size: 1.2em;
+  }
+}
+
+.page-header,
+.container-base {
+  width: 997px
+}
+
+.container-base {
+  font-size: .9em
+}
+
+a {
+  color: $primary;
+
+  &:hover {
+    color: $primary-focus;
+  }
+}
+
+.ico {
+  position: absolute;
+  padding: 0.3em 0.7em;
+  background: $primary-focus;
+  font-size: 1.2em;
+  top: 0;
+}
+
+.ico-right {
+  @extend .ico;
+  right: 0
+}
+
+.ico-left {
+  @extend .ico;
+  left: 0;
+}
+
+.col-form-label {
+  text-align: right;
+}

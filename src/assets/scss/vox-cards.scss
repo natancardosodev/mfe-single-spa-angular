@@ -1,0 +1,92 @@
+.vox-cards {
+  .card {
+    border: none;
+    margin-bottom: .5rem;
+    border-radius: 0;
+
+    .panel-collapse {
+      .card-body {
+        padding: 1rem .7rem;
+
+        .table {
+          tr {
+
+            th,
+            td {
+              font-size: 13px;
+            }
+
+            th {
+              background: $primary-lighter;
+              font-size: 13px;
+            }
+          }
+        }
+
+        .card-header {
+          background: $primary-lighter;
+          font-weight: bold;
+          padding: .6rem;
+          margin-bottom: .6rem;
+        }
+
+      }
+    }
+
+    .card-header {
+      cursor: pointer;
+      border: none;
+      border-radius: 0;
+      background: $primary-light;
+      padding: .7rem;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    h5 {
+      font-size: 14px;
+      margin: 0;
+      padding: 0;
+      padding: 0.1rem;
+
+      button {
+        text-decoration: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        border: none;
+
+        h5 {
+          font-size: 14px;
+          color: $primary-darck;
+          margin: 0;
+          padding: 0;
+          text-align: left;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .card {
+      margin-bottom: 0;
+    }
+
+    .vox-cards .card .lib-card-title {
+      font-weight: 600;
+      font-size: .9rem;
+      color: $primary-darck;
+      display: block;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.card-box-content {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid $primary;
+  padding: 2em;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: .75rem;
+}
