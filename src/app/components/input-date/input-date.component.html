@@ -1,0 +1,18 @@
+<input
+  [id]="id ? id : ''"
+  bsDatepicker
+  [bsConfig]="configDatepicker"
+  [(ngModel)]="value"
+  (keydown)="onKeydownDate($event)"
+  [ngClass]="[ isValid ? '' : 'input-invalid', 'form-control', 'form-control-sm']"
+  [maxDate]="maxDate"
+  [minDate]="minDate"
+  type="text"
+  placeholder="DD/MM/AAAA"/>
+
+<div *ngIf="!isValid"
+  class="mt-1 text-danger" >
+    {{ mensagemStatus }}
+</div>
+
+<button class="close" (click)="clearValue()"></button>
