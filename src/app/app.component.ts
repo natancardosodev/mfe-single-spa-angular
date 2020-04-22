@@ -6,6 +6,8 @@ import { Menu } from 'lib-menu';
 import { LogoInterface } from 'lib-header';
 
 import { AlertMessage } from './util/alert-message';
+import { StorageUtil } from './util/storage.util';
+import { isUndefined } from 'util';
 import { UrlUtilService } from './services/url-util.service';
 import { UsuarioLogadoInterface } from './interfaces/usuario-logado.interface';
 import { SystemInterface } from './interfaces/system.interfece';
@@ -38,14 +40,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.getSystemInfo();
     this.loadingGlobal.show();
-    this.userService.logarService();
+    this.logarService();
   }
 
   public ngOnDestroy(): void {
-    this.getSystemInfo().unsubscribe();
-    this.userService.logarService().unsubscribe();
+    this.getSystemInfo('').unsubscribe();
+    this.logarService().unsubscribe();
   }
 
   public get sistema(): SystemInterface[] {
@@ -80,17 +81,30 @@ export class AppComponent implements OnInit, OnDestroy {
     this.funcionalidade = funcionalidadeAtual;
   }
 
-  private getSystemInfo(): Subscription {
+  public logarService(): Subscription {
+    return this.userService.getUser().subscribe(
+      (resposta: any) => {
+        StorageUtil.store('user', resposta);
+        this.getSystemInfo(resposta);
+        return isUndefined(resposta['mensagem']) || this.urlUtilService.redirectToLogin();
+      },
+      (error) => {
+        console.log('deu erro');
+        return error.naoAutorizado && this.urlUtilService.redirectToLogin();
+      }
+    );
+  }
+
+  private getSystemInfo(dadosUsuario): Subscription {
     return forkJoin([
-      this.userService.getUserInfo(),
       this.userService.getSystem(),
       this.userService.getTime(),
       this.userService.getPathLogo(),
       this.userService.getModulos()
-    ]).subscribe(([user, system, data, path, itensMenu]) => {
+    ]).subscribe(([system, data, path, itensMenu]) => {
       this.loadingGlobal.hide();
       this.$dataSistema = data;
-      this.$usuario = user;
+      this.$usuario = dadosUsuario;
       this.$sistema = system;
       this.$urlLogo = path;
       this.$itensMenu = itensMenu;
