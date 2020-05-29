@@ -1,0 +1,51 @@
+@import 'src/assets/scss/variables.scss';
+@import 'src/assets/scss/buttons.scss';
+@import 'src/assets/scss/vox-cards.scss';
+@import 'src/assets/scss/header.scss';
+@import 'src/assets/scss/nav.scss';
+
+body {
+  color: $primary-darck;
+
+  &:before, &:after {
+    content:'';
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  &:before {
+    top: 0;
+    height: 10em;
+    background: $primary-lighter;
+    background: -moz-linear-gradient(top, $primary-lighter 66%, $white 100%);
+    background: -webkit-linear-gradient(top, $primary-lighter 66%, $white 100%);
+    background: linear-gradient(to bottom, $primary-lighter 66%, $white 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$primary-lighter', endColorstr='$white', GradientType=0);
+  }
+
+  &:after {
+    top: 5.7em;
+    height: 0.5em;
+    background: $primary-border;
+    z-index: 5;
+  }
+}
+
+.form-control {
+  padding: .4em .2em;
+
+  &:focus {
+    border-color: $primary-border;
+    box-shadow: 0 0 0 0.2rem $primary-lighter;
+  }
+}
+
+.input-invalid {
+  border: solid 1px $error-border;
+  box-shadow: 0 0 0 0.2rem $error-shadow;
+
+  &:focus{
+    @extend .input-invalid;
+  }
+}

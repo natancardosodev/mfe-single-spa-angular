@@ -14,18 +14,22 @@ export class PesquisaFormComponent implements OnInit {
 
   @Input() public loading: boolean;
   @Output() public dataForm: EventEmitter<any>;
+  public dateMin: Date;
+  public dateMax: Date;
   private $pesquisaForm: PesquisaForm;
   private $maskFactory: TextMaskFactory;
 
   constructor(
-    private alertMessage: AlertMessage
+    private $alertMessage: AlertMessage
   ) {
     this.dataForm = new EventEmitter();
     this.$maskFactory = new TextMaskFactory();
     this.$pesquisaForm = new PesquisaForm();
+    this.dateMax = new Date();
   }
 
   public ngOnInit() {
+    this.setDateMin();
   }
 
   public get pesquisaForm(): PesquisaForm {
@@ -41,14 +45,20 @@ export class PesquisaFormComponent implements OnInit {
 
     if (!this.isEmpty(formValue)) {
       if (this.$pesquisaForm.valid) {
-        const parametros = Object.assign(formValue);
+        const parametros = this.pesquisaForm.getValuesFormated();
         this.dataForm.emit({ form: parametros });
         return;
       }
       return;
     }
 
-    this.alertMessage.alert('Informe pelo menos um campo para pesquisa');
+    this.$alertMessage.alert('Informe pelo menos um campo para pesquisa');
+  }
+
+  public setDateMin(): void {
+    this.pesquisaForm.dataInicial.valueChanges.subscribe(date => {
+      this.dateMin = date;
+    });
   }
 
   public isFieldValid(form: FormGroup, field: string) {

@@ -55,28 +55,6 @@ export class UserService {
   }
 
   /**
-   *
-   *
-   * @returns {Subscription}
-   * @memberof UserService
-   */
-  public logarService(): Subscription {
-    return this.getUser().subscribe(
-      (resposta: any) => {
-        StorageUtil.store('user', resposta);
-        this.$setUserInfo.next(resposta);
-        this.$setUserInfo.complete();
-
-        return isUndefined(resposta.mensagem) || this.urlUtilService.redirectToLogin(window.location.href);
-      },
-      (error) => {
-        this.$setUserInfo.error(error);
-        return error.naoAutorizado && this.urlUtilService.redirectToLogin(window.location.href);
-      }
-    );
-  }
-
-  /**
    * Retorna a logo da entidade
    * @returns {Observable<string>}
    * @memberof UserService

@@ -2,14 +2,17 @@ import { FormGroup, FormControl, AbstractControl, ValidatorFn } from '@angular/f
 
 import { isValidCnpj } from '@brazilian-utils/is-valid-cnpj';
 import { isValidCpf } from '@brazilian-utils/is-valid-cpf';
+import * as moment from 'moment';
 import { clearMask } from 'src/configs/regexClearMask';
 
 export class PesquisaForm extends FormGroup {
 
     private $errorMessages = {
+        required: 'O campo %s é obrigatório.',
         quantidadeInvalida: 'Quantidade Inválida de dígitos',
         nomeEmpresarialMinLength: 'O nome empresarial deve ter no mínimo 3 caracteres',
         valorInvalido: 'O valor informado no campo %s é inválido',
+        maiorQueDataAtual: 'A data informada é maior que a atual'
     };
 
     constructor() {
@@ -17,22 +20,31 @@ export class PesquisaForm extends FormGroup {
             cnpj: new FormControl(null),
             numeroRegistro: new FormControl(null),
             nomeEmpresarial: new FormControl(null),
-            cpfMembroQsa: new FormControl(null)
+            cpfMembroQsa: new FormControl(null),
+            dataInicial: new FormControl(null),
+            dataFinal: new FormControl(null)
         });
 
         this.cnpj.setValidators([
             PesquisaForm.validaQuantidaDeDigito(14),
             PesquisaForm.validaCpfCnpj()
         ]);
+
         this.nomeEmpresarial.setValidators([
             PesquisaForm.validaQuantidaDeDigito(3, true),
         ]);
+
         this.cpfMembroQsa.setValidators([
             PesquisaForm.validaQuantidaDeDigito(11),
             PesquisaForm.validaCpfCnpj()
         ]);
+
         this.numeroRegistro.setValidators([
             PesquisaForm.validaQuantidaDeDigito(11),
+        ]);
+
+        this.dataFinal.setValidators([
+          PesquisaForm.validaPeriodo(new FormControl(new Date()), this.dataFinal, {maiorQueDataAtual: true})
         ]);
     }
 
@@ -65,6 +77,14 @@ export class PesquisaForm extends FormGroup {
         };
     }
 
+    private static validaPeriodo(dataInicial: AbstractControl, dataFinal: AbstractControl, mensagemErro: object): ValidatorFn {
+      return (): any => {
+        if (dataInicial.value < dataFinal.value) {
+          return mensagemErro;
+        }
+      };
+    }
+
     public get cnpj(): AbstractControl {
         return this.get('cnpj');
     }
@@ -84,6 +104,22 @@ export class PesquisaForm extends FormGroup {
     public getDadosForm(): any {
       this.deleteControlValuesNull();
       return this.value;
+    }
+
+    public get dataInicial(): AbstractControl {
+      return this.get('dataInicial');
+    }
+
+    public get dataFinal(): AbstractControl {
+      return this.get('dataFinal');
+    }
+
+    public getValuesFormated(): any {
+      return {
+        ... this.value,
+        dataInicial: moment(this.value.dataInicial).format('DD/MM/AAAA'),
+        dataFinal: moment(this.value.dataFinal).format('DD/MM/AAAA')
+      };
     }
 
     public getFirstErrorFrom(controlName: string, label: string): string {

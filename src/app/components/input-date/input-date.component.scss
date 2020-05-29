@@ -1,0 +1,32 @@
+.trace {
+  content: '';
+  height: 17px;
+  border-left: 2px solid #a5a5a5;
+  position: absolute;
+  left: 9px;
+  top: 0;
+}
+
+.close {
+  background: transparent;
+  width: 21px;
+  height: 18px;
+  position: relative;
+  border-radius: 20%;
+  position: absolute;
+  top: 7px;
+  right: 20px;
+  outline: none;
+  border: none;
+
+  &:after {
+    @extend .trace;
+    transform: rotate(45deg);
+  }
+
+  &:before {
+    @extend .trace;
+    transform: rotate(-45deg);
+  }
+}
+
