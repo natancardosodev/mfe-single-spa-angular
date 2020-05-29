@@ -89,9 +89,8 @@ export class UrlUtilService {
    * @param {string} targetPath
    * @memberof UrlUtilService
    */
-  public redirectToLogin(targetPath: string): void {
-
-    window.location.href = `${this.getUrlApiBase()}/redirect?url=${targetPath}`;
+  public redirectToLogin(): void {
+    window.location.href = `${this.getAuth()}`;
   }
 
 
