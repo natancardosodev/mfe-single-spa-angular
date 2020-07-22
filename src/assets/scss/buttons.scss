@@ -7,7 +7,8 @@ input {
   transition: all .7s ease;
 }
 
-.btn-nav-base, .btn-nav-secondary {
+.btn-nav-base,
+.btn-nav-secondary {
   margin-bottom: 5px;
   position: relative;
   color: $white;
@@ -17,7 +18,7 @@ input {
 }
 
 .btn-nav-base {
-  background: $primary;
+  background: $primary !important;
 
   &:hover {
     background: $primary-focus;
@@ -51,4 +52,9 @@ input {
 .btn-singout {
   right: 17em;
   font-size: 1.3em !important
+}
+
+.btn.btn-nav-base {
+  color: #ffffff;
+  padding: .4rem 2.2rem .3rem 0.75rem !important;
 }

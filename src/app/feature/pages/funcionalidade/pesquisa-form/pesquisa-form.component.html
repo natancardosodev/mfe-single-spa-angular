@@ -1,0 +1,135 @@
+<section class="card-box-content">
+    <form [formGroup]="pesquisaForm">
+        <div class="form-group mt-4 col-12">
+            <div class="form-group row justify-content-center">
+                <label for="cnpj" class="col-4 col-form-label text-left">CNPJ:</label>
+                <div class="col-6">
+                    <input
+                        formControlName="cnpj"
+                        [textMask]="maskFactory.createCnpj()"
+                        type="text"
+                        id="cnpj"
+                        [ngClass]="[
+                            isFieldValid(pesquisaForm, 'cnpj') ? 'input-invalid' : '',
+                            'form-control',
+                            'form-control-sm'
+                        ]"
+                    />
+                    <div class="mt-1 text-danger" *ngIf="isFieldValid(pesquisaForm, 'cnpj')">
+                        {{ pesquisaForm.getFirstErrorFrom('cnpj', 'CNPJ') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label for="numero-registro" class="col-4 col-form-label text-left">Número De Registro:</label>
+                <div class="col-6">
+                    <input
+                        formControlName="numeroRegistro"
+                        maxlength="11"
+                        type="text"
+                        id="numero-registro"
+                        [ngClass]="[
+                            isFieldValid(pesquisaForm, 'numeroRegistro') ? 'input-invalid' : '',
+                            'form-control',
+                            'form-control-sm'
+                        ]"
+                    />
+                    <div class="mt-1 text-danger" *ngIf="isFieldValid(pesquisaForm, 'numeroRegistro')">
+                        {{ pesquisaForm.getFirstErrorFrom('numeroRegistro', 'Número De Registro') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label for="nome-empresarial" class="col-4 col-form-label text-left">Nome Empresarial:</label>
+                <div class="col-6">
+                    <input
+                        formControlName="nomeEmpresarial"
+                        maxlength="300"
+                        type="text"
+                        id="nome-empresarial"
+                        [ngClass]="[
+                            isFieldValid(pesquisaForm, 'nomeEmpresarial') ? 'input-invalid' : '',
+                            'form-control',
+                            'form-control-sm'
+                        ]"
+                    />
+                    <div class="mt-1 text-danger" *ngIf="isFieldValid(pesquisaForm, 'nomeEmpresarial')">
+                        {{ pesquisaForm.getFirstErrorFrom('nomeEmpresarial', 'Nome Empresarial') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label for="cpf-membro-qsa" class="col-4 col-form-label text-left">CPF:</label>
+                <div class="col-6">
+                    <input
+                        formControlName="cpfMembroQsa"
+                        [textMask]="maskFactory.createCpf()"
+                        type="text"
+                        id="cpf-membro-qsa"
+                        [ngClass]="[
+                            isFieldValid(pesquisaForm, 'cpfMembroQsa') ? 'input-invalid' : '',
+                            'form-control',
+                            'form-control-sm'
+                        ]"
+                    />
+                    <div class="mt-1 text-danger" *ngIf="isFieldValid(pesquisaForm, 'cpfMembroQsa')">
+                        {{ pesquisaForm.getFirstErrorFrom('cpfMembroQsa', 'CPF do Membro do QSA') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label for="data-inicial" class="col-4 col-form-label text-left">Período:</label>
+                <div class="col-3">
+                    <app-input-date
+                        formControlName="dataInicial"
+                        [maxDate]="dateMax"
+                        id="data-inicial"
+                        [isValid]="pesquisaForm.dataInicial.valid"
+                        [mensagemStatus]="
+                            !pesquisaForm.dataInicial.valid
+                                ? pesquisaForm.getFirstErrorFrom('dataInicial', 'Data Inicial')
+                                : ''
+                        "
+                    >
+                    </app-input-date>
+                </div>
+                <div class="col-3">
+                    <app-input-date
+                        formControlName="dataFinal"
+                        [minDate]="dateMin"
+                        [isValid]="pesquisaForm.dataFinal.valid"
+                        [mensagemStatus]="
+                            !pesquisaForm.dataFinal.valid
+                                ? pesquisaForm.getFirstErrorFrom('dataFinal', 'Data Final')
+                                : ''
+                        "
+                    >
+                    </app-input-date>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-11">
+                    <button
+                        type="submit"
+                        id="pesquisarSolicitacoes"
+                        [disabled]="loading"
+                        class="btn btn-nav-base btn-nav-ico-right float-md-right"
+                        title="Clique aqui para pesquisar"
+                        (click)="pesquisar()"
+                    >
+                        Pesquisar
+                        <span class="ico-right">
+                            <i class="fas fa-circle-o-notch fa-spin fa-fw" *ngIf="loading"></i>
+                            <i class="fas fa-search" aria-hidden="true" *ngIf="!loading"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,19 @@
+<ng-template #alert>
+    <div class="br-modal is-medium">
+        <div class="br-modal-dialog">
+            <div class="br-modal-content">
+                <div class="br-modal-header">
+                    <h4 class="br-modal-title">
+                        {{ title }}
+                    </h4>
+                    <button type="button" class="close" (click)="close()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="br-modal-body">
+                    <p>{{ body }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
