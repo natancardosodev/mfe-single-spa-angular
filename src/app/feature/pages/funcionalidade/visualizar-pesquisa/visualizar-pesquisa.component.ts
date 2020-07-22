@@ -33,6 +33,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     public popularCards(): void {
         this.visualizarPesquisaService.getCards('1').subscribe(
             (response) => {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
                 this.$cards = response.cards;
             },
             (erro) => {
