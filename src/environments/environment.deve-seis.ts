@@ -1,11 +1,12 @@
-import { EnvironmentInterface } from './../app/interfaces/enviroment-interface';
+import { EnvironmentInterface } from '../app/core/interfaces/enviroment-interface';
 
 export const environment: EnvironmentInterface = {
     production: true,
     uri: {
-        api: 'https://deve-seis-api.voxtecnologia.com.br/servicos/nova-funcionalidade',
+        api: 'https://deve-seis-nova-funcionalidade-service.voxtecnologia.com.br',
         oauth: 'https://deve-seis.voxtecnologia.com.br',
         projeto: 'https://deve-seis.voxtecnologia.com.br/sigfacil/nova-funcionalidade',
-        environments: 'https://deve-seis'
+        environments: 'https://deve-seis',
+        subDomain: 'deve-seis'
     }
 };

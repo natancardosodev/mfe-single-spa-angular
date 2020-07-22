@@ -1,0 +1,52 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { Subscription } from 'rxjs';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, Input } from '@angular/core';
+
+import { AlertService } from './alert.service';
+
+@Component({
+    selector: 'app-lib-alert',
+    templateUrl: './alert.component.html',
+    styleUrls: ['./alert.component.scss']
+})
+export class AlertComponent implements OnInit, OnDestroy {
+    @ViewChild('alert', { static: false }) private content: ElementRef;
+
+    private subscription: Subscription;
+
+    public show: boolean;
+    public modalRef: BsModalRef;
+    public body: string;
+    public alert: string;
+    public title: string;
+    public closeResult: string;
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    public callBack: Function;
+
+    constructor(private modalService: BsModalService, private alertService: AlertService) {
+        this.show = false;
+    }
+
+    ngOnInit(): void {
+        this.subscription = this.alertService.loaderState.subscribe((state) => {
+            if (state.show) {
+                this.title = state.title;
+                this.body = state.body;
+                this.callBack = state.callBack;
+                this.modalRef = this.modalService.show(this.content);
+            }
+        });
+    }
+
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
+    public close(): void {
+        this.modalRef.hide();
+    }
+}

@@ -1,11 +1,12 @@
-import { EnvironmentInterface } from './../app/interfaces/enviroment-interface';
+import { EnvironmentInterface } from '../app/core/interfaces/enviroment-interface';
 
 export const environment: EnvironmentInterface = {
     production: true,
     uri: {
-        api: 'https://deve-oito-api.voxtecnologia.com.br/servicos/nova-funcionalidade',
+        api: 'https://deve-oito-nova-funcionalidade-service.voxtecnologia.com.br',
         oauth: 'https://deve-oito.voxtecnologia.com.br',
         projeto: 'https://deve-oito.voxtecnologia.com.br/sigfacil/nova-funcionalidade',
-        environments: 'https://deve-oito'
+        environments: 'https://deve-oito',
+        subDomain: 'deve-oito'
     }
 };
