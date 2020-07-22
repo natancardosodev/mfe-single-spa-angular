@@ -76,7 +76,9 @@ export class AppComponent implements OnInit, OnDestroy {
         return this.$itensMenu;
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public getFuncionalidadeAtual(funcionalidadeAtual: any): void {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         this.funcionalidade = funcionalidadeAtual;
     }
 
@@ -85,10 +87,11 @@ export class AppComponent implements OnInit, OnDestroy {
             (resposta: any) => {
                 StorageUtil.store('user', resposta);
                 this.getSystemInfo(resposta);
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 return isUndefined(resposta['mensagem']) || this.urlUtilService.redirectToLogin();
             },
             (error) => {
-                console.log('deu erro');
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 return error.naoAutorizado && this.urlUtilService.redirectToLogin();
             }
         );
@@ -104,14 +107,17 @@ export class AppComponent implements OnInit, OnDestroy {
             ([system, data, path, itensMenu]) => {
                 this.loadingGlobal.hide();
                 this.$dataSistema = data;
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 this.$usuario = dadosUsuario;
                 this.$sistema = system;
                 this.$urlLogo = path;
                 this.$itensMenu = itensMenu;
             },
             (error: any) => {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 if (!error.naoAutorizado) {
                     this.loadingGlobal.hide();
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                     this.alertMessage.alert(error.message, 'danger');
                 }
             }

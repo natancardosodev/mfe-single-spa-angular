@@ -23,7 +23,7 @@ export class CardOficioComponent implements OnInit {
         this.$oficioForm = new OficioForm();
     }
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 
     public get dadosOficio(): any {
         return this.$dadosOficio;

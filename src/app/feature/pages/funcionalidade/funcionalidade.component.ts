@@ -43,14 +43,14 @@ export class FuncionalidadeComponent implements OnInit, OnDestroy {
         };
     }
 
-    public ngOnInit() {}
+    public ngOnInit(): void {}
 
     public ngOnDestroy(): void {
         this.$sub.unsubscribe();
     }
 
     public onRowClicked(dadosLinha: PesquisaInterface): void {
-        this.router.navigate([RotasEnum.VISUALIZAR_PESQUISA, dadosLinha.id]);
+        void this.router.navigate([RotasEnum.VISUALIZAR_PESQUISA, dadosLinha.id]);
     }
 
     public get colunasGrid(): Array<GridColumnDefs> {
@@ -68,7 +68,7 @@ export class FuncionalidadeComponent implements OnInit, OnDestroy {
         return this.$pageConfig;
     }
 
-    public get dadosGrid() {
+    public get dadosGrid(): Subject<any> {
         return this.$dadosGrid;
     }
 
@@ -84,17 +84,22 @@ export class FuncionalidadeComponent implements OnInit, OnDestroy {
     }
 
     public formDataValue(evento: any): void {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         this.$dataValue = evento.form;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         this.pesquisar(evento.form);
     }
 
     public pesquisar(formValue, novosParametros = { limit: 50, offset: 0 }): Subscription {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const { nomeEmpresarial } = formValue;
 
         if (nomeEmpresarial) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             formValue.nomeEmpresarial = encodeURIComponent(nomeEmpresarial);
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const parametros = Object.assign(formValue, novosParametros);
         this.$dadosGrid.next('Carregando');
         this.loading = true;
