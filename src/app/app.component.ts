@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subject, Subscription, forkJoin } from 'rxjs';
@@ -8,8 +9,8 @@ import { LogoInterface } from 'lib-header';
 import { AlertMessage } from './core/utils/alert-message';
 import { StorageUtil } from './core/utils/storage.util';
 import { isUndefined } from 'util';
-import { UrlUtilService } from './services/url-util.service';
-import { UserService } from './services/user.service';
+import { UrlUtilService } from './core/services/url-util.service';
+import { UserService } from './core/services/user.service';
 import { SystemInterface } from './core/interfaces/system.interface';
 import { UsuarioLogadoInterface } from './core/interfaces/usuario-logado.interface';
 
