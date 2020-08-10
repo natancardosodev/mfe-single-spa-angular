@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { config, locale } from './datepicker';
 
 @Component({
@@ -23,7 +23,7 @@ export class InputDateComponent implements ControlValueAccessor, AfterViewInit {
     @Input() public maxDate: string;
     @Input() public minDate: string;
 
-    public configDatepicker: object;
+    public configDatepicker: Partial<BsDatepickerConfig>;
 
     private $valueInput: string;
 
@@ -36,30 +36,33 @@ export class InputDateComponent implements ControlValueAccessor, AfterViewInit {
         this.$localeService.use(locale);
     }
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this.$renderer.removeAttribute(this.$elementRef.nativeElement, 'id');
     }
 
-    writeValue(value: any) {
+    writeValue(value: string): void {
         if (value !== undefined) {
             this.$valueInput = value;
             this.propagateChange(this.$valueInput);
         }
     }
 
-    propagateChange = (_: any) => {};
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/explicit-module-boundary-types
+    propagateChange = (_: any): void => {};
 
-    registerOnChange(fn) {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    registerOnChange(fn: any): void {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         this.propagateChange = fn;
     }
 
-    registerOnTouched() {}
+    registerOnTouched(): void {}
 
-    get value() {
+    get value(): string {
         return this.$valueInput;
     }
 
-    set value(val) {
+    set value(val: string) {
         if (val) {
             this.$valueInput = val;
             this.propagateChange(this.$valueInput);
@@ -71,7 +74,9 @@ export class InputDateComponent implements ControlValueAccessor, AfterViewInit {
         this.propagateChange(this.$valueInput);
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public onKeydownDate(event: any): void {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call,  @typescript-eslint/no-unsafe-member-access
         event.preventDefault();
     }
 }

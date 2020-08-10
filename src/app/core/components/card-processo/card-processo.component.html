@@ -1,0 +1,39 @@
+<div class="vox-cards panel-group">
+    <div class="panel card panel-default">
+        <div class="panel-heading card-header" role="tab">
+            <div
+                class="accordion-toggle panel-title"
+                role="button"
+                aria-expanded="true"
+                (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed"
+                aria-controls="collapseBasic"
+            >
+                Dados do Processo
+            </div>
+        </div>
+        <div class="panel-collapse collapse in show" *ngIf="!isCollapsed">
+            <div class="col my-5 d-flex justify-content-center" *ngIf="loading">
+                <span class="fas fa-circle-notch fa-spin fa-fw fa-3x"></span>
+            </div>
+            <div class="panel-body card-block card-body" *ngIf="!loading">
+                <dl class="row">
+                    <dt class="col-4">Protocolo:</dt>
+                    <dd class="col-6">{{ processo.protocolo }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Status:</dt>
+                    <dd class="col-6">{{ processo.status }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Tipo:</dt>
+                    <dd class="col-6">{{ processo.tipo }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Evento:</dt>
+                    <dd class="col-6">{{ processo.evento }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

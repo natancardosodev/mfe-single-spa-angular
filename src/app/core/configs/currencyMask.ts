@@ -4,7 +4,7 @@ export const customCurrencyMaskConfig = {
     allowZero: true,
     decimal: ',',
     precision: 2,
-    prefix: '',
+    prefix: 'R$',
     suffix: '',
     thousands: '.',
     nullable: true

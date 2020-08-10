@@ -12,6 +12,7 @@ export class CardResponse {
      * @returns {Promise<any>}
      * @memberof CardResponse
      */
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public static manager(response: any): Promise<any> {
         const arrayVazio = response instanceof Array && !response.length;
         const objetoVazio = response instanceof Object && !Object.keys(response).length;

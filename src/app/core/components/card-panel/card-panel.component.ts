@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionConfig, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { CardResponse } from './card-response.util';
 @Component({
@@ -26,7 +26,7 @@ export class CardPanelComponent {
      * @param * event
      * @memberof CardPanelComponent
      */
-    onPanelChange(event: any): void {
+    onPanelChange(event: NgbPanelChangeEvent): void {
         if (event.nextState) {
             this.panelOpen.emit(event.panelId);
         }

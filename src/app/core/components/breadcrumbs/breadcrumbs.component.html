@@ -1,5 +1,5 @@
 <div class="breadcrumb-content">
-    <div class="breadcrumb-nav" *ngFor="let crumbs of mountBreadCrumbs()">
+    <div class="breadcrumb-nav" *ngFor="let crumbs of breadCrumbs; let num = index">
         <i aria-hidden="true" class="fas fa-arrow-right breadcrumb-arrow"></i>
         <a [href]="crumbs?.route">{{ crumbs?.item }}</a>
     </div>

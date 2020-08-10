@@ -11,8 +11,8 @@ import { StorageUtil } from './core/utils/storage.util';
 import { isUndefined } from 'util';
 import { UrlUtilService } from './core/services/url-util.service';
 import { UserService } from './core/services/user.service';
-import { SystemInterface } from './core/interfaces/system.interface';
-import { UsuarioLogadoInterface } from './core/interfaces/usuario-logado.interface';
+import { SystemInterface } from './core/interfaces/interno/system-interface';
+import { User } from './core/interfaces/interno/user-interface';
 
 @Component({
     selector: 'app-root',
@@ -22,12 +22,12 @@ import { UsuarioLogadoInterface } from './core/interfaces/usuario-logado.interfa
 export class AppComponent implements OnInit, OnDestroy {
     public funcionalidade: string;
     public idUsuario: Subject<number>;
-    private $sistema: SystemInterface[];
-    private $usuario: UsuarioLogadoInterface;
-    private $urlLogo: string;
-    private $dataSistema: string;
-    private $urlLogoSistema: LogoInterface;
-    private $itensMenu: Menu[];
+    private _sistema: SystemInterface[];
+    private _usuario: User;
+    private _urlLogo: string;
+    private _dataSistema: string;
+    private _urlLogoSistema: LogoInterface;
+    private _itensMenu: Menu[];
 
     constructor(
         private alertMessage: AlertMessage,
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private loadingGlobal: LoadingGlobalService
     ) {
         this.idUsuario = new Subject();
-        this.$urlLogoSistema = { url: 'assets/images/sigfacil.png', alt: 'string' };
+        this._urlLogoSistema = { url: 'assets/images/sigfacil.png', alt: 'string' };
     }
 
     public ngOnInit(): void {
@@ -50,15 +50,15 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     public get sistema(): SystemInterface[] {
-        return this.$sistema;
+        return this._sistema;
     }
 
-    public get usuario(): UsuarioLogadoInterface {
-        return this.$usuario;
+    public get usuario(): User {
+        return this._usuario;
     }
 
     public get urlLogo(): string {
-        return this.$urlLogo;
+        return this._urlLogo;
     }
 
     public get urlLogout(): string {
@@ -66,15 +66,15 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     public get urlLogoSistema(): LogoInterface {
-        return this.$urlLogoSistema;
+        return this._urlLogoSistema;
     }
 
     public get dataSistema(): string {
-        return this.$dataSistema;
+        return this._dataSistema;
     }
 
     public get itensMenu(): Array<Menu> {
-        return this.$itensMenu;
+        return this._itensMenu;
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -107,12 +107,12 @@ export class AppComponent implements OnInit, OnDestroy {
         ]).subscribe(
             ([system, data, path, itensMenu]) => {
                 this.loadingGlobal.hide();
-                this.$dataSistema = data;
+                this._dataSistema = data;
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                this.$usuario = dadosUsuario;
-                this.$sistema = system;
-                this.$urlLogo = path;
-                this.$itensMenu = itensMenu;
+                this._usuario = dadosUsuario;
+                this._sistema = system;
+                this._urlLogo = path;
+                this._itensMenu = itensMenu;
             },
             (error: any) => {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

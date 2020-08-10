@@ -4,9 +4,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable } from '@angular/core';
-import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
+import { BaseService } from './base.service';
+
 import { Observable, forkJoin, BehaviorSubject, Subscription } from 'rxjs';
+import { AlertService } from 'lib-alert';
+
 import { UrlUtilService } from './url-util.service';
 import { StorageUtil } from '../utils/storage.util';
 import { HttpUtil } from '../utils/http-util';
@@ -33,8 +36,8 @@ export class CommonService extends BaseService {
      * @param {UrlUtilService} urlUtilService
      * @memberof CommonService
      */
-    constructor(http: HttpClient, urlUtilService: UrlUtilService) {
-        super('', http, urlUtilService);
+    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
+        super('', http, urlUtilService, alertService);
     }
 
     /**
@@ -137,7 +140,7 @@ export class CommonService extends BaseService {
         return value.length ? value[0].value : '-';
     }
 
-    public resolve(path: string, obj: CommonService) {
+    public resolve(path: string, obj: CommonService): any {
         return path.split('.').reduce(function (prev, curr) {
             return prev ? prev[curr] : null;
         }, obj || self);

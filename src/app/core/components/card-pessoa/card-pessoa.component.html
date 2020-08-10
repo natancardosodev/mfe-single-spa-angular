@@ -1,0 +1,127 @@
+<div class="vox-cards panel-group">
+    <div class="panel card panel-default">
+        <div class="panel-heading card-header" role="tab">
+            <div
+                class="accordion-toggle panel-title"
+                role="button"
+                aria-expanded="true"
+                (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed"
+                aria-controls="collapseBasic"
+            >
+                Dados da Pessoa
+            </div>
+        </div>
+        <div class="panel-collapse collapse in show" *ngIf="!isCollapsed">
+            <div class="col my-5 d-flex justify-content-center" *ngIf="loading">
+                <span class="fas fa-circle-notch fa-spin fa-fw fa-3x"></span>
+            </div>
+            <div class="panel-body card-block card-body" *ngIf="!loading">
+                <dl class="row">
+                    <dt class="col-4">Nome:</dt>
+                    <dd class="col-6">{{ pessoa.nome }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">CPF:</dt>
+                    <dd class="col-6">{{ pessoa.cpf | mask: 'cpf' }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Documento:</dt>
+                    <dd class="col-6">{{ pessoa.documento }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Orgão Emissor:</dt>
+                    <dd class="col-6">{{ pessoa.orgao_emissor }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">UF do Orgão Emissor:</dt>
+                    <dd class="col-6">{{ pessoa.uf_orgao_emissor }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Data de Nascimento:</dt>
+                    <dd class="col-6">{{ pessoa.data_nascimento | date: 'dd/MM/yyyy' }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Nacionalidade:</dt>
+                    <dd class="col-6">{{ pessoa.nacionalidade }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Naturalidade Estrangeira:</dt>
+                    <dd class="col-6">{{ pessoa.naturalidade_estrangeira }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">UF da Naturalidade:</dt>
+                    <dd class="col-6">{{ pessoa.uf_naturalidade }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Naturalidade:</dt>
+                    <dd class="col-6">{{ pessoa.naturalidade }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Estado Civil:</dt>
+                    <dd class="col-6">{{ pessoa.estado_civil }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Nome da Mãe:</dt>
+                    <dd class="col-6">{{ pessoa.nome_mae }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Nome do Pai:</dt>
+                    <dd class="col-6">{{ pessoa.nome_pai }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Sexo:</dt>
+                    <dd class="col-6">{{ pessoa.sexo }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">CEP:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.cep }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Logradouro:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.logradouro }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Número:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.numero }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Bairro:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.bairro }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Complemento:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.complemento }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Município:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.municipio }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">UF:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.uf }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Email:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.email }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">DDD Telefone:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.ddd_telefone }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Telefone:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.telefone }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">DDD Celular:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.ddd_celular }}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-4">Celular:</dt>
+                    <dd class="col-6">{{ pessoa.endereco.celular }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

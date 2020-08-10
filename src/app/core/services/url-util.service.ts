@@ -7,7 +7,7 @@ import { EnvService } from './env.service';
     providedIn: 'root'
 })
 export class UrlUtilService {
-    constructor(private env: EnvService) {}
+    constructor(private env: EnvService) { }
 
     public getUrlApiBase(): string {
         return `${this.env.api}`;
@@ -75,7 +75,8 @@ export class UrlUtilService {
      * @memberof UrlUtilService
      */
     public redirectToLogin(): void {
-        window.location.href = `${this.getAuth()}`;
+        const urlAtual = window.location.href;
+        window.location.href = `${this.getUrlApiBase()}/redirect?url=${urlAtual}`;
     }
 
     /**

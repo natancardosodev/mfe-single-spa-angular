@@ -1,60 +1,63 @@
 button,
 input {
-  -webkit-transition: all .7s ease;
-  -moz-transition: all .7s ease;
-  -ms-transition: all .7s ease;
-  -o-transition: all .7s ease;
-  transition: all .7s ease;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -ms-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
 }
 
 .btn-nav-base,
 .btn-nav-secondary {
-  margin-bottom: 5px;
-  position: relative;
-  color: $white;
-  text-transform: uppercase;
-  font-size: .9em;
-  overflow: hidden;
-}
-
-.btn-nav-base {
-  background: $primary !important;
-
-  &:hover {
-    background: $primary-focus;
+    margin-bottom: 5px;
+    position: relative;
     color: $white;
-  }
-}
-
-.btn-nav-secondary {
-  background: $primary-darck;
-}
-
-.btn-nav-ico-right {
-  padding-right: 3.5em;
-}
-
-.btn-nav-ico-left {
-  padding-left: 3.5em;
-}
-
-.btn-acao {
-  margin: 0 0 .5em .5em;
-}
-
-
-.btn-acao-group {
-  float: right;
-  width: 84%;
-  text-align: right;
-}
-
-.btn-singout {
-  right: 17em;
-  font-size: 1.3em !important
+    text-transform: uppercase;
+    font-size: 0.9em;
+    overflow: hidden;
 }
 
 .btn.btn-nav-base {
-  color: #ffffff;
-  padding: .4rem 2.2rem .3rem 0.75rem !important;
+    color: #ffffff;
+    font-size: 0.9rem;
+    background: $primary;
+
+    &:hover {
+        background: $primary-focus !important;
+        color: $white;
+    }
+
+    &.btn-nav-ico-left {
+        padding: 0.4rem 0.8rem 0.3rem 3.3rem !important;
+    }
+
+    &.btn-nav-ico-right {
+        padding: 0.4rem 3.3rem 0.3rem 0.8rem !important;
+    }
+}
+
+.btn-nav-secondary {
+    background: $primary-darck;
+}
+
+.btn-acao {
+    margin: 0 0 0.5em 0.5em;
+}
+
+.btn-acao-group {
+    float: right;
+    width: 84%;
+    text-align: right;
+}
+
+.btn-singout {
+    right: 17em;
+    font-size: 1.3em !important;
+}
+
+.btn-sm {
+    text-transform: none;
+    background-color: $terciary !important;
+    font-size: 0.8rem !important;
+    margin-bottom: 0em;
 }
