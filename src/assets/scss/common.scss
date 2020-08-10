@@ -1,35 +1,36 @@
-@import 'src/assets/scss/variables.scss';
-@import 'src/assets/scss/buttons.scss';
-@import 'src/assets/scss/vox-cards.scss';
-@import 'src/assets/scss/header.scss';
-@import 'src/assets/scss/nav.scss';
-@import 'src/assets/scss/fontawesome.scss';
+@import 'src/assets/scss/variables';
+@import 'src/assets/scss/buttons';
+@import 'src/assets/scss/vox-cards';
+@import 'src/assets/scss/header';
+@import 'src/assets/scss/nav';
+@import 'src/assets/scss/search';
+@import 'src/assets/scss/fontawesome';
+@import 'src/assets/scss/datepicker';
+@import 'src/assets/scss/visualizar';
 
 body {
-    color: $primary-darck;
+    color: $primary-dark;
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
         content: '';
         left: 0;
         position: absolute;
         width: 100%;
     }
 
-    &:before {
-        top: 0;
-        height: 10em;
+    &::before {
         background: $primary-lighter;
-        background: -moz-linear-gradient(top, $primary-lighter 66%, $white 100%);
-        background: -webkit-linear-gradient(top, $primary-lighter 66%, $white 100%);
         background: linear-gradient(to bottom, $primary-lighter 66%, $white 100%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$primary-lighter', endColorstr='$white', GradientType=0);
+        height: 10em;
+        top: 0;
     }
 
-    &:after {
-        top: 5.7em;
-        height: 0.5em;
+    &::after {
         background: $primary-border;
+        height: 0.5em;
+        top: 5.7em;
         z-index: 5;
     }
 }
@@ -50,4 +51,8 @@ body {
     &:focus {
         @extend .input-invalid;
     }
+}
+
+.is-primary {
+    color: $primary;
 }

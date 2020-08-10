@@ -114,15 +114,19 @@ export class VisualizarProcessoComponent {
         return this.$sub;
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public formatarDadosPesquisa(dados): Array<any> {
         if (dados) {
             const mask = new MaskPipe();
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             dados = dados.processos.map((processo) => {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-return
                 return {
                     ...processo,
                     cpf: mask.transform(processo.cpf, 'cpf')
                 };
             });
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             return dados;
         }
     }

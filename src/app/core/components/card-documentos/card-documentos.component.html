@@ -14,7 +14,7 @@
         </div>
         <div class="panel-collapse collapse in show" *ngIf="!isCollapsed">
             <div class="col my-5 d-flex justify-content-center" *ngIf="loading">
-                <span class="fas fa-circle-notch fa-spin fa-fw fa-3x"></span>
+                <span class="fas fa-circle-notch fa-spin fa-fw fa-3x is-primary"></span>
             </div>
             <div class="panel-body card-block card-body" *ngIf="!loading">
                 <table class="table table-striped table-bordered" *ngIf="documentos$">
@@ -33,7 +33,7 @@
                                 [href]="getDownloadDocumento(documento.id, documento.is_anexo)"
                                 target="_blank"
                             >
-                                <span class="fas fa-download" aria-hidden="true"></span>
+                                <span class="fas fa-download is-primary" aria-hidden="true"></span>
                             </a>
                         </td>
                     </tr>

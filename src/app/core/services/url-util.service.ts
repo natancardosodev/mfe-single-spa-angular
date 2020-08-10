@@ -7,7 +7,7 @@ import { EnvService } from './env.service';
     providedIn: 'root'
 })
 export class UrlUtilService {
-    constructor(private env: EnvService) { }
+    constructor(private env: EnvService) {}
 
     public getUrlApiBase(): string {
         return `${this.env.api}`;

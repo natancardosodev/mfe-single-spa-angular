@@ -1,5 +1,7 @@
+@import './variables';
+
 .content-block {
-    border: 0.1em solid #005b34;
+    border: 0.1em solid $primary;
     padding: 1.5em 2em;
 }
 

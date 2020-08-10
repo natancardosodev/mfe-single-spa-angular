@@ -1,26 +1,22 @@
 button,
 input {
-    -webkit-transition: all 0.7s ease;
-    -moz-transition: all 0.7s ease;
-    -ms-transition: all 0.7s ease;
-    -o-transition: all 0.7s ease;
     transition: all 0.7s ease;
 }
 
 .btn-nav-base,
 .btn-nav-secondary {
-    margin-bottom: 5px;
-    position: relative;
     color: $white;
-    text-transform: uppercase;
     font-size: 0.9em;
+    margin-bottom: 5px;
     overflow: hidden;
+    position: relative;
+    text-transform: uppercase;
 }
 
 .btn.btn-nav-base {
-    color: #ffffff;
-    font-size: 0.9rem;
     background: $primary;
+    color: #fff;
+    font-size: 0.9rem;
 
     &:hover {
         background: $primary-focus !important;
@@ -37,7 +33,7 @@ input {
 }
 
 .btn-nav-secondary {
-    background: $primary-darck;
+    background: $primary-dark;
 }
 
 .btn-acao {
@@ -46,18 +42,18 @@ input {
 
 .btn-acao-group {
     float: right;
-    width: 84%;
     text-align: right;
+    width: 84%;
 }
 
 .btn-singout {
-    right: 17em;
     font-size: 1.3em !important;
+    right: 17em;
 }
 
 .btn-sm {
-    text-transform: none;
     background-color: $terciary !important;
     font-size: 0.8rem !important;
-    margin-bottom: 0em;
+    margin-bottom: 0;
+    text-transform: none;
 }

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
-import { PathDocumentoInterface } from '../../interfaces/dados-processo/path-documento-interface';
 import { UrlUtilService } from '../../services/url-util.service';
 
 @Component({
@@ -15,7 +14,7 @@ import { UrlUtilService } from '../../services/url-util.service';
 export class CardDocumentosComponent implements OnInit {
     @Input() public solicitacao: number;
     public documentos$: Observable<any>;
-    public path: PathDocumentoInterface;
+    public path: any;
     public loading: boolean;
     public isCollapsed: boolean;
 
@@ -33,7 +32,9 @@ export class CardDocumentosComponent implements OnInit {
         this.solicitacaoService
             .getPathDocumento(id)
             .pipe(finalize(() => (this.loading = false)))
-            .subscribe((response: PathDocumentoInterface) => {
+            .subscribe((response: any) => {
+                // @todo colocar interface para tipo
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 this.path = response;
             });
     }

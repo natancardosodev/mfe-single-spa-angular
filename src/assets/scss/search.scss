@@ -1,15 +1,14 @@
-
-
-$_color_primaria: #286935;
+// $_color_primaria: #286935;
+@import './variables';
 
 .form-group {
     font-size: 0.9rem;
 }
 
 .titulo-principal {
-    border-bottom: solid 1px $_color_primaria;
-    border-left: solid 1px $_color_primaria;
-    color: $_color_primaria;
+    border-bottom: solid 1px $primary;
+    border-left: solid 1px $primary;
+    color: $primary;
     font-size: 0.8rem;
     font-weight: 600;
     margin-top: 20px;
@@ -30,7 +29,7 @@ $_color_primaria: #286935;
 }
 
 .texto-obrigatorio {
-    color: red;
+    color: $error-border;
 }
 
 .align-center-flex {

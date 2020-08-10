@@ -3,7 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
-import { DadosProcessoInterface } from '../../interfaces/dados-processo/dados-processo-interface';
 
 @Component({
     selector: 'app-card-processo',
@@ -12,7 +11,7 @@ import { DadosProcessoInterface } from '../../interfaces/dados-processo/dados-pr
 })
 export class CardProcessoComponent implements OnInit {
     @Input() public solicitacao: number;
-    public processo: DadosProcessoInterface;
+    public processo: any;
     public loading: boolean;
     public isCollapsed: boolean;
 
@@ -25,7 +24,9 @@ export class CardProcessoComponent implements OnInit {
         this.solicitacaoService
             .getDadosProcesso({ solicitacao: this.solicitacao })
             .pipe(finalize(() => (this.loading = false)))
-            .subscribe((response: DadosProcessoInterface) => {
+            .subscribe((response: any) => {
+                // @todo Colocar interface para tipo
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 this.processo = response;
             });
     }
