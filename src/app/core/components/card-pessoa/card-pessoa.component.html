@@ -75,7 +75,7 @@
                 </dl>
                 <dl class="row">
                     <dt class="col-4">CEP:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.cep }}</dd>
+                    <dd class="col-6">{{ pessoa.endereco.cep | mask: 'cep' }}</dd>
                 </dl>
                 <dl class="row">
                     <dt class="col-4">Logradouro:</dt>
