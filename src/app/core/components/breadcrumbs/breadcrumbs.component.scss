@@ -1,38 +1,45 @@
+@import '../../../../assets/scss/variables.scss';
+
 .breadcrumb-content {
-  position: relative;
+    position: relative;
 
-  &:after {
-    content: '';
-    display: block;
-    clear: both;
-  }
-
-  .breadcrumb-nav {
-    padding: 0 0 1.15em 0.6em;
-    float: left;
-
-    a {
-      font-weight: bold
+    &::after {
+        clear: both;
+        content: '';
+        display: block;
     }
 
-    .breadcrumb-arrow {
-      color: #c2c1c1;
-      font-size: 0.8em;
-      margin: 0 .9em 0 .2em;
+    .breadcrumb-nav {
+        float: left;
+        padding: 0 0 1.15em 0.6em;
+
+        a {
+            color: $primary;
+            font-weight: bold;
+
+            &:hover {
+                color: $primary-focus;
+            }
+        }
+
+        .breadcrumb-arrow {
+            color: #c2c1c1;
+            font-size: 0.8em;
+            margin: 0 0.9em 0 0.2em;
+        }
+
+        &:first-child .breadcrumb-arrow {
+            display: none;
+        }
     }
 
-    &:first-child .breadcrumb-arrow {
-      display: none
+    .breadcrumb-detail {
+        background: #fff;
+        color: #005b34;
+        font-size: 0;
+        left: 0.6em;
+        position: absolute;
+        top: 0.95em;
+        z-index: 10;
     }
-  }
-
-  .breadcrumb-detail {
-    left: 0.6em;
-    top: .95em;
-    position: absolute;
-    background: #fff;
-    color: #005b34;
-    font-size: 0;
-    z-index: 10;
-  }
 }

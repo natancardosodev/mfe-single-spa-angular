@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+
+import { MenuFuncionalidade } from 'lib-menu';
 import { UrlUtilService } from './../../services/url-util.service';
 
 @Component({
@@ -7,15 +9,14 @@ import { UrlUtilService } from './../../services/url-util.service';
     styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent implements OnInit {
-    @Input() public getFuncionalidade: any;
+    @Input() public getFuncionalidade: MenuFuncionalidade;
     public paramsRoute: any;
+    public breadCrumbs: Array<Record<string, string>>;
 
     constructor(private urlUtilService: UrlUtilService) {}
 
-    ngOnInit() {}
-
-    public mountBreadCrumbs() {
-        const breadCrumbs = [
+    public ngOnInit(): void {
+        this.breadCrumbs = [
             {
                 item: 'Início',
                 route: this.urlUtilService.getUrlProjeto('/')
@@ -25,7 +26,5 @@ export class BreadcrumbsComponent implements OnInit {
                 route: this.getFuncionalidade && this.getFuncionalidade.rota
             }
         ];
-
-        return breadCrumbs;
     }
 }

@@ -8,16 +8,16 @@ import { Menu } from 'lib-menu';
 
 import { HttpUtil } from '../../core/utils/http-util';
 import { UrlUtilService } from './url-util.service';
-import { UsuarioLogadoInterface } from '../../core/interfaces/usuario-logado.interface';
-import { SystemInterface } from '../../core/interfaces/system.interface';
+import { User } from '../interfaces/interno/user-interface';
+import { SystemInterface } from '../interfaces/interno/system-interface';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
     private $checkModuloMenu: Subject<any>;
-    private $user: Observable<UsuarioLogadoInterface>;
-    private $setUserInfo: Subject<UsuarioLogadoInterface>;
+    private $user: Observable<User>;
+    private $setUserInfo: Subject<User>;
 
     constructor(private http: HttpClient, private urlUtilService: UrlUtilService) {
         this.$setUserInfo = new Subject();
@@ -30,12 +30,12 @@ export class UserService {
      * @returns {Observable<UserService>}
      * @memberof UsuarioService
      */
-    public getUser(): Observable<UsuarioLogadoInterface> {
-        const url = 'https://www.mocky.io/v2/5b23f0fb2f00007d00e097c4'; // Substituir pela url da API, exemplo abaixo
-        //const url = this.urlUtilService.mountUrl('/me');
+    public getUser(): Observable<User> {
+        const url = 'https://www.mocky.io/v2/5b23f0fb2f00007d00e097c4';
+        // const url = this.urlUtilService.mountUrl('/me');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
-            .get<UsuarioLogadoInterface>(url, { withCredentials: true, responseType: 'json' })
+            .get<User>(url, { withCredentials: true, responseType: 'json' })
             .pipe(catchError((error: HttpErrorResponse) => HttpUtil.tratarErroLogin(error)));
     }
 
@@ -44,7 +44,7 @@ export class UserService {
      * @returns
      * @memberof UserService
      */
-    public getUserInfo(): Observable<UsuarioLogadoInterface> {
+    public getUserInfo(): Observable<User> {
         return this.$user;
     }
 
@@ -54,8 +54,8 @@ export class UserService {
      * @memberof UserService
      */
     public getPathLogo(): Observable<string> {
-        const url = 'https://www.mocky.io/v2/5c98e8913200007402d906ab'; // Substituir pela url da API, exemplo abaixo
-        //const url = this.urlUtilService.mountUrl('/me/logo-entidade');
+        const url = 'https://www.mocky.io/v2/5c98e8913200007402d906ab';
+        // const url = this.urlUtilService.mountUrl('/me/logo-entidade');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http.get(url, { withCredentials: true, responseType: 'text' }).pipe(
             catchError((erro: HttpErrorResponse) => {
@@ -74,8 +74,8 @@ export class UserService {
      * @memberof TimeService
      */
     public getTime(): Observable<string> {
-        const url = 'https://www.mocky.io/v2/5b63630630000052006503ef'; // Substituir pela url da API, exemplo abaixo
-        //const url = this.urlUtilService.mountUrl('/hora');
+        const url = 'https://www.mocky.io/v2/5b63630630000052006503ef';
+        // const url = this.urlUtilService.mountUrl('/hora');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
             .get<string>(url, { withCredentials: true, responseType: 'json' })
@@ -88,8 +88,8 @@ export class UserService {
      * @memberof SystemAvailableService
      */
     public getSystem(): Observable<SystemInterface[]> {
-        const url = 'https://www.mocky.io/v2/5b645c5b2e00008d00414025'; // Substituir pela url da API, exemplo abaixo
-        //const url = this.urlUtilService.mountUrl('/me/sistema');
+        const url = 'https://www.mocky.io/v2/5b645c5b2e00008d00414025';
+        // const url = this.urlUtilService.mountUrl('/me/sistema');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
             .get<Array<SystemInterface>>(url, { withCredentials: true, responseType: 'json' })
@@ -103,8 +103,8 @@ export class UserService {
      * @memberof UserService
      */
     public getModulos(): Observable<Menu[]> {
-        const url = 'https://www.mocky.io/v2/5e16301b34000070eb406a2c'; // Substituir pela url da API, exemplo abaixo
-        //const url = this.urlUtilService.mountUrl('/me/menu/4');
+        const url = 'https://www.mocky.io/v2/5e16301b34000070eb406a2c';
+        const url = this.urlUtilService.mountUrl('/me/menu/4');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
             .get<Array<Menu>>(url, { withCredentials: true, responseType: 'json' })
@@ -122,7 +122,9 @@ export class UserService {
      * @returns {Menu}
      * @memberof UserService
      */
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public setModulos(param: any): Menu {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         return param.funcionalidades.map((menu) => menu.rota);
     }
 

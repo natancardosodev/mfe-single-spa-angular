@@ -2,38 +2,63 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+import { AlertService } from 'lib-alert';
 
 import { UrlUtilService } from 'src/app/core/services/url-util.service';
 import { BaseService } from 'src/app/core/services/base.service';
 
-import { ProcessoInterface } from 'src/app/core/interfaces/processo.interface';
-import { LeiloeiroInterface } from 'src/app/core/interfaces/leiloeiro.interface';
+import { ListarProcessoInterface } from 'src/app/core/interfaces/dados-processo/listar-processo.interface';
+import { SolicitacaoInterface } from 'src/app/core/interfaces/dados-processo/solicitacao.interface';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SolicitacaoService extends BaseService {
-    constructor(http: HttpClient, urlUtilService: UrlUtilService) {
-        super('/', http, urlUtilService);
+    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
+        super('/', http, urlUtilService, alertService);
     }
 
-    public postSolicitacao = (solicitacao: LeiloeiroInterface): Observable<any> => {
-        return this.post('solicitacao', solicitacao);
+    public getListarProcessos = (processo: ListarProcessoInterface): Observable<any> => {
+        return this.get('solicitacao', processo);
     };
 
-    public getSolicitacaoPorCpf = (cpf: string): Observable<any> => {
-        return this.get(`solicitacao-pessoa-fisica/${cpf}`);
+    public getDadosProcesso = (solicitacao: SolicitacaoInterface): Observable<any> => {
+        return this.get('solicitacao/dados-processo', solicitacao);
     };
 
-    public getProcesso = (processo: ProcessoInterface): Observable<any> => {
-        return this.get('dados-processo', processo);
+    public getDadosPessoa = (solicitacao: SolicitacaoInterface): Observable<any> => {
+        return this.get('solicitacao/pessoa', solicitacao);
     };
 
-    public getPessoaPorCpf = (cpf: string): Observable<any> => {
-        return this.get(`pessoa-fisica/${cpf}`);
+    public getTaxas = (solicitacao: SolicitacaoInterface): Observable<any> => {
+        return this.get('solicitacao/taxa', solicitacao);
     };
 
-    public getStatusSolicitacao = (solicitacao: number): Observable<any> => {
-        return this.get(`solicitacao/status/${solicitacao}`);
+    public getValorDevido = (solicitacao: SolicitacaoInterface): Observable<any> => {
+        return this.get('solicitacao/valor-devido', solicitacao);
+    };
+
+    public getDadosDocumento = (solicitacao: SolicitacaoInterface): Observable<any> => {
+        return this.get('solicitacao/documento', solicitacao);
+    };
+
+    public getPathDocumento = (id: number): Observable<any> => {
+        return this.get(`solicitacao/documento/${id}`);
+    };
+
+    public getHistorico = (solicitacao: SolicitacaoInterface): Observable<any> => {
+        return this.get('solicitacao/historico', solicitacao);
+    };
+
+    public getParecer = (id: number): Observable<any> => {
+        return this.get(`solicitacao/historico/parecer/${id}`);
+    };
+
+    public getObservacao = (solicitacao: SolicitacaoInterface): Observable<any> => {
+        return this.get('solicitacao/observacao', solicitacao);
+    };
+
+    public getExigencia = (solicitacao: SolicitacaoInterface): Observable<any> => {
+        return this.get('solicitacao/exigencia', solicitacao);
     };
 }

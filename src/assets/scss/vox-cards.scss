@@ -1,92 +1,111 @@
 .vox-cards {
-  .card {
-    border: none;
-    margin-bottom: .5rem;
-    border-radius: 0;
-
-    .panel-collapse {
-      .card-body {
-        padding: 1rem .7rem;
-
-        .table {
-          tr {
-
-            th,
-            td {
-              font-size: 13px;
-            }
-
-            th {
-              background: $primary-lighter;
-              font-size: 13px;
-            }
-          }
-        }
-
-        .card-header {
-          background: $primary-lighter;
-          font-weight: bold;
-          padding: .6rem;
-          margin-bottom: .6rem;
-        }
-
-      }
-    }
-
-    .card-header {
-      cursor: pointer;
-      border: none;
-      border-radius: 0;
-      background: $primary-light;
-      padding: .7rem;
-      font-size: 14px;
-      text-transform: uppercase;
-    }
-
-    h5 {
-      font-size: 14px;
-      margin: 0;
-      padding: 0;
-      padding: 0.1rem;
-
-      button {
-        text-decoration: none;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        border: none;
-
-        h5 {
-          font-size: 14px;
-          color: $primary-darck;
-          margin: 0;
-          padding: 0;
-          text-align: left;
-          text-transform: uppercase;
-        }
-      }
+    .divider {
+        border: 10px solid $error-border;
+        display: inline-block;
+        padding: 0 1rem;
     }
 
     .card {
-      margin-bottom: 0;
-    }
+        background: $white;
+        border: none;
+        border-radius: 0;
+        margin-bottom: 0.5rem;
 
-    .vox-cards .card .lib-card-title {
-      font-weight: 600;
-      font-size: .9rem;
-      color: $primary-darck;
-      display: block;
-      margin-bottom: 10px;
+        .panel-collapse {
+            .card-body {
+                margin-bottom: -20px;
+                padding: 1rem 0.7rem;
+
+                .table {
+                    tr {
+                        th,
+                        td {
+                            font-size: 13px;
+                        }
+
+                        th {
+                            background: $primary-lighter;
+                            font-size: 13px;
+                        }
+                    }
+                }
+
+                .card-header {
+                    background: $primary-lighter;
+                    font-weight: bold;
+                    margin-bottom: 0.6rem;
+                    padding: 0.6rem;
+                }
+            }
+        }
+
+        .card-header {
+            background: $primary-light;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        h5 {
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            padding: 0.1rem;
+
+            button {
+                border: none;
+                margin: 0;
+                padding: 0;
+                text-decoration: none;
+                width: 100%;
+
+                h5 {
+                    color: $primary-dark;
+                    font-size: 14px;
+                    margin: 0;
+                    padding: 0;
+                    text-align: left;
+                    text-transform: uppercase;
+                }
+            }
+        }
+
+        .card {
+            margin-bottom: 0;
+        }
+
+        .vox-cards .card .lib-card-title {
+            color: $primary-dark;
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
     }
-  }
+}
+
+.card {
+    background-clip: border-box;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    display: -webkit-box;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    position: relative;
+    word-wrap: break-word;
 }
 
 .card-box-content {
-  display: inline-block;
-  width: 100%;
-  border: 1px solid $primary;
-  padding: 2em;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  margin-bottom: .75rem;
+    border: 1px solid $primary;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 2em;
+    width: 100%;
 }

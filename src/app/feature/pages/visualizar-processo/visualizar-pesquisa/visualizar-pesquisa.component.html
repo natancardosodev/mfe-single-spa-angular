@@ -1,0 +1,18 @@
+<section class="main-content-block">
+    <div class="content-block">
+        <app-card-processo [solicitacao]="solicitacao"></app-card-processo>
+
+        <app-card-pessoa [solicitacao]="solicitacao"></app-card-pessoa>
+
+        <app-card-documentos [solicitacao]="solicitacao"></app-card-documentos>
+
+        <div class="d-flex flex-row-reverse mt-2">
+            <button type="button" class="btn btn-nav-base btn-nav-ico-left mr-4" (click)="voltarParaPesquisa()">
+                <span class="ico-left">
+                    <i aria-hidden="true" class="fas fa-angle-double-left"></i>
+                </span>
+                Voltar
+            </button>
+        </div>
+    </div>
+</section>

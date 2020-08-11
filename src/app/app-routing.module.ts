@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
     {
-        path: 'nova-funcionalidade',
+        path: 'visualizar-processo',
         loadChildren: () =>
-            import('./feature/pages/funcionalidade/funcionalidade.module').then((m) => m.FuncionalidadeModule)
+            import('./feature/pages/visualizar-processo/visualizar-processo.module').then(
+                (m) => m.VisualizarProcessoModule
+            )
     },
-    { path: '', redirectTo: 'nova-funcionalidade', pathMatch: 'full' },
+    { path: '', redirectTo: 'visualizar-processo', pathMatch: 'full' },
     {
         path: '**',
         loadChildren: () =>

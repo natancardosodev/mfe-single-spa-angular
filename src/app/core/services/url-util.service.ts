@@ -75,7 +75,8 @@ export class UrlUtilService {
      * @memberof UrlUtilService
      */
     public redirectToLogin(): void {
-        window.location.href = `${this.getAuth()}`;
+        const urlAtual = window.location.href;
+        window.location.href = `${this.getUrlApiBase()}/redirect?url=${urlAtual}`;
     }
 
     /**

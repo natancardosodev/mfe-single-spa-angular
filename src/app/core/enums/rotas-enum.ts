@@ -1,3 +1,4 @@
 export enum RotasEnum {
-    VISUALIZAR_PESQUISA = 'nova-funcionalidade/visualizar'
+    VISUALIZAR_PESQUISA = 'visualizar',
+    VISUALIZAR_PROCESSO = 'visualizar-processo'
 }

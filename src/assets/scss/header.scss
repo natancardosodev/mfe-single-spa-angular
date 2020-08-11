@@ -1,56 +1,56 @@
 #permission-client {
-  position: relative;
-  z-index: 10;
+    position: relative;
+    z-index: 10;
 }
 
 .name-user,
 .time {
-  color: $primary;
+    color: $primary;
 }
 
 #permission-system {
-  top: 4px !important;
+    top: 4px !important;
 
-  .nav-item {
-    font-size: 1.2em;
-  }
+    .nav-item {
+        font-size: 1.2em;
+    }
 }
 
 .page-header,
 .container-base {
-  width: 997px
+    width: 997px;
 }
 
 .container-base {
-  font-size: .9em
+    font-size: 0.9em;
 }
 
 a {
-  color: $primary;
+    color: $primary;
 
-  &:hover {
-    color: $primary-focus;
-  }
+    &:hover {
+        color: $primary-focus;
+    }
 }
 
 .ico {
-  position: absolute;
-  padding: 0.3em 0.7em;
-  background: $primary-focus;
-  font-size: 1.2em;
-  top: 0;
+    background: $primary-focus;
+    font-size: 1.2em;
+    padding: 0.3em 0.7em;
+    position: absolute;
+    top: 0;
 }
 
 .ico-right {
-  @extend .ico;
-  right: 0
+    @extend .ico;
+    right: 0;
 }
 
 .ico-left {
-  @extend .ico;
-  left: 0;
+    @extend .ico;
+    left: 0;
 }
 
 .col-form-label {
-  text-align: right;
+    text-align: right;
 }

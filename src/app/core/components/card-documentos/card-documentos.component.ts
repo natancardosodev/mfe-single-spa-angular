@@ -1,7 +1,10 @@
-import { CardDocumentosService } from '../../../services/card-documentos.service';
-import { Component, OnInit } from '@angular/core';
-import { AnexosConfig, ExtensaoArquivoEnum } from 'vox-upload';
-import { UrlUtilService } from 'src/app/services/url-util.service';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
+import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
+import { UrlUtilService } from '../../services/url-util.service';
 
 @Component({
     selector: 'app-card-documentos',
@@ -9,55 +12,36 @@ import { UrlUtilService } from 'src/app/services/url-util.service';
     styleUrls: ['./card-documentos.component.scss']
 })
 export class CardDocumentosComponent implements OnInit {
-    public anexosConfig: AnexosConfig | any;
-    public hasArquivoAnexado: boolean;
-    public nri: string;
+    @Input() public solicitacao: number;
+    public documentos$: Observable<any>;
+    public path: any;
+    public loading: boolean;
+    public isCollapsed: boolean;
 
-    private $titleUpload: string;
-
-    constructor(private urlUtilService: UrlUtilService, private cardDocumentosService: CardDocumentosService) {
-        this.$titleUpload = 'Documentos';
-        this.anexosConfig = {
-            listaAnexos: [],
-            apiUrl: ''
-        };
+    constructor(private solicitacaoService: SolicitacaoService, private urlUtilService: UrlUtilService) {
+        this.loading = true;
+        this.isCollapsed = false;
     }
 
-    ngOnInit() {
-        this.onAnexarCardOpen();
+    public ngOnInit(): void {
+        this.documentos$ = this.solicitacaoService.getDadosDocumento({ solicitacao: this.solicitacao });
+        this.loading = false;
     }
 
-    public get titleUpload(): string {
-        return this.$titleUpload;
+    public getPathDocumento(id: number): void {
+        this.solicitacaoService
+            .getPathDocumento(id)
+            .pipe(finalize(() => (this.loading = false)))
+            .subscribe((response: any) => {
+                // @todo colocar interface para tipo
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                this.path = response;
+            });
     }
 
-    public onArquivoAnexado(hasArquivos: any) {
-        this.hasArquivoAnexado = hasArquivos;
-    }
+    public getDownloadDocumento(id: number, isAnexo: boolean): string {
+        const anexo = isAnexo ? 1 : 0;
 
-    public onAnexarCardOpen() {
-        this.cardDocumentosService.getAnexosDocumentos().subscribe(
-            (response) => {
-                response = response.map((res) => {
-                    res.tipo = '1';
-                    res.nriProtocolo = this.nri;
-                    res.browser = window.navigator.userAgent;
-                    return res;
-                });
-                this.anexosConfig = {
-                    listaAnexos: response,
-                    apiUrl: this.urlUtilService.mountUrl(''),
-                    apiAnexoUrl: this.urlUtilService.mountUrl(`/upload`),
-                    formato: [ExtensaoArquivoEnum.PDF],
-                    nriProtocolo: this.nri,
-                    tamanho: 2
-                };
-            },
-            (erro) =>
-                (this.anexosConfig = {
-                    listaAnexos: erro,
-                    apiUrl: ''
-                })
-        );
+        return this.urlUtilService.montarUrlApi(`/download-documento/${id}/${anexo}`);
     }
 }
