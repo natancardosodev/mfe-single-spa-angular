@@ -4,29 +4,52 @@ Projeto gerado com [Angular CLI](https://github.com/angular/angular-cli) version
 
 ## Pre-requisitos
 
-- Node 12.13.0
-- NPM 5.10.0
+-   Node 12.13.0
+-   NPM 5.10.0
 
-## Execução
+## Instalação
 
-* Start deste projeto deve executar `npm run start`
+Faça o fork deste projeto e altere o nome de acordo com o definido.
 
-## Acessar ambiente local
+```shell
+npm install
+npm run start
+```
 
-* [Local host](http://localhost:4200)
+No comando start ou build a pasta é buildada, necessitando servir o diretório com virtualHost do apache. Busque seu
+líder técnico ou arquiteto para auxiliar nisso.
 
+Adicione os remotes do git:
+
+```shell
+git remote add upstream git@gitlab....link-do-projeto-pai
+git remote add skeleton git@gitlab.voxtecnologia.com.br:vox/front-end/skeleton-externo-angular.git
+```
+
+## Lint: Stylelint (.scss) e ESLint (.ts)
+
+Sempre antes de submeter um Merge Request busque executar o comando `npm run lint:fix`, que fará uma análise estática do
+código. Se houver algum erro, busque corrigir observando a documentação e execute o `npm run lint` para verificar se
+está tudo certo.
+
+### Configurações do Lint no Visual Studio Code
+
+Para facilitar as correções de lint instale as seguintes extensões: `dbaeumer.vscode-eslint esbenp.prettier-vscode`.
 
 ## Sobre o projeto
 
-O projeto tem finalidade de trazer uma pré configuração da estrutura dos principais componentes e serviços utilizados para montar o layout interno do SigFácil. Trazendo com ele [libs](https://gitlab.voxtecnologia.com.br/?sort=latest_activity_desc&utf8=%E2%9C%93&name=lib-&sort=latest_activity_desc) internas da Vox que darão a base do sistema.
-
+O projeto tem finalidade de trazer uma pré configuração da estrutura dos principais componentes e serviços utilizados
+para montar o layout interno do SigFácil. Trazendo com ele
+[libs](https://gitlab.voxtecnologia.com.br/?sort=latest_activity_desc&utf8=%E2%9C%93&name=lib-&sort=latest_activity_desc)
+internas da Vox que darão a base do sistema.
 
 #### As três principais libs que dão identidade visual do projeto são:
-___
 
-- **1** - [Lib-header](https://gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-header) 
-- **2** - [Lib-menu](https://gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-menu)
-- **3** - [Lib-footer](https://gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-menu)
+---
+
+-   **1** - [Lib-header](https://gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-header)
+-   **2** - [Lib-menu](https://gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-menu)
+-   **3** - [Lib-footer](https://gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-menu)
 
 > Abaixo um exemplo visual da disposição dessas libs
 
@@ -34,9 +57,10 @@ ___
 
 Essa é a tela base do projeto, na área do conteúdo principal será acrescentado as funcionalidades da nova aplicação.
 
-
 #### Gráfico de estrutura base
-___
+
+---
+
 Veja o gráfico da estrutura de libs e components presentes no projeto base
 
 ```mermaid
@@ -50,25 +74,30 @@ Veja o gráfico da estrutura de libs e components presentes no projeto base
   root -->|Component|app-breadcrumbs
   root -->|lib|LB-f(lib-footer)
 ```
-___
+
+---
+
 #### Serviços
 
-Para popular os componentes foram criado alguns mocks, quando for substituir os links dos mocks por end-point da api, seguir o mesmo padrão de estrutura. Os mocks encontran-se no arquivo `src/app/services/user.service.ts`
+Para popular os componentes foram criado alguns mocks, quando for substituir os links dos mocks por end-point da api,
+seguir o mesmo padrão de estrutura. Os mocks encontran-se no arquivo `src/app/services/user.service.ts`
 
 Veja abaixo os endpoints nescessários:
 
-[Lib-header](https://gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-header) 
-*  Dados do sistema, função `getSystem()` [Exemplo de estrutura](https://www.mocky.io/v2/5b645c5b2e00008d00414025)
-*  Dados do usuário logado, função `getUser()` [Exemplo de estrutura](https://www.mocky.io/v2/5b23f0fb2f00007d00e097c4)
-*  Logo do sistema, função `getPathLogo()` [Exemplo de estrutura](https://www.mocky.io/v2/5c98e8913200007402d906ab)
-*  Hora do sistema, função `getTime()` [Exemplo de estrutura](https://www.mocky.io/v2/5b63630630000052006503ef)
+[Lib-header](https://gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-header)
+
+-   Dados do sistema, função `getSystem()` [Exemplo de estrutura](https://www.mocky.io/v2/5b645c5b2e00008d00414025)
+-   Dados do usuário logado, função `getUser()` [Exemplo de estrutura](https://www.mocky.io/v2/5b23f0fb2f00007d00e097c4)
+-   Logo do sistema, função `getPathLogo()` [Exemplo de estrutura](https://www.mocky.io/v2/5c98e8913200007402d906ab)
+-   Hora do sistema, função `getTime()` [Exemplo de estrutura](https://www.mocky.io/v2/5b63630630000052006503ef)
 
 [Lib-menu](https://gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-menu)
-*  Módulos do menu, função `getModulos()` [Exemplo de estrutura](https://www.mocky.io/v2/5e16301b34000070eb406a2c)
 
+-   Módulos do menu, função `getModulos()` [Exemplo de estrutura](https://www.mocky.io/v2/5e16301b34000070eb406a2c)
 
 ## Exemplo de implementação de uma funcionalidade
-Foi implementado uma nova funcionalidade para ter um exemplo de uso de outras Libs da vox, a estrutura dela é essa: 
+
+Foi implementado uma nova funcionalidade para ter um exemplo de uso de outras Libs da vox, a estrutura dela é essa:
 
 ```mermaid
   graph TD
