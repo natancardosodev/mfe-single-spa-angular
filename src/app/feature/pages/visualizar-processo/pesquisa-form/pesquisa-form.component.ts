@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
+import { GeneralsUtil } from './../../../../core/utils/generals.util';
 import { AlertMessage } from './../../../../core/utils/alert-message';
 import { TextMaskFactory } from './../../../../core/utils/mask/text-mask-factory';
 import { PesquisaForm } from './pesquisa.form';
@@ -42,7 +43,7 @@ export class PesquisaFormComponent implements OnInit {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const formValue = this.pesquisaForm.getDadosForm();
 
-        if (!this.isEmpty(formValue)) {
+        if (!GeneralsUtil.isEmpty(formValue)) {
             if (this._pesquisaForm.valid) {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 const parametros = this.pesquisaForm.getValuesFormated();
@@ -64,9 +65,5 @@ export class PesquisaFormComponent implements OnInit {
 
     public isFieldValid(form: FormGroup, field: string): any {
         return !form.get(field).valid && form.get(field).dirty;
-    }
-
-    public isEmpty(dado: boolean): boolean {
-        return JSON.stringify(dado) === '{}';
     }
 }

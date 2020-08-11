@@ -3,6 +3,7 @@ import { FormGroup, FormControl, AbstractControl, ValidatorFn } from '@angular/f
 import { isValidCpf } from '@brazilian-utils/is-valid-cpf';
 import { clearMask } from 'src/app/core/configs/regexClearMask';
 import { StorageUtil } from 'src/app/core/utils/storage.util';
+import { Storage } from 'src/app/core/enums/storage.enum';
 
 export class PesquisaForm extends FormGroup {
     private $errorMessages = {
@@ -73,7 +74,7 @@ export class PesquisaForm extends FormGroup {
 
     public static validaUfProtocolo(): ValidatorFn {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-        const ufUsuario: string = StorageUtil.get('user').estado;
+        const ufUsuario: string = StorageUtil.get(Storage.DADOS_USUARIO).estado;
         const prefixoProtocolo = `${ufUsuario}E`;
 
         return (control: AbstractControl): any => {
