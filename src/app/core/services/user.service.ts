@@ -104,7 +104,7 @@ export class UserService {
      */
     public getModulos(): Observable<Menu[]> {
         const url = 'https://www.mocky.io/v2/5e16301b34000070eb406a2c';
-        const url = this.urlUtilService.mountUrl('/me/menu/4');
+        //const url = this.urlUtilService.mountUrl('/me/menu/4');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
             .get<Array<Menu>>(url, { withCredentials: true, responseType: 'json' })
