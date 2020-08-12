@@ -5,14 +5,15 @@ import { Subject, Subscription, forkJoin } from 'rxjs';
 import { LoadingGlobalService } from '@voxtecnologia/vox-preload';
 import { Menu } from 'lib-menu';
 import { LogoInterface } from 'lib-header';
+import { isUndefined } from 'util';
 
 import { AlertMessage } from './core/utils/alert-message';
 import { StorageUtil } from './core/utils/storage.util';
-import { isUndefined } from 'util';
 import { UrlUtilService } from './core/services/url-util.service';
 import { UserService } from './core/services/user.service';
 import { SystemInterface } from './core/interfaces/interno/system-interface';
 import { User } from './core/interfaces/interno/user-interface';
+import { Storage } from './core/enums/storage.enum';
 
 @Component({
     selector: 'app-root',
@@ -86,7 +87,7 @@ export class AppComponent implements OnInit, OnDestroy {
     public logarService(): Subscription {
         return this.userService.getUser().subscribe(
             (resposta: any) => {
-                StorageUtil.store('user', resposta);
+                StorageUtil.store(Storage.DADOS_USUARIO, resposta);
                 this.getSystemInfo(resposta);
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 return isUndefined(resposta['mensagem']) || this.urlUtilService.redirectToLogin();
