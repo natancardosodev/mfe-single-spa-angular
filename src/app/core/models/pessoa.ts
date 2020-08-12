@@ -1,4 +1,3 @@
-import { PessoaInterface } from '../interfaces/pessoa.interface';
 import { clearMask } from '../configs/regexClearMask';
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -56,7 +55,7 @@ export class Pessoa {
         this.sexo = sexo;
     }
 
-    public getValues(): PessoaInterface {
+    public getValues(): any {
         return {
             nome: this.nome,
             cpf: clearMask(this.cpf),

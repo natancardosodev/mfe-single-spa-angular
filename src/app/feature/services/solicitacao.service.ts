@@ -7,9 +7,6 @@ import { AlertService } from 'lib-alert';
 import { UrlUtilService } from 'src/app/core/services/url-util.service';
 import { BaseService } from 'src/app/core/services/base.service';
 
-import { ListarProcessoInterface } from 'src/app/core/interfaces/dados-processo/listar-processo.interface';
-import { SolicitacaoInterface } from 'src/app/core/interfaces/dados-processo/solicitacao.interface';
-
 @Injectable({
     providedIn: 'root'
 })
@@ -18,27 +15,27 @@ export class SolicitacaoService extends BaseService {
         super('/', http, urlUtilService, alertService);
     }
 
-    public getListarProcessos = (processo: ListarProcessoInterface): Observable<any> => {
+    public getListarProcessos = (processo: any): Observable<any> => {
         return this.get('solicitacao', processo);
     };
 
-    public getDadosProcesso = (solicitacao: SolicitacaoInterface): Observable<any> => {
+    public getDadosProcesso = (solicitacao: any): Observable<any> => {
         return this.get('solicitacao/dados-processo', solicitacao);
     };
 
-    public getDadosPessoa = (solicitacao: SolicitacaoInterface): Observable<any> => {
+    public getDadosPessoa = (solicitacao: any): Observable<any> => {
         return this.get('solicitacao/pessoa', solicitacao);
     };
 
-    public getTaxas = (solicitacao: SolicitacaoInterface): Observable<any> => {
+    public getTaxas = (solicitacao: any): Observable<any> => {
         return this.get('solicitacao/taxa', solicitacao);
     };
 
-    public getValorDevido = (solicitacao: SolicitacaoInterface): Observable<any> => {
+    public getValorDevido = (solicitacao: any): Observable<any> => {
         return this.get('solicitacao/valor-devido', solicitacao);
     };
 
-    public getDadosDocumento = (solicitacao: SolicitacaoInterface): Observable<any> => {
+    public getDadosDocumento = (solicitacao: any): Observable<any> => {
         return this.get('solicitacao/documento', solicitacao);
     };
 
@@ -46,7 +43,7 @@ export class SolicitacaoService extends BaseService {
         return this.get(`solicitacao/documento/${id}`);
     };
 
-    public getHistorico = (solicitacao: SolicitacaoInterface): Observable<any> => {
+    public getHistorico = (solicitacao: any): Observable<any> => {
         return this.get('solicitacao/historico', solicitacao);
     };
 
@@ -54,11 +51,11 @@ export class SolicitacaoService extends BaseService {
         return this.get(`solicitacao/historico/parecer/${id}`);
     };
 
-    public getObservacao = (solicitacao: SolicitacaoInterface): Observable<any> => {
+    public getObservacao = (solicitacao: any): Observable<any> => {
         return this.get('solicitacao/observacao', solicitacao);
     };
 
-    public getExigencia = (solicitacao: SolicitacaoInterface): Observable<any> => {
+    public getExigencia = (solicitacao: any): Observable<any> => {
         return this.get('solicitacao/exigencia', solicitacao);
     };
 }

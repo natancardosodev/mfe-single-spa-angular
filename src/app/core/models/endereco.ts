@@ -1,4 +1,3 @@
-import { EnderecoInterface } from '../interfaces/endereco.interface';
 import { clearMask } from '../configs/regexClearMask';
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -48,7 +47,7 @@ export class Endereco {
         this.telefone = telefone;
     }
 
-    public getValues(): EnderecoInterface {
+    public getValues(): any {
         return {
             cep: clearMask(this.cep),
             tipo_logradouro: this.tipo_logradouro,
