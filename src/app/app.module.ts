@@ -5,18 +5,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { LoadingGlobalModule } from '@voxtecnologia/vox-preload';
-import { AlertModule, AlertConfirmModule } from 'lib-alert';
 import { HeaderModule } from 'lib-header';
 import { MenuModule } from 'lib-menu';
 import { FooterModule } from 'footer';
 import { BreadcrumbsModule } from './core/components/breadcrumbs/breadcrumbs.module';
+import { AlertModule } from './core/components/alert/alert.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonService } from './core/services/common.service';
-
 import { VisualizarProcessoModule } from './feature/pages/visualizar-processo/visualizar-processo.module';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { VisualizarProcessoModule } from './feature/pages/visualizar-processo/vi
         LoadingGlobalModule,
         FontAwesomeModule,
         AlertModule,
-        AlertConfirmModule,
+        ModalModule.forRoot(),
         BreadcrumbsModule,
         HeaderModule,
         MenuModule,

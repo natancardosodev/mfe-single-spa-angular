@@ -1,0 +1,6 @@
+<dl class="row">
+    <dt class="col-4">{{ label }}</dt>
+    <dd class="col-6" *ngIf="!mask && !date">{{ value || '-' }}</dd>
+    <dd class="col-6" *ngIf="mask">{{ value | mask: mask }}</dd>
+    <dd class="col-6" *ngIf="date">{{ value | date: date }}</dd>
+</dl>

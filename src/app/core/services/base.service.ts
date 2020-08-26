@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 import { UrlUtilService } from './url-util.service';
 import { HttpOptions } from '../interfaces/http-options';
-import { AlertService } from 'lib-alert';
+import { AlertService } from '../components/alert/alert.service';
 
 export abstract class BaseService {
     private _baseUrl: string;
@@ -49,7 +49,7 @@ export abstract class BaseService {
             take(1),
             catchError(
                 (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal({ title: erro.error.message, message: this._msgDefault })
+                    void this.alertService.openModal(erro.error.message, this._msgDefault, 'danger')
             )
         );
     };
@@ -60,7 +60,7 @@ export abstract class BaseService {
             take(1),
             catchError(
                 (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal({ title: erro.error.message, message: this._msgDefault })
+                    void this.alertService.openModal(erro.error.message, this._msgDefault, 'danger')
             )
         );
     };
@@ -75,7 +75,7 @@ export abstract class BaseService {
             take(1),
             catchError(
                 (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal({ title: erro.error.message, message: this._msgDefault })
+                    void this.alertService.openModal(erro.error.message, this._msgDefault, 'danger')
             )
         );
     };
@@ -85,7 +85,7 @@ export abstract class BaseService {
             take(1),
             catchError(
                 (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal({ title: erro.error.message, message: this._msgDefault })
+                    void this.alertService.openModal(erro.error.message, this._msgDefault, 'danger')
             )
         );
     };
@@ -106,7 +106,7 @@ export abstract class BaseService {
             take(1),
             catchError(
                 (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal({ title: erro.error.message, message: this._msgDefault })
+                    void this.alertService.openModal(erro.error.message, this._msgDefault, 'danger')
             )
         );
     };

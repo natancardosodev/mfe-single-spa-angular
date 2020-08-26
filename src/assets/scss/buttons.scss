@@ -3,10 +3,9 @@ input {
     transition: all 0.7s ease;
 }
 
-.btn-nav-base,
-.btn-nav-secondary {
-    color: $white;
-    font-size: 0.9em;
+.btn.btn-nav-base,
+.btn.btn-outline-secondary {
+    font-size: 0.95em;
     margin-bottom: 5px;
     overflow: hidden;
     position: relative;
@@ -15,8 +14,7 @@ input {
 
 .btn.btn-nav-base {
     background: $primary;
-    color: #fff;
-    font-size: 0.9rem;
+    color: $white;
 
     &:hover {
         background: $primary-focus !important;

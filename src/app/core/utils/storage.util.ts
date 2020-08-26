@@ -7,6 +7,10 @@ export class StorageUtil {
 
     public static get(key: string): any {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        return sessionStorage.getItem(key) ? JSON.parse(atob(sessionStorage.getItem(key))) : null;
+        return window.sessionStorage.getItem(key) ? JSON.parse(atob(sessionStorage.getItem(key))) : null;
+    }
+
+    public static remove(key: string): any {
+        return window.sessionStorage.removeItem(key);
     }
 }
