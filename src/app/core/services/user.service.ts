@@ -31,7 +31,7 @@ export class UserService {
      * @memberof UsuarioService
      */
     public getUser(): Observable<User> {
-        const url = 'https://www.mocky.io/v2/5b23f0fb2f00007d00e097c4';
+        const url = 'https://run.mocky.io/v3/97093ccf-98c1-4dca-9dcf-17b89f400c9b';
         // const url = this.urlUtilService.mountUrl('/me');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
@@ -103,7 +103,7 @@ export class UserService {
      * @memberof UserService
      */
     public getModulos(): Observable<Menu[]> {
-        const url = 'https://www.mocky.io/v2/5e16301b34000070eb406a2c';
+        const url = 'https://run.mocky.io/v3/2d9574a8-27e4-42d2-8bb6-e2bcd6db1fae';
         //const url = this.urlUtilService.mountUrl('/me/menu/4');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
