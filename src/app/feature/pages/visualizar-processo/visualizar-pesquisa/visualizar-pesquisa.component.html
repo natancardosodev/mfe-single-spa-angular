@@ -6,8 +6,26 @@
 
         <app-card-documentos [solicitacao]="solicitacao"></app-card-documentos>
 
+        <app-card-observacao
+            [solicitacao]="solicitacao"
+            [statusAtualProcesso]="statusAtualProcesso"
+            (finalizandoProcesso)="finalizandoProcesso($event)"
+        ></app-card-observacao>
+
         <div class="d-flex flex-row-reverse mt-2">
-            <button type="button" class="btn btn-nav-base btn-nav-ico-left mr-4" (click)="voltarParaPesquisa()">
+            <button type="button" class="btn btn-nav-base btn-nav-ico-left mr-2" (click)="openModalIndeferir()">
+                <span class="ico-left">
+                    <i aria-hidden="true" class="fas fa-check"></i>
+                </span>
+                Indeferir
+            </button>
+            <button type="button" class="btn btn-nav-base btn-nav-ico-left mr-2" (click)="openModalDeferir()">
+                <span class="ico-left">
+                    <i aria-hidden="true" class="fas fa-check"></i>
+                </span>
+                Deferir
+            </button>
+            <button type="button" class="btn btn-nav-base btn-nav-ico-left mr-2" (click)="voltarParaPesquisa()">
                 <span class="ico-left">
                     <i aria-hidden="true" class="fas fa-angle-double-left"></i>
                 </span>
@@ -16,3 +34,26 @@
         </div>
     </div>
 </section>
+
+<app-modal-indeferir
+    [solicitacao]="solicitacao"
+    (finalizandoIndeferir)="finalizandoProcesso($event)"
+></app-modal-indeferir>
+
+<ng-template #modalDeferir>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Atenção</h4>
+    </div>
+    <div class="modal-body">
+        <p>Deseja confirmar o deferimento do processo?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary pl-3 pr-3" (click)="closeModal()">
+            Não
+        </button>
+        <button type="button" class="btn btn-nav-base pl-3 pr-3" (click)="deferir()" [disabled]="loading">
+            Sim
+            <i class="fas fa-circle-notch fa-spin fa-fw" *ngIf="loading"></i>
+        </button>
+    </div>
+</ng-template>

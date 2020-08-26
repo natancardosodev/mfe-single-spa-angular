@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 
 import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
 import { UrlUtilService } from '../../services/url-util.service';
@@ -26,17 +25,6 @@ export class CardDocumentosComponent implements OnInit {
     public ngOnInit(): void {
         this.documentos$ = this.solicitacaoService.getDadosDocumento({ solicitacao: this.solicitacao });
         this.loading = false;
-    }
-
-    public getPathDocumento(id: number): void {
-        this.solicitacaoService
-            .getPathDocumento(id)
-            .pipe(finalize(() => (this.loading = false)))
-            .subscribe((response: any) => {
-                // @todo colocar interface para tipo
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                this.path = response;
-            });
     }
 
     public getDownloadDocumento(id: number, isAnexo: boolean): string {
