@@ -73,4 +73,13 @@ export class VisualizarPesquisaComponent implements OnInit {
     public openModalIndeferir(): void {
         this.modalIndeferir.openModal();
     }
+
+    public finalizandoProcesso(success: boolean): void {
+        this.loading = false;
+        this.closeModal();
+
+        if (success) {
+            window.console.log('Sucesso');
+        }
+    }
 }

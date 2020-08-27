@@ -1,5 +1,5 @@
 export interface EnderecoPessoaFisicaInterface {
-    cep: number;
+    cep: string;
     logradouro: string;
     numero: number;
     bairro: string;
@@ -17,6 +17,7 @@ export interface DadosPessoaInterface {
     nome: string;
     cpf: number;
     documento: number;
+    orgao_emissor: string;
     uf_orgao_emissor: string;
     data_nascimento: string;
     nacionalidade: string;
