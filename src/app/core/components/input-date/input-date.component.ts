@@ -48,7 +48,7 @@ export class InputDateComponent implements ControlValueAccessor, AfterViewInit {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/explicit-module-boundary-types
-    propagateChange = (_: any): void => { };
+    propagateChange = (_: any): void => {};
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     registerOnChange(fn: any): void {
@@ -56,7 +56,7 @@ export class InputDateComponent implements ControlValueAccessor, AfterViewInit {
         this.propagateChange = fn;
     }
 
-    registerOnTouched(): void { }
+    registerOnTouched(): void {}
 
     get value(): string {
         return this._valueInput;
