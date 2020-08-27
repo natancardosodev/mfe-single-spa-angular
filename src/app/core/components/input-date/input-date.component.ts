@@ -25,25 +25,25 @@ export class InputDateComponent implements ControlValueAccessor, AfterViewInit {
 
     public configDatepicker: Partial<BsDatepickerConfig>;
 
-    private $valueInput: string;
+    private _valueInput: string;
 
     constructor(
-        private $localeService: BsLocaleService,
-        private $renderer: Renderer2,
-        private $elementRef: ElementRef
+        private _localeService: BsLocaleService,
+        private _renderer: Renderer2,
+        private _elementRef: ElementRef
     ) {
         this.configDatepicker = config;
-        this.$localeService.use(locale);
+        this._localeService.use(locale);
     }
 
     ngAfterViewInit(): void {
-        this.$renderer.removeAttribute(this.$elementRef.nativeElement, 'id');
+        this._renderer.removeAttribute(this._elementRef.nativeElement, 'id');
     }
 
     writeValue(value: string): void {
         if (value !== undefined) {
-            this.$valueInput = value;
-            this.propagateChange(this.$valueInput);
+            this._valueInput = value;
+            this.propagateChange(this._valueInput);
         }
     }
 
@@ -59,19 +59,19 @@ export class InputDateComponent implements ControlValueAccessor, AfterViewInit {
     registerOnTouched(): void {}
 
     get value(): string {
-        return this.$valueInput;
+        return this._valueInput;
     }
 
     set value(val: string) {
         if (val) {
-            this.$valueInput = val;
-            this.propagateChange(this.$valueInput);
+            this._valueInput = val;
+            this.propagateChange(this._valueInput);
         }
     }
 
     public clearValue(): void {
-        this.$valueInput = null;
-        this.propagateChange(this.$valueInput);
+        this._valueInput = null;
+        this.propagateChange(this._valueInput);
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

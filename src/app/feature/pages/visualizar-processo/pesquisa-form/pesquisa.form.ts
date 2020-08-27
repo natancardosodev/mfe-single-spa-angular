@@ -6,7 +6,7 @@ import { StorageUtil } from 'src/app/core/utils/storage.util';
 import { Storage } from 'src/app/core/enums/storage.enum';
 
 export class PesquisaForm extends FormGroup {
-    private $errorMessages = {
+    private _errorMessages = {
         required: 'O campo %s é obrigatório.',
         quantidadeInvalida: 'Quantidade Inválida de dígitos',
         valorInvalido: 'O valor informado no campo %s é inválido',
@@ -130,7 +130,7 @@ export class PesquisaForm extends FormGroup {
 
     public getFirstErrorFrom(controlName: string, label: string): string {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-        return this.$errorMessages[Object.keys(this.get(controlName).errors)[0]].replace('%s', label || controlName);
+        return this._errorMessages[Object.keys(this.get(controlName).errors)[0]].replace('%s', label || controlName);
     }
 
     public markAllAsTouched(): void {
