@@ -24,22 +24,22 @@ import { AlertService } from 'src/app/core/components/alert/alert.service';
 export class VisualizarProcessoComponent {
     public gridView: boolean;
     public loading: boolean;
-    private $dadosGrid: Subject<any>;
-    private $colunasGrid: Array<GridColumnDefs>;
-    private $dataValue: any;
-    private $sub: Subscription;
-    private $pageConfig: GridOptions;
+    private _dadosGrid: Subject<any>;
+    private _colunasGrid: Array<GridColumnDefs>;
+    private _dataValue: any;
+    private _sub: Subscription;
+    private _pageConfig: GridOptions;
 
     constructor(
         private solicitacaoService: SolicitacaoService,
         private alertService: AlertService,
         private router: Router
     ) {
-        this.$dadosGrid = new Subject();
-        this.$dataValue = {};
+        this._dadosGrid = new Subject();
+        this._dataValue = {};
         this.gridView = false;
         this.loading = false;
-        this.$pageConfig = {
+        this._pageConfig = {
             paginationPageSize: 10,
             cacheBlockSize: 0,
             rowHeight: 55
@@ -52,7 +52,7 @@ export class VisualizarProcessoComponent {
     }
 
     public get colunasGrid(): Array<GridColumnDefs> {
-        this.$colunasGrid = [
+        this._colunasGrid = [
             new GridColumnDefs('Protocolo', 'protocolo', 150),
             new GridColumnDefs('Nome', 'nome', 295),
             new GridColumnDefs('CPF', 'cpf', 140),
@@ -60,15 +60,15 @@ export class VisualizarProcessoComponent {
             new GridColumnDefs('Protocolado', 'data_protocolado', 130)
         ];
 
-        return this.$colunasGrid;
+        return this._colunasGrid;
     }
 
     public get pageConfig(): GridOptions {
-        return this.$pageConfig;
+        return this._pageConfig;
     }
 
     public get dadosGrid(): Subject<any> {
-        return this.$dadosGrid;
+        return this._dadosGrid;
     }
 
     public onGridUpdate(parametrosGrid: GridSearchParams): boolean | Subscription {
@@ -79,12 +79,12 @@ export class VisualizarProcessoComponent {
             offset: parametrosGrid.offset
         };
 
-        return !this.$dataValue || this.pesquisar(this.$dataValue, parametros);
+        return !this._dataValue || this.pesquisar(this._dataValue, parametros);
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public formDataValue(evento: any): void {
-        this.$dataValue = evento.form;
+        this._dataValue = evento.form;
         this.pesquisar(evento.form);
     }
 
@@ -96,22 +96,22 @@ export class VisualizarProcessoComponent {
         }
 
         const parametros = Object.assign(formValue, novosParametros);
-        this.$dadosGrid.next('Carregando');
+        this._dadosGrid.next('Carregando');
         this.loading = true;
-        this.$sub = this.solicitacaoService
+        this._sub = this.solicitacaoService
             .getListarProcessos(parametros)
             .pipe(finalize(() => (this.loading = false)))
             .subscribe(
                 (response) => {
-                    this.$dadosGrid.next({ ...response, processos: this.formatarDadosPesquisa(response) });
+                    this._dadosGrid.next({ ...response, processos: this.formatarDadosPesquisa(response) });
                 },
                 (erro: HttpErrorResponse) => {
                     this.alertService.openModal('Erro', erro.message, 'danger');
-                    this.$dadosGrid.next([]);
+                    this._dadosGrid.next([]);
                 }
             );
         this.gridView = true;
-        return this.$sub;
+        return this._sub;
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

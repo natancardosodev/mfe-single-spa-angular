@@ -15,14 +15,14 @@ import { SystemInterface } from '../interfaces/interno/system-interface';
     providedIn: 'root'
 })
 export class UserService {
-    private $checkModuloMenu: Subject<any>;
-    private $user: Observable<User>;
-    private $setUserInfo: Subject<User>;
+    private _checkModuloMenu: Subject<any>;
+    private _user: Observable<User>;
+    private _setUserInfo: Subject<User>;
 
     constructor(private http: HttpClient, private urlUtilService: UrlUtilService) {
-        this.$setUserInfo = new Subject();
-        this.$checkModuloMenu = new Subject();
-        this.$user = this.$setUserInfo.asObservable();
+        this._setUserInfo = new Subject();
+        this._checkModuloMenu = new Subject();
+        this._user = this._setUserInfo.asObservable();
     }
 
     /**
@@ -45,7 +45,7 @@ export class UserService {
      * @memberof UserService
      */
     public getUserInfo(): Observable<User> {
-        return this.$user;
+        return this._user;
     }
 
     /**
@@ -110,7 +110,7 @@ export class UserService {
             .get<Array<Menu>>(url, { withCredentials: true, responseType: 'json' })
             .pipe(
                 map((modulo) => {
-                    this.$checkModuloMenu.next(modulo);
+                    this._checkModuloMenu.next(modulo);
                     return modulo.filter((moduloMenu) => this.setModulos(moduloMenu));
                 }),
                 catchError((erro) => HttpUtil.tratarErroLogin(erro))
@@ -134,6 +134,6 @@ export class UserService {
      * @memberof UserService
      */
     public get checkModuloMenu(): Observable<Menu[]> {
-        return this.$checkModuloMenu.asObservable();
+        return this._checkModuloMenu.asObservable();
     }
 }

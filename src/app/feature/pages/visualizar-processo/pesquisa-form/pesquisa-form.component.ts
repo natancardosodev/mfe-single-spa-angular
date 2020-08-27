@@ -18,11 +18,11 @@ export class PesquisaFormComponent implements OnInit {
     public dateMin: Date;
     public dateMax: Date;
     private _pesquisaForm: PesquisaForm;
-    private $maskFactory: TextMaskFactory;
+    private _maskFactory: TextMaskFactory;
 
     constructor(private titleService: Title, private alertService: AlertService) {
         this.dataForm = new EventEmitter();
-        this.$maskFactory = new TextMaskFactory();
+        this._maskFactory = new TextMaskFactory();
         this._pesquisaForm = new PesquisaForm();
         this.dateMax = new Date();
         this.loading = false;
@@ -38,7 +38,7 @@ export class PesquisaFormComponent implements OnInit {
     }
 
     public get maskFactory(): TextMaskFactory {
-        return this.$maskFactory;
+        return this._maskFactory;
     }
 
     public pesquisar(): void {
