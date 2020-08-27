@@ -10,6 +10,7 @@ import { isUndefined } from 'util';
 
 import { StorageUtil } from './core/utils/storage.util';
 import { UrlUtilService } from './core/services/url-util.service';
+import { CommonService } from './core/services/common.service';
 import { UserService } from './core/services/user.service';
 import { SystemInterface } from './core/interfaces/interno/system-interface';
 import { User } from './core/interfaces/interno/user-interface';
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private userService: UserService,
         private urlUtilService: UrlUtilService,
         private loadingGlobal: LoadingGlobalService,
+        private commonService: CommonService,
         private router: Router
     ) {
         this.idUsuario = new Subject();
@@ -93,6 +95,7 @@ export class AppComponent implements OnInit, OnDestroy {
             (response: User) => {
                 StorageUtil.store(Storage.DADOS_USUARIO, response);
                 this.getSystemInfo(response);
+                // this.commonService.getAllOptions(); @todo ajustar rotas do commonService
 
                 return isUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
             },
