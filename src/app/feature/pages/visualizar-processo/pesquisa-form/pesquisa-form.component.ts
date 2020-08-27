@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 import { GeneralsUtil } from './../../../../core/utils/generals.util';
-import { AlertMessage } from './../../../../core/utils/alert-message';
 import { TextMaskFactory } from './../../../../core/utils/mask/text-mask-factory';
 import { PesquisaForm } from './pesquisa.form';
+import { AlertService } from 'src/app/core/components/alert/alert.service';
 
 @Component({
     selector: 'app-pesquisa-form',
@@ -19,7 +20,7 @@ export class PesquisaFormComponent implements OnInit {
     private _pesquisaForm: PesquisaForm;
     private $maskFactory: TextMaskFactory;
 
-    constructor(private $alertMessage: AlertMessage) {
+    constructor(private titleService: Title, private alertService: AlertService) {
         this.dataForm = new EventEmitter();
         this.$maskFactory = new TextMaskFactory();
         this._pesquisaForm = new PesquisaForm();
@@ -28,6 +29,7 @@ export class PesquisaFormComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+        this.titleService.setTitle('Visualizar Processo - Skeleton');
         this.setDateMin();
     }
 
@@ -54,7 +56,7 @@ export class PesquisaFormComponent implements OnInit {
             return;
         }
 
-        this.$alertMessage.alert('Informe pelo menos um campo para pesquisa');
+        this.alertService.openModal('Atenção', 'Informe pelo menos um campo para pesquisa', 'warning');
     }
 
     public setDateMin(): void {

@@ -11,10 +11,10 @@ import { GridColumnDefs, GridSearchParams } from 'grid';
 import { GridOptions } from 'ag-grid';
 
 import { PesquisaInterface } from '../../../core/interfaces/pesquisa/pesquisa-interface';
-import { RotasEnum } from '../../../core/enums/rotas-enum';
-import { AlertMessage } from '../../../core/utils/alert-message';
+import { RotasEnum } from '../../../core/enums/rotas.enum';
 import { SolicitacaoService } from '../../services/solicitacao.service';
 import { MaskPipe } from 'src/app/shared/pipes/mask.pipe';
+import { AlertService } from 'src/app/core/components/alert/alert.service';
 
 @Component({
     selector: 'app-visualizar-processo',
@@ -32,7 +32,7 @@ export class VisualizarProcessoComponent {
 
     constructor(
         private solicitacaoService: SolicitacaoService,
-        private alertMessage: AlertMessage,
+        private alertService: AlertService,
         private router: Router
     ) {
         this.$dadosGrid = new Subject();
@@ -48,7 +48,7 @@ export class VisualizarProcessoComponent {
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public onRowClicked(dadosLinha: any): void {
-        void this.router.navigate([RotasEnum.VISUALIZAR_PROCESSO, dadosLinha.id]);
+        void this.router.navigate([RotasEnum.visualizarprocesso, dadosLinha.id]);
     }
 
     public get colunasGrid(): Array<GridColumnDefs> {
@@ -106,7 +106,7 @@ export class VisualizarProcessoComponent {
                     this.$dadosGrid.next({ ...response, processos: this.formatarDadosPesquisa(response) });
                 },
                 (erro: HttpErrorResponse) => {
-                    this.alertMessage.alert(erro.message, 'danger');
+                    this.alertService.openModal('Erro', erro.message, 'danger');
                     this.$dadosGrid.next([]);
                 }
             );

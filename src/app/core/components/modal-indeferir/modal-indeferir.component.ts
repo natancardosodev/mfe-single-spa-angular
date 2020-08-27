@@ -66,7 +66,6 @@ export class ModalIndeferirComponent implements OnInit {
 
     public openModal(): void {
         const config: Record<string, any> = {
-            ignoreBackdropClick: true,
             class: 'modal-lg'
         };
         this.loading = false;

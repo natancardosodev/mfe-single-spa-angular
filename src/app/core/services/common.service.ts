@@ -8,11 +8,11 @@ import { HttpClient } from '@angular/common/http';
 import { BaseService } from './base.service';
 
 import { Observable, forkJoin, BehaviorSubject, Subscription } from 'rxjs';
-import { AlertService } from 'lib-alert';
 
 import { UrlUtilService } from './url-util.service';
 import { StorageUtil } from '../utils/storage.util';
 import { HttpUtil } from '../utils/http-util';
+import { AlertService } from '../components/alert/alert.service';
 
 /**
  * @export

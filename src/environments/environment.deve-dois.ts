@@ -4,7 +4,7 @@ export const environment: EnvironmentInterface = {
     production: true,
     uri: {
         api: 'https://deve-dois-nova-funcionalidade-service.voxtecnologia.com.br',
-        oauth: 'https://deve-dois.voxtecnologia.com.br',
+        oauth: 'https://deve-dois-nova-funcionalidade-service.voxtecnologia.com.br/connect/vox',
         projeto: 'https://deve-dois.voxtecnologia.com.br/sigfacil/nova-funcionalidade',
         environments: 'https://deve-dois',
         subDomain: 'deve-dois'

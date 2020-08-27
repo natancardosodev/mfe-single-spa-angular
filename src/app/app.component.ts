@@ -1,19 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoadingGlobalService } from '@voxtecnologia/vox-preload';
 
 import { Subject, Subscription, forkJoin } from 'rxjs';
-import { LoadingGlobalService } from '@voxtecnologia/vox-preload';
 import { Menu } from 'lib-menu';
 import { LogoInterface } from 'lib-header';
 import { isUndefined } from 'util';
 
-import { AlertMessage } from './core/utils/alert-message';
 import { StorageUtil } from './core/utils/storage.util';
 import { UrlUtilService } from './core/services/url-util.service';
+import { CommonService } from './core/services/common.service';
 import { UserService } from './core/services/user.service';
 import { SystemInterface } from './core/interfaces/interno/system-interface';
 import { User } from './core/interfaces/interno/user-interface';
 import { Storage } from './core/enums/storage.enum';
+import { AlertService } from './core/components/alert/alert.service';
+import { FuncionalidadeEnum } from './core/enums/funcionalidade.enum';
+import { RotasEnum } from './core/enums/rotas.enum';
 
 @Component({
     selector: 'app-root',
@@ -31,10 +35,12 @@ export class AppComponent implements OnInit, OnDestroy {
     private _itensMenu: Menu[];
 
     constructor(
-        private alertMessage: AlertMessage,
+        private alertService: AlertService,
         private userService: UserService,
         private urlUtilService: UrlUtilService,
-        private loadingGlobal: LoadingGlobalService
+        private loadingGlobal: LoadingGlobalService,
+        private commonService: CommonService,
+        private router: Router
     ) {
         this.idUsuario = new Subject();
         this._urlLogoSistema = { url: 'assets/images/sigfacil.png', alt: 'string' };
@@ -86,11 +92,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     public logarService(): Subscription {
         return this.userService.getUser().subscribe(
-            (resposta: any) => {
-                StorageUtil.store(Storage.DADOS_USUARIO, resposta);
-                this.getSystemInfo(resposta);
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                return isUndefined(resposta['mensagem']) || this.urlUtilService.redirectToLogin();
+            (response: User) => {
+                StorageUtil.store(Storage.DADOS_USUARIO, response);
+                this.getSystemInfo(response);
+                // this.commonService.getAllOptions(); @todo ajustar rotas do commonService
+
+                return isUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
             },
             (error) => {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -114,15 +121,31 @@ export class AppComponent implements OnInit, OnDestroy {
                 this._sistema = system;
                 this._urlLogo = path;
                 this._itensMenu = itensMenu;
+                this.validaPermissaoFuncionalidade(this._usuario);
             },
             (error: any) => {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 if (!error.naoAutorizado) {
                     this.loadingGlobal.hide();
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                    this.alertMessage.alert(error.message, 'danger');
+                    this.alertService.openModal('Erro', error.message, 'danger');
                 }
             }
         );
+    }
+
+    private validaPermissaoFuncionalidade(dadosUsuario: User) {
+        const permissao = JSON.stringify(this.itensMenu);
+        const rota = this.router.url.replace('/', '').replace('-', '');
+
+        if (
+            (this.router.url.includes(RotasEnum[rota]) && !permissao.includes(String(FuncionalidadeEnum[rota]))) ||
+            dadosUsuario.papel.length == 0
+        ) {
+            this.alertService.openModal('', 'Acesso Negado', 'danger');
+            setTimeout(() => {
+                window.location.href = this.urlUtilService.getUrlSigfacil();
+            }, 1000);
+        }
     }
 }

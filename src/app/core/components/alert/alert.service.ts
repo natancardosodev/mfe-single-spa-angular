@@ -21,18 +21,12 @@ export class AlertService {
      * @param {string} [size] size of modal || sm || lg
      * @memberof AlertService
      */
-    public openModal(
-        title?: string,
-        message?: string | HTMLElement,
-        // eslint-disable-next-line @typescript-eslint/ban-types
-        fun?: Function,
-        size?: string
-    ): void {
+    public openModal(title?: string, message?: string | HTMLElement, style?: string, size?: string): void {
         this._loaderSubject.next({
             show: true,
             title: title,
             body: message,
-            callBack: fun,
+            style: style,
             size: size
         });
     }
