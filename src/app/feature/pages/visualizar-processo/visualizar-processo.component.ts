@@ -15,6 +15,8 @@ import { RotasEnum } from '../../../core/enums/rotas.enum';
 import { SolicitacaoService } from '../../services/solicitacao.service';
 import { MaskPipe } from 'src/app/shared/pipes/mask.pipe';
 import { AlertService } from 'src/app/core/components/alert/alert.service';
+import { StorageUtil } from 'src/app/core/utils/storage.util';
+import { Storage } from 'src/app/core/enums/storage.enum';
 
 @Component({
     selector: 'app-visualizar-processo',
@@ -103,6 +105,7 @@ export class VisualizarProcessoComponent {
             .pipe(finalize(() => (this.loading = false)))
             .subscribe(
                 (response) => {
+                    StorageUtil.store(Storage.PESQUISA_VISUAL_PROCESSO, formValue);
                     this._dadosGrid.next({ ...response, processos: this.formatarDadosPesquisa(response) });
                 },
                 (erro: HttpErrorResponse) => {
