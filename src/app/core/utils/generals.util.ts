@@ -6,4 +6,13 @@ export class GeneralsUtil {
     public static isEmpty(dado: Record<string, string>): boolean {
         return !Object.keys(dado).length;
     }
+
+    /**
+     * Formating date from YYYY-MM-DD to MM/DD/YYYY
+     * @param date string
+     */
+    public static formatDateEnToBr(date: string): string {
+        const [year, month, day] = date.split('-');
+        return `${day}/${month}/${year}`;
+    }
 }

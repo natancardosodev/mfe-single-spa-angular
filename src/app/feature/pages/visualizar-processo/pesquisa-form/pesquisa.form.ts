@@ -4,6 +4,8 @@ import { isValidCpf } from '@brazilian-utils/is-valid-cpf';
 import { clearMask } from 'src/app/core/configs/regexClearMask';
 import { StorageUtil } from 'src/app/core/utils/storage.util';
 import { Storage } from 'src/app/core/enums/storage.enum';
+import { PesquisaInterface } from 'src/app/core/interfaces/pesquisa/pesquisa-interface';
+import { GeneralsUtil } from 'src/app/core/utils/generals.util';
 
 export class PesquisaForm extends FormGroup {
     private _errorMessages = {
@@ -100,7 +102,7 @@ export class PesquisaForm extends FormGroup {
     }
 
     public get statusProcesso(): AbstractControl {
-        return this.get('status');
+        return this.get('statusProcesso');
     }
 
     public getDadosForm(): any {
@@ -124,7 +126,7 @@ export class PesquisaForm extends FormGroup {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             dataInicial: this.value.dataInicial ? new Date(this.value.dataInicial).toLocaleDateString('fr-CA') : null,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            dataFinal: this.value.dataInicial ? new Date(this.value.dataInicial).toLocaleDateString('fr-CA') : null
+            dataFinal: this.value.dataFinal ? new Date(this.value.dataFinal).toLocaleDateString('fr-CA') : null
         };
     }
 
@@ -135,6 +137,15 @@ export class PesquisaForm extends FormGroup {
 
     public markAllAsTouched(): void {
         Object.keys(this.controls).map((control) => this.get(control).markAsTouched());
+    }
+
+    public setValues(data: PesquisaInterface): void {
+        this.protocolo.setValue(data.protocolo);
+        this.cpf.setValue(data.cpf);
+        this.statusProcesso.setValue(data.statusProcesso);
+        this.tipo.setValue(data.tipo);
+        this.dataInicial.setValue(GeneralsUtil.formatDateEnToBr(data.dataInicial));
+        this.dataFinal.setValue(GeneralsUtil.formatDateEnToBr(data.dataFinal));
     }
 
     private deleteControlValuesNull(): void {
