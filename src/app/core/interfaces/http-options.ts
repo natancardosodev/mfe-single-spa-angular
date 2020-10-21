@@ -4,12 +4,12 @@ export interface HttpOptions {
     // headers?: HttpHeaders | {
     //     [header: string]: string | string[];
     // };
-    observe?: 'body';
+    observe?: 'events' | 'body' | 'response';
     // params?: HttpParams | {
     //     [param: string]: string | string[];
     // };
     params?: any;
     reportProgress?: boolean;
-    responseType?: 'arraybuffer' | 'json' | 'text';
+    responseType?: 'arraybuffer' | 'json' | 'text' | 'blob';
     withCredentials?: boolean;
 }

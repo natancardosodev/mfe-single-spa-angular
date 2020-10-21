@@ -11,9 +11,9 @@ import { Observable, forkJoin, BehaviorSubject, Subscription } from 'rxjs';
 import { Storage } from '../enums/storage.enum';
 import { StorageUtil } from '../utils/storage.util';
 import { HttpUtil } from '../utils/http-util';
-import { AlertService } from '../components/alert/alert.service';
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 /**
  * @export

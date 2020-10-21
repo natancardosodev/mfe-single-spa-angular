@@ -26,10 +26,3 @@ Adicione os remotes do git:
 git remote add upstream git@gitlab....link-do-projeto-pai
 git remote add skeleton git@gitlab.voxtecnologia.com.br:vox/front-end/skeleton-externo-angular.git
 ```
-
-## Documentações
-
--   [Arquitetura do Skeleton](/docs/arquitetura.md)
--   [Construção de um projeto](/docs/construcao.md)
--   [Boas Práticas](/docs/boas-praticas.md)
--   [VirtualHost](/docs/vhost.md)

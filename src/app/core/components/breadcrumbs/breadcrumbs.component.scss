@@ -1,5 +1,3 @@
-@import '../../../../assets/scss/variables.scss';
-
 .breadcrumb-content {
     position: relative;
 
@@ -14,11 +12,11 @@
         padding: 0 0 1.15em 0.6em;
 
         a {
-            color: $primary;
+            color: var(--sig-primary);
             font-weight: bold;
 
             &:hover {
-                color: $primary-focus;
+                color: var(--sig-primary-focus);
             }
         }
 
@@ -35,7 +33,7 @@
 
     .breadcrumb-detail {
         background: #fff;
-        color: #005b34;
+        color: var(--sig-primary);
         font-size: 0;
         left: 0.6em;
         position: absolute;

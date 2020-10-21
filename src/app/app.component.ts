@@ -15,9 +15,11 @@ import { UserService } from './core/services/user.service';
 import { SystemInterface } from './core/interfaces/interno/system-interface';
 import { User } from './core/interfaces/interno/user-interface';
 import { Storage } from './core/enums/storage.enum';
-import { AlertService } from './core/components/alert/alert.service';
 import { FuncionalidadeEnum } from './core/enums/funcionalidade.enum';
 import { RotasEnum } from './core/enums/rotas.enum';
+import { ExternalFilesService } from './core/services/external-files.service';
+import { EnvService } from './core/services/env.service';
+import { AlertService } from './core/services/alert.service';
 
 @Component({
     selector: 'app-root',
@@ -38,6 +40,8 @@ export class AppComponent implements OnInit, OnDestroy {
         private alertService: AlertService,
         private userService: UserService,
         private urlUtilService: UrlUtilService,
+        private externalFiles: ExternalFilesService,
+        private envService: EnvService,
         private loadingGlobal: LoadingGlobalService,
         private commonService: CommonService,
         private router: Router
@@ -68,8 +72,12 @@ export class AppComponent implements OnInit, OnDestroy {
         return this._urlLogo;
     }
 
-    public get urlLogout(): string {
-        return this.urlUtilService.redirectToLogout();
+    public get urlApi(): string {
+        return this.urlUtilService.getUrlApiBase();
+    }
+
+    public get subDomain(): string {
+        return this.envService.subDomain;
     }
 
     public get urlLogoSistema(): LogoInterface {
@@ -122,6 +130,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 this._urlLogo = path;
                 this._itensMenu = itensMenu;
                 this.validaPermissaoFuncionalidade(this._usuario);
+                this.externalFiles.loadCss(`${this.envService.assetsSigfacil}/css/interno/theme.css`);
             },
             (error: any) => {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

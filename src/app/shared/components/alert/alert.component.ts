@@ -6,7 +6,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { Subscription } from 'rxjs';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
-import { AlertService } from './alert.service';
+import { AlertService } from '../../../core/services/alert.service';
 
 @Component({
     selector: 'app-lib-alert',

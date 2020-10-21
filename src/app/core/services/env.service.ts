@@ -14,8 +14,16 @@ export class EnvService {
         return environment.uri.projeto;
     }
 
+    public get jarvis(): string {
+        return environment.uri.jarvis;
+    }
+
     public get oauth(): string {
         return environment.uri.oauth;
+    }
+
+    public get assetsSigfacil(): string {
+        return environment.uri.assetsSigfacil;
     }
 
     public get enviromment(): string {
