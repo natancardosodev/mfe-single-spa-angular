@@ -4,12 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { TextMaskModule } from 'angular2-text-mask';
 
-import { InputDateModule } from './../../../../core/components/input-date/input-date.module';
 import { PesquisaFormComponent } from './pesquisa-form.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
     declarations: [PesquisaFormComponent],
-    imports: [CommonModule, ReactiveFormsModule, TextMaskModule, InputDateModule],
+    imports: [CommonModule, ReactiveFormsModule, TextMaskModule, SharedModule],
     exports: [PesquisaFormComponent]
 })
 export class PesquisaFormModule {}

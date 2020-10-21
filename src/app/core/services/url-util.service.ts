@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 import { Injectable } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 
@@ -25,26 +26,29 @@ export class UrlUtilService {
         return 'https://' + window.location.host;
     }
 
-    /**
-     * monta a url base do projeto
-     * @static
-     * @returns string
-     * @memberof UrlUtilService
-     */
     public mountUrl(rota: string): string {
         return `${this.env.api}${rota}`;
     }
 
-    /**
-     * @static
-     * @param {string} resource
-     * @param {any} [parameters]
-     * @returns
-     * @memberof UrlUtilService
-     */
-    public montarUrlApi(resource: string, parameters?: Record<string, string>, isSigfacil?: boolean): string {
+    public mountUrlJarvis(rota = ''): string {
+        return `${this.env.jarvis}${rota}`;
+    }
+
+    public montarUrlApi(resource: string, parameters?: Record<string, string>, tipoApi?: string): string {
         const queryString = parameters ? this.objectToQueryString(parameters) : '';
-        const baseUrl = isSigfacil ? this.getUrlSigfacil() : this.getUrlApiBase();
+        let baseUrl = '';
+
+        switch (tipoApi) {
+            case 'jarvis':
+                baseUrl = this.mountUrlJarvis();
+                break;
+            case 'sigfacil':
+                baseUrl = this.getUrlSigfacil();
+                break;
+            default:
+                baseUrl = this.getUrlApiBase();
+                break;
+        }
 
         return baseUrl + resource + queryString;
     }

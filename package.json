@@ -54,7 +54,7 @@
         "bootstrap": "^4.5.0",
         "footer": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-footer.git#1.0",
         "grid": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-grid.git#1.7.1",
-        "lib-header": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-header.git#1.0.6",
+        "lib-header": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-header.git#1.0.7",
         "lib-menu": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-menu.git#1.0",
         "ngx-bootstrap": "~5.4.0",
         "ngx-currency": "^2.3.3",

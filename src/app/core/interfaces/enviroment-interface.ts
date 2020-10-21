@@ -4,6 +4,8 @@ export interface EnvironmentInterface {
         oauth: string;
         api: string;
         projeto: string;
+        assetsSigfacil: string;
+        jarvis: string;
         environments: string;
         subDomain: string;
     };

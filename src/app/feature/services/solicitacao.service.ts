@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { UrlUtilService } from 'src/app/core/services/url-util.service';
 import { BaseService } from 'src/app/core/services/base.service';
-import { AlertService } from 'src/app/core/components/alert/alert.service';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Injectable({
     providedIn: 'root'

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -12,12 +12,14 @@ import { HeaderModule } from 'lib-header';
 import { MenuModule } from 'lib-menu';
 import { FooterModule } from 'footer';
 import { BreadcrumbsModule } from './core/components/breadcrumbs/breadcrumbs.module';
-import { AlertModule } from './core/components/alert/alert.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonService } from './core/services/common.service';
-import { VisualizarProcessoModule } from './feature/pages/visualizar-processo/visualizar-processo.module';
+import { UserService } from './core/services/user.service';
+import { AuthInterceptor } from './core/interceptor/auth.interceptor';
+import { SharedModule } from './shared/shared.module';
+// import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
 
 @NgModule({
     declarations: [AppComponent],
@@ -28,15 +30,19 @@ import { VisualizarProcessoModule } from './feature/pages/visualizar-processo/vi
         AppRoutingModule,
         LoadingGlobalModule,
         FontAwesomeModule,
-        AlertModule,
         ModalModule.forRoot(),
         BreadcrumbsModule,
         HeaderModule,
         MenuModule,
         FooterModule,
-        VisualizarProcessoModule
+        SharedModule
     ],
-    providers: [CommonService],
+    providers: [
+        CommonService,
+        UserService,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+        // { provide: HTTP_INTERCEPTORS, useClass: JarvisInterceptor, multi: true }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

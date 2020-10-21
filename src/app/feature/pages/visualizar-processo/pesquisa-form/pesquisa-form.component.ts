@@ -5,10 +5,8 @@ import { Title } from '@angular/platform-browser';
 import { GeneralsUtil } from './../../../../core/utils/generals.util';
 import { TextMaskFactory } from './../../../../core/utils/mask/text-mask-factory';
 import { PesquisaForm } from './pesquisa.form';
-import { AlertService } from 'src/app/core/components/alert/alert.service';
-import { Storage } from 'src/app/core/enums/storage.enum';
-import { StorageUtil } from 'src/app/core/utils/storage.util';
 import { PesquisaInterface } from 'src/app/core/interfaces/pesquisa/pesquisa-interface';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
     selector: 'app-pesquisa-form',
@@ -25,8 +23,6 @@ export class PesquisaFormComponent implements OnInit {
     private _maskFactory: TextMaskFactory;
 
     constructor(private titleService: Title, private alertService: AlertService) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        this._pesquisa = StorageUtil.get(Storage.PESQUISA_VISUAL_PROCESSO);
         this.dataForm = new EventEmitter();
         this._maskFactory = new TextMaskFactory();
         this._pesquisaForm = new PesquisaForm();
@@ -39,25 +35,12 @@ export class PesquisaFormComponent implements OnInit {
         this.setDateMin();
     }
 
-    public ngAfterViewInit(): void {
-        this.loadGridSession();
-    }
-
     public get pesquisaForm(): PesquisaForm {
         return this._pesquisaForm;
     }
 
     public get maskFactory(): TextMaskFactory {
         return this._maskFactory;
-    }
-
-    public loadGridSession(): void {
-        if (this._pesquisa) {
-            setTimeout(() => {
-                this.dataForm.emit({ form: this._pesquisa });
-                this.pesquisaForm.setValues(this._pesquisa);
-            }, 500);
-        }
     }
 
     public pesquisar(): void {

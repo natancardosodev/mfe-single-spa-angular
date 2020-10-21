@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 import { UrlUtilService } from './url-util.service';
 import { HttpOptions } from '../interfaces/http-options';
-import { AlertService } from '../components/alert/alert.service';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 export abstract class BaseService {
     private _baseUrl: string;
@@ -44,23 +44,30 @@ export abstract class BaseService {
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    get = (url?: string, params?: any, isSigfacil?: boolean): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, isSigfacil), 'get', params).pipe(
+    get = (
+        url?: string,
+        params?: any,
+        tipoApi?: string,
+        isRequestComplete?: boolean,
+        semModal?: boolean
+    ): Observable<any> => {
+        return this.sendRequest(this.getUrl(url, tipoApi), 'get', params, null, isRequestComplete).pipe(
             take(1),
-            catchError(
-                (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal(erro.error.message, this._msgDefault, 'danger')
+            catchError((erro: HttpErrorResponse) =>
+                semModal
+                    ? null
+                    : void this.alertService.openModal(erro.error ? erro.error.message : erro, this._msgDefault)
             )
         );
     };
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    post = (url?: string, body?: any, isSigfacil?: boolean): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, isSigfacil), 'post', null, body).pipe(
+    post = (url?: string, body?: any, tipoApi?: string, isRequestComplete?: boolean): Observable<any> => {
+        return this.sendRequest(this.getUrl(url, tipoApi), 'post', null, body, isRequestComplete).pipe(
             take(1),
             catchError(
                 (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal(erro.error.message, this._msgDefault, 'danger')
+                    void this.alertService.openModal(erro.error ? erro.error.message : erro, this._msgDefault)
             )
         );
     };
@@ -69,33 +76,63 @@ export abstract class BaseService {
      * @description Toda requisição put requisitará o infoLog, regra decidida para a implementação de log no gateway que consome o siarco.
      * @memberof BaseService
      */
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    put = (url?: string, body?: any, isSigfacil?: boolean): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, isSigfacil), 'put', null, body).pipe(
+    put = (url?: string, body?: any, tipoApi?: string, isRequestComplete?: boolean): Observable<any> => {
+        return this.sendRequest(this.getUrl(url, tipoApi), 'put', null, body, isRequestComplete).pipe(
             take(1),
             catchError(
                 (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal(erro.error.message, this._msgDefault, 'danger')
+                    void this.alertService.openModal(erro.error ? erro.error.message : erro, this._msgDefault)
             )
         );
     };
 
-    delete = (url?: string, params?: Record<string, string>, isSigfacil?: boolean): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, isSigfacil), 'delete', params).pipe(
+    delete = (
+        url?: string,
+        params?: Record<string, string>,
+        tipoApi?: string,
+        isRequestComplete?: boolean
+    ): Observable<any> => {
+        return this.sendRequest(this.getUrl(url, tipoApi), 'delete', params, null, isRequestComplete).pipe(
             take(1),
             catchError(
                 (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal(erro.error.message, this._msgDefault, 'danger')
+                    void this.alertService.openModal(erro.error ? erro.error.message : erro, this._msgDefault)
             )
         );
     };
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    sendRequest = (url: string, type: string, params?: Record<string, string>, body?: any): Observable<any> => {
+    uploadArquivo = (url?: string, body?: any, tipoApi?: string): Observable<any> => {
+        return this.http.post(this.getUrl(url, tipoApi), body, {
+            withCredentials: true,
+            observe: 'events',
+            reportProgress: true
+        });
+    };
+
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    downloadArquivo = (type?: string, url?: string, body?: any, tipoApi?: string): Observable<any> => {
+        this.options = {
+            withCredentials: true,
+            responseType: 'blob',
+            headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }),
+            body: body
+        };
+        return this.http.request(type, this.getUrl(url, tipoApi), this.options);
+    };
+
+    sendRequest = (
+        url: string,
+        type: string,
+        params?: Record<string, string>,
+        body?: any,
+        isRequestComplete?: boolean
+    ): Observable<any> => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         this.options['params'] = params ? this.cleanParams(params) : this.options['params'];
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         this.options['body'] = body;
+        this.options['observe'] = isRequestComplete ? 'response' : 'body';
 
         return this.http.request(type, url, this.options);
     };
@@ -111,10 +148,10 @@ export abstract class BaseService {
         );
     };
 
-    public getUrl(url: string, isSigfacil?: boolean): string {
+    public getUrl(url: string, tipoApi?: string): string {
         const concatUrl = url ? `${this._baseUrl}${url}` : this._baseUrl;
 
-        return this.urlUtilService.montarUrlApi(concatUrl, null, isSigfacil);
+        return this.urlUtilService.montarUrlApi(concatUrl, null, tipoApi);
     }
 
     private cleanParams(params: any): any {
