@@ -9,7 +9,7 @@ import { EnvService } from '../services/env.service';
 
 @Injectable()
 export class JarvisInterceptor implements HttpInterceptor {
-    constructor(private envService: EnvService) { }
+    constructor(private envService: EnvService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

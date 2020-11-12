@@ -31,7 +31,7 @@ export class UserService {
      * @memberof UsuarioService
      */
     public getUser(): Observable<User> {
-        const url = 'https://run.mocky.io/v3/97093ccf-98c1-4dca-9dcf-17b89f400c9b';
+        const url = 'https://run.mocky.io/v3/ac0fac47-5e5e-4ef2-bb2c-1b2c5cacdfa1';
         // const url = this.urlUtilService.mountUrl('/me');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
@@ -54,7 +54,7 @@ export class UserService {
      * @memberof UserService
      */
     public getPathLogo(): Observable<string> {
-        const url = 'https://www.mocky.io/v2/5c98e8913200007402d906ab';
+        const url = 'https://run.mocky.io/v3/e107dd8e-1962-4823-ab67-534359f5f677';
         // const url = this.urlUtilService.mountUrl('/me/logo-entidade');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http.get(url, { withCredentials: true, responseType: 'text' }).pipe(
@@ -74,7 +74,7 @@ export class UserService {
      * @memberof TimeService
      */
     public getTime(): Observable<string> {
-        const url = 'https://www.mocky.io/v2/5b63630630000052006503ef';
+        const url = 'https://run.mocky.io/v3/f1f807e3-2f98-4836-9c1a-ad3584806274';
         // const url = this.urlUtilService.mountUrl('/hora');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
@@ -88,7 +88,7 @@ export class UserService {
      * @memberof SystemAvailableService
      */
     public getSystem(): Observable<SystemInterface[]> {
-        const url = 'https://www.mocky.io/v2/5b645c5b2e00008d00414025';
+        const url = 'https://run.mocky.io/v3/a544f110-af96-4f2e-8c93-3d566e3f5a46';
         // const url = this.urlUtilService.mountUrl('/me/sistema');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
@@ -103,7 +103,7 @@ export class UserService {
      * @memberof UserService
      */
     public getModulos(): Observable<Menu[]> {
-        const url = 'https://run.mocky.io/v3/2d9574a8-27e4-42d2-8bb6-e2bcd6db1fae';
+        const url = 'https://run.mocky.io/v3/fb4aa8b9-282e-42df-bb2f-b1c292be3fef';
         //const url = this.urlUtilService.mountUrl('/me/menu/4');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
@@ -135,5 +135,16 @@ export class UserService {
      */
     public get checkModuloMenu(): Observable<Menu[]> {
         return this._checkModuloMenu.asObservable();
+    }
+
+    /**
+     * Checar se na funcionalidade acessada o usuário tem o papel com
+     * permissão de acesso (Alterar, excluir, etc) para essa funcionalidade
+     * @param papelUsuario
+     * @param funcionalidadeAtual
+     * @param permissao
+     */
+    public checkPermissao(papelUsuario: string[], funcionalidadeAtual: number, permissaoAtual: string): void {
+        // @todo A FAZER
     }
 }

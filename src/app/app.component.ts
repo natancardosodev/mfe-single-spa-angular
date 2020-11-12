@@ -145,9 +145,14 @@ export class AppComponent implements OnInit, OnDestroy {
         );
     }
 
+    /**
+     * Validação a partir das rotas principais, desconsiderando as subrotas que deve-se colocar no RotasEnum
+     * Verifica-se o id da funcionalidade em comum.s_sistema_funcionalidade que deve-se colocar no FuncionalidadeEnum
+     * @param dadosUsuario
+     */
     private validaPermissaoFuncionalidade(dadosUsuario: User) {
         const permissao = JSON.stringify(this.itensMenu);
-        const rota = this.router.url.replace('/', '').replace('-', '');
+        const rota = this.router.url.split('/')[1].toUpperCase();
 
         if (
             (this.router.url.includes(RotasEnum[rota]) && !permissao.includes(String(FuncionalidadeEnum[rota]))) ||

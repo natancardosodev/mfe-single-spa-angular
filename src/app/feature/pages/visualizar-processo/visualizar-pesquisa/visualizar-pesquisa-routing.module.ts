@@ -4,7 +4,7 @@ import { VisualizarPesquisaComponent } from './visualizar-pesquisa.component';
 
 const routes: Routes = [
     {
-        path: ':id',
+        path: 'visualizar/:id',
         component: VisualizarPesquisaComponent
     }
 ];
