@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoadingGlobalService } from '@voxtecnologia/vox-preload';
 
 import { Subject, Subscription, forkJoin } from 'rxjs';
+import * as sha512 from 'js-sha512';
 import { Menu } from 'lib-menu';
 import { LogoInterface } from 'lib-header';
 import { isUndefined } from 'util';
@@ -104,6 +105,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 StorageUtil.store(Storage.DADOS_USUARIO, response);
                 this.getSystemInfo(response);
                 // this.commonService.getAllOptions(); @todo ajustar rotas do commonService
+                // this.carregarJarvis(response.cpf, response.id); @todo Caso use o jarvis
 
                 return isUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
             },
@@ -143,9 +145,14 @@ export class AppComponent implements OnInit, OnDestroy {
         );
     }
 
+    /**
+     * Validação a partir das rotas principais, desconsiderando as subrotas que deve-se colocar no RotasEnum
+     * Verifica-se o id da funcionalidade em comum.s_sistema_funcionalidade que deve-se colocar no FuncionalidadeEnum
+     * @param dadosUsuario
+     */
     private validaPermissaoFuncionalidade(dadosUsuario: User) {
         const permissao = JSON.stringify(this.itensMenu);
-        const rota = this.router.url.replace('/', '').replace('-', '');
+        const rota = this.router.url.split('/')[1].toUpperCase();
 
         if (
             (this.router.url.includes(RotasEnum[rota]) && !permissao.includes(String(FuncionalidadeEnum[rota]))) ||
@@ -156,5 +163,11 @@ export class AppComponent implements OnInit, OnDestroy {
                 window.location.href = this.urlUtilService.getUrlSigfacil();
             }, 1000);
         }
+    }
+
+    private carregarJarvis(cpf: string, id: number): void {
+        let hash = `${cpf}${id}`;
+        hash = sha512.sha512(hash.toString());
+        StorageUtil.store(Storage.JARVIS, hash);
     }
 }

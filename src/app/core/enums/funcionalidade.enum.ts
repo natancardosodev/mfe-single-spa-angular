@@ -1,3 +1,4 @@
 export enum FuncionalidadeEnum {
-    visualizarprocesso = 1040020200
+    EMPRESA = 1040020253,
+    MIGRAR = 1040020254
 }

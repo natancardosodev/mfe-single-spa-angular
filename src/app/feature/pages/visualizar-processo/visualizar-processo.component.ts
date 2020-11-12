@@ -48,7 +48,7 @@ export class VisualizarProcessoComponent {
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public onRowClicked(dadosLinha: any): void {
-        void this.router.navigate([RotasEnum.visualizarprocesso, dadosLinha.id]);
+        void this.router.navigate([RotasEnum.EMPRESA_VISUALIZAR, dadosLinha.id]);
     }
 
     public get colunasGrid(): Array<GridColumnDefs> {

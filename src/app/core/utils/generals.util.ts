@@ -9,6 +9,7 @@ export class GeneralsUtil {
 
     /**
      * Formating date from YYYY-MM-DD to MM/DD/YYYY
+     * Alternativa ao new Date().toLocaleDateString('pt-BR')
      * @param date string
      */
     public static formatDateEnToBr(date: string): string {

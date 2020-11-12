@@ -1,15 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, OperatorFunction } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 import { UrlUtilService } from './url-util.service';
 import { HttpOptions } from '../interfaces/http-options';
-import { AlertService } from 'src/app/core/services/alert.service';
+import { AlertService } from './alert.service';
 
 export abstract class BaseService {
     private _baseUrl: string;
     private _options: HttpOptions;
+    private _optionsBasic: HttpOptions;
     private _msgDefault: string;
 
     constructor(
@@ -23,6 +23,9 @@ export abstract class BaseService {
             withCredentials: true,
             responseType: 'json',
             headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' })
+        };
+        this.optionsBasic = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
         this._msgDefault = 'Por favor tente novamente.';
     }
@@ -41,6 +44,14 @@ export abstract class BaseService {
 
     set options(options: HttpOptions) {
         this._options = options;
+    }
+
+    get optionsBasic(): HttpOptions {
+        return this._optionsBasic;
+    }
+
+    set optionsBasic(optionsBasic: HttpOptions) {
+        this._optionsBasic = optionsBasic;
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -116,6 +127,7 @@ export abstract class BaseService {
             withCredentials: true,
             responseType: 'blob',
             headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             body: body
         };
         return this.http.request(type, this.getUrl(url, tipoApi), this.options);
@@ -128,6 +140,7 @@ export abstract class BaseService {
         body?: any,
         isRequestComplete?: boolean
     ): Observable<any> => {
+        this.options = isRequestComplete ? this.optionsBasic : this.options;
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         this.options['params'] = params ? this.cleanParams(params) : this.options['params'];
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -137,14 +150,10 @@ export abstract class BaseService {
         return this.http.request(type, url, this.options);
     };
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     register = (url?: string, body?: any): Observable<any> => {
         return this.sendRequest(this.getUrl(url), 'post', null, body).pipe(
             take(1),
-            catchError(
-                (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal(erro.error.message, this._msgDefault, 'danger')
-            )
+            catchError((erro: OperatorFunction<any, any>) => erro)
         );
     };
 
