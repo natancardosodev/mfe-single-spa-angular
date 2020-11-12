@@ -11,7 +11,7 @@
 -   Sigfácil
 -   Portal
 -   Security
--   Produtor Rural Internal Service
+-   Projeto XXX Internal Service
 
 ## Instalação
 
