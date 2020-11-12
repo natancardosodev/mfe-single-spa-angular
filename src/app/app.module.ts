@@ -41,7 +41,7 @@ import { SharedModule } from './shared/shared.module';
         CommonService,
         UserService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-        // { provide: HTTP_INTERCEPTORS, useClass: JarvisInterceptor, multi: true }
+        // { provide: HTTP_INTERCEPTORS, useClass: JarvisInterceptor, multi: true } @todo caso tenha jarvis
     ],
     bootstrap: [AppComponent]
 })

@@ -8,12 +8,12 @@ import { UrlUtilService } from '../services/url-util.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private urlUtilService: UrlUtilService) {}
+    constructor(private urlUtilService: UrlUtilService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
             tap(
-                () => {},
+                () => { },
                 (error: HttpErrorResponse) => {
                     if (error && (error.status === 401 || error.status === 302)) {
                         this.urlUtilService.redirectToLogin();

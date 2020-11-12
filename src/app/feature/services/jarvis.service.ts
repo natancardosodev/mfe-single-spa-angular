@@ -22,7 +22,7 @@ export class JarvisService extends BaseService {
     /**
      * group: 'all' - dados completos / 'app' - dados resumidos
      **/
-    public getPessoaCpf = (cpf: string, group = 'all'): Observable<any> => {
-        return this.get(`gateway/receita/s09/${this.uf}/${cpf}/${group}`, null, this.tipoApi);
+    public getPessoaCpf = (cpf: string, group = 'app'): Observable<any> => {
+        return this.get(`gateway/receita/s09/${this.uf}/${cpf}/${group}`, null, this.tipoApi, true);
     };
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoadingGlobalService } from '@voxtecnologia/vox-preload';
 
 import { Subject, Subscription, forkJoin } from 'rxjs';
+import * as sha512 from 'js-sha512';
 import { Menu } from 'lib-menu';
 import { LogoInterface } from 'lib-header';
 import { isUndefined } from 'util';
@@ -104,6 +105,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 StorageUtil.store(Storage.DADOS_USUARIO, response);
                 this.getSystemInfo(response);
                 // this.commonService.getAllOptions(); @todo ajustar rotas do commonService
+                // this.carregarJarvis(response.cpf, response.id); @todo Caso use o jarvis
 
                 return isUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
             },
@@ -156,5 +158,11 @@ export class AppComponent implements OnInit, OnDestroy {
                 window.location.href = this.urlUtilService.getUrlSigfacil();
             }, 1000);
         }
+    }
+
+    private carregarJarvis(cpf: string, id: number): void {
+        let hash = `${cpf}${id}`;
+        hash = sha512.sha512(hash.toString());
+        StorageUtil.store(Storage.JARVIS, hash);
     }
 }
