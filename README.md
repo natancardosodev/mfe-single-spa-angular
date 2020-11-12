@@ -1,11 +1,17 @@
 # Skeleton Projetos Interno Sigfacil Angular
 
-Projeto gerado com [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
-
 ## Pre-requisitos
 
 -   Node 12.13.0
 -   NPM 5.10.0
+
+## Requisitos
+
+-   Assets Sigfácil
+-   Sigfácil
+-   Portal
+-   Security
+-   Produtor Rural Internal Service
 
 ## Instalação
 
@@ -25,6 +31,31 @@ Adicione os remotes do git:
 ```shell
 git remote add upstream git@gitlab....link-do-projeto-pai
 git remote add skeleton git@gitlab.voxtecnologia.com.br:vox/front-end/skeleton-externo-angular.git
+```
+
+## Acesso
+
+-   https://deve.voxtecnologia.com.br/sigfacil/skeleton/empresa - Visualizar Processo Skeleton
+-   http://localhost:4200/sigfacil/skeleton/empresa
+
+## Recomendações
+
+-   Utilizar VSCode com as extensões `dbaeumer.vscode-eslint esbenp.prettier-vscode` e permitir a integração do ESLint
+    do node_modules.
+-   Executar `npm run lint:fix` antes de commitar e corrigir os erros
+-   Não conseguindo resolver um erro de lint utilize o `disable-eslint-next-line` com a regra, mas antes
+    [consulte a doc](https://eslint.org/docs/rules/)
+-   [Outras recomendações...](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/training/construcao.md)
+
+## Mocky de services com a Assets Sigfacil
+
+```ts
+public getProcesso(): Observable<any> {
+    const url = 'https://deve-assets-sigfacil.voxtecnologia.com.br/assets/configs/mocky-processo.json';
+    return this.http
+        .get<any>(url, { withCredentials: false, responseType: 'json' })
+        .pipe<any>(catchError((error: HttpErrorResponse) => HttpUtil.tratarErroLogin(error)));
+}
 ```
 
 ## Rotas

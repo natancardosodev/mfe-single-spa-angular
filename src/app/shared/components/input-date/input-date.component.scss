@@ -1,4 +1,4 @@
-.trace {
+%trace {
     border-left: 2px solid #a5a5a5;
     content: '';
     height: 17px;
@@ -9,7 +9,7 @@
 
 .close {
     background: transparent;
-    border: none;
+    border: 0;
     border-radius: 20%;
     height: 18px;
     outline: none;
@@ -20,13 +20,12 @@
     width: 21px;
 
     &::after {
-        @extend .trace;
+        @extend %trace;
         transform: rotate(45deg);
     }
 
     &::before {
-        @extend .trace;
+        @extend %trace;
         transform: rotate(-45deg);
     }
 }
-
