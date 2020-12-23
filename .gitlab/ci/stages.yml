@@ -1,0 +1,6 @@
+stages:
+  - preparation
+  - style
+  - tests
+  - scanner
+  - deploy

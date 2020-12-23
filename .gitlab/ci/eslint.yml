@@ -1,0 +1,6 @@
+eslint:
+    extends:
+        - .eslint
+    script:
+        - $RUN_LINT_JS
+        - $RUN_LINT_CSS
