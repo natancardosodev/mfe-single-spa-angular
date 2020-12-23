@@ -87,7 +87,7 @@ export class UserService {
      * @returns {Observable<SystemInterface[]>}
      * @memberof SystemAvailableService
      */
-    public getSystem(): Observable<SystemInterface[]> {
+    public getSystem(): Observable<Array<SystemInterface>> {
         const url = 'https://run.mocky.io/v3/a544f110-af96-4f2e-8c93-3d566e3f5a46';
         // const url = this.urlUtilService.mountUrl('/me/sistema');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -102,7 +102,7 @@ export class UserService {
      *
      * @memberof UserService
      */
-    public getModulos(): Observable<Menu[]> {
+    public getModulos(): Observable<Array<Menu>> {
         const url = 'https://run.mocky.io/v3/fb4aa8b9-282e-42df-bb2f-b1c292be3fef';
         //const url = this.urlUtilService.mountUrl('/me/menu/4');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -133,7 +133,7 @@ export class UserService {
      * @type {Observable<Menu[]>}
      * @memberof UserService
      */
-    public get checkModuloMenu(): Observable<Menu[]> {
+    public get checkModuloMenu(): Observable<Array<Menu>> {
         return this._checkModuloMenu.asObservable();
     }
 
@@ -144,7 +144,7 @@ export class UserService {
      * @param funcionalidadeAtual
      * @param permissao
      */
-    public checkPermissao(papelUsuario: string[], funcionalidadeAtual: number, permissaoAtual: string): void {
-        // @todo A FAZER
-    }
+    // public checkPermissao(papelUsuario: Array<string>, funcionalidadeAtual: number, permissaoAtual: string): void {
+    //     // @todo A FAZER
+    // }
 }

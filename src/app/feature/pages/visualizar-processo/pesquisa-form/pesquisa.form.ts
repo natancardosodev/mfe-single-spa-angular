@@ -42,6 +42,21 @@ export class PesquisaForm extends FormGroup {
         ]);
     }
 
+    public static validaUfProtocolo(): ValidatorFn {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+        const ufUsuario: string = StorageUtil.get(Storage.DADOS_USUARIO).estado;
+        const prefixoProtocolo = `${ufUsuario}E`;
+
+        return (control: AbstractControl): any => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+            const ufProtocolo = control.value ? control.value.substring(0, 3).toUpperCase() : '';
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            if (ufProtocolo.length > 0 && ufProtocolo !== prefixoProtocolo) {
+                return { valorInvalido: true };
+            }
+        };
+    }
+
     private static validaQuantidaDeDigito(quantidade: number): ValidatorFn {
         return (control: AbstractControl): any => {
             const conteudo = control.value ? clearMask(control.value) : '';
@@ -70,21 +85,6 @@ export class PesquisaForm extends FormGroup {
         return (): any => {
             if (dataInicial.value < dataFinal.value) {
                 return mensagemErro;
-            }
-        };
-    }
-
-    public static validaUfProtocolo(): ValidatorFn {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-        const ufUsuario: string = StorageUtil.get(Storage.DADOS_USUARIO).estado;
-        const prefixoProtocolo = `${ufUsuario}E`;
-
-        return (control: AbstractControl): any => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-            const ufProtocolo = control.value ? control.value.substring(0, 3).toUpperCase() : '';
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            if (ufProtocolo.length > 0 && ufProtocolo !== prefixoProtocolo) {
-                return { valorInvalido: true };
             }
         };
     }

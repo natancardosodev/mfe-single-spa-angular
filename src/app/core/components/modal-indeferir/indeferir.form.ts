@@ -25,14 +25,6 @@ export class IndeferirForm extends FormGroup {
         Object.keys(this.controls).map((control) => this.get(control).markAsDirty());
     }
 
-    private deleteControlValuesNull(): void {
-        for (const control in this.value) {
-            if (this.value[control] === null || this.value[control] === '') {
-                delete this.value[control];
-            }
-        }
-    }
-
     // Retornar Interface
     public getDadosForm(): any {
         this.deleteControlValuesNull();
@@ -50,5 +42,13 @@ export class IndeferirForm extends FormGroup {
         return {
             descricao: this.value.descricao
         };
+    }
+
+    private deleteControlValuesNull(): void {
+        for (const control in this.value) {
+            if (this.value[control] === null || this.value[control] === '') {
+                delete this.value[control];
+            }
+        }
     }
 }

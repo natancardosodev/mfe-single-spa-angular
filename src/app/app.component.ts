@@ -30,12 +30,12 @@ import { AlertService } from './core/services/alert.service';
 export class AppComponent implements OnInit, OnDestroy {
     public funcionalidade: string;
     public idUsuario: Subject<number>;
-    private _sistema: SystemInterface[];
+    private _sistema: Array<SystemInterface>;
     private _usuario: User;
     private _urlLogo: string;
     private _dataSistema: string;
     private _urlLogoSistema: LogoInterface;
-    private _itensMenu: Menu[];
+    private _itensMenu: Array<Menu>;
 
     constructor(
         private alertService: AlertService,
@@ -61,7 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.logarService().unsubscribe();
     }
 
-    public get sistema(): SystemInterface[] {
+    public get sistema(): Array<SystemInterface> {
         return this._sistema;
     }
 
