@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -153,6 +148,25 @@ export class CommonService extends BaseService {
         return sessionStorage.getItem(Storage.COMMON_SERVICE_OPTIONS) !== null;
     }
 
+    public getAllOptionsFromLocalStorage(): Record<string, string> {
+        return this.hasCommonOptionsInStorage ? StorageUtil.get(Storage.COMMON_SERVICE_OPTIONS) : null;
+    }
+
+    public getValueByKey(optionName: string, key: string): string {
+        const options = this.resolve(optionName, this);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        const value = options.filter((op) =>
+            op && typeof op.key === 'string' ? op.key === key : parseInt(op.key) === parseInt(key)
+        );
+        return value.length ? value[0].value : '-';
+    }
+
+    public resolve(path: string, obj: CommonService) {
+        return path.split('.').reduce(function (prev, curr) {
+            return prev ? prev[curr] : null;
+        }, obj || self);
+    }
+
     /**
      * @private
      * @param {*} anyOptions
@@ -160,10 +174,6 @@ export class CommonService extends BaseService {
      */
     private saveCommonOptionsInStorage(anyOptions: any): void {
         StorageUtil.store(Storage.COMMON_SERVICE_OPTIONS, { ...anyOptions, ...this.getAllOptionsFromLocalStorage() });
-    }
-
-    public getAllOptionsFromLocalStorage(): Record<string, string> {
-        return this.hasCommonOptionsInStorage ? StorageUtil.get(Storage.COMMON_SERVICE_OPTIONS) : null;
     }
 
     /**
@@ -190,19 +200,5 @@ export class CommonService extends BaseService {
         this.classificacaoCrcOptions.next(classificacaoCrcOptions);
         this.tipoClassificacaoCrcOptions.next(tipoClassificacaoCrcOptions);
         this.escolaridadeOptions.next(escolaridadeOptions);
-    }
-
-    public getValueByKey(optionName: string, key: string): string {
-        const options = this.resolve(optionName, this);
-        const value = options.filter((op) =>
-            op && typeof op.key === 'string' ? op.key === key : parseInt(op.key) === parseInt(key)
-        );
-        return value.length ? value[0].value : '-';
-    }
-
-    public resolve(path: string, obj: CommonService) {
-        return path.split('.').reduce(function (prev, curr) {
-            return prev ? prev[curr] : null;
-        }, obj || self);
     }
 }

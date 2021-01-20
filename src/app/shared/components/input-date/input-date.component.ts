@@ -47,12 +47,10 @@ export class InputDateComponent implements ControlValueAccessor, AfterViewInit {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/explicit-module-boundary-types
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     propagateChange = (_: any): void => {};
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     registerOnChange(fn: any): void {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         this.propagateChange = fn;
     }
 
@@ -74,9 +72,8 @@ export class InputDateComponent implements ControlValueAccessor, AfterViewInit {
         this.propagateChange(this._valueInput);
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public onKeydownDate(event: any): void {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call,  @typescript-eslint/no-unsafe-member-access
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         event.preventDefault();
     }
 }

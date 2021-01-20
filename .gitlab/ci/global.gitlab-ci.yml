@@ -1,0 +1,48 @@
+.default-retry:
+    retry:
+        max: 2
+        when:
+            - unknown_failure
+            - api_failure
+            - runner_system_failure
+
+.only-default:
+    only:
+        refs:
+            - '$CUSTOM_PROJECT_BRANCH@$CUSTOM_PROJECT_PATH'
+            - merge_requests
+
+.default-cache-vendor:
+    cache:
+        key: ${CI_COMMIT_REF_SLUG}
+        paths:
+            - vendor/
+
+.default-cache-node_modules:
+    cache:
+        key: ${CI_COMMIT_REF_SLUG}
+        paths:
+            - node_modules/
+
+.default-cache-sonar:
+    cache:
+        key: ${CI_COMMIT_REF_SLUG}
+        paths:
+            - opt/
+
+.before_script_npm:
+    before_script:
+        - export CHROME_BIN="$(pwd)/node_modules/chromium-binary/lib/chromium/chrome-linux/chrome"
+        - npm install --silent
+        - sh .gitlab/ci/scripts/run_build.sh
+        - export NO_PROXY="localhost, 0.0.0.0/4201, 0.0.0.0/9876"
+
+.eslint:
+    extends:
+        - .default-retry
+        - .only-default
+        - .default-cache-node_modules
+    image: voxtecnologiahub/node-12.14.0
+    stage: style
+    before_script:
+        - npm install

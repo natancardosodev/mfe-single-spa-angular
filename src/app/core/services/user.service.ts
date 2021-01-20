@@ -33,7 +33,6 @@ export class UserService {
     public getUser(): Observable<User> {
         const url = 'https://run.mocky.io/v3/ac0fac47-5e5e-4ef2-bb2c-1b2c5cacdfa1';
         // const url = this.urlUtilService.mountUrl('/me');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
             .get<User>(url, { withCredentials: true, responseType: 'json' })
             .pipe(catchError((error: HttpErrorResponse) => HttpUtil.tratarErroLogin(error)));
@@ -56,7 +55,6 @@ export class UserService {
     public getPathLogo(): Observable<string> {
         const url = 'https://run.mocky.io/v3/e107dd8e-1962-4823-ab67-534359f5f677';
         // const url = this.urlUtilService.mountUrl('/me/logo-entidade');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http.get(url, { withCredentials: true, responseType: 'text' }).pipe(
             catchError((erro: HttpErrorResponse) => {
                 if (erro.status === 404) {
@@ -76,7 +74,6 @@ export class UserService {
     public getTime(): Observable<string> {
         const url = 'https://run.mocky.io/v3/f1f807e3-2f98-4836-9c1a-ad3584806274';
         // const url = this.urlUtilService.mountUrl('/hora');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
             .get<string>(url, { withCredentials: true, responseType: 'json' })
             .pipe(catchError((erro) => HttpUtil.tratarErroLogin(erro)));
@@ -87,10 +84,9 @@ export class UserService {
      * @returns {Observable<SystemInterface[]>}
      * @memberof SystemAvailableService
      */
-    public getSystem(): Observable<SystemInterface[]> {
+    public getSystem(): Observable<Array<SystemInterface>> {
         const url = 'https://run.mocky.io/v3/a544f110-af96-4f2e-8c93-3d566e3f5a46';
         // const url = this.urlUtilService.mountUrl('/me/sistema');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
             .get<Array<SystemInterface>>(url, { withCredentials: true, responseType: 'json' })
             .pipe(catchError((erro) => HttpUtil.tratarErroLogin(erro)));
@@ -102,10 +98,9 @@ export class UserService {
      *
      * @memberof UserService
      */
-    public getModulos(): Observable<Menu[]> {
+    public getModulos(): Observable<Array<Menu>> {
         const url = 'https://run.mocky.io/v3/fb4aa8b9-282e-42df-bb2f-b1c292be3fef';
         //const url = this.urlUtilService.mountUrl('/me/menu/4');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.http
             .get<Array<Menu>>(url, { withCredentials: true, responseType: 'json' })
             .pipe(
@@ -122,9 +117,8 @@ export class UserService {
      * @returns {Menu}
      * @memberof UserService
      */
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public setModulos(param: any): Menu {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         return param.funcionalidades.map((menu) => menu.rota);
     }
 
@@ -133,7 +127,7 @@ export class UserService {
      * @type {Observable<Menu[]>}
      * @memberof UserService
      */
-    public get checkModuloMenu(): Observable<Menu[]> {
+    public get checkModuloMenu(): Observable<Array<Menu>> {
         return this._checkModuloMenu.asObservable();
     }
 
@@ -144,7 +138,7 @@ export class UserService {
      * @param funcionalidadeAtual
      * @param permissao
      */
-    public checkPermissao(papelUsuario: string[], funcionalidadeAtual: number, permissaoAtual: string): void {
-        // @todo A FAZER
-    }
+    // public checkPermissao(papelUsuario: Array<string>, funcionalidadeAtual: number, permissaoAtual: string): void {
+    //     // @todo A FAZER
+    // }
 }

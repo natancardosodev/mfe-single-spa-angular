@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
 
 export class IndeferirForm extends FormGroup {
@@ -17,7 +15,7 @@ export class IndeferirForm extends FormGroup {
     }
 
     public getFirstErrorFrom(controlName: string, label: string): string {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         return this._errorMessages[Object.keys(this.get(controlName).errors)[0]].replace('%s', label || controlName);
     }
 
@@ -25,18 +23,9 @@ export class IndeferirForm extends FormGroup {
         Object.keys(this.controls).map((control) => this.get(control).markAsDirty());
     }
 
-    private deleteControlValuesNull(): void {
-        for (const control in this.value) {
-            if (this.value[control] === null || this.value[control] === '') {
-                delete this.value[control];
-            }
-        }
-    }
-
     // Retornar Interface
     public getDadosForm(): any {
         this.deleteControlValuesNull();
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.value;
     }
 
@@ -50,5 +39,13 @@ export class IndeferirForm extends FormGroup {
         return {
             descricao: this.value.descricao
         };
+    }
+
+    private deleteControlValuesNull(): void {
+        for (const control in this.value) {
+            if (this.value[control] === null || this.value[control] === '') {
+                delete this.value[control];
+            }
+        }
     }
 }

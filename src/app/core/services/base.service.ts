@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, OperatorFunction } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
@@ -54,7 +53,6 @@ export abstract class BaseService {
         this._optionsBasic = optionsBasic;
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     get = (
         url?: string,
         params?: any,
@@ -72,7 +70,6 @@ export abstract class BaseService {
         );
     };
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     post = (url?: string, body?: any, tipoApi?: string, isRequestComplete?: boolean): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'post', null, body, isRequestComplete).pipe(
             take(1),
@@ -112,7 +109,6 @@ export abstract class BaseService {
         );
     };
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     uploadArquivo = (url?: string, body?: any, tipoApi?: string): Observable<any> => {
         return this.http.post(this.getUrl(url, tipoApi), body, {
             withCredentials: true,
@@ -121,13 +117,11 @@ export abstract class BaseService {
         });
     };
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     downloadArquivo = (type?: string, url?: string, body?: any, tipoApi?: string): Observable<any> => {
         this.options = {
             withCredentials: true,
             responseType: 'blob',
             headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }),
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             body: body
         };
         return this.http.request(type, this.getUrl(url, tipoApi), this.options);
@@ -141,9 +135,7 @@ export abstract class BaseService {
         isRequestComplete?: boolean
     ): Observable<any> => {
         this.options = isRequestComplete ? this.optionsBasic : this.options;
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         this.options['params'] = params ? this.cleanParams(params) : this.options['params'];
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         this.options['body'] = body;
         this.options['observe'] = isRequestComplete ? 'response' : 'body';
 
@@ -166,14 +158,11 @@ export abstract class BaseService {
     private cleanParams(params: any): any {
         if (params) {
             Object.keys(params).forEach((key) => {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 if (params[key] && typeof params[key] === 'object') this.cleanParams(params[key]);
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 else if (params[key] === undefined) delete params[key];
             });
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return params;
     }
 }

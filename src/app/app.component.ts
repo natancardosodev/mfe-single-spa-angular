@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingGlobalService } from '@voxtecnologia/vox-preload';
@@ -30,12 +29,12 @@ import { AlertService } from './core/services/alert.service';
 export class AppComponent implements OnInit, OnDestroy {
     public funcionalidade: string;
     public idUsuario: Subject<number>;
-    private _sistema: SystemInterface[];
+    private _sistema: Array<SystemInterface>;
     private _usuario: User;
     private _urlLogo: string;
     private _dataSistema: string;
     private _urlLogoSistema: LogoInterface;
-    private _itensMenu: Menu[];
+    private _itensMenu: Array<Menu>;
 
     constructor(
         private alertService: AlertService,
@@ -61,7 +60,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.logarService().unsubscribe();
     }
 
-    public get sistema(): SystemInterface[] {
+    public get sistema(): Array<SystemInterface> {
         return this._sistema;
     }
 
@@ -93,9 +92,7 @@ export class AppComponent implements OnInit, OnDestroy {
         return this._itensMenu;
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public getFuncionalidadeAtual(funcionalidadeAtual: any): void {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         this.funcionalidade = funcionalidadeAtual;
     }
 
@@ -103,14 +100,13 @@ export class AppComponent implements OnInit, OnDestroy {
         return this.userService.getUser().subscribe(
             (response: User) => {
                 StorageUtil.store(Storage.DADOS_USUARIO, response);
+                // this.carregarJarvis(response.cpf, response.id); @todo Caso use o jarvis
                 this.getSystemInfo(response);
                 // this.commonService.getAllOptions(); @todo ajustar rotas do commonService
-                // this.carregarJarvis(response.cpf, response.id); @todo Caso use o jarvis
 
                 return isUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
             },
             (error) => {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 return error.naoAutorizado && this.urlUtilService.redirectToLogin();
             }
         );
@@ -126,7 +122,6 @@ export class AppComponent implements OnInit, OnDestroy {
             ([system, data, path, itensMenu]) => {
                 this.loadingGlobal.hide();
                 this._dataSistema = data;
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 this._usuario = dadosUsuario;
                 this._sistema = system;
                 this._urlLogo = path;
@@ -135,10 +130,8 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.externalFiles.loadCss(`${this.envService.assetsSigfacil}/css/interno/theme.css`);
             },
             (error: any) => {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 if (!error.naoAutorizado) {
                     this.loadingGlobal.hide();
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                     this.alertService.openModal('Erro', error.message, 'danger');
                 }
             }

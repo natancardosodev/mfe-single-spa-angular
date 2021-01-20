@@ -44,14 +44,11 @@ export class PesquisaFormComponent implements OnInit {
     }
 
     public pesquisar(): void {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const formValue = this.pesquisaForm.getDadosForm();
 
         if (!GeneralsUtil.isEmpty(formValue)) {
             if (this._pesquisaForm.valid) {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 const parametros = this.pesquisaForm.getValuesFormated();
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 this.dataForm.emit({ form: parametros });
                 return;
             }

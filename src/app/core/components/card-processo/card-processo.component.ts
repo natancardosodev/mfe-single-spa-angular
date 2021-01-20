@@ -20,13 +20,11 @@ export class CardProcessoComponent implements OnInit {
         this.isCollapsed = false;
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.solicitacaoService
             .getDadosProcesso({ solicitacao: this.solicitacao })
             .pipe(finalize(() => (this.loading = false)))
             .subscribe((response: any) => {
-                // @todo Colocar interface para tipo
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 this.processo = response;
             });
     }

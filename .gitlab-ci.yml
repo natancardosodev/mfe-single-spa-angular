@@ -1,0 +1,11 @@
+image: voxtecnologiahub/node-12.14.0
+
+variables:
+    CUSTOM_PROJECT_PATH: vox/front-end/skeleton-interno-angular
+    RUN_LINT_CSS: npm run stylelint
+    RUN_LINT_JS: npm run eslint
+
+include:
+    - local: '.gitlab/ci/stages.yml' #obrigatorio
+    - local: '.gitlab/ci/global.gitlab-ci.yml' #obrigatorio
+    - local: '.gitlab/ci/eslint.yml'

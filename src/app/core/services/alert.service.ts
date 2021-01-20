@@ -5,8 +5,8 @@ import { Subject } from 'rxjs';
     providedIn: 'root'
 })
 export class AlertService {
-    private _loaderSubject: Subject<any>;
     public loaderState: any;
+    private _loaderSubject: Subject<any>;
 
     constructor() {
         this._loaderSubject = new Subject();

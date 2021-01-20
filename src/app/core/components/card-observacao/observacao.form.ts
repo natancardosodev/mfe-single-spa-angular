@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 
 export class ObservacaoForm extends FormGroup {
@@ -14,7 +12,6 @@ export class ObservacaoForm extends FormGroup {
     }
 
     public getDadosForm(): any {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.value;
     }
 

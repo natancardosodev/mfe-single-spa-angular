@@ -1,7 +1,5 @@
 import { clearMask } from '../configs/regexClearMask';
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export class Endereco {
     private _cep?: string;
     private _tipo_logradouro?: number;
