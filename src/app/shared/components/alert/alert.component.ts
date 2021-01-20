@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
@@ -29,6 +26,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         this.subscription = this.alertService.loaderState.subscribe((state) => {
             if (state.show) {
                 this.title = state.title;

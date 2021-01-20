@@ -1,7 +1,5 @@
 import { clearMask } from '../configs/regexClearMask';
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export class Pessoa {
     private _cpf: string;
     private _nome: string;

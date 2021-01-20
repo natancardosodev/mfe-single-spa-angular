@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -159,6 +154,7 @@ export class CommonService extends BaseService {
 
     public getValueByKey(optionName: string, key: string): string {
         const options = this.resolve(optionName, this);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         const value = options.filter((op) =>
             op && typeof op.key === 'string' ? op.key === key : parseInt(op.key) === parseInt(key)
         );

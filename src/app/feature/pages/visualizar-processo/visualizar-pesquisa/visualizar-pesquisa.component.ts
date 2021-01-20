@@ -30,7 +30,6 @@ export class VisualizarPesquisaComponent implements OnInit {
     ) {
         this.loading = true;
         this.isStatusExigencia = false;
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
         this.route.params.subscribe((params) => (this.solicitacao = params['id']));
     }
 

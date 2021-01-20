@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import { Injectable } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 
@@ -96,9 +95,9 @@ export class UrlUtilService {
     public montarUrlArray(resource: string, parameters: Record<string, Array<string>>): string {
         const arrayParametros = Object.keys(parameters).map((property: string) => {
             if (!isNullOrUndefined(parameters[property])) {
-                const resp: string = property.match('\\[]') // eslint-disable-line @typescript-eslint/prefer-regexp-exec
-                    ? parameters[property].map((value) => `${property}=${value}`).join('&') // eslint-disable-line @typescript-eslint/prefer-regexp-exec
-                    : `${property}=${parameters[property]}`; // eslint-disable-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/prefer-regexp-exec
+                const resp: string = property.match('\\[]')
+                    ? parameters[property].map((value) => `${property}=${value}`).join('&')
+                    : `${property}=${parameters[property]}`;
                 return resp;
             }
         });

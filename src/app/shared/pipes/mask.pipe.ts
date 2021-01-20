@@ -42,12 +42,10 @@ export class MaskPipe implements PipeTransform {
      * @returns {*}
      * @memberof MaskPipe
      */
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     transform(value: string, format: any): string {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         const maskFn = this.acceptedsMasks[format];
         if (format && maskFn) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             return maskFn(value);
         }
 

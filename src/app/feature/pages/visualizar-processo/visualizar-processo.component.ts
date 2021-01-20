@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -46,7 +44,6 @@ export class VisualizarProcessoComponent {
         };
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public onRowClicked(dadosLinha: any): void {
         void this.router.navigate([RotasEnum.EMPRESA_VISUALIZAR, dadosLinha.id]);
     }
@@ -82,7 +79,6 @@ export class VisualizarProcessoComponent {
         return !this._dataValue || this.pesquisar(this._dataValue, parametros);
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public formDataValue(evento: any): void {
         this._dataValue = evento.form;
         this.pesquisar(evento.form);
@@ -114,19 +110,16 @@ export class VisualizarProcessoComponent {
         return this._sub;
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public formatarDadosPesquisa(dados): Array<any> {
         if (dados) {
             const mask = new MaskPipe();
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             dados = dados.processos.map((processo) => {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-return
                 return {
                     ...processo,
                     cpf: mask.transform(processo.cpf, 'cpf')
                 };
             });
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             return dados;
         }
     }
