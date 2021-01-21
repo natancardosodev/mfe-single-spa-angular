@@ -120,7 +120,6 @@ export class AppComponent implements OnInit, OnDestroy {
             this.userService.getModulos()
         ]).subscribe(
             ([system, data, path, itensMenu]) => {
-                this.loadingGlobal.hide();
                 this._dataSistema = data;
                 this._usuario = dadosUsuario;
                 this._sistema = system;
@@ -128,6 +127,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 this._itensMenu = itensMenu;
                 this.validaPermissaoFuncionalidade(this._usuario);
                 this.externalFiles.loadCss(`${this.envService.assetsSigfacil}/css/interno/theme.css`);
+                this.loadingGlobal.hide();
             },
             (error: any) => {
                 if (!error.naoAutorizado) {
@@ -145,10 +145,11 @@ export class AppComponent implements OnInit, OnDestroy {
      */
     private validaPermissaoFuncionalidade(dadosUsuario: User) {
         const permissao = JSON.stringify(this.itensMenu);
-        const rota = this.router.url.split('/')[1].toUpperCase();
+        const rotaInicial = this.router.url.replace(/-/g, '').split('/')[1].toUpperCase();
 
         if (
-            (this.router.url.includes(RotasEnum[rota]) && !permissao.includes(String(FuncionalidadeEnum[rota]))) ||
+            (this.router.url.includes(RotasEnum[rotaInicial]) &&
+                !permissao.includes(String(FuncionalidadeEnum[rotaInicial]))) ||
             dadosUsuario.papel.length == 0
         ) {
             this.alertService.openModal('', 'Acesso Negado', 'danger');

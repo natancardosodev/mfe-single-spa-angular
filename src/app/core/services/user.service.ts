@@ -132,13 +132,29 @@ export class UserService {
     }
 
     /**
-     * Checar se na funcionalidade acessada o usuário tem o papel com
+     * Checar se na funcionalidade acessada o usuário tem algum papel com
      * permissão de acesso (Alterar, excluir, etc) para essa funcionalidade
-     * @param papelUsuario
-     * @param funcionalidadeAtual
-     * @param permissao
      */
-    // public checkPermissao(papelUsuario: Array<string>, funcionalidadeAtual: number, permissaoAtual: string): void {
-    //     // @todo A FAZER
-    // }
+    public checkPermissaoLiberada(
+        dadosUsuario: User,
+        funcionalidadeAcessada: number,
+        permissaoNecessaria: Array<string>
+    ): boolean {
+        let hasPermissao = false;
+        dadosUsuario.papel.forEach((p) => {
+            const papeisUsuario = p.split('_');
+            const funcionalidadePermitida = String(papeisUsuario[1]);
+            const acessoPermitido = papeisUsuario[2];
+
+            if (String(funcionalidadeAcessada) === funcionalidadePermitida) {
+                permissaoNecessaria.filter(() => {
+                    if (permissaoNecessaria.indexOf(acessoPermitido) !== -1) {
+                        return (hasPermissao = true);
+                    }
+                });
+            }
+        });
+
+        return hasPermissao ? true : false;
+    }
 }
