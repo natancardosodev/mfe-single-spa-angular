@@ -7,12 +7,12 @@ import { Subject, Subscription } from 'rxjs';
 
 import { GridColumnDefs, GridSearchParams } from 'grid';
 import { GridOptions } from 'ag-grid';
+import { AlertService } from 'lib-ui-interno';
 
 import { PesquisaInterface } from '../../../core/interfaces/pesquisa/pesquisa-interface';
 import { RotasEnum } from '../../../core/enums/rotas.enum';
 import { SolicitacaoService } from '../../services/solicitacao.service';
 import { MaskPipe } from 'src/app/shared/pipes/mask.pipe';
-import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
     selector: 'app-visualizar-processo',
@@ -102,7 +102,7 @@ export class VisualizarProcessoComponent {
                     this._dadosGrid.next({ ...response, processos: this.formatarDadosPesquisa(response) });
                 },
                 (erro: HttpErrorResponse) => {
-                    this.alertService.openModal('Erro', erro.message, 'danger');
+                    this.alertService.openModal({ title: 'Erro', message: erro.message, style: 'danger' });
                     this._dadosGrid.next([]);
                 }
             );

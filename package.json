@@ -57,6 +57,7 @@
         "js-sha512": "^0.8.0",
         "lib-header": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-header.git#1.0.7",
         "lib-menu": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-menu.git#1.0",
+        "lib-ui-interno": "git+ssh://git@gitlab.voxtecnologia.com.br:vox/bibliotecas/front-end/lib-ui-interno.git#1.0.2",
         "ngx-bootstrap": "~5.4.0",
         "ngx-currency": "^2.3.3",
         "rxjs": "~6.5.3",

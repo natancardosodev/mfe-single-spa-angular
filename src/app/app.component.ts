@@ -6,6 +6,7 @@ import { Subject, Subscription, forkJoin } from 'rxjs';
 import * as sha512 from 'js-sha512';
 import { Menu } from 'lib-menu';
 import { LogoInterface } from 'lib-header';
+import { AlertService } from 'lib-ui-interno';
 import { isUndefined } from 'util';
 
 import { StorageUtil } from './core/utils/storage.util';
@@ -19,7 +20,6 @@ import { FuncionalidadeEnum } from './core/enums/funcionalidade.enum';
 import { RotasEnum } from './core/enums/rotas.enum';
 import { ExternalFilesService } from './core/services/external-files.service';
 import { EnvService } from './core/services/env.service';
-import { AlertService } from './core/services/alert.service';
 
 @Component({
     selector: 'app-root',
@@ -132,7 +132,7 @@ export class AppComponent implements OnInit, OnDestroy {
             (error: any) => {
                 if (!error.naoAutorizado) {
                     this.loadingGlobal.hide();
-                    this.alertService.openModal('Erro', error.message, 'danger');
+                    this.alertService.openModal({ title: 'Erro', message: error.message, style: 'danger' });
                 }
             }
         );
@@ -152,7 +152,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 !permissao.includes(String(FuncionalidadeEnum[rotaInicial]))) ||
             dadosUsuario.papel.length == 0
         ) {
-            this.alertService.openModal('', 'Acesso Negado', 'danger');
+            this.alertService.openModal({ title: 'Erro', message: 'Acesso Negado', style: 'danger' });
             setTimeout(() => {
                 window.location.href = this.urlUtilService.getUrlSigfacil();
             }, 1000);

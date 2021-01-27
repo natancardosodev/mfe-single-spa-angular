@@ -6,8 +6,6 @@ import { Observable, Subject, throwError } from 'rxjs';
 
 import { Menu } from 'lib-menu';
 
-import { HttpUtil } from '../../core/utils/http-util';
-import { UrlUtilService } from './url-util.service';
 import { User } from '../interfaces/interno/user-interface';
 import { SystemInterface } from '../interfaces/interno/system-interface';
 
@@ -19,7 +17,7 @@ export class UserService {
     private _user: Observable<User>;
     private _setUserInfo: Subject<User>;
 
-    constructor(private http: HttpClient, private urlUtilService: UrlUtilService) {
+    constructor(private http: HttpClient) {
         this._setUserInfo = new Subject();
         this._checkModuloMenu = new Subject();
         this._user = this._setUserInfo.asObservable();
@@ -35,7 +33,7 @@ export class UserService {
         // const url = this.urlUtilService.mountUrl('/me');
         return this.http
             .get<User>(url, { withCredentials: true, responseType: 'json' })
-            .pipe(catchError((error: HttpErrorResponse) => HttpUtil.tratarErroLogin(error)));
+            .pipe(catchError((error: HttpErrorResponse) => throwError(new Error(error.error.message))));
     }
 
     /**
@@ -61,7 +59,7 @@ export class UserService {
                     window.console.warn(erro.message);
                     return throwError({ naoAutorizado: true });
                 }
-                return HttpUtil.tratarErroLogin(erro);
+                return throwError(new Error(erro.error.message));
             })
         );
     }
@@ -76,7 +74,7 @@ export class UserService {
         // const url = this.urlUtilService.mountUrl('/hora');
         return this.http
             .get<string>(url, { withCredentials: true, responseType: 'json' })
-            .pipe(catchError((erro) => HttpUtil.tratarErroLogin(erro)));
+            .pipe(catchError((error: HttpErrorResponse) => throwError(new Error(error.error.message))));
     }
 
     /**
@@ -89,7 +87,7 @@ export class UserService {
         // const url = this.urlUtilService.mountUrl('/me/sistema');
         return this.http
             .get<Array<SystemInterface>>(url, { withCredentials: true, responseType: 'json' })
-            .pipe(catchError((erro) => HttpUtil.tratarErroLogin(erro)));
+            .pipe(catchError((error: HttpErrorResponse) => throwError(new Error(error.error.message))));
     }
 
     /**
@@ -108,7 +106,7 @@ export class UserService {
                     this._checkModuloMenu.next(modulo);
                     return modulo.filter((moduloMenu) => this.setModulos(moduloMenu));
                 }),
-                catchError((erro) => HttpUtil.tratarErroLogin(erro))
+                catchError((error: HttpErrorResponse) => throwError(new Error(error.error.message)))
             );
     }
 
