@@ -7,6 +7,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Status } from 'src/app/core/enums/status.enum';
 import { ModalIndeferirComponent } from 'src/app/core/components/modal-indeferir/modal-indeferir.component';
 import { CardObservacaoComponent } from 'src/app/core/components/card-observacao/card-observacao.component';
+import { UserService } from 'src/app/core/services/user.service';
+import { Storage } from 'src/app/core/enums/storage.enum';
+import { StorageUtil } from 'src/app/core/utils/storage.util';
+import { FuncionalidadeEnum } from 'src/app/core/enums/funcionalidade.enum';
+import { PapeisEnum } from 'src/app/core/enums/papeis.enum';
 
 @Component({
     selector: 'app-visualizar-pesquisa',
@@ -26,11 +31,20 @@ export class VisualizarPesquisaComponent implements OnInit {
         private titleService: Title,
         private router: Router,
         private route: ActivatedRoute,
+        private userService: UserService,
         private modalService: BsModalService
     ) {
         this.loading = true;
         this.isStatusExigencia = false;
         this.route.params.subscribe((params) => (this.solicitacao = params['id']));
+    }
+
+    public get hasAcessoInserir(): boolean {
+        return this.userService.checkPermissaoLiberada(
+            StorageUtil.get(Storage.DADOS_USUARIO),
+            FuncionalidadeEnum.EMPRESA,
+            [PapeisEnum.INSERIR]
+        );
     }
 
     ngOnInit(): void {
