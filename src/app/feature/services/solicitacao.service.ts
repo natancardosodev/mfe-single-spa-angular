@@ -6,14 +6,13 @@ import { Observable } from 'rxjs';
 
 import { UrlUtilService } from 'src/app/core/services/url-util.service';
 import { BaseService } from 'src/app/core/services/base.service';
-import { AlertService } from 'src/app/core/services/alert.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SolicitacaoService extends BaseService {
-    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
-        super('/', http, urlUtilService, alertService);
+    constructor(http: HttpClient, urlUtilService: UrlUtilService) {
+        super('/', http, urlUtilService);
     }
 
     // Passar Interface

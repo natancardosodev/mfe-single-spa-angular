@@ -8,7 +8,6 @@ import { StorageUtil } from '../utils/storage.util';
 import { HttpUtil } from '../utils/http-util';
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';
-import { AlertService } from 'src/app/core/services/alert.service';
 
 /**
  * @export
@@ -34,8 +33,8 @@ export class CommonService extends BaseService {
      * @param {UrlUtilService} urlUtilService
      * @memberof CommonService
      */
-    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
-        super('', http, urlUtilService, alertService);
+    constructor(http: HttpClient, urlUtilService: UrlUtilService) {
+        super('', http, urlUtilService);
     }
 
     /**

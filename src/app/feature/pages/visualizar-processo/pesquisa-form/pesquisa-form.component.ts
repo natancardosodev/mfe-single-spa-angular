@@ -2,11 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
+import { AlertService } from 'lib-ui-interno';
 import { GeneralsUtil } from './../../../../core/utils/generals.util';
 import { TextMaskFactory } from './../../../../core/utils/mask/text-mask-factory';
 import { PesquisaForm } from './pesquisa.form';
 import { PesquisaInterface } from 'src/app/core/interfaces/pesquisa/pesquisa-interface';
-import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
     selector: 'app-pesquisa-form',
@@ -55,7 +55,11 @@ export class PesquisaFormComponent implements OnInit {
             return;
         }
 
-        this.alertService.openModal('Atenção', 'Informe pelo menos um campo para pesquisa', 'warning');
+        this.alertService.openModal({
+            title: 'Atenção',
+            message: 'Informe pelo menos um campo para pesquisa',
+            style: 'warning'
+        });
     }
 
     public setDateMin(): void {

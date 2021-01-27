@@ -1,22 +1,16 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, OperatorFunction } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
+
 import { UrlUtilService } from './url-util.service';
 import { HttpOptions } from '../interfaces/http-options';
-import { AlertService } from './alert.service';
 
 export abstract class BaseService {
     private _baseUrl: string;
     private _options: HttpOptions;
     private _optionsBasic: HttpOptions;
-    private _msgDefault: string;
 
-    constructor(
-        baseUrl: string = null,
-        protected http: HttpClient,
-        protected urlUtilService: UrlUtilService,
-        private alertService: AlertService
-    ) {
+    constructor(baseUrl: string = null, protected http: HttpClient, protected urlUtilService: UrlUtilService) {
         this.baseUrl = baseUrl;
         this.options = {
             withCredentials: true,
@@ -26,7 +20,6 @@ export abstract class BaseService {
         this.optionsBasic = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
-        this._msgDefault = 'Por favor tente novamente.';
     }
 
     get baseUrl(): string {
@@ -53,30 +46,17 @@ export abstract class BaseService {
         this._optionsBasic = optionsBasic;
     }
 
-    get = (
-        url?: string,
-        params?: any,
-        tipoApi?: string,
-        isRequestComplete?: boolean,
-        semModal?: boolean
-    ): Observable<any> => {
+    get = (url?: string, params?: any, tipoApi?: string, isRequestComplete?: boolean): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'get', params, null, isRequestComplete).pipe(
             take(1),
-            catchError((erro: HttpErrorResponse) =>
-                semModal
-                    ? null
-                    : void this.alertService.openModal(erro.error ? erro.error.message : erro, this._msgDefault)
-            )
+            catchError((error: HttpErrorResponse) => throwError(new Error(error.error.message)))
         );
     };
 
     post = (url?: string, body?: any, tipoApi?: string, isRequestComplete?: boolean): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'post', null, body, isRequestComplete).pipe(
             take(1),
-            catchError(
-                (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal(erro.error ? erro.error.message : erro, this._msgDefault)
-            )
+            catchError((error: HttpErrorResponse) => throwError(new Error(error.error.message)))
         );
     };
 
@@ -87,34 +67,33 @@ export abstract class BaseService {
     put = (url?: string, body?: any, tipoApi?: string, isRequestComplete?: boolean): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'put', null, body, isRequestComplete).pipe(
             take(1),
-            catchError(
-                (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal(erro.error ? erro.error.message : erro, this._msgDefault)
-            )
+            catchError((error: HttpErrorResponse) => throwError(new Error(error.error.message)))
         );
     };
 
     delete = (
         url?: string,
-        params?: Record<string, string>,
+        params?: Record<string, string> | any,
         tipoApi?: string,
         isRequestComplete?: boolean
     ): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'delete', params, null, isRequestComplete).pipe(
             take(1),
-            catchError(
-                (erro: HttpErrorResponse) =>
-                    void this.alertService.openModal(erro.error ? erro.error.message : erro, this._msgDefault)
-            )
+            catchError((error: HttpErrorResponse) => throwError(new Error(error.error.message)))
         );
     };
 
     uploadArquivo = (url?: string, body?: any, tipoApi?: string): Observable<any> => {
-        return this.http.post(this.getUrl(url, tipoApi), body, {
-            withCredentials: true,
-            observe: 'events',
-            reportProgress: true
-        });
+        return this.http
+            .post(this.getUrl(url, tipoApi), body, {
+                withCredentials: true,
+                observe: 'events',
+                reportProgress: true
+            })
+            .pipe(
+                take(1),
+                catchError((error: HttpErrorResponse) => throwError(new Error(error.message)))
+            );
     };
 
     downloadArquivo = (type?: string, url?: string, body?: any, tipoApi?: string): Observable<any> => {
@@ -124,7 +103,10 @@ export abstract class BaseService {
             headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }),
             body: body
         };
-        return this.http.request(type, this.getUrl(url, tipoApi), this.options);
+        return this.http.request(type, this.getUrl(url, tipoApi), this.options).pipe(
+            take(1),
+            catchError((error: HttpErrorResponse) => throwError(new Error(error.message)))
+        );
     };
 
     sendRequest = (
@@ -145,7 +127,7 @@ export abstract class BaseService {
     register = (url?: string, body?: any): Observable<any> => {
         return this.sendRequest(this.getUrl(url), 'post', null, body).pipe(
             take(1),
-            catchError((erro: OperatorFunction<any, any>) => erro)
+            catchError((error: HttpErrorResponse) => throwError(new Error(error.error.message)))
         );
     };
 

@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 
 import { UrlUtilService } from '../../core/services/url-util.service';
 import { BaseService } from '../../core/services/base.service';
-import { AlertService } from 'src/app/core/services/alert.service';
+import { User } from 'src/app/core/interfaces/interno/user-interface';
+import { StorageUtil } from 'src/app/core/utils/storage.util';
+import { Storage } from 'src/app/core/enums/storage.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -13,10 +15,12 @@ import { AlertService } from 'src/app/core/services/alert.service';
 export class JarvisService extends BaseService {
     private tipoApi = 'jarvis';
     private uf: string;
+    private dadosUsuario: User;
 
-    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
-        super('/', http, urlUtilService, alertService);
-        this.uf = 'PB'; // @todo corrigir getUf
+    constructor(http: HttpClient, urlUtilService: UrlUtilService) {
+        super('/', http, urlUtilService);
+        this.dadosUsuario = StorageUtil.get(Storage.DADOS_USUARIO) as User;
+        this.uf = this.dadosUsuario.estado;
     }
 
     /**
