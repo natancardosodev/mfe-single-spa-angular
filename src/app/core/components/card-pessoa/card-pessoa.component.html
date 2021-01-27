@@ -17,80 +17,32 @@
                 <span class="fas fa-circle-notch fa-spin fa-fw fa-3x is-primary"></span>
             </div>
             <div class="panel-body card-block card-body" *ngIf="!loading">
-                <app-cards label="Nome:" [value]="pessoa.nome"></app-cards>
-                <app-cards label="CPF:" [value]="pessoa.cpf" mask="cpf"></app-cards>
-                <app-cards label="Documento:" [value]="pessoa.documento"></app-cards>
-                <app-cards label="Orgão Emissor:" [value]="pessoa.orgao_emissor"></app-cards>
-                <app-cards label="UF do Orgão Emissor:" [value]="pessoa.uf_orgao_emissor"></app-cards>
-                <app-cards label="Data de Nascimento:" [value]="pessoa.data_nascimento" date="dd/MM/yyyy"></app-cards>
-                <app-cards label="Nacionalidade:" [value]="pessoa.nacionalidade"></app-cards>
-                <app-cards label="Naturalidade Estrangeira:" [value]="pessoa.naturalidade_estrangeira"></app-cards>
-                <app-cards label="UF da Naturalidade:" [value]="pessoa.uf_naturalidade"></app-cards>
-                <app-cards label="Naturalidade:" [value]="pessoa.naturalidade"></app-cards>
-                <dl class="row">
-                    <dt class="col-4">Estado Civil:</dt>
-                    <dd class="col-6">{{ pessoa.estado_civil }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Nome da Mãe:</dt>
-                    <dd class="col-6">{{ pessoa.nome_mae }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Nome do Pai:</dt>
-                    <dd class="col-6">{{ pessoa.nome_pai }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Sexo:</dt>
-                    <dd class="col-6">{{ pessoa.sexo }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">CEP:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.cep | mask: 'cep' }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Logradouro:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.logradouro }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Número:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.numero }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Bairro:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.bairro }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Complemento:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.complemento }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Município:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.municipio }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">UF:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.uf }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Email:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.email }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">DDD Telefone:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.ddd_telefone }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Telefone:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.telefone }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">DDD Celular:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.ddd_celular }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Celular:</dt>
-                    <dd class="col-6">{{ pessoa.endereco.celular }}</dd>
-                </dl>
+                <app-list label="Nome" [value]="pessoa.nome"></app-list>
+                <app-list label="CPF" [value]="pessoa.cpf" mask="cpf"></app-list>
+                <app-list label="Documento" [value]="pessoa.documento"></app-list>
+                <app-list label="Orgão Emissor" [value]="pessoa.orgao_emissor"></app-list>
+                <app-list label="UF do Orgão Emissor" [value]="pessoa.uf_orgao_emissor"></app-list>
+                <app-list label="Data de Nascimento" [value]="pessoa.data_nascimento" date="dd/MM/yyyy"></app-list>
+                <app-list label="Nacionalidade" [value]="pessoa.nacionalidade"></app-list>
+                <app-list label="Naturalidade Estrangeira" [value]="pessoa.naturalidade_estrangeira"></app-list>
+                <app-list label="UF da Naturalidade" [value]="pessoa.uf_naturalidade"></app-list>
+                <app-list label="Naturalidade" [value]="pessoa.naturalidade"></app-list>
+                <app-list label="Estado Civil" [value]="pessoa.estado_civil"></app-list>
+                <app-list label="Nome da Mãe" [value]="pessoa.nome_mae"></app-list>
+                <app-list label="Nome do Pai" [value]="pessoa.nome_pai"></app-list>
+                <app-list label="Sexo" [value]="pessoa.sexo === 'M' ? 'Masculino' : 'Feminino'"></app-list>
+                <app-list label="CEP" [value]="pessoa.cep" mask="cep"></app-list>
+                <app-list label="Logradouro" [value]="pessoa.endereco.logradouro"></app-list>
+                <app-list label="Número" [value]="pessoa.endereco.numero"></app-list>
+                <app-list label="Bairro" [value]="pessoa.endereco.bairro"></app-list>
+                <app-list label="Complemento" [value]="pessoa.endereco.complemento"></app-list>
+                <app-list label="Município" [value]="pessoa.endereco.municipio"></app-list>
+                <app-list label="UF" [value]="pessoa.endereco.uf"></app-list>
+                <app-list label="Email" [value]="pessoa.endereco.email"></app-list>
+                <app-list label="DDD Telefone" [value]="pessoa.endereco.ddd_telefone"></app-list>
+                <app-list label="Telefone" [value]="pessoa.endereco.telefone"></app-list>
+                <app-list label="DDD Celular" [value]="pessoa.endereco.ddd_celular"></app-list>
+                <app-list label="Celular" [value]="pessoa.endereco.celular"></app-list>
             </div>
         </div>
     </div>
