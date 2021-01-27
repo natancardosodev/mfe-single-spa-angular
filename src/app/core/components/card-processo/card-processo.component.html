@@ -17,22 +17,10 @@
                 <span class="fas fa-circle-notch fa-spin fa-fw fa-3x is-primary"></span>
             </div>
             <div class="panel-body card-block card-body" *ngIf="!loading">
-                <dl class="row">
-                    <dt class="col-4">Protocolo:</dt>
-                    <dd class="col-6">{{ processo.protocolo }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Status:</dt>
-                    <dd class="col-6">{{ processo.status }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Tipo:</dt>
-                    <dd class="col-6">{{ processo.tipo }}</dd>
-                </dl>
-                <dl class="row">
-                    <dt class="col-4">Evento:</dt>
-                    <dd class="col-6">{{ processo.evento }}</dd>
-                </dl>
+                <app-list label="Protocolo" [value]="processo.protocolo"></app-list>
+                <app-list label="Status" [value]="processo.status"></app-list>
+                <app-list label="Tipo" [value]="processo.tipo"></app-list>
+                <app-list label="Evento" [value]="processo.evento"></app-list>
             </div>
         </div>
     </div>
