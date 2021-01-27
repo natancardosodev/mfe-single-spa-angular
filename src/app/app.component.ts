@@ -132,7 +132,7 @@ export class AppComponent implements OnInit, OnDestroy {
             (error: any) => {
                 if (!error.naoAutorizado) {
                     this.loadingGlobal.hide();
-                    this.alertService.openModal({ title: 'Erro', message: 'Acesso Negado', style: 'danger' });
+                    this.alertService.openModal({ title: 'Erro', message: error.message, style: 'danger' });
                 }
             }
         );
