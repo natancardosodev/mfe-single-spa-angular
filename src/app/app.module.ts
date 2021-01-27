@@ -11,6 +11,7 @@ import { LoadingGlobalModule } from '@voxtecnologia/vox-preload';
 import { HeaderModule } from 'lib-header';
 import { MenuModule } from 'lib-menu';
 import { FooterModule } from 'footer';
+import { LibUIModule } from 'lib-ui-interno';
 import { BreadcrumbsModule } from './core/components/breadcrumbs/breadcrumbs.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,6 +36,7 @@ import { SharedModule } from './shared/shared.module';
         HeaderModule,
         MenuModule,
         FooterModule,
+        LibUIModule,
         SharedModule
     ],
     providers: [
