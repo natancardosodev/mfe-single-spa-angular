@@ -1,27 +1,6 @@
-<div class="vox-cards panel-group">
-    <div class="panel card panel-default">
-        <div class="panel-heading card-header" role="tab">
-            <div
-                class="accordion-toggle panel-title"
-                role="button"
-                aria-expanded="true"
-                (click)="isCollapsed = !isCollapsed"
-                [attr.aria-expanded]="!isCollapsed"
-                aria-controls="collapseBasic"
-            >
-                Dados do Processo
-            </div>
-        </div>
-        <div class="panel-collapse collapse in show" *ngIf="!isCollapsed">
-            <div class="col my-5 d-flex justify-content-center" *ngIf="loading">
-                <span class="fas fa-circle-notch fa-spin fa-fw fa-3x is-primary"></span>
-            </div>
-            <div class="panel-body card-block card-body" *ngIf="!loading">
-                <app-list label="Protocolo" [value]="processo.protocolo"></app-list>
-                <app-list label="Status" [value]="processo.status"></app-list>
-                <app-list label="Tipo" [value]="processo.tipo"></app-list>
-                <app-list label="Evento" [value]="processo.evento"></app-list>
-            </div>
-        </div>
-    </div>
-</div>
+<app-collapse label="Dados do Processo" [isCollapsed]="false" [loading]="loading">
+    <app-list label="Protocolo" [value]="processo?.protocolo"></app-list>
+    <app-list label="Status" [value]="processo?.status"></app-list>
+    <app-list label="Tipo" [value]="processo?.tipo"></app-list>
+    <app-list label="Evento" [value]="processo?.evento"></app-list>
+</app-collapse>

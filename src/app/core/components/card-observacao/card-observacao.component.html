@@ -1,46 +1,25 @@
-<div class="vox-cards panel-group">
-    <div class="panel card panel-default">
-        <div class="panel-heading card-header" role="tab">
-            <div
-                class="accordion-toggle panel-title"
-                role="button"
-                aria-expanded="true"
-                (click)="isCollapsed = !isCollapsed"
-                [attr.aria-expanded]="!isCollapsed"
-                aria-controls="collapseBasic"
-            >
-                Observação
-            </div>
-        </div>
-        <div class="panel-collapse collapse in show" *ngIf="!isCollapsed">
-            <div class="col my-5 d-flex justify-content-center" *ngIf="loading">
-                <span class="fas fa-circle-notch fa-spin fa-fw fa-3x"></span>
-            </div>
-            <div class="panel-body card-block card-body" *ngIf="!loading">
-                <div *ngIf="statusAtualProcesso == 36">
-                    <ng-container *ngFor="let observacao of observacoes$ | async">
-                        <dl>
-                            <dd>
-                                <strong>Mensagem:</strong> {{ observacao.descricao }} Em:
-                                {{ observacao.data | date: 'dd/MM/yyyy hh:mm:ss' }} Por: {{ observacao.usuario }}
-                            </dd>
-                        </dl>
-                    </ng-container>
-                </div>
-                <form [formGroup]="observacaoForm">
-                    <div class="form-group row align-center-flex">
-                        <label for="descricao" class="col-2 col-form-label text-left">Observação:</label>
-                        <div class="col-10">
-                            <textarea
-                                class="form-control form-control-sm"
-                                formControlName="descricao"
-                                id="observacao"
-                                rows="5"
-                            ></textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+<app-collapse label="Observação" [isCollapsed]="false" [loading]="loading">
+    <div *ngIf="statusAtualProcesso == 36">
+        <ng-container *ngFor="let observacao of observacoes$ | async">
+            <dl>
+                <dd>
+                    <strong>Mensagem:</strong> {{ observacao.descricao }} Em:
+                    {{ observacao.data | date: 'dd/MM/yyyy hh:mm:ss' }} Por: {{ observacao.usuario }}
+                </dd>
+            </dl>
+        </ng-container>
     </div>
-</div>
+    <form [formGroup]="observacaoForm">
+        <div class="form-group row align-center-flex">
+            <label for="descricao" class="col-2 col-form-label text-left">Observação:</label>
+            <div class="col-10">
+                <textarea
+                    class="form-control form-control-sm"
+                    formControlName="descricao"
+                    id="observacao"
+                    rows="5"
+                ></textarea>
+            </div>
+        </div>
+    </form>
+</app-collapse>

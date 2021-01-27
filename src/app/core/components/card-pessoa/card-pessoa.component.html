@@ -1,49 +1,28 @@
-<div class="vox-cards panel-group">
-    <div class="panel card panel-default">
-        <div class="panel-heading card-header" role="tab">
-            <div
-                class="accordion-toggle panel-title"
-                role="button"
-                aria-expanded="true"
-                (click)="isCollapsed = !isCollapsed"
-                [attr.aria-expanded]="!isCollapsed"
-                aria-controls="collapseBasic"
-            >
-                Dados da Pessoa
-            </div>
-        </div>
-        <div class="panel-collapse collapse in show" *ngIf="!isCollapsed">
-            <div class="col my-5 d-flex justify-content-center" *ngIf="loading">
-                <span class="fas fa-circle-notch fa-spin fa-fw fa-3x is-primary"></span>
-            </div>
-            <div class="panel-body card-block card-body" *ngIf="!loading">
-                <app-list label="Nome" [value]="pessoa.nome"></app-list>
-                <app-list label="CPF" [value]="pessoa.cpf" mask="cpf"></app-list>
-                <app-list label="Documento" [value]="pessoa.documento"></app-list>
-                <app-list label="Orgão Emissor" [value]="pessoa.orgao_emissor"></app-list>
-                <app-list label="UF do Orgão Emissor" [value]="pessoa.uf_orgao_emissor"></app-list>
-                <app-list label="Data de Nascimento" [value]="pessoa.data_nascimento" date="dd/MM/yyyy"></app-list>
-                <app-list label="Nacionalidade" [value]="pessoa.nacionalidade"></app-list>
-                <app-list label="Naturalidade Estrangeira" [value]="pessoa.naturalidade_estrangeira"></app-list>
-                <app-list label="UF da Naturalidade" [value]="pessoa.uf_naturalidade"></app-list>
-                <app-list label="Naturalidade" [value]="pessoa.naturalidade"></app-list>
-                <app-list label="Estado Civil" [value]="pessoa.estado_civil"></app-list>
-                <app-list label="Nome da Mãe" [value]="pessoa.nome_mae"></app-list>
-                <app-list label="Nome do Pai" [value]="pessoa.nome_pai"></app-list>
-                <app-list label="Sexo" [value]="pessoa.sexo === 'M' ? 'Masculino' : 'Feminino'"></app-list>
-                <app-list label="CEP" [value]="pessoa.cep" mask="cep"></app-list>
-                <app-list label="Logradouro" [value]="pessoa.endereco.logradouro"></app-list>
-                <app-list label="Número" [value]="pessoa.endereco.numero"></app-list>
-                <app-list label="Bairro" [value]="pessoa.endereco.bairro"></app-list>
-                <app-list label="Complemento" [value]="pessoa.endereco.complemento"></app-list>
-                <app-list label="Município" [value]="pessoa.endereco.municipio"></app-list>
-                <app-list label="UF" [value]="pessoa.endereco.uf"></app-list>
-                <app-list label="Email" [value]="pessoa.endereco.email"></app-list>
-                <app-list label="DDD Telefone" [value]="pessoa.endereco.ddd_telefone"></app-list>
-                <app-list label="Telefone" [value]="pessoa.endereco.telefone"></app-list>
-                <app-list label="DDD Celular" [value]="pessoa.endereco.ddd_celular"></app-list>
-                <app-list label="Celular" [value]="pessoa.endereco.celular"></app-list>
-            </div>
-        </div>
-    </div>
-</div>
+<app-collapse label="Dados da Pessoa" [isCollapsed]="false" [loading]="loading">
+    <app-list label="Nome" [value]="pessoa?.nome"></app-list>
+    <app-list label="CPF" [value]="pessoa?.cpf" mask="cpf"></app-list>
+    <app-list label="Documento" [value]="pessoa?.documento"></app-list>
+    <app-list label="Orgão Emissor" [value]="pessoa?.orgao_emissor"></app-list>
+    <app-list label="UF do Orgão Emissor" [value]="pessoa?.uf_orgao_emissor"></app-list>
+    <app-list label="Data de Nascimento" [value]="pessoa?.data_nascimento" date="dd/MM/yyyy"></app-list>
+    <app-list label="Nacionalidade" [value]="pessoa?.nacionalidade"></app-list>
+    <app-list label="Naturalidade Estrangeira" [value]="pessoa?.naturalidade_estrangeira"></app-list>
+    <app-list label="UF da Naturalidade" [value]="pessoa?.uf_naturalidade"></app-list>
+    <app-list label="Naturalidade" [value]="pessoa?.naturalidade"></app-list>
+    <app-list label="Estado Civil" [value]="pessoa?.estado_civil"></app-list>
+    <app-list label="Nome da Mãe" [value]="pessoa?.nome_mae"></app-list>
+    <app-list label="Nome do Pai" [value]="pessoa?.nome_pai"></app-list>
+    <app-list label="Sexo" [value]="pessoa?.sexo === 'M' ? 'Masculino' : 'Feminino'"></app-list>
+    <app-list label="CEP" [value]="pessoa?.cep" mask="cep"></app-list>
+    <app-list label="Logradouro" [value]="pessoa?.endereco.logradouro"></app-list>
+    <app-list label="Número" [value]="pessoa?.endereco.numero"></app-list>
+    <app-list label="Bairro" [value]="pessoa?.endereco.bairro"></app-list>
+    <app-list label="Complemento" [value]="pessoa?.endereco.complemento"></app-list>
+    <app-list label="Município" [value]="pessoa?.endereco.municipio"></app-list>
+    <app-list label="UF" [value]="pessoa?.endereco.uf"></app-list>
+    <app-list label="Email" [value]="pessoa?.endereco.email"></app-list>
+    <app-list label="DDD Telefone" [value]="pessoa?.endereco.ddd_telefone"></app-list>
+    <app-list label="Telefone" [value]="pessoa?.endereco.telefone"></app-list>
+    <app-list label="DDD Celular" [value]="pessoa?.endereco.ddd_celular"></app-list>
+    <app-list label="Celular" [value]="pessoa?.endereco.celular"></app-list>
+</app-collapse>
