@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { Observable, forkJoin, BehaviorSubject, Subscription } from 'rxjs';
+import { Observable, forkJoin, BehaviorSubject, Subscription, throwError } from 'rxjs';
 
 import { Storage } from '../enums/storage.enum';
 import { StorageUtil } from '../utils/storage.util';
-import { HttpUtil } from '../utils/http-util';
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';
 
@@ -130,7 +129,7 @@ export class CommonService extends BaseService {
                         escolaridadeOptions
                     });
                 },
-                (error) => HttpUtil.tratarErro(error)
+                (error: HttpErrorResponse) => throwError(new Error(error.error.message))
             );
         }
 
