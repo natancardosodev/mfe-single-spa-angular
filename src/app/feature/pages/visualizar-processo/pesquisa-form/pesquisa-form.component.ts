@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
+import { BehaviorSubject } from 'rxjs';
 import { AlertService } from 'lib-ui-interno';
 import { GeneralsUtil } from './../../../../core/utils/generals.util';
 import { TextMaskFactory } from './../../../../core/utils/mask/text-mask-factory';
@@ -16,6 +17,9 @@ import { PesquisaInterface } from 'src/app/core/interfaces/pesquisa/pesquisa-int
 export class PesquisaFormComponent implements OnInit {
     @Input() public loading: boolean;
     @Output() public dataForm: EventEmitter<any>;
+    public tipos: BehaviorSubject<any> = new BehaviorSubject([]);
+    public statusProcesso: BehaviorSubject<any> = new BehaviorSubject([]);
+    public loadingPage: boolean;
     public dateMin: Date;
     public dateMax: Date;
     private _pesquisa: PesquisaInterface;
@@ -28,11 +32,13 @@ export class PesquisaFormComponent implements OnInit {
         this._pesquisaForm = new PesquisaForm();
         this.dateMax = new Date();
         this.loading = false;
+        this.loadingPage = true;
     }
 
     public ngOnInit(): void {
         this.titleService.setTitle('Visualizar Processo - Skeleton');
         this.setDateMin();
+        this.setOptions();
     }
 
     public get pesquisaForm(): PesquisaForm {
@@ -41,6 +47,42 @@ export class PesquisaFormComponent implements OnInit {
 
     public get maskFactory(): TextMaskFactory {
         return this._maskFactory;
+    }
+
+    public setOptions(): void {
+        this.tipos.next([
+            {
+                key: 'Leiloeiro',
+                value: 'Leiloeiro'
+            },
+            {
+                key: 'Tradutor',
+                value: 'Tradutor'
+            }
+        ]);
+        this.statusProcesso.next([
+            {
+                key: 29,
+                value: 'Aguardando análise'
+            },
+            {
+                key: 36,
+                value: 'Aguardando habilitação'
+            },
+            {
+                key: 37,
+                value: 'Aguardando nomeação'
+            },
+            {
+                key: 2,
+                value: 'Em exigência'
+            },
+            {
+                key: 8,
+                value: 'Indeferido'
+            }
+        ]);
+        this.loadingPage = false;
     }
 
     public pesquisar(): void {
@@ -62,13 +104,13 @@ export class PesquisaFormComponent implements OnInit {
         });
     }
 
-    public setDateMin(): void {
+    public isFieldValid(form: FormGroup, field: string): any {
+        return !form.get(field).valid && form.get(field).dirty;
+    }
+
+    private setDateMin(): void {
         this.pesquisaForm.dataInicial.valueChanges.subscribe((date: Date) => {
             this.dateMin = date;
         });
-    }
-
-    public isFieldValid(form: FormGroup, field: string): any {
-        return !form.get(field).valid && form.get(field).dirty;
     }
 }
