@@ -1,4 +1,4 @@
-<vox-loading-global initialStatus="show"></vox-loading-global>
+<app-loading-global></app-loading-global>
 <app-alert></app-alert>
 
 <div *ngIf="usuario">
@@ -16,7 +16,7 @@
     <main class="container container-base">
         <div class="row">
             <aside class="col-md-3">
-                <lib-menu [modulos]="itensMenu" (funcionalidadeAtual)="getFuncionalidadeAtual($event)"> </lib-menu>
+                <lib-menu [modulos]="itensMenu"></lib-menu>
             </aside>
             <section class="col-9 content-app">
                 <div class="system-content">
@@ -27,5 +27,5 @@
         </div>
     </main>
 
-    <lib-footer></lib-footer>
+    <app-footer></app-footer>
 </div>

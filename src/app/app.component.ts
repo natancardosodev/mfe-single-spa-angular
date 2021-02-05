@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingGlobalService } from '@voxtecnologia/vox-preload';
 
 import { Subject, Subscription, forkJoin } from 'rxjs';
 import * as sha512 from 'js-sha512';
-import { Menu } from 'lib-menu';
+import { Menu, MenuFuncionalidade } from 'lib-menu';
 import { LogoInterface } from 'lib-header';
-import { AlertService } from 'lib-ui-interno';
+import { AlertService, LoadingGlobalService } from 'lib-ui-interno';
 import { isUndefined } from 'util';
 
 import { StorageUtil } from './core/utils/storage.util';
@@ -27,7 +26,7 @@ import { EnvService } from './core/services/env.service';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-    public funcionalidade: string;
+    public funcionalidade: MenuFuncionalidade;
     public idUsuario: Subject<number>;
     private _sistema: Array<SystemInterface>;
     private _usuario: User;
@@ -92,10 +91,6 @@ export class AppComponent implements OnInit, OnDestroy {
         return this._itensMenu;
     }
 
-    public getFuncionalidadeAtual(funcionalidadeAtual: any): void {
-        this.funcionalidade = funcionalidadeAtual;
-    }
-
     public logarService(): Subscription {
         return this.userService.getUser().subscribe(
             (response: User) => {
@@ -146,6 +141,14 @@ export class AppComponent implements OnInit, OnDestroy {
     private validaPermissaoFuncionalidade(dadosUsuario: User) {
         const permissao = JSON.stringify(this.itensMenu);
         const rotaInicial = this.router.url.replace(/-/g, '').split('/')[1].toUpperCase();
+
+        this.itensMenu.forEach((menu) => {
+            menu.funcionalidades.forEach((func) => {
+                if (FuncionalidadeEnum[rotaInicial] === func.id) {
+                    this.funcionalidade = func;
+                }
+            });
+        });
 
         if (
             (this.router.url.includes(RotasEnum[rotaInicial]) &&
