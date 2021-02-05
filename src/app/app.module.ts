@@ -7,37 +7,30 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
-import { LoadingGlobalModule } from '@voxtecnologia/vox-preload';
 import { HeaderModule } from 'lib-header';
 import { MenuModule } from 'lib-menu';
-import { FooterModule } from 'footer';
 import { LibUIModule } from 'lib-ui-interno';
-import { BreadcrumbsModule } from './core/components/breadcrumbs/breadcrumbs.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonService } from './core/services/common.service';
 import { UserService } from './core/services/user.service';
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
-import { SharedModule } from './shared/shared.module';
+import { MaskPipe } from './core/pipes/mask.pipe';
 // import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, MaskPipe],
     imports: [
         HttpClientModule,
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        LoadingGlobalModule,
         FontAwesomeModule,
         ModalModule.forRoot(),
-        BreadcrumbsModule,
         HeaderModule,
         MenuModule,
-        FooterModule,
-        LibUIModule,
-        SharedModule
+        LibUIModule
     ],
     providers: [
         CommonService,
