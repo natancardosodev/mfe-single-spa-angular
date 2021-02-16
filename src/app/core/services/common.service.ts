@@ -7,6 +7,7 @@ import { Storage } from '../enums/storage.enum';
 import { StorageUtil } from '../utils/storage.util';
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';
+import { AlertService } from 'lib-ui-interno';
 
 /**
  * @export
@@ -32,8 +33,8 @@ export class CommonService extends BaseService {
      * @param {UrlUtilService} urlUtilService
      * @memberof CommonService
      */
-    constructor(http: HttpClient, urlUtilService: UrlUtilService) {
-        super('', http, urlUtilService);
+    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
+        super('', http, urlUtilService, alertService);
     }
 
     /**
