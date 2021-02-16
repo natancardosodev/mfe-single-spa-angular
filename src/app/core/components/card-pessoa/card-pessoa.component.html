@@ -13,7 +13,7 @@
     <app-list label="Nome da Mãe" [value]="pessoa?.nome_mae"></app-list>
     <app-list label="Nome do Pai" [value]="pessoa?.nome_pai"></app-list>
     <app-list label="Sexo" [value]="pessoa?.sexo === 'M' ? 'Masculino' : 'Feminino'"></app-list>
-    <app-list label="CEP" [value]="pessoa?.cep" mask="cep"></app-list>
+    <app-list label="CEP" [value]="pessoa?.endereco.cep" mask="cep"></app-list>
     <app-list label="Logradouro" [value]="pessoa?.endereco.logradouro"></app-list>
     <app-list label="Número" [value]="pessoa?.endereco.numero"></app-list>
     <app-list label="Bairro" [value]="pessoa?.endereco.bairro"></app-list>
