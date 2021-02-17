@@ -91,27 +91,6 @@
             "
         >
         </app-input>
-        <!-- <app-input
-            label="Nacionalidade"
-            isObrigatorio="true"
-            formControlName="nacionalidade"
-            [form]="produtorForm"
-            col="4"
-            [message]="
-                !produtorForm.nacionalidade.valid
-                    ? produtorForm.getFirstErrorFrom('nacionalidade', 'Nacionalidade')
-                    : ''
-            "
-        ></app-input>
-        <app-input
-            label="Sexo"
-            formControlName="coSexo"
-            col="5"
-            [form]="produtorForm"
-            type="select"
-[options]="sexos"
-            [message]="!produtorForm.coSexo.valid ? produtorForm.getFirstErrorFrom('coSexo', 'Sexo') : ''"
-        ></app-input> -->
         <app-input
             label="Data de Nascimento"
             formControlName="dt_nascimento"
@@ -129,7 +108,6 @@
 
         <app-input
             label="Naturalidade"
-            isObrigatorio="true"
             formControlName="naturalidade"
             col="7"
             [form]="produtorForm"
@@ -164,7 +142,7 @@
             [form]="produtorForm"
             type="select"
             [options]="commonService.estadoOptions"
-            keyOp="ds_sigla"
+            keyOp="co_uf"
             valueOp="ds_sigla"
             [message]="!produtorForm.uf_pais.valid ? produtorForm.getFirstErrorFrom('uf_pais', 'UF') : ''"
         >
@@ -172,13 +150,13 @@
         <app-input
             label="Município"
             isObrigatorio="true"
-            formControlName="ds_municipio"
+            formControlName="co_municipio"
             col="7"
             [form]="produtorForm"
             type="select"
             [options]="listaMunicipiosProdutor"
             [message]="
-                !produtorForm.ds_municipio.valid ? produtorForm.getFirstErrorFrom('ds_municipio', 'Município') : ''
+                !produtorForm.co_municipio.valid ? produtorForm.getFirstErrorFrom('co_municipio', 'Município') : ''
             "
         >
         </app-input>
@@ -253,6 +231,9 @@
             [message]="!produtorForm.ds_email.valid ? produtorForm.getFirstErrorFrom('ds_email', 'Email') : ''"
         ></app-input>
     </app-collapse>
+    <app-collapse label="Atividade" [loading]="loading">
+        <app-form-atividade [dadosAtividades]="atividades"></app-form-atividade>
+    </app-collapse>
     <app-collapse label="Dados imóvel" [loading]="loading">
         <app-input
             label="Tipo Logradouro"
@@ -304,7 +285,7 @@
             [form]="imovelForm"
             type="select"
             [options]="commonService.estadoOptions"
-            keyOp="ds_sigla"
+            keyOp="co_uf"
             valueOp="ds_sigla"
             [message]="!imovelForm.uf_imovel.valid ? imovelForm.getFirstErrorFrom('uf_imovel', 'UF') : ''"
         >
@@ -313,13 +294,13 @@
             label="Município"
             isObrigatorio="true"
             col="7"
-            formControlName="ds_municipio_imovel"
+            formControlName="co_municipio"
             [form]="imovelForm"
             type="select"
             [options]="listaMunicipiosImovel"
             [message]="
-                !imovelForm.ds_municipio_imovel.valid
-                    ? imovelForm.getFirstErrorFrom('ds_municipio_imovel', 'Município')
+                !imovelForm.co_municipio.valid
+                    ? imovelForm.getFirstErrorFrom('co_municipio', 'Município')
                     : ''
             "
         >
@@ -345,6 +326,17 @@
             "
         ></app-input>
         <app-input
+            label="Ponto de Referência"
+            formControlName="ds_ponto_referencia"
+            col="7"
+            [form]="imovelForm"
+            [message]="
+                !imovelForm.ds_ponto_referencia.valid
+                    ? imovelForm.getFirstErrorFrom('ds_ponto_referencia', 'Ponto de Referência')
+                    : ''
+            "
+        ></app-input>
+        <app-input
             label="Área total(ha)"
             isObrigatorio="true"
             formControlName="nu_area_total"
@@ -367,13 +359,22 @@
             "
         ></app-input>
         <app-input
-            label="Ponto de Referência"
-            formControlName="ds_ponto_referencia"
-            col="7"
+            label="Latitude"
+            formControlName="nu_latitude"
             [form]="imovelForm"
             [message]="
-                !imovelForm.ds_ponto_referencia.valid
-                    ? imovelForm.getFirstErrorFrom('ds_ponto_referencia', 'Ponto de Referência')
+                !imovelForm.nu_latitude.valid
+                    ? imovelForm.getFirstErrorFrom('nu_latitude', 'Latitude')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Longitude"
+            formControlName="nu_longitude"
+            [form]="imovelForm"
+            [message]="
+                !imovelForm.nu_longitude.valid
+                    ? imovelForm.getFirstErrorFrom('nu_longitude', 'Longitude')
                     : ''
             "
         ></app-input>
@@ -449,12 +450,12 @@
         <app-input
             label="Número do CRC"
             isObrigatorio="true"
-            formControlName="nu_sequencia"
+            formControlName="nu_tipo_crc"
             col="4"
             [form]="contabilistaForm"
             [message]="
-                !contabilistaForm.nu_sequencia.valid
-                    ? contabilistaForm.getFirstErrorFrom('nu_sequencia', 'Número do CRC')
+                !contabilistaForm.nu_tipo_crc.valid
+                    ? contabilistaForm.getFirstErrorFrom('nu_tipo_crc', 'Número do CRC')
                     : ''
             "
         ></app-input>
@@ -623,8 +624,8 @@
             [form]="contabilistaForm"
             type="select"
             [options]="commonService.estadoOptions"
-            keyOp="ds_uf"
-            valueOp="ds_uf"
+            keyOp="co_uf"
+            valueOp="ds_sigla"
             [message]="!contabilistaForm.co_uf.valid ? contabilistaForm.getFirstErrorFrom('co_uf', 'UF') : ''"
         >
         </app-input>

@@ -17,7 +17,7 @@ import { SharedModule } from './shared/shared.module';
 import { CommonService } from './core/services/common.service';
 import { UserService } from './core/services/user.service';
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
-// import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
+import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
 
 @NgModule({
     declarations: [AppComponent],
@@ -36,8 +36,8 @@ import { AuthInterceptor } from './core/interceptor/auth.interceptor';
     providers: [
         CommonService,
         UserService,
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-        // { provide: HTTP_INTERCEPTORS, useClass: JarvisInterceptor, multi: true } @todo caso tenha jarvis
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: JarvisInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
 })

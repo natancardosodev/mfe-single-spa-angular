@@ -7,13 +7,14 @@ import { Observable } from 'rxjs';
 import { UrlUtilService } from 'src/app/core/services/url-util.service';
 import { BaseService } from 'src/app/core/services/base.service';
 import { DadosInscricaoInterface } from 'src/app/core/interfaces/pessoa-fisica/dados-inscricao.interface';
+import { AlertService } from 'lib-ui-interno';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SolicitacaoService extends BaseService {
-    constructor(http: HttpClient, urlUtilService: UrlUtilService) {
-        super('/', http, urlUtilService);
+    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
+        super('/', http, urlUtilService, alertService);
     }
 
     // Passar Interface

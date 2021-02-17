@@ -23,7 +23,7 @@ npm run start
 ```
 
 No comando start ou build a pasta é buildada, necessitando servir o diretório com virtualHost do apache. Busque seu
-líder técnico ou arquiteto para auxiliar nisso. Não estando configurado isto deve executar: `ng serve` e abrir
+líder técnico ou arquiteto para auxiliar nisso. Não estando configurado isto deve executar: `npm run dev` e abrir
 `http://localhost:4200/sigfacil/skeleton/empresa`.
 
 Adicione os remotes do git:
@@ -88,3 +88,10 @@ Será salvo no banco na coluna ds_url: `/sigfacil/funcionalidade-pai/subfuncao/`
 `/sigfacil/funcionalidade-pai/subfuncoes/`
 
 Deve-se duplicar o `src/app/feature/pages/visualizar-processo`
+
+### Utilizar Jarvis ou Assets Sigfacil pelo Skeleton
+- Devido a política de CORS esses serviços só funcionam dentram de produtos vox, como localhost é teste, se faz necessário habilitar a [extensão de navegador CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf) durante os testes.
+
+### Para não utilizar o Jarvis realize as seguintes remoções:
+- this.carregarJarvis() e this.commonService.getAllOptions() no src/app/app.component.ts
+- CommonService e JarvisInterceptor nos providers de src/app/app.module.ts

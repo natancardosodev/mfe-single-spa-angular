@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
-import { finalize } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { ObservacaoForm } from './observacao.form';
@@ -43,15 +43,15 @@ export class CardObservacaoComponent implements OnInit {
             .pipe(
                 finalize(() => {
                     this.loading = false;
-                })
+                }),
+                take(1)
             )
             .subscribe(
                 () => {
                     this.finalizandoProcesso.emit(true);
                 },
-                (error) => {
+                () => {
                     this.finalizandoProcesso.emit(false);
-                    window.console.error(error);
                 }
             );
     }

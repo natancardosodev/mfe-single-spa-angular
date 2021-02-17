@@ -115,6 +115,8 @@ export interface EnderecoCorrespondenciaInterface {
     ds_complemento?: string;
     co_municipio: number;
     co_uf: number;
+    co_telefone?: string;
+    ds_email?: string;
     ds_ponto_referencia?: string;
     anexo?: AnexoInterface;
 }
@@ -146,8 +148,8 @@ export interface EnderecoContabilistaInterface {
 }
 
 export interface CoordenadasGeograficasInterface {
-    nu_latitude: string;
-    nu_longitude: string;
+    latitude: string;
+    longitude: string;
 }
 
 export interface Atividade {

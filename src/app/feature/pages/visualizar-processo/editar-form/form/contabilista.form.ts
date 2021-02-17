@@ -1,24 +1,29 @@
-import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, AbstractControl, Validators, ValidatorFn } from '@angular/forms';
+import { isValidCnpj } from '@brazilian-utils/is-valid-cnpj';
+import { isValidCpf } from '@brazilian-utils/is-valid-cpf';
+import { clearMask } from 'src/app/core/configs/regexClearMask';
 import { ContabilistaInterface } from 'src/app/core/interfaces/pessoa-fisica/dados-inscricao.interface';
 
 export class ContabilistaForm extends FormGroup {
     private _errorMessages = {
         required: 'O campo %s é obrigatório.',
-        email: 'Este e-mail não é válido.'
+        email: 'Este e-mail não é válido.',
+        quantidadeInvalida: 'Quantidade Inválida de dígitos',
+        valorInvalido: 'O valor informado no campo %s é inválido'
     };
 
     constructor() {
         super({
             tipo_pessoa: new FormControl(null),
-            co_cpf: new FormControl(null, [Validators.required]),
+            co_cpf: new FormControl(null),
             ds_nome: new FormControl(null, [Validators.required]),
             nu_tipo_crc: new FormControl(null),
             ds_classificacao: new FormControl(null, [Validators.required]),
             co_tipo_classificacao_crc: new FormControl(null, [Validators.required]),
             co_digito_verificador: new FormControl(null, [Validators.required]),
             co_uf_crc: new FormControl(null, [Validators.required]),
-            nu_sequencia: new FormControl(null, [Validators.required]),
-            co_cnpj: new FormControl(null, [Validators.required]),
+            nu_sequencia: new FormControl(null),
+            co_cnpj: new FormControl(null),
             ds_nome_empresa: new FormControl(null, [Validators.required]),
             nu_tipo_crc_empresa: new FormControl(null, [Validators.required]),
             ds_classificacao_empresa: new FormControl(null, [Validators.required]),
@@ -31,12 +36,46 @@ export class ContabilistaForm extends FormGroup {
             ds_endereco: new FormControl(null, [Validators.required]),
             co_cep: new FormControl(null, [Validators.required]),
             nu_numero: new FormControl(null, [Validators.required]),
-            ds_complemento: new FormControl(null, [Validators.required]),
+            ds_complemento: new FormControl(null),
             ds_bairro: new FormControl(null, [Validators.required]),
             nu_telefone: new FormControl(null),
             co_fax: new FormControl(null),
-            ds_email: new FormControl(null, [Validators.email])
+            ds_email: new FormControl(null)
         });
+
+        this.co_cpf.setValidators([ContabilistaForm.validaQuantidaDeDigito(11), ContabilistaForm.validaCpf()]);
+
+        this.co_cnpj.setValidators([ContabilistaForm.validaQuantidaDeDigito(14), ContabilistaForm.validaCnpj()]);
+    }
+
+    private static validaQuantidaDeDigito(quantidade: number): ValidatorFn {
+        return (control: AbstractControl): any => {
+            const conteudo = control.value ? clearMask(control.value) : '';
+
+            if (conteudo.length > 0 && conteudo.length < quantidade) {
+                return { quantidadeInvalida: true };
+            }
+        };
+    }
+
+    private static validaCpf(): ValidatorFn {
+        return (control: AbstractControl): any => {
+            const cpf = control.value ? clearMask(control.value) : '';
+
+            if (!isValidCpf(cpf) && cpf.length === 11) {
+                return { valorInvalido: true };
+            }
+        };
+    }
+
+    private static validaCnpj(): ValidatorFn {
+        return (control: AbstractControl): any => {
+            const cnpj = control.value ? clearMask(control.value) : '';
+
+            if (!isValidCnpj(cnpj) && cnpj.length === 14) {
+                return { valorInvalido: true };
+            }
+        };
     }
 
     public get tipo_pessoa(): AbstractControl {
@@ -145,6 +184,10 @@ export class ContabilistaForm extends FormGroup {
 
     public get ds_email(): AbstractControl {
         return this.get('ds_email');
+    }
+
+    public markAllAsTouched(): void {
+        Object.keys(this.controls).map((control) => this.get(control).markAsDirty());
     }
 
     public getFirstErrorFrom(controlName: string, label: string): string {

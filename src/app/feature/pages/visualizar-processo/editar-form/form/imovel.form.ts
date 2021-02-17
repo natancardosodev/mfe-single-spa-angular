@@ -14,12 +14,14 @@ export class ImovelForm extends FormGroup {
             nu_numero_imovel: new FormControl(null, [Validators.required]),
             ds_bairro_imovel: new FormControl(null, [Validators.required]),
             uf_imovel: new FormControl(null, [Validators.required]),
-            ds_municipio_imovel: new FormControl(null, [Validators.required]),
+            co_municipio: new FormControl(null, [Validators.required]),
             co_cep_imovel: new FormControl(null, [Validators.required]),
-            co_tipo_imovel: new FormControl(null, [Validators.required]),
+            co_tipo_imovel: new FormControl(null), // , [Validators.required] @todo add posterior
             nu_area_total: new FormControl(null, [Validators.required]),
             nu_area_producao: new FormControl(null, [Validators.required]),
             ds_ponto_referencia: new FormControl(null),
+            nu_latitude: new FormControl(null),
+            nu_longitude: new FormControl(null),
             nu_inscricao_rural: new FormControl(null),
             nu_car: new FormControl(null),
             nu_ccir: new FormControl(null),
@@ -47,8 +49,8 @@ export class ImovelForm extends FormGroup {
         return this.get('uf_imovel');
     }
 
-    public get ds_municipio_imovel(): AbstractControl {
-        return this.get('ds_municipio_imovel');
+    public get co_municipio(): AbstractControl {
+        return this.get('co_municipio');
     }
 
     public get co_cep_imovel(): AbstractControl {
@@ -75,6 +77,14 @@ export class ImovelForm extends FormGroup {
         return this.get('nu_inscricao_rural');
     }
 
+    public get nu_latitude(): AbstractControl {
+        return this.get('nu_latitude');
+    }
+
+    public get nu_longitude(): AbstractControl {
+        return this.get('nu_longitude');
+    }
+
     public get nu_car(): AbstractControl {
         return this.get('nu_car');
     }
@@ -91,18 +101,24 @@ export class ImovelForm extends FormGroup {
         return this._errorMessages[Object.keys(this.get(controlName).errors)[0]].replace('%s', label || controlName);
     }
 
+    public markAllAsTouched(): void {
+        Object.keys(this.controls).map((control) => this.get(control).markAsDirty());
+    }
+
     public setValues(produtor: ImovelInterface): void {
         this.co_tipo_logradouro.setValue(produtor.endereco.co_tipo_logradouro);
         this.ds_endereco.setValue(produtor.endereco.ds_endereco);
         this.nu_numero_imovel.setValue(produtor.nu_inscricao_rural);
         this.ds_bairro_imovel.setValue(produtor.endereco.ds_bairro);
         this.uf_imovel.setValue(produtor.endereco.co_uf);
-        this.ds_municipio_imovel.setValue(produtor.endereco.co_municipio);
+        this.co_municipio.setValue(produtor.endereco.co_municipio);
         this.co_cep_imovel.setValue(produtor.endereco.co_cep);
         this.co_tipo_imovel.setValue(produtor.endereco.co_tipo_imovel);
+        this.ds_ponto_referencia.setValue(produtor.endereco.ds_ponto_referencia);
         this.nu_area_total.setValue(produtor.endereco.nu_area_total);
         this.nu_area_producao.setValue(produtor.endereco.nu_area_producao);
-        this.ds_ponto_referencia.setValue(produtor.endereco.ds_ponto_referencia);
+        this.nu_latitude.setValue(produtor.endereco.coordenadas_geograficas.latitude);
+        this.nu_longitude.setValue(produtor.endereco.coordenadas_geograficas.longitude);
         this.nu_inscricao_rural.setValue(produtor.nu_inscricao_rural);
         this.nu_car.setValue(produtor.nu_car);
         this.nu_ccir.setValue(produtor.nu_ccir);

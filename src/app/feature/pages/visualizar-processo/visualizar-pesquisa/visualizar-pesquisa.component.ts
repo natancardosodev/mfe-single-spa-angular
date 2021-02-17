@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalComponent } from 'lib-ui-interno';
+import { take } from 'rxjs/operators';
 
 import { Status } from 'src/app/core/enums/status.enum';
 import { ModalIndeferirComponent } from 'src/app/core/components/modal-indeferir/modal-indeferir.component';
@@ -38,7 +39,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     ) {
         this.loading = true;
         this.isStatusExigencia = false;
-        this.route.params.subscribe((params) => (this.solicitacao = params['id']));
+        this.route.params.pipe(take(1)).subscribe((params) => (this.solicitacao = params['id']));
     }
 
     public get hasAcessoInserir(): boolean {

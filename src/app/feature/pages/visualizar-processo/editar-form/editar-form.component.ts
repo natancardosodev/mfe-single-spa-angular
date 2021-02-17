@@ -283,8 +283,8 @@ export class EditarFormComponent implements OnInit {
                     nu_area_total: imovelData.nu_area_total,
                     nu_area_producao: imovelData.nu_area_producao,
                     coordenadas_geograficas: {
-                        nu_latitude: null,
-                        nu_longitude: null
+                        latitude: imovelData.latitude,
+                        longitude: imovelData.longitude
                     }
                 },
                 endereco_correspondencia: {

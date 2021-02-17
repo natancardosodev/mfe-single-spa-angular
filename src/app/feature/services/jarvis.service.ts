@@ -8,6 +8,7 @@ import { BaseService } from '../../core/services/base.service';
 import { User } from 'src/app/core/interfaces/interno/user-interface';
 import { StorageUtil } from 'src/app/core/utils/storage.util';
 import { Storage } from 'src/app/core/enums/storage.enum';
+import { AlertService } from 'lib-ui-interno';
 
 @Injectable({
     providedIn: 'root'
@@ -17,8 +18,8 @@ export class JarvisService extends BaseService {
     private uf: string;
     private dadosUsuario: User;
 
-    constructor(http: HttpClient, urlUtilService: UrlUtilService) {
-        super('/', http, urlUtilService);
+    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
+        super('/', http, urlUtilService, alertService);
         this.dadosUsuario = StorageUtil.get(Storage.DADOS_USUARIO) as User;
         this.uf = this.dadosUsuario.estado;
     }

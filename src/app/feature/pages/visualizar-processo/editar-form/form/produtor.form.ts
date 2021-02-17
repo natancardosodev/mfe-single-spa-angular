@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { DadosInscricaoInterface } from 'src/app/core/interfaces/pessoa-fisica/dados-inscricao.interface';
 
@@ -18,13 +19,13 @@ export class ProdutorForm extends FormGroup {
             ds_orgao_emissor: new FormControl(null, [Validators.required]),
             co_uf_emissor: new FormControl(null),
             co_sexo: new FormControl(null, [Validators.required]),
-            nacionalidade: new FormControl(null, [Validators.required]),
+            nacionalidade: new FormControl(null),
             estado_civil: new FormControl(null),
             dt_nascimento: new FormControl(null),
             naturalidade: new FormControl(null),
             uf_naturalidade: new FormControl(null),
             uf_pais: new FormControl(null, [Validators.required]),
-            ds_municipio: new FormControl(null, [Validators.required]),
+            co_municipio: new FormControl(null, [Validators.required]),
             co_cep: new FormControl(null, [Validators.required]),
             ds_endereco: new FormControl(null, [Validators.required]),
             nu_numero: new FormControl(null, [Validators.required]),
@@ -96,8 +97,8 @@ export class ProdutorForm extends FormGroup {
         return this.get('uf_pais');
     }
 
-    public get ds_municipio(): AbstractControl {
-        return this.get('ds_municipio');
+    public get co_municipio(): AbstractControl {
+        return this.get('co_municipio');
     }
 
     public get co_cep(): AbstractControl {
@@ -137,7 +138,6 @@ export class ProdutorForm extends FormGroup {
         return this._errorMessages[Object.keys(this.get(controlName).errors)[0]].replace('%s', label || controlName);
     }
 
-    // @todo ver campos comentados
     public setValues(produtor: DadosInscricaoInterface): void {
         this.protocolo.setValue(produtor.protocolo);
         this.no_cpf.setValue(produtor.no_cpf);
@@ -150,15 +150,17 @@ export class ProdutorForm extends FormGroup {
         this.co_sexo.setValue(produtor.co_sexo);
         this.nacionalidade.setValue(null);
         this.dt_nascimento.setValue(new Date(produtor.data_nascimento).toLocaleDateString('pt-br'));
-        this.ds_municipio.setValue(produtor.imovel.endereco.co_municipio);
-        this.co_cep.setValue(produtor.imovel.endereco.co_cep);
-        this.ds_endereco.setValue(produtor.imovel.endereco.co_tipo_logradouro);
-        this.nu_numero.setValue(produtor.imovel.endereco.nu_numero);
-        this.ds_complemento.setValue(produtor.imovel.endereco.ds_complemento);
-        this.ds_bairro.setValue(produtor.imovel.endereco.ds_bairro);
-        this.nu_telefone.setValue(produtor.imovel.endereco.nu_telefone);
-        this.ds_email.setValue(produtor.imovel.endereco.ds_email);
-        this.co_fax.setValue(null);
+        if (produtor.imovel.endereco_correspondencia) {
+            this.co_municipio.setValue(produtor.imovel.endereco_correspondencia.co_municipio);
+            this.co_cep.setValue(produtor.imovel.endereco_correspondencia.co_cep);
+            this.ds_endereco.setValue(produtor.imovel.endereco_correspondencia.co_tipo_logradouro);
+            this.nu_numero.setValue(produtor.imovel.endereco_correspondencia.nu_numero);
+            this.ds_complemento.setValue(produtor.imovel.endereco_correspondencia.ds_complemento);
+            this.ds_bairro.setValue(produtor.imovel.endereco_correspondencia.ds_bairro);
+            this.nu_telefone.setValue(produtor.imovel.endereco_correspondencia.co_telefone);
+            this.ds_email.setValue(produtor.imovel.endereco_correspondencia.ds_email);
+            this.co_fax.setValue(null);
+        }
     }
 
     public markAllAsTouched(): void {

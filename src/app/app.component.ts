@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Subject, Subscription, forkJoin } from 'rxjs';
+import { take } from 'rxjs/operators';
 import * as sha512 from 'js-sha512';
 import { Menu, MenuFuncionalidade } from 'lib-menu';
 import { LogoInterface } from 'lib-header';
 import { AlertService, LoadingGlobalService } from 'lib-ui-interno';
-import { isUndefined } from 'util';
 
 import { StorageUtil } from './core/utils/storage.util';
 import { UrlUtilService } from './core/services/url-util.service';
@@ -25,7 +25,7 @@ import { EnvService } from './core/services/env.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
     public funcionalidade: MenuFuncionalidade;
     public idUsuario: Subject<number>;
     private _sistema: Array<SystemInterface>;
@@ -52,11 +52,6 @@ export class AppComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.loadingGlobal.show();
         this.logarService();
-    }
-
-    public ngOnDestroy(): void {
-        this.getSystemInfo('').unsubscribe();
-        this.logarService().unsubscribe();
     }
 
     public get sistema(): Array<SystemInterface> {
@@ -92,19 +87,22 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     public logarService(): Subscription {
-        return this.userService.getUser().subscribe(
-            (response: User) => {
-                StorageUtil.store(Storage.DADOS_USUARIO, response);
-                // this.carregarJarvis(response.cpf, response.id); @todo Caso use o jarvis
-                this.getSystemInfo(response);
-                // this.commonService.getAllOptions(); @todo ajustar rotas do commonService
+        return this.userService
+            .getUser()
+            .pipe(take(1))
+            .subscribe(
+                (response: User) => {
+                    StorageUtil.store(Storage.DADOS_USUARIO, response);
+                    this.carregarJarvis(response.cpf, response.id);
+                    this.getSystemInfo(response);
+                    this.commonService.getAllOptions();
 
-                return isUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
-            },
-            (error) => {
-                return error.naoAutorizado && this.urlUtilService.redirectToLogin();
-            }
-        );
+                    return typeof response['mensagem'] === 'undefined' || this.urlUtilService.redirectToLogin();
+                },
+                (error) => {
+                    return error.naoAutorizado && this.urlUtilService.redirectToLogin();
+                }
+            );
     }
 
     private getSystemInfo(dadosUsuario): Subscription {
@@ -113,24 +111,27 @@ export class AppComponent implements OnInit, OnDestroy {
             this.userService.getTime(),
             this.userService.getPathLogo(),
             this.userService.getModulos()
-        ]).subscribe(
-            ([system, data, path, itensMenu]) => {
-                this._dataSistema = data;
-                this._usuario = dadosUsuario;
-                this._sistema = system;
-                this._urlLogo = path;
-                this._itensMenu = itensMenu;
-                this.validaPermissaoFuncionalidade(this._usuario);
-                this.externalFiles.loadCss(`${this.envService.assetsSigfacil}/css/interno/theme.css`);
-                this.loadingGlobal.hide();
-            },
-            (error: any) => {
-                if (!error.naoAutorizado) {
+        ])
+            .pipe(take(1))
+            .subscribe(
+                ([system, data, path, itensMenu]) => {
+                    this._dataSistema = data;
+                    this._usuario = dadosUsuario;
+                    this._sistema = system;
+                    this._urlLogo = path;
+                    this._itensMenu = itensMenu;
+                    this.validaPermissaoFuncionalidade(this._usuario);
+                    this.removeDuplicidadeFuncionalidades();
+                    this.externalFiles.loadCss(`${this.envService.assetsSigfacil}/css/interno/theme.css`);
                     this.loadingGlobal.hide();
-                    this.alertService.openModal({ title: 'Erro', message: error.message, style: 'danger' });
+                },
+                (error: any) => {
+                    if (!error.naoAutorizado) {
+                        this.loadingGlobal.hide();
+                        this.alertService.openModal({ title: 'Erro', message: error.message, style: 'danger' });
+                    }
                 }
-            }
-        );
+            );
     }
 
     /**
@@ -140,7 +141,7 @@ export class AppComponent implements OnInit, OnDestroy {
      */
     private validaPermissaoFuncionalidade(dadosUsuario: User) {
         const permissao = JSON.stringify(this.itensMenu);
-        const rotaInicial = this.router.url.replace(/-/g, '').split('/')[1].toUpperCase();
+        const rotaInicial = this.router.url.replace(/-/g, '').split('/')[1].toUpperCase() || 'EMPRESA'; // @todo funcionalidade base
 
         this.itensMenu.forEach((menu) => {
             menu.funcionalidades.forEach((func) => {
@@ -166,5 +167,26 @@ export class AppComponent implements OnInit, OnDestroy {
         let hash = `${cpf}${id}`;
         hash = sha512.sha512(hash.toString());
         StorageUtil.store(Storage.JARVIS, hash);
+    }
+
+    /**
+     * Remove a duplicidade do link ao clicar no menu lateral para com funcionalidades do mesmo projeto
+     */
+    private removeDuplicidadeFuncionalidades(): void {
+        this._itensMenu = this.itensMenu.map((item: Menu) => {
+            let index = 0;
+            item.funcionalidades.map((funcionalidade) => {
+                if (funcionalidade.rota.match(RotasEnum.BASE)) {
+                    const teste = funcionalidade.rota.replace(RotasEnum.BASE + '/', '');
+                    item.funcionalidades[index].rota = teste;
+                }
+                index++;
+
+                return funcionalidade;
+            });
+            if (item.funcionalidades.length === index) {
+                return item;
+            }
+        });
     }
 }
