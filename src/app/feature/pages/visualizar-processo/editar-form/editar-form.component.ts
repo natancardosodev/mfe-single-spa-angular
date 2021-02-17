@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { isValidCpf } from '@brazilian-utils/is-valid-cpf';
-import { isValidCnpj } from '@brazilian-utils/is-valid-cnpj';
 
-import { MensagensEnum } from 'src/app/core/enums/mensagens.enum';
 import { Dados } from 'src/app/core/interfaces/pessoa-fisica/dados';
 import {
     AnexoInterface,
@@ -29,6 +25,7 @@ import { JarvisService } from 'src/app/feature/services/jarvis.service';
 import { clearMask } from 'src/app/core/configs/regexClearMask';
 import { GatewayReceitaInterface } from 'src/app/core/interfaces/jarvis/gateway-receita.interface';
 import { AlertService } from 'lib-ui-interno';
+import { MensagensEnum } from 'src/app/core/enums/mensagens.enum';
 
 @Component({
     selector: 'app-editar-form',
@@ -84,7 +81,6 @@ export class EditarFormComponent implements OnInit {
         private router: Router,
         private solicitacaoService: SolicitacaoService,
         private activeRouter: ActivatedRoute,
-        private location: Location,
         private alertService: AlertService,
         private jarvisService: JarvisService,
         private _commonService: CommonService
@@ -102,6 +98,7 @@ export class EditarFormComponent implements OnInit {
         window.scrollTo(0, 0);
         this._solicitacaoId = this.activeRouter.snapshot.params.id;
         this.getDadosSolicitacao();
+        this.disabledFields();
         this.preencherNomeByCpf();
         this.setOptions();
     }
@@ -141,18 +138,102 @@ export class EditarFormComponent implements OnInit {
 
     public verificaTipoPessoa(event: boolean): void {
         if (event === true) {
+            this.disabledFields();
             this.tipoPessoaJuridica = false;
             return;
         }
+        this.enableFields();
         this.tipoPessoaJuridica = true;
         return;
+    }
+
+    public carregarMunicipio(uf: number, tipo: string): void {
+        this.loadingUf = true;
+        this.jarvisService
+            .getOptionsMunicipioByCoUf(uf)
+            .pipe(
+                finalize(
+                    () =>
+                        void (async () => {
+                            await GeneralsUtil.delay(1000);
+                            this.loadingUf = false;
+                        })()
+                )
+            )
+            .subscribe((response) => {
+                this.loadingUf = false;
+
+                switch (tipo) {
+                    case 'Produtor':
+                        if (response) {
+                            this.listaMunicipiosProdutor.next(response.body);
+                            return;
+                        }
+                        this.produtorForm.uf_pais.reset();
+                        break;
+
+                    case 'Imovel':
+                        if (response) {
+                            this.listaMunicipiosImovel.next(response.body);
+                            return;
+                        }
+                        this.imovelForm.uf_imovel.reset();
+                        break;
+
+                    case 'Contabilista':
+                        if (response) {
+                            this.listaMunicipiosContabilista.next(response.body);
+                            return;
+                        }
+                        this.contabilistaForm.co_uf.reset();
+                        break;
+
+                    default:
+                        break;
+                }
+                return;
+            });
+    }
+
+    public disabledFields(): void {
+        this.contabilistaForm.co_cnpj.disable();
+        this.contabilistaForm.ds_nome_empresa.disable();
+        this.contabilistaForm.ds_classificacao_empresa.disable();
+        this.contabilistaForm.nu_tipo_crc_empresa.disable();
+        this.contabilistaForm.co_tipo_classificacao_crc_empresa.disable();
+        this.contabilistaForm.co_digito_verificador_empresa.disable();
+        this.contabilistaForm.co_uf_crc_empresa.disable();
+        this.contabilistaForm.co_cnpj.updateValueAndValidity();
+        this.contabilistaForm.ds_nome_empresa.updateValueAndValidity();
+        this.contabilistaForm.ds_classificacao_empresa.updateValueAndValidity();
+        this.contabilistaForm.nu_tipo_crc_empresa.updateValueAndValidity();
+        this.contabilistaForm.co_tipo_classificacao_crc_empresa.updateValueAndValidity();
+        this.contabilistaForm.co_digito_verificador_empresa.updateValueAndValidity();
+        this.contabilistaForm.co_uf_crc_empresa.updateValueAndValidity();
+    }
+
+    public enableFields(): void {
+        this.contabilistaForm.co_cnpj.enable();
+        this.contabilistaForm.ds_nome_empresa.enable();
+        this.contabilistaForm.ds_classificacao_empresa.enable();
+        this.contabilistaForm.nu_tipo_crc_empresa.enable();
+        this.contabilistaForm.co_tipo_classificacao_crc_empresa.enable();
+        this.contabilistaForm.co_digito_verificador_empresa.enable();
+        this.contabilistaForm.co_uf_crc_empresa.enable();
+        this.contabilistaForm.co_cnpj.setValidators(Validators.required);
+        this.contabilistaForm.ds_nome_empresa.setValidators(Validators.required);
+        this.contabilistaForm.ds_classificacao_empresa.setValidators(Validators.required);
+        this.contabilistaForm.nu_tipo_crc_empresa.setValidators(Validators.required);
+        this.contabilistaForm.co_tipo_classificacao_crc_empresa.setValidators(Validators.required);
+        this.contabilistaForm.co_digito_verificador_empresa.setValidators(Validators.required);
+        this.contabilistaForm.co_uf_crc_empresa.setValidators(Validators.required);
     }
 
     public preencherNomeByCpf(): void {
         const cpf = clearMask(this.contabilistaForm.co_cpf.value);
 
         if (cpf) {
-            if (isValidCpf(cpf) && cpf.length === 11 && this.contabilistaForm.co_cpf.valid) {
+            if (cpf.length === 11 && this.contabilistaForm.co_cpf.valid) {
                 this.jarvisService
                     .getPessoaCpf(cpf)
                     .pipe(
@@ -168,12 +249,6 @@ export class EditarFormComponent implements OnInit {
                             window.console.error(error);
                         }
                     );
-            } else {
-                this.alertService.openModal({
-                    title: 'Atenção',
-                    message: MensagensEnum.INVALID_CPF,
-                    style: 'warning'
-                });
             }
         }
     }
@@ -181,7 +256,7 @@ export class EditarFormComponent implements OnInit {
     public preencherNomeByCnpj(): void {
         const cnpj = clearMask(this.contabilistaForm.co_cnpj.value);
         if (cnpj) {
-            if (isValidCnpj(cnpj) && cnpj.length === 14 && this.contabilistaForm.co_cnpj.valid) {
+            if (cnpj.length === 14 && this.contabilistaForm.co_cnpj.valid) {
                 this.jarvisService
                     .getPessoaCnpj(cnpj)
                     .pipe(
@@ -197,12 +272,6 @@ export class EditarFormComponent implements OnInit {
                             window.console.error(error);
                         }
                     );
-            } else {
-                this.alertService.openModal({
-                    title: 'Atenção',
-                    message: MensagensEnum.INVALID_CNPJ,
-                    style: 'warning'
-                });
             }
         }
     }
@@ -210,7 +279,7 @@ export class EditarFormComponent implements OnInit {
     public salvar(): void {
         this.produtorForm.markAllAsTouched();
         this.imovelForm.markAllAsTouched();
-        this.contabilistaForm.markAllAsTouched();
+        // this.contabilistaForm.markAllAsTouched(); @todo verificar
 
         if (this.validateAllFormFields()) {
             this.loadingUpdate = true;
@@ -223,19 +292,18 @@ export class EditarFormComponent implements OnInit {
                 )
                 .subscribe(
                     (response: DadosInscricaoInterface) => {
-                        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                        this.router.navigate([RotasEnum.EMPRESA_VISUALIZAR, response.nu_seq_usuario]);
+                        void this.router.navigate([RotasEnum.EMPRESA_VISUALIZAR, response.nu_seq_usuario]);
                     },
                     (error) => {
                         window.console.error(error);
                     }
                 );
-            return;
         }
     }
 
     public validateAllFormFields(): boolean {
-        if (this.produtorForm.invalid || this.imovelForm.invalid || this.contabilistaForm.invalid) {
+        if (this.produtorForm.invalid || this.imovelForm.invalid) {
+            // || this.contabilistaForm.invalid // @todo verificar
             this.loadingUpdate = false;
             this.alertService.openModal({
                 title: 'Atenção',
@@ -288,14 +356,16 @@ export class EditarFormComponent implements OnInit {
                     }
                 },
                 endereco_correspondencia: {
-                    co_cep: imovelData.co_cep,
-                    co_tipo_logradouro: imovelData.co_tipo_logradouro,
-                    ds_endereco: imovelData.ds_endereco,
-                    nu_numero: imovelData.nu_numero,
-                    ds_bairro: imovelData.ds_bairro,
-                    co_municipio: imovelData.co_municipio,
-                    co_uf: imovelData.co_uf,
-                    ds_ponto_referencia: imovelData.ds_ponto_referencia
+                    co_cep: produtorData.co_cep,
+                    co_tipo_logradouro: produtorData.co_tipo_logradouro,
+                    ds_endereco: produtorData.ds_endereco,
+                    nu_numero: produtorData.nu_numero,
+                    ds_bairro: produtorData.ds_bairro,
+                    co_municipio: produtorData.co_municipio,
+                    co_uf: produtorData.co_uf,
+                    ds_ponto_referencia: produtorData.ds_ponto_referencia,
+                    co_telefone: produtorData.co_telefone,
+                    ds_email: produtorData.ds_email
                 }
             },
             contabilista: {
@@ -305,19 +375,19 @@ export class EditarFormComponent implements OnInit {
                     ds_nome: contabilistaData.ds_nome,
                     conselho: {
                         co_uf_crc: contabilistaData.co_uf_crc,
-                        nu_sequencia: contabilistaData.nu_sequencia,
+                        nu_sequencia: this._solicitacaoId,
                         dt_registro: contabilistaData.dt_registro,
                         co_tipo_classificacao_crc: contabilistaData.co_tipo_classificacao_crc,
-                        nu_tipo_crc: contabilistaData.nu_tipo_crc,
+                        nu_tipo_crc: contabilistaData.nu_tipo_crc_empresa,
                         co_digito_verificador: contabilistaData.co_digito_verificador
                     }
                 },
                 conselho: {
                     co_uf_crc: contabilistaData.co_uf_crc,
-                    nu_sequencia: contabilistaData.nu_sequencia,
+                    nu_sequencia: this._solicitacaoId,
                     dt_registro: contabilistaData.dt_registro,
                     co_tipo_classificacao_crc: contabilistaData.co_tipo_classificacao_crc,
-                    nu_tipo_crc: contabilistaData.nu_tipo_crc,
+                    nu_tipo_crc: contabilistaData.co_tipo_classificacao_crc,
                     co_digito_verificador: contabilistaData.co_digito_verificador
                 },
                 endereco: {
