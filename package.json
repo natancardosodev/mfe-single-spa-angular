@@ -51,7 +51,7 @@
         "@voxtecnologia/vox-preload": "^1.2.0",
         "ag-grid": "^16.0.1",
         "ag-grid-angular": "^16.0.0",
-        "angular2-text-mask": "^2.1.0",
+        "angular2-text-mask": "^9.0.0",
         "bootstrap": "^4.5.0",
         "footer": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-footer.git#1.0",
         "grid": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-grid.git#1.7.1",

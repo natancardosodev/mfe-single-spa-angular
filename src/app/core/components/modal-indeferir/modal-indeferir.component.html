@@ -1,42 +1,26 @@
-<ng-template #modalIndeferir>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Motivo do Indeferimento</h4>
-    </div>
-    <div class="modal-body">
-        <div class="col my-5 d-flex justify-content-center" *ngIf="loading">
-            <span class="fas fa-circle-notch fa-spin fa-fw fa-3x is-primary"></span>
-        </div>
-        <div class="panel-body card-block card-body" *ngIf="!loading">
-            <form [formGroup]="indeferirForm">
-                <div class="form-group row align-center-flex">
-                    <label for="descricao" class="col-3 col-form-label text-left campo-obrigatorio">Descrição:</label>
-                    <div class="col-9">
-                        <textarea
-                            class="form-control form-control-sm"
-                            formControlName="descricao"
-                            id="descricao"
-                            rows="5"
-                        ></textarea>
-                        <div class="feedback color-danger" *ngIf="isFieldValid(indeferirForm, 'descricao')">
-                            {{ indeferirForm.getFirstErrorFrom('descricao', 'Descrição') }}
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button
-            type="button"
-            class="btn btn-outline-secondary pl-3 pr-3 text-uppercase"
-            (click)="closeModal()"
-            [disabled]="loading"
+<app-modal label="Motivo do Indeferimento" size="lg" #modal>
+    <section class="row col">
+        <app-input
+            label="Descrição"
+            formControlName="descricao"
+            isObrigatorio="true"
+            [form]="indeferirForm"
+            [message]="!indeferirForm.descricao.valid ? indeferirForm.getFirstErrorFrom('descricao', 'Descrição') : ''"
+            type="textarea"
+            rows="5"
+            col="8"
+            class="col"
+        ></app-input>
+    </section>
+    <footer class="row">
+        <app-simple-button label="Cancelar Indeferimento" (click)="closeModal()" class="px-1"> </app-simple-button>
+        <app-simple-button
+            label="Confirmar Indeferimento"
+            (click)="confirmarIndeferir()"
+            [loading]="loading"
+            [isPrimary]="true"
+            class="px-1"
         >
-            Cancelar Indeferimento
-        </button>
-        <button type="button" class="btn btn-nav-base pl-3 pr-3" (click)="confirmarIndeferir()" [disabled]="loading">
-            Confirmar Indeferimento
-            <i class="fas fa-circle-notch fa-spin fa-fw" *ngIf="loading"></i>
-        </button>
-    </div>
-</ng-template>
+        </app-simple-button>
+    </footer>
+</app-modal>

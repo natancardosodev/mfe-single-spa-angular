@@ -9,6 +9,7 @@ import { VisualizarProcessoRoutingModule } from './visualizar-processo-routing.m
 
 import { VisualizarProcessoComponent } from './visualizar-processo.component';
 import { VisualizarPesquisaModule } from './visualizar-pesquisa/visualizar-pesquisa.module';
+import { EditarFormModule } from './editar-form/editar-form.module';
 
 @NgModule({
     declarations: [VisualizarProcessoComponent],
@@ -18,7 +19,8 @@ import { VisualizarPesquisaModule } from './visualizar-pesquisa/visualizar-pesqu
         VisualizarProcessoRoutingModule,
         GridModule,
         PesquisaFormModule,
-        VisualizarPesquisaModule
+        VisualizarPesquisaModule,
+        EditarFormModule
     ],
     exports: [VisualizarProcessoComponent]
 })

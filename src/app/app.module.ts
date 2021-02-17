@@ -13,14 +13,14 @@ import { LibUIModule } from 'lib-ui-interno';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 import { CommonService } from './core/services/common.service';
 import { UserService } from './core/services/user.service';
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
-import { MaskPipe } from './core/pipes/mask.pipe';
 // import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
 
 @NgModule({
-    declarations: [AppComponent, MaskPipe],
+    declarations: [AppComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
@@ -28,6 +28,7 @@ import { MaskPipe } from './core/pipes/mask.pipe';
         AppRoutingModule,
         FontAwesomeModule,
         ModalModule.forRoot(),
+        SharedModule,
         HeaderModule,
         MenuModule,
         LibUIModule

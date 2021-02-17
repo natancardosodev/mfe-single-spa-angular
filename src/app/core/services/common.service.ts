@@ -21,10 +21,11 @@ export class CommonService extends BaseService {
     public logradouroOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     public tipoImovelOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     public estadoOptions: BehaviorSubject<any> = new BehaviorSubject([]);
-    public motivoBaixaOptions: BehaviorSubject<any> = new BehaviorSubject([]);
+    public municipioOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     public classificacaoCrcOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     public tipoClassificacaoCrcOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     public escolaridadeOptions: BehaviorSubject<any> = new BehaviorSubject([]);
+    private tipoApi = 'jarvis';
 
     /**
      *Creates an instance of CommonService.
@@ -40,49 +41,46 @@ export class CommonService extends BaseService {
      * @returns {Observable<any>}
      * @memberof CommonService
      */
-    public getOptionsTipoDocumento = (): Observable<any> => this.get('/tipo-documento');
+    public getOptionsTipoDocumento = (): Observable<any> => this.get('/tipo-documento/combo', null, this.tipoApi, true);
 
     /**
      * @returns {Observable<any>}
      * @memberof CommonService
      */
-    public getOptionsLogradouro = (): Observable<any> => this.get('/logradouro');
+    public getOptionsLogradouro = (): Observable<any> =>
+        this.get('/comum/tipo-logradouro/combo', null, this.tipoApi, true);
 
     /**
      * @returns {Observable<any>}
      * @memberof CommonService
      */
-    public getOptionsTipoImovel = (): Observable<any> => this.get('/tipo-imovel');
+    public getOptionsTipoImovel = (): Observable<any> => this.get('/tipo-imovel/combo', null, this.tipoApi, true);
 
     /**
      * @returns {Observable<any>}
      * @memberof CommonService
      */
-    public getOptionsEstado = (): Observable<any> => this.get('/uf');
+    public getOptionsEstado = (): Observable<any> => this.get('/uf', null, this.tipoApi, true);
 
     /**
      * @returns {Observable<any>}
      * @memberof CommonService
      */
-    public getOptionsMotivoBaixa = (): Observable<any> => this.get('/motivo-baixa');
+    public getOptionsClassificacaoCrc = (): Observable<any> =>
+        this.get('/classificacao-crc/combo', null, this.tipoApi, true);
 
     /**
      * @returns {Observable<any>}
      * @memberof CommonService
      */
-    public getOptionsClassificacaoCrc = (): Observable<any> => this.get('/classificacao-crc');
+    public getOptionsTipoClassificacaoCrc = (): Observable<any> =>
+        this.get('/tipo-classificacao-crc/combo', null, this.tipoApi, true);
 
     /**
      * @returns {Observable<any>}
      * @memberof CommonService
      */
-    public getOptionsTipoClassificacaoCrc = (): Observable<any> => this.get('/tipo-classificacao-crc');
-
-    /**
-     * @returns {Observable<any>}
-     * @memberof CommonService
-     */
-    public getOptionsEscolaridade = (): Observable<any> => this.get('/escolaridade');
+    public getOptionsEscolaridade = (): Observable<any> => this.get('/escolaridade/combo', null, this.tipoApi, true);
 
     /**
      * @memberof CommonService
@@ -94,7 +92,6 @@ export class CommonService extends BaseService {
                 this.getOptionsLogradouro(),
                 this.getOptionsTipoImovel(),
                 this.getOptionsEstado(),
-                this.getOptionsMotivoBaixa(),
                 this.getOptionsClassificacaoCrc(),
                 this.getOptionsTipoClassificacaoCrc(),
                 this.getOptionsEscolaridade()
@@ -104,26 +101,23 @@ export class CommonService extends BaseService {
                     logradouroOptions,
                     tipoImovelOptions,
                     estadoOptions,
-                    motivoBaixaOptions,
                     classificacaoCrcOptions,
                     tipoClassificacaoCrcOptions,
                     escolaridadeOptions
                 ]) => {
-                    this.tipoDocumentoOptions.next(tipoDocumentoOptions);
-                    this.logradouroOptions.next(logradouroOptions);
-                    this.tipoImovelOptions.next(tipoImovelOptions);
-                    this.estadoOptions.next(estadoOptions);
-                    this.motivoBaixaOptions.next(motivoBaixaOptions);
-                    this.classificacaoCrcOptions.next(classificacaoCrcOptions);
-                    this.tipoClassificacaoCrcOptions.next(tipoClassificacaoCrcOptions);
-                    this.escolaridadeOptions.next(escolaridadeOptions);
+                    this.tipoDocumentoOptions.next(tipoDocumentoOptions.body);
+                    this.logradouroOptions.next(logradouroOptions.body);
+                    this.tipoImovelOptions.next(tipoImovelOptions.body);
+                    this.estadoOptions.next(estadoOptions.body);
+                    this.classificacaoCrcOptions.next(classificacaoCrcOptions.body);
+                    this.tipoClassificacaoCrcOptions.next(tipoClassificacaoCrcOptions.body);
+                    this.escolaridadeOptions.next(escolaridadeOptions.body);
 
                     this.saveCommonOptionsInStorage({
                         tipoDocumentoOptions,
                         logradouroOptions,
                         tipoImovelOptions,
                         estadoOptions,
-                        motivoBaixaOptions,
                         classificacaoCrcOptions,
                         tipoClassificacaoCrcOptions,
                         escolaridadeOptions
@@ -135,16 +129,6 @@ export class CommonService extends BaseService {
 
         this.loadAllOptionsFromLocalStorage();
     };
-
-    /**
-     * @readonly
-     * @private
-     * @type {boolean}
-     * @memberof CommonService
-     */
-    private get hasCommonOptionsInStorage(): boolean {
-        return sessionStorage.getItem(Storage.COMMON_SERVICE_OPTIONS) !== null;
-    }
 
     public getAllOptionsFromLocalStorage(): Record<string, string> {
         return this.hasCommonOptionsInStorage ? StorageUtil.get(Storage.COMMON_SERVICE_OPTIONS) : null;
@@ -166,6 +150,16 @@ export class CommonService extends BaseService {
     }
 
     /**
+     * @readonly
+     * @private
+     * @type {boolean}
+     * @memberof CommonService
+     */
+    private get hasCommonOptionsInStorage(): boolean {
+        return sessionStorage.getItem(Storage.COMMON_SERVICE_OPTIONS) !== null;
+    }
+
+    /**
      * @private
      * @param {*} anyOptions
      * @memberof CommonService
@@ -184,19 +178,17 @@ export class CommonService extends BaseService {
             tipoDocumentoOptions,
             tipoImovelOptions,
             estadoOptions,
-            motivoBaixaOptions,
             classificacaoCrcOptions,
             tipoClassificacaoCrcOptions,
             escolaridadeOptions
         } = StorageUtil.get(Storage.COMMON_SERVICE_OPTIONS);
 
-        this.logradouroOptions.next(logradouroOptions);
-        this.tipoDocumentoOptions.next(tipoDocumentoOptions);
-        this.tipoImovelOptions.next(tipoImovelOptions);
-        this.estadoOptions.next(estadoOptions);
-        this.motivoBaixaOptions.next(motivoBaixaOptions);
-        this.classificacaoCrcOptions.next(classificacaoCrcOptions);
-        this.tipoClassificacaoCrcOptions.next(tipoClassificacaoCrcOptions);
-        this.escolaridadeOptions.next(escolaridadeOptions);
+        this.logradouroOptions.next(logradouroOptions.body);
+        this.tipoDocumentoOptions.next(tipoDocumentoOptions.body);
+        this.tipoImovelOptions.next(tipoImovelOptions.body);
+        this.estadoOptions.next(estadoOptions.body);
+        this.classificacaoCrcOptions.next(classificacaoCrcOptions.body);
+        this.tipoClassificacaoCrcOptions.next(tipoClassificacaoCrcOptions.body);
+        this.escolaridadeOptions.next(escolaridadeOptions.body);
     }
 }

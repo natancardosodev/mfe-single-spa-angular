@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ModalComponent } from 'lib-ui-interno';
 
 import { Status } from 'src/app/core/enums/status.enum';
 import { ModalIndeferirComponent } from 'src/app/core/components/modal-indeferir/modal-indeferir.component';
@@ -12,6 +13,7 @@ import { Storage } from 'src/app/core/enums/storage.enum';
 import { StorageUtil } from 'src/app/core/utils/storage.util';
 import { FuncionalidadeEnum } from 'src/app/core/enums/funcionalidade.enum';
 import { PapeisEnum } from 'src/app/core/enums/papeis.enum';
+import { RotasEnum } from 'src/app/core/enums/rotas.enum';
 
 @Component({
     selector: 'app-visualizar-pesquisa',
@@ -21,7 +23,7 @@ import { PapeisEnum } from 'src/app/core/enums/papeis.enum';
 export class VisualizarPesquisaComponent implements OnInit {
     @ViewChild(CardObservacaoComponent, { static: false }) observacao: CardObservacaoComponent;
     @ViewChild(ModalIndeferirComponent, { static: false }) modalIndeferir: ModalIndeferirComponent;
-    @ViewChild('modalDeferir', { static: false }) modalDeferir: ElementRef;
+    @ViewChild('modalDeferir', { static: false }) modalDeferir: ModalComponent;
     public loading: boolean;
     public modalRef: BsModalRef;
     public solicitacao: number;
@@ -44,6 +46,14 @@ export class VisualizarPesquisaComponent implements OnInit {
             StorageUtil.get(Storage.DADOS_USUARIO),
             FuncionalidadeEnum.EMPRESA,
             [PapeisEnum.INSERIR]
+        );
+    }
+
+    public get hasAcessoAlterar(): boolean {
+        return this.userService.checkPermissaoLiberada(
+            StorageUtil.get(Storage.DADOS_USUARIO),
+            FuncionalidadeEnum.EMPRESA,
+            [PapeisEnum.ALTERAR]
         );
     }
 
@@ -75,7 +85,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public openModalDeferir(): void {
-        this.openModal(this.modalDeferir);
+        this.modalDeferir.openModal();
     }
 
     public deferir(): void {
@@ -94,5 +104,10 @@ export class VisualizarPesquisaComponent implements OnInit {
         if (success) {
             window.console.log('Sucesso');
         }
+    }
+
+    public redirectAlterarDados(): void {
+        window.scroll(0, 0);
+        void this.router.navigate([RotasEnum.EMPRESA_EDITAR, this.solicitacao]);
     }
 }
