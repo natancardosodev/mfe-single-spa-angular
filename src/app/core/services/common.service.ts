@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, forkJoin, BehaviorSubject, Subscription, throwError } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { Storage } from '../enums/storage.enum';
 import { StorageUtil } from '../utils/storage.util';
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';
+import { AlertService } from 'lib-ui-interno';
 
 /**
  * @export
@@ -32,8 +34,8 @@ export class CommonService extends BaseService {
      * @param {UrlUtilService} urlUtilService
      * @memberof CommonService
      */
-    constructor(http: HttpClient, urlUtilService: UrlUtilService) {
-        super('', http, urlUtilService);
+    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
+        super('', http, urlUtilService, alertService);
     }
 
     /**
@@ -98,27 +100,10 @@ export class CommonService extends BaseService {
                 this.getOptionsClassificacaoCrc(),
                 this.getOptionsTipoClassificacaoCrc(),
                 this.getOptionsEscolaridade()
-            ]).subscribe(
-                ([
-                    tipoDocumentoOptions,
-                    logradouroOptions,
-                    tipoImovelOptions,
-                    estadoOptions,
-                    motivoBaixaOptions,
-                    classificacaoCrcOptions,
-                    tipoClassificacaoCrcOptions,
-                    escolaridadeOptions
-                ]) => {
-                    this.tipoDocumentoOptions.next(tipoDocumentoOptions);
-                    this.logradouroOptions.next(logradouroOptions);
-                    this.tipoImovelOptions.next(tipoImovelOptions);
-                    this.estadoOptions.next(estadoOptions);
-                    this.motivoBaixaOptions.next(motivoBaixaOptions);
-                    this.classificacaoCrcOptions.next(classificacaoCrcOptions);
-                    this.tipoClassificacaoCrcOptions.next(tipoClassificacaoCrcOptions);
-                    this.escolaridadeOptions.next(escolaridadeOptions);
-
-                    this.saveCommonOptionsInStorage({
+            ])
+                .pipe(take(1))
+                .subscribe(
+                    ([
                         tipoDocumentoOptions,
                         logradouroOptions,
                         tipoImovelOptions,
@@ -127,10 +112,29 @@ export class CommonService extends BaseService {
                         classificacaoCrcOptions,
                         tipoClassificacaoCrcOptions,
                         escolaridadeOptions
-                    });
-                },
-                (error: HttpErrorResponse) => throwError(new Error(error.error.message))
-            );
+                    ]) => {
+                        this.tipoDocumentoOptions.next(tipoDocumentoOptions);
+                        this.logradouroOptions.next(logradouroOptions);
+                        this.tipoImovelOptions.next(tipoImovelOptions);
+                        this.estadoOptions.next(estadoOptions);
+                        this.motivoBaixaOptions.next(motivoBaixaOptions);
+                        this.classificacaoCrcOptions.next(classificacaoCrcOptions);
+                        this.tipoClassificacaoCrcOptions.next(tipoClassificacaoCrcOptions);
+                        this.escolaridadeOptions.next(escolaridadeOptions);
+
+                        this.saveCommonOptionsInStorage({
+                            tipoDocumentoOptions,
+                            logradouroOptions,
+                            tipoImovelOptions,
+                            estadoOptions,
+                            motivoBaixaOptions,
+                            classificacaoCrcOptions,
+                            tipoClassificacaoCrcOptions,
+                            escolaridadeOptions
+                        });
+                    },
+                    (error: HttpErrorResponse) => throwError(new Error(error.error.message))
+                );
         }
 
         this.loadAllOptionsFromLocalStorage();

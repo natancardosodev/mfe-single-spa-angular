@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { finalize } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 import { IndeferirForm } from './indeferir.form';
@@ -48,17 +48,16 @@ export class ModalIndeferirComponent implements OnInit {
                 .pipe(
                     finalize(() => {
                         this.loading = false;
-                    })
+                        this.closeModal();
+                    }),
+                    take(1)
                 )
                 .subscribe(
                     () => {
-                        this.closeModal();
                         this.finalizandoIndeferir.emit(true);
                     },
-                    (error) => {
-                        this.closeModal();
+                    () => {
                         this.finalizandoIndeferir.emit(false);
-                        window.console.error(error);
                     }
                 );
         }

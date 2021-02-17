@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { finalize } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
 import { GridColumnDefs, GridSearchParams } from 'grid';
@@ -96,7 +96,10 @@ export class VisualizarProcessoComponent {
         this.loading = true;
         this._sub = this.solicitacaoService
             .getListarProcessos(parametros)
-            .pipe(finalize(() => (this.loading = false)))
+            .pipe(
+                finalize(() => (this.loading = false)),
+                take(1)
+            )
             .subscribe(
                 (response) => {
                     this._dadosGrid.next({ ...response, processos: this.formatarDadosPesquisa(response) });

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { finalize } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 
 import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
 
@@ -23,7 +23,10 @@ export class CardProcessoComponent implements OnInit {
     public ngOnInit(): void {
         this.solicitacaoService
             .getDadosProcesso({ solicitacao: this.solicitacao })
-            .pipe(finalize(() => (this.loading = false)))
+            .pipe(
+                finalize(() => (this.loading = false)),
+                take(1)
+            )
             .subscribe((response: any) => {
                 this.processo = response;
             });

@@ -56,7 +56,6 @@ export class UserService {
         return this.http.get(url, { withCredentials: true, responseType: 'text' }).pipe(
             catchError((erro: HttpErrorResponse) => {
                 if (erro.status === 404) {
-                    window.console.warn(erro.message);
                     return throwError({ naoAutorizado: true });
                 }
                 return throwError(new Error(erro.error.message));

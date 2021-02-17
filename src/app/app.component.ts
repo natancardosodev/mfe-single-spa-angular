@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoadingGlobalService } from '@voxtecnologia/vox-preload';
 
 import { Subject, Subscription, forkJoin } from 'rxjs';
+import { take } from 'rxjs/operators';
 import * as sha512 from 'js-sha512';
 import { Menu } from 'lib-menu';
 import { LogoInterface } from 'lib-header';
@@ -97,19 +98,22 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     public logarService(): Subscription {
-        return this.userService.getUser().subscribe(
-            (response: User) => {
-                StorageUtil.store(Storage.DADOS_USUARIO, response);
-                // this.carregarJarvis(response.cpf, response.id); @todo Caso use o jarvis
-                this.getSystemInfo(response);
-                // this.commonService.getAllOptions(); @todo ajustar rotas do commonService
+        return this.userService
+            .getUser()
+            .pipe(take(1))
+            .subscribe(
+                (response: User) => {
+                    StorageUtil.store(Storage.DADOS_USUARIO, response);
+                    // this.carregarJarvis(response.cpf, response.id); @todo Caso use o jarvis
+                    this.getSystemInfo(response);
+                    // this.commonService.getAllOptions(); @todo ajustar rotas do commonService
 
-                return isUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
-            },
-            (error) => {
-                return error.naoAutorizado && this.urlUtilService.redirectToLogin();
-            }
-        );
+                    return isUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
+                },
+                (error) => {
+                    return error.naoAutorizado && this.urlUtilService.redirectToLogin();
+                }
+            );
     }
 
     private getSystemInfo(dadosUsuario): Subscription {
@@ -118,24 +122,26 @@ export class AppComponent implements OnInit, OnDestroy {
             this.userService.getTime(),
             this.userService.getPathLogo(),
             this.userService.getModulos()
-        ]).subscribe(
-            ([system, data, path, itensMenu]) => {
-                this._dataSistema = data;
-                this._usuario = dadosUsuario;
-                this._sistema = system;
-                this._urlLogo = path;
-                this._itensMenu = itensMenu;
-                this.validaPermissaoFuncionalidade(this._usuario);
-                this.externalFiles.loadCss(`${this.envService.assetsSigfacil}/css/interno/theme.css`);
-                this.loadingGlobal.hide();
-            },
-            (error: any) => {
-                if (!error.naoAutorizado) {
+        ])
+            .pipe(take(1))
+            .subscribe(
+                ([system, data, path, itensMenu]) => {
+                    this._dataSistema = data;
+                    this._usuario = dadosUsuario;
+                    this._sistema = system;
+                    this._urlLogo = path;
+                    this._itensMenu = itensMenu;
+                    this.validaPermissaoFuncionalidade(this._usuario);
+                    this.externalFiles.loadCss(`${this.envService.assetsSigfacil}/css/interno/theme.css`);
                     this.loadingGlobal.hide();
-                    this.alertService.openModal({ title: 'Erro', message: error.message, style: 'danger' });
+                },
+                (error: any) => {
+                    if (!error.naoAutorizado) {
+                        this.loadingGlobal.hide();
+                        this.alertService.openModal({ title: 'Erro', message: error.message, style: 'danger' });
+                    }
                 }
-            }
-        );
+            );
     }
 
     /**
