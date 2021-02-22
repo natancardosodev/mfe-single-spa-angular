@@ -28,22 +28,22 @@ export class JarvisService extends BaseService {
      * group: 'all' - dados completos / 'app' - dados resumidos
      **/
     public getPessoaCpf = (cpf: string, group = 'app'): Observable<any> => {
-        return this.get(`gateway/receita/s09/${this.uf}/${cpf}/${group}`, null, this.tipoApi, true);
+        return this.get(`gateway/receita/s09/${this.uf}/${cpf}/${group}`, null, this.tipoApi);
     };
 
     public getPessoaCnpj = (cnpj: string, group = 'app'): Observable<any> => {
-        return this.get(`gateway/receita/s09/${this.uf}/${cnpj}/${group}`, null, this.tipoApi, true);
+        return this.get(`gateway/receita/s09/${this.uf}/${cnpj}/${group}`, null, this.tipoApi);
     };
 
     public getExigencias = (orgao: number): Observable<any> => {
-        return this.get(`exigencia/combo/${orgao}`, null, this.tipoApi, true);
+        return this.get(`exigencia/combo/${orgao}`, null, this.tipoApi);
     };
 
     public getOptionsMunicipio = (ds_sigla: string): Observable<any> => {
-        return this.get(`municipio/combo/${ds_sigla}`, null, this.tipoApi, true);
+        return this.get(`municipio/combo/${ds_sigla}`, null, this.tipoApi);
     };
 
     public getOptionsMunicipioByCoUf = (co_uf: number): Observable<any> => {
-        return this.get(`municipio/codigo/combo/${co_uf}`, null, this.tipoApi, true);
+        return this.get(`municipio/codigo/combo/${co_uf}`, null, this.tipoApi);
     };
 }

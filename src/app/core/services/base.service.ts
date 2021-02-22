@@ -3,14 +3,13 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 import { AlertService } from 'lib-ui-interno';
-
 import { UrlUtilService } from './url-util.service';
 import { HttpOptions } from '../interfaces/http-options';
 
 export abstract class BaseService {
     private _baseUrl: string;
     private _options: HttpOptions;
-    private _optionsBasic: HttpOptions;
+    private _optionsJarvis: HttpOptions;
 
     constructor(
         baseUrl: string = null,
@@ -24,7 +23,7 @@ export abstract class BaseService {
             responseType: 'json',
             headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' })
         };
-        this.optionsBasic = {
+        this.optionsJarvis = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
     }
@@ -45,43 +44,39 @@ export abstract class BaseService {
         this._options = options;
     }
 
-    get optionsBasic(): HttpOptions {
-        return this._optionsBasic;
+    get optionsJarvis(): HttpOptions {
+        return this._optionsJarvis;
     }
 
-    set optionsBasic(optionsBasic: HttpOptions) {
-        this._optionsBasic = optionsBasic;
+    set optionsJarvis(optionsJarvis: HttpOptions) {
+        this._optionsJarvis = optionsJarvis;
     }
 
-    get = (url?: string, params?: any, tipoApi?: string, isRequestComplete?: boolean): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, tipoApi), 'get', params, null, isRequestComplete).pipe(
+    get = (url?: string, params?: any, tipoApi?: string, isHideAlert?: boolean): Observable<any> => {
+        return this.sendRequest(this.getUrl(url, tipoApi), 'get', params, null, tipoApi).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                this.alertService.openModal(erro.error.message);
+                isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
                 return this.tratarErro(erro);
             })
         );
     };
 
-    post = (url?: string, body?: any, tipoApi?: string, isRequestComplete?: boolean): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, tipoApi), 'post', null, body, isRequestComplete).pipe(
+    post = (url?: string, body?: any, tipoApi?: string, isHideAlert?: boolean): Observable<any> => {
+        return this.sendRequest(this.getUrl(url, tipoApi), 'post', null, body, tipoApi).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                this.alertService.openModal(erro.error.message);
+                isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
                 return this.tratarErro(erro);
             })
         );
     };
 
-    /**
-     * @description Toda requisição put requisitará o infoLog, regra decidida para a implementação de log no gateway que consome o siarco.
-     * @memberof BaseService
-     */
-    put = (url?: string, body?: any, tipoApi?: string, isRequestComplete?: boolean): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, tipoApi), 'put', null, body, isRequestComplete).pipe(
+    put = (url?: string, body?: any, tipoApi?: string, isHideAlert?: boolean): Observable<any> => {
+        return this.sendRequest(this.getUrl(url, tipoApi), 'put', null, body, tipoApi).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                this.alertService.openModal(erro.error.message);
+                isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
                 return this.tratarErro(erro);
             })
         );
@@ -91,18 +86,18 @@ export abstract class BaseService {
         url?: string,
         params?: Record<string, string> | any,
         tipoApi?: string,
-        isRequestComplete?: boolean
+        isHideAlert?: boolean
     ): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, tipoApi), 'delete', params, null, isRequestComplete).pipe(
+        return this.sendRequest(this.getUrl(url, tipoApi), 'delete', params, null, tipoApi).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                this.alertService.openModal(erro.error.message);
+                isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
                 return this.tratarErro(erro);
             })
         );
     };
 
-    uploadArquivo = (url?: string, body?: any, tipoApi?: string): Observable<any> => {
+    uploadArquivo = (url?: string, body?: any, tipoApi?: string, isHideAlert?: boolean): Observable<any> => {
         return this.http
             .post(this.getUrl(url, tipoApi), body, {
                 withCredentials: true,
@@ -112,13 +107,19 @@ export abstract class BaseService {
             .pipe(
                 take(1),
                 catchError((erro: HttpErrorResponse) => {
-                    this.alertService.openModal(erro.error.message);
+                    isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
                     return this.tratarErro(erro);
                 })
             );
     };
 
-    downloadArquivo = (type?: string, url?: string, body?: any, tipoApi?: string): Observable<any> => {
+    downloadArquivo = (
+        type?: string,
+        url?: string,
+        body?: any,
+        tipoApi?: string,
+        isHideAlert?: boolean
+    ): Observable<any> => {
         this.options = {
             withCredentials: true,
             responseType: 'blob',
@@ -128,7 +129,7 @@ export abstract class BaseService {
         return this.http.request(type, this.getUrl(url, tipoApi), this.options).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                this.alertService.openModal(erro.error.message);
+                isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
                 return this.tratarErro(erro);
             })
         );
@@ -139,24 +140,14 @@ export abstract class BaseService {
         type: string,
         params?: Record<string, string>,
         body?: any,
-        isRequestComplete?: boolean
+        tipoApi?: string
     ): Observable<any> => {
-        this.options = isRequestComplete ? this.optionsBasic : this.options;
+        this.options = tipoApi === 'jarvis' ? this.optionsJarvis : this.options;
         this.options['params'] = params ? this.cleanParams(params) : this.options['params'];
         this.options['body'] = body;
-        this.options['observe'] = isRequestComplete ? 'response' : 'body';
+        this.options['observe'] = tipoApi === 'jarvis' ? 'response' : 'body';
 
         return this.http.request(type, url, this.options);
-    };
-
-    register = (url?: string, body?: any): Observable<any> => {
-        return this.sendRequest(this.getUrl(url), 'post', null, body).pipe(
-            take(1),
-            catchError((erro: HttpErrorResponse) => {
-                this.alertService.openModal(erro.error.message);
-                return this.tratarErro(erro);
-            })
-        );
     };
 
     public getUrl(url: string, tipoApi?: string): string {
