@@ -1,146 +1,95 @@
-<section class="card-box-content">
-    <form [formGroup]="pesquisaForm">
-        <div class="form-group mt-4 col-12">
-            <div class="form-group row justify-content-center">
-                <label for="protocolo" class="col-4 col-form-label text-left">Protocolo:</label>
-                <div class="col-6">
-                    <input
-                        formControlName="protocolo"
-                        [textMask]="maskFactory.createProtocolo()"
-                        type="text"
-                        id="protocolo"
-                        [ngClass]="[
-                            isFieldValid(pesquisaForm, 'protocolo') ? 'input-invalid' : '',
-                            'form-control',
-                            'form-control-sm'
-                        ]"
-                    />
-                    <div class="mt-1 text-danger" *ngIf="isFieldValid(pesquisaForm, 'protocolo')">
-                        {{ pesquisaForm.getFirstErrorFrom('protocolo', 'Protocolo') }}
-                    </div>
-                </div>
-            </div>
+<app-grid-page>
+    <app-input
+        [isGrid]="true"
+        label="Protocolo"
+        formControlName="protocolo"
+        [form]="pesquisaForm"
+        [message]="!pesquisaForm.protocolo.valid ? pesquisaForm.getFirstErrorFrom('protocolo', 'Protocolo') : ''"
+    ></app-input>
 
-            <div class="form-group row justify-content-center">
-                <label for="cpf" class="col-4 col-form-label text-left">CPF:</label>
-                <div class="col-6">
-                    <input
-                        formControlName="cpf"
-                        [textMask]="maskFactory.createCpf()"
-                        type="text"
-                        id="cpf"
-                        [ngClass]="[
-                            isFieldValid(pesquisaForm, 'cpf') ? 'input-invalid' : '',
-                            'form-control',
-                            'form-control-sm'
-                        ]"
-                    />
-                    <div class="mt-1 text-danger" *ngIf="isFieldValid(pesquisaForm, 'cpf')">
-                        {{ pesquisaForm.getFirstErrorFrom('cpf', 'CPF') }}
-                    </div>
-                </div>
-            </div>
+    <app-input
+        [isGrid]="true"
+        label="CPF"
+        formControlName="cpf"
+        [textMask]="maskFactory.createCpf()"
+        [form]="pesquisaForm"
+        [message]="!pesquisaForm.cpf.valid ? pesquisaForm.getFirstErrorFrom('cpf', 'CPF') : ''"
+    ></app-input>
 
-            <div class="form-group row justify-content-center">
-                <label for="tipo" class="col-4 col-form-label text-left">Tipo:</label>
-                <div class="col-6">
-                    <select
-                        formControlName="tipo"
-                        maxlength="300"
-                        type="text"
-                        id="tipo"
-                        [ngClass]="[
-                            isFieldValid(pesquisaForm, 'tipo') ? 'input-invalid' : '',
-                            'form-control',
-                            'form-control-sm'
-                        ]"
-                    >
-                        <option value="" [selected]>Selecione</option>
-                        <option value="Leiloeiro">Leiloeiro</option>
-                        <option value="Tradutor">Tradutor</option>
-                    </select>
-                    <div class="mt-1 text-danger" *ngIf="isFieldValid(pesquisaForm, 'tipo')">
-                        {{ pesquisaForm.getFirstErrorFrom('tipo', 'Tipo') }}
-                    </div>
-                </div>
-            </div>
+    <app-input
+        [isGrid]="true"
+        label="Tipo"
+        formControlName="tipo"
+        col="5"
+        [form]="pesquisaForm"
+        type="select"
+        [options]="tipos"
+        [message]="!pesquisaForm.tipo.valid ? pesquisaForm.getFirstErrorFrom('tipo', 'Tipo') : ''"
+    ></app-input>
 
-            <div class="form-group row justify-content-center">
-                <label for="statusProcesso" class="col-4 col-form-label text-left">Status:</label>
-                <div class="col-6">
-                    <select
-                        formControlName="statusProcesso"
-                        maxlength="300"
-                        type="text"
-                        id="statusProcesso"
-                        [ngClass]="[
-                            isFieldValid(pesquisaForm, 'statusProcesso') ? 'input-invalid' : '',
-                            'form-control',
-                            'form-control-sm'
-                        ]"
-                    >
-                        <option value="" [selected]>Selecione</option>
-                        <option value="29">Aguardando análise</option>
-                        <option value="36">Aguardando habilitação</option>
-                        <option value="37">Aguardando nomeação</option>
-                        <option value="2">Em exigência</option>
-                        <option value="8">Indeferido</option>
-                    </select>
-                    <div class="mt-1 text-danger" *ngIf="isFieldValid(pesquisaForm, 'statusProcesso')">
-                        {{ pesquisaForm.getFirstErrorFrom('statusProcesso', 'Status') }}
-                    </div>
-                </div>
-            </div>
+    <app-input
+        [isGrid]="true"
+        label="Status"
+        formControlName="statusProcesso"
+        col="5"
+        [form]="pesquisaForm"
+        type="select"
+        [options]="statusProcesso"
+        [message]="!pesquisaForm.statusProcesso.valid ? pesquisaForm.getFirstErrorFrom('statusProcesso', 'Status') : ''"
+    ></app-input>
 
-            <div class="form-group row justify-content-center">
-                <label for="data-inicial" class="col-4 col-form-label text-left">Data Protocolo:</label>
-                <div class="col-3">
-                    <app-input-date
-                        formControlName="dataInicial"
-                        [maxDate]="dateMax"
-                        id="data-inicial"
-                        [isValid]="pesquisaForm.dataInicial.valid"
-                        [mensagemStatus]="
-                            !pesquisaForm.dataInicial.valid
-                                ? pesquisaForm.getFirstErrorFrom('dataInicial', 'Data Inicial')
-                                : ''
-                        "
-                    >
-                    </app-input-date>
-                </div>
-                <div class="col-3">
-                    <app-input-date
-                        formControlName="dataFinal"
-                        [minDate]="dateMin"
-                        [isValid]="pesquisaForm.dataFinal.valid"
-                        [mensagemStatus]="
-                            !pesquisaForm.dataFinal.valid
-                                ? pesquisaForm.getFirstErrorFrom('dataFinal', 'Data Final')
-                                : ''
-                        "
-                    >
-                    </app-input-date>
-                </div>
-            </div>
+    <app-input
+        [isGrid]="true"
+        label="Data Protocolo"
+        formControlName="dataInicial"
+        id="dt-procolo"
+        [isObrigatorio]="true"
+        col="5"
+        [form]="pesquisaForm"
+        [isDate]="true"
+        [message]="
+            !pesquisaForm.dataInicial.valid ? pesquisaForm.getFirstErrorFrom('dataInicial', 'Data Protocolo') : ''
+        "
+    ></app-input>
 
-            <div class="form-group row">
-                <div class="col-11">
-                    <button
-                        type="submit"
-                        id="pesquisarSolicitacoes"
-                        [disabled]="loading"
-                        class="btn btn-nav-base btn-nav-ico-right float-md-right"
-                        title="Clique aqui para pesquisar"
-                        (click)="pesquisar()"
-                    >
-                        Pesquisar
-                        <span class="ico-right">
-                            <i class="fas fa-circle-notch fa-spin fa-fw" *ngIf="loading"></i>
-                            <i class="fas fa-search" aria-hidden="true" *ngIf="!loading"></i>
-                        </span>
-                    </button>
-                </div>
-            </div>
+    <div class="justify-content-center form-group row col">
+        <label for="data-inicial" class="col-4 col-form-label text-left">Data Protocolo:</label>
+        <div class="col-3">
+            <app-input
+                formControlName="dataInicial"
+                [maxDate]="dateMax"
+                [form]="pesquisaForm"
+                type="date"
+                col="12"
+                id="data-inicial"
+                [message]="
+                    !pesquisaForm.dataInicial.valid ? pesquisaForm.getFirstErrorFrom('dataInicial', 'Data Inicial') : ''
+                "
+            >
+            </app-input>
         </div>
-    </form>
-</section>
+        <div class="col-3 ml-2">
+            <app-input
+                formControlName="dataFinal"
+                [minDate]="dateMin"
+                [form]="pesquisaForm"
+                type="date"
+                col="12"
+                [message]="
+                    !pesquisaForm.dataFinal.valid ? pesquisaForm.getFirstErrorFrom('dataFinal', 'Data Final') : ''
+                "
+            >
+            </app-input>
+        </div>
+    </div>
+
+    <div class="d-flex flex-row-reverse mt-2">
+        <app-button
+            id="pesquisar"
+            label="Pesquisar"
+            (click)="pesquisar()"
+            [loading]="loading"
+            [isRight]="true"
+        ></app-button>
+    </div>
+</app-grid-page>

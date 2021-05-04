@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { LibUIModule } from 'lib-ui-interno';
 import { ModalIndeferirComponent } from './modal-indeferir.component';
 
 @NgModule({
     declarations: [ModalIndeferirComponent],
-    imports: [CommonModule, ReactiveFormsModule, ModalModule],
+    imports: [CommonModule, LibUIModule],
     exports: [ModalIndeferirComponent]
 })
 export class ModalIndeferirModule {}

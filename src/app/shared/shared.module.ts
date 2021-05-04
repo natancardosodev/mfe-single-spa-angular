@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MaskPipe } from './pipes/mask.pipe';
-import { InputDateModule } from './components/input-date/input-date.module';
-import { InputDateComponent } from './components/input-date/input-date.component';
+import { UppercaseDirective } from './directives/uppercase.directive';
 
 @NgModule({
-    declarations: [MaskPipe],
-    exports: [MaskPipe, InputDateComponent],
-    imports: [CommonModule, InputDateModule]
+    declarations: [MaskPipe, UppercaseDirective],
+    exports: [MaskPipe, UppercaseDirective],
+    imports: [CommonModule]
 })
 export class SharedModule {}

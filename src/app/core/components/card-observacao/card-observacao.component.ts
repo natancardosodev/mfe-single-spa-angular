@@ -3,8 +3,8 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { finalize, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { SolicitacaoService } from '@feature/services/solicitacao.service';
 import { ObservacaoForm } from './observacao.form';
-import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
 
 @Component({
     selector: 'app-card-observacao',
@@ -39,7 +39,7 @@ export class CardObservacaoComponent implements OnInit {
     public salvar(): void {
         this.loading = true;
         this.solicitacaoService
-            .putIndeferir(this.solicitacao, this.observacaoForm.getDadosEnvioObservacao())
+            .putIndeferir(this.solicitacao, this.observacaoForm.getDados())
             .pipe(
                 finalize(() => {
                     this.loading = false;

@@ -2,8 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LibUIModule } from 'lib-ui-interno';
+import { SharedModule } from '@shared/shared.module';
 import { CardPessoaComponent } from './card-pessoa.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
     declarations: [CardPessoaComponent],

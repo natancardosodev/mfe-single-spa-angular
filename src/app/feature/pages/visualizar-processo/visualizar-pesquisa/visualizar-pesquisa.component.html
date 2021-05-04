@@ -13,29 +13,10 @@
         ></app-card-observacao>
 
         <div class="d-flex flex-row-reverse mt-2">
-            <button type="button" class="btn btn-nav-base btn-nav-ico-left mr-2" (click)="openModalIndeferir()">
-                <span class="ico-left">
-                    <i aria-hidden="true" class="fas fa-check"></i>
-                </span>
-                Indeferir
-            </button>
-            <button
-                type="button"
-                class="btn btn-nav-base btn-nav-ico-left mr-2"
-                (click)="openModalDeferir()"
-                *ngIf="hasAcessoInserir"
-            >
-                <span class="ico-left">
-                    <i aria-hidden="true" class="fas fa-check"></i>
-                </span>
-                Deferir
-            </button>
-            <button type="button" class="btn btn-nav-base btn-nav-ico-left mr-2" (click)="voltarParaPesquisa()">
-                <span class="ico-left">
-                    <i aria-hidden="true" class="fas fa-angle-double-left"></i>
-                </span>
-                Voltar
-            </button>
+            <app-button label="Indeferir" (click)="openModalIndeferir()"></app-button>
+            <app-button label="Deferir" (click)="openModalDeferir()" *ngIf="hasAcessoInserir"></app-button>
+            <app-button label="Alterar" (click)="redirectAlterarDados()" *ngIf="hasAcessoAlterar"></app-button>
+            <app-button label="Voltar" (click)="voltarParaPesquisa()"></app-button>
         </div>
     </div>
 </section>
@@ -45,18 +26,13 @@
     (finalizandoIndeferir)="finalizandoProcesso($event)"
 ></app-modal-indeferir>
 
-<ng-template #modalDeferir>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Atenção</h4>
-    </div>
-    <div class="modal-body">
+<app-modal label="Atenção" size="md" #modalDeferir>
+    <section class="row col">
         <p>Deseja confirmar o deferimento do processo?</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary pl-3 pr-3" (click)="closeModal()">Não</button>
-        <button type="button" class="btn btn-nav-base pl-3 pr-3" (click)="deferir()" [disabled]="loading">
-            Sim
-            <i class="fas fa-circle-notch fa-spin fa-fw" *ngIf="loading"></i>
-        </button>
-    </div>
-</ng-template>
+    </section>
+    <footer class="row">
+        <app-simple-button label="fechar" (click)="closeModal()" class="px-1"> </app-simple-button>
+        <app-simple-button label="salvar" (click)="deferir()" [loading]="loading" [isPrimary]="true" class="px-1">
+        </app-simple-button>
+    </footer>
+</app-modal>

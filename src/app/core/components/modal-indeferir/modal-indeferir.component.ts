@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { finalize, take } from 'rxjs/operators';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
-import { IndeferirForm } from './indeferir.form';
+import { ModalComponent } from 'lib-ui-interno';
 import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
+import { IndeferirForm } from './indeferir.form';
 
 @Component({
     selector: 'app-modal-indeferir',
@@ -13,14 +14,14 @@ import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service
 })
 export class ModalIndeferirComponent implements OnInit {
     @Input() public solicitacao: number;
-    @ViewChild('modalIndeferir', { static: false }) modal: ElementRef;
+    @ViewChild('modal', { static: false }) modal: ModalComponent;
     @Output() public finalizandoIndeferir: EventEmitter<any>;
     public loading: boolean;
     public isCollapsed: boolean;
     public modalRef: BsModalRef;
     private _indeferirForm: IndeferirForm;
 
-    constructor(private solicitacaoService: SolicitacaoService, private modalService: BsModalService) {
+    constructor(private solicitacaoService: SolicitacaoService) {
         this.loading = true;
         this.isCollapsed = false;
         this.finalizandoIndeferir = new EventEmitter();
@@ -33,10 +34,6 @@ export class ModalIndeferirComponent implements OnInit {
 
     public get indeferirForm(): IndeferirForm {
         return this._indeferirForm;
-    }
-
-    public get modalIndeferir(): ElementRef {
-        return this.modal;
     }
 
     public confirmarIndeferir(): void {
@@ -64,15 +61,10 @@ export class ModalIndeferirComponent implements OnInit {
     }
 
     public openModal(): void {
-        const config: Record<string, any> = {
-            class: 'modal-lg'
-        };
-        this.loading = false;
-        this.modalRef = this.modalService.show(this.modal, config);
+        this.modal.openModal();
     }
-
     public closeModal(): void {
-        this.modalRef.hide();
+        this.modal.closeModal();
     }
 
     public isFieldValid(form: FormGroup, field: string): boolean {

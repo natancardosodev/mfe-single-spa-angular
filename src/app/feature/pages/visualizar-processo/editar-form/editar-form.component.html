@@ -1,0 +1,730 @@
+<app-view-page>
+    <app-collapse label="Identificação" [loading]="loading">
+        <app-input
+            label="Protocolo"
+            formControlName="protocolo"
+            [isObrigatorio]="true"
+            col="5"
+            [form]="produtorForm"
+            [readOnly]="readonly"
+            [message]="!produtorForm.protocolo.valid ? produtorForm.getFirstErrorFrom('protocolo', 'Protocolo') : ''"
+        ></app-input>
+        <app-input
+            label="Número do CPF"
+            formControlName="no_cpf"
+            [isObrigatorio]="true"
+            col="5"
+            [readOnly]="readonly"
+            [textMask]="maskFactory.createCpf()"
+            [form]="produtorForm"
+            [message]="!produtorForm.no_cpf.valid ? produtorForm.getFirstErrorFrom('no_cpf', 'Número CPF') : ''"
+        ></app-input>
+        <app-input
+            label="Nome Completo"
+            [isObrigatorio]="true"
+            formControlName="ds_nome"
+            col="9"
+            [form]="produtorForm"
+            [message]="!produtorForm.ds_nome.valid ? produtorForm.getFirstErrorFrom('ds_nome', 'Nome Completo') : ''"
+        ></app-input>
+        <app-input
+            label="Data da Solicitação"
+            [isObrigatorio]="true"
+            formControlName="dt_solicitacao"
+            col="5"
+            [readOnly]="readonly"
+            [form]="produtorForm"
+            [message]="
+                !produtorForm.dt_solicitacao.valid
+                    ? produtorForm.getFirstErrorFrom('dt_solicitacao', 'Data da Solicitação')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Eventos"
+            [isObrigatorio]="true"
+            formControlName="co_evento"
+            col="6"
+            [readOnly]="readonly"
+            [form]="produtorForm"
+            [message]="!produtorForm.co_evento.valid ? produtorForm.getFirstErrorFrom('co_evento', 'Eventos') : ''"
+        ></app-input>
+    </app-collapse>
+    <app-collapse label="Dados Produtor Rural" [loading]="loading">
+        <app-input
+            label="Documento de Identificação"
+            [isObrigatorio]="true"
+            formControlName="nu_documento"
+            [form]="produtorForm"
+            col="4"
+            [message]="
+                !produtorForm.nu_documento.valid
+                    ? produtorForm.getFirstErrorFrom('nu_documento', 'Documento de Identificação')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Órgão Emissor"
+            [isObrigatorio]="true"
+            formControlName="ds_orgao_emissor"
+            [form]="produtorForm"
+            col="4"
+            [message]="
+                !produtorForm.ds_orgao_emissor.valid
+                    ? produtorForm.getFirstErrorFrom('ds_orgao_emissor', 'Órgão Emissor')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="UF do Emissor"
+            formControlName="co_uf_emissor"
+            [form]="produtorForm"
+            col="4"
+            type="select"
+            [options]="commonService.estadoOptions"
+            keyOp="nu_uf"
+            valueOp="ds_sigla"
+            [message]="
+                !produtorForm.co_uf_emissor.valid
+                    ? produtorForm.getFirstErrorFrom('co_uf_emissor', 'UF do Emissor')
+                    : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="Data de Nascimento"
+            formControlName="dt_nascimento"
+            [isObrigatorio]="true"
+            col="4"
+            [form]="produtorForm"
+            type="date"
+            [mensagemStatus]="
+                !produtorForm.dt_nascimento.valid
+                    ? produtorForm.getFirstErrorFrom('dt_nascimento', 'Data de Nascimento')
+                    : ''
+            "
+        >
+        </app-input>
+
+        <app-input
+            label="Naturalidade"
+            formControlName="naturalidade"
+            col="7"
+            [form]="produtorForm"
+            [message]="
+                !produtorForm.naturalidade.valid ? produtorForm.getFirstErrorFrom('naturalidade', 'Naturalidade') : ''
+            "
+        ></app-input>
+
+        <app-input
+            label="UF Naturalidade"
+            formControlName="uf_naturalidade"
+            col="4"
+            [form]="produtorForm"
+            type="select"
+            [options]="commonService.estadoOptions"
+            keyOp="nu_uf"
+            valueOp="ds_sigla"
+            [message]="
+                !produtorForm.uf_naturalidade.valid
+                    ? produtorForm.getFirstErrorFrom('uf_naturalidade', 'UF Naturalidade')
+                    : ''
+            "
+        >
+        </app-input>
+    </app-collapse>
+    <app-collapse label="Endereço de correspondência e contato" [loading]="loading">
+        <app-input
+            label="UF"
+            [isObrigatorio]="true"
+            formControlName="uf_pais"
+            col="7"
+            [form]="produtorForm"
+            type="select"
+            [options]="commonService.estadoOptions"
+            keyOp="co_uf"
+            valueOp="ds_sigla"
+            [message]="!produtorForm.uf_pais.valid ? produtorForm.getFirstErrorFrom('uf_pais', 'UF') : ''"
+        >
+        </app-input>
+        <app-input
+            label="Município"
+            [isObrigatorio]="true"
+            formControlName="co_municipio"
+            col="7"
+            [form]="produtorForm"
+            type="select"
+            [options]="listaMunicipiosProdutor"
+            [message]="
+                !produtorForm.co_municipio.valid ? produtorForm.getFirstErrorFrom('co_municipio', 'Município') : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="CEP"
+            [isObrigatorio]="true"
+            formControlName="co_cep"
+            col="4"
+            [textMask]="maskFactory.createCep()"
+            [form]="produtorForm"
+            [message]="!produtorForm.co_cep.valid ? produtorForm.getFirstErrorFrom('co_cep', 'CEP') : ''"
+        ></app-input>
+        <app-input
+            label="Logradouro"
+            formControlName="ds_endereco"
+            col="7"
+            [form]="produtorForm"
+            type="select"
+            [options]="commonService.logradouroOptions"
+            [message]="
+                !produtorForm.ds_endereco.valid ? produtorForm.getFirstErrorFrom('ds_endereco', 'Logradouro') : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="Número"
+            [isObrigatorio]="true"
+            formControlName="nu_numero"
+            col="4"
+            [form]="produtorForm"
+            [message]="!produtorForm.nu_numero.valid ? produtorForm.getFirstErrorFrom('nu_numero', 'Número') : ''"
+        ></app-input>
+        <app-input
+            label="Complemento"
+            formControlName="ds_complemento"
+            col="7"
+            [form]="produtorForm"
+            [message]="
+                !produtorForm.ds_complemento.valid
+                    ? produtorForm.getFirstErrorFrom('ds_complemento', 'Complemento')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Bairro"
+            [isObrigatorio]="true"
+            formControlName="ds_bairro"
+            col="7"
+            [form]="produtorForm"
+            [message]="!produtorForm.ds_bairro.valid ? produtorForm.getFirstErrorFrom('ds_bairro', 'Bairro') : ''"
+        ></app-input>
+        <app-input
+            label="Telefone"
+            formControlName="nu_telefone"
+            col="7"
+            [textMask]="maskFactory.createTelefone()"
+            [form]="produtorForm"
+            [message]="!produtorForm.nu_telefone.valid ? produtorForm.getFirstErrorFrom('nu_telefone', 'Telefone') : ''"
+        ></app-input>
+        <app-input
+            label="Fax"
+            formControlName="co_fax"
+            col="7"
+            [form]="produtorForm"
+            [message]="!produtorForm.co_fax.valid ? produtorForm.getFirstErrorFrom('co_fax', 'Fax') : ''"
+        ></app-input>
+        <app-input
+            label="Email"
+            formControlName="ds_email"
+            col="7"
+            [form]="produtorForm"
+            [message]="!produtorForm.ds_email.valid ? produtorForm.getFirstErrorFrom('ds_email', 'Email') : ''"
+        ></app-input>
+    </app-collapse>
+    <app-collapse label="Dados imóvel" [loading]="loading">
+        <app-input
+            label="Tipo Logradouro"
+            [isObrigatorio]="true"
+            formControlName="co_tipo_logradouro"
+            col="4"
+            [form]="imovelForm"
+            type="select"
+            [options]="commonService.logradouroOptions"
+            [message]="
+                !imovelForm.co_tipo_logradouro.valid
+                    ? imovelForm.getFirstErrorFrom('co_tipo_logradouro', 'Tipo Logradouro')
+                    : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="Logradouro"
+            [isObrigatorio]="true"
+            formControlName="ds_endereco"
+            col="7"
+            [form]="imovelForm"
+            [message]="!imovelForm.ds_endereco.valid ? imovelForm.getFirstErrorFrom('ds_endereco', 'Logradouro') : ''"
+        ></app-input>
+        <app-input
+            label="Número"
+            [isObrigatorio]="true"
+            formControlName="nu_numero_imovel"
+            col="4"
+            [form]="imovelForm"
+            [message]="
+                !imovelForm.nu_numero_imovel.valid ? imovelForm.getFirstErrorFrom('nu_numero_imovel', 'Número') : ''
+            "
+        ></app-input>
+        <app-input
+            label="Bairro"
+            [isObrigatorio]="true"
+            formControlName="ds_bairro_imovel"
+            col="7"
+            [form]="imovelForm"
+            [message]="
+                !imovelForm.ds_bairro_imovel.valid ? imovelForm.getFirstErrorFrom('ds_bairro_imovel', 'Bairro') : ''
+            "
+        ></app-input>
+        <app-input
+            label="UF"
+            formControlName="uf_imovel"
+            col="4"
+            [form]="imovelForm"
+            type="select"
+            [options]="commonService.estadoOptions"
+            keyOp="co_uf"
+            valueOp="ds_sigla"
+            [message]="!imovelForm.uf_imovel.valid ? imovelForm.getFirstErrorFrom('uf_imovel', 'UF') : ''"
+        >
+        </app-input>
+        <app-input
+            label="Município"
+            [isObrigatorio]="true"
+            col="7"
+            formControlName="co_municipio"
+            [form]="imovelForm"
+            type="select"
+            [options]="listaMunicipiosImovel"
+            [message]="
+                !imovelForm.co_municipio.valid
+                    ? imovelForm.getFirstErrorFrom('co_municipio', 'Município')
+                    : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="CEP"
+            formControlName="co_cep_imovel"
+            [textMask]="maskFactory.createCep()"
+            col="4"
+            [form]="imovelForm"
+            [message]="!imovelForm.co_cep_imovel.valid ? imovelForm.getFirstErrorFrom('co_cep_imovel', 'CEP') : ''"
+        ></app-input>
+        <app-input
+            label="Tipo de Imóvel"
+            [isObrigatorio]="true"
+            col="4"
+            formControlName="co_tipo_imovel"
+            [form]="imovelForm"
+            type="select"
+            [options]="commonService.tipoImovelOptions"
+            [message]="
+                !imovelForm.co_tipo_imovel.valid ? imovelForm.getFirstErrorFrom('co_tipo_imovel', 'Tipo de Imóvel') : ''
+            "
+        ></app-input>
+        <app-input
+            label="Ponto de Referência"
+            formControlName="ds_ponto_referencia"
+            col="7"
+            [form]="imovelForm"
+            [message]="
+                !imovelForm.ds_ponto_referencia.valid
+                    ? imovelForm.getFirstErrorFrom('ds_ponto_referencia', 'Ponto de Referência')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Área total(ha)"
+            [isObrigatorio]="true"
+            formControlName="nu_area_total"
+            col="4"
+            [form]="imovelForm"
+            [message]="
+                !imovelForm.nu_area_total.valid ? imovelForm.getFirstErrorFrom('nu_area_total', 'Área total(ha)') : ''
+            "
+        ></app-input>
+        <app-input
+            label="Área de Produção(ha)"
+            [isObrigatorio]="true"
+            formControlName="nu_area_producao"
+            col="4"
+            [form]="imovelForm"
+            [message]="
+                !imovelForm.nu_area_producao.valid
+                    ? imovelForm.getFirstErrorFrom('nu_area_producao', 'Área de Produção(ha)')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Latitude"
+            formControlName="nu_latitude"
+            [form]="imovelForm"
+            [message]="
+                !imovelForm.nu_latitude.valid
+                    ? imovelForm.getFirstErrorFrom('nu_latitude', 'Latitude')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Longitude"
+            formControlName="nu_longitude"
+            [form]="imovelForm"
+            [message]="
+                !imovelForm.nu_longitude.valid
+                    ? imovelForm.getFirstErrorFrom('nu_longitude', 'Longitude')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Inscrição Rural"
+            formControlName="nu_inscricao_rural"
+            col="7"
+            [form]="imovelForm"
+            [message]="
+                !imovelForm.nu_inscricao_rural.valid
+                    ? imovelForm.getFirstErrorFrom('nu_inscricao_rural', 'Inscrição Rural')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Número CAR"
+            formControlName="nu_car"
+            col="4"
+            [form]="imovelForm"
+            [message]="!imovelForm.nu_car.valid ? imovelForm.getFirstErrorFrom('nu_car', 'Número CAR') : ''"
+        ></app-input>
+        <app-input
+            label="Número CCIR"
+            formControlName="nu_ccir"
+            col="4"
+            [form]="imovelForm"
+            [message]="!imovelForm.nu_ccir.valid ? imovelForm.getFirstErrorFrom('nu_ccir', 'Número CCIR') : ''"
+        ></app-input>
+        <app-input
+            label="Número SIGEF"
+            formControlName="nu_sigef"
+            col="7"
+            [form]="imovelForm"
+            [message]="!imovelForm.nu_sigef.valid ? imovelForm.getFirstErrorFrom('nu_sigef', 'Número SIGEF') : ''"
+        ></app-input>
+    </app-collapse>
+    <app-collapse label="Contabilista" [loading]="loading">
+        <app-input
+            label="Tipo de Pessoa"
+            formControlName="tipo_pessoa"
+            id="tiposPessoa"
+            col="7"
+            [isRadio]="true"
+            [form]="contabilistaForm"
+            type="radio"
+            [options]="tiposPessoa"
+            [message]="
+                !contabilistaForm.tipo_pessoa.valid
+                    ? contabilistaForm.getFirstErrorFrom('tipo_pessoa', 'Tipo de Pessoa')
+                    : ''
+            "
+        ></app-input>
+    </app-collapse>
+    <app-collapse label="Responsável Contábil" [loading]="loading">
+        <app-input
+            label="CPF"
+            [isObrigatorio]="true"
+            formControlName="co_cpf"
+            col="4"
+            (change)="preencherNomeByCpf()"
+            [form]="contabilistaForm"
+            [textMask]="maskFactory.createCpf()"
+            [message]="!contabilistaForm.co_cpf.valid ? contabilistaForm.getFirstErrorFrom('co_cpf', 'CPF') : ''"
+        ></app-input>
+        <app-input
+            label="Nome"
+            [isObrigatorio]="true"
+            formControlName="ds_nome"
+            col="7"
+            [form]="contabilistaForm"
+            [message]="!contabilistaForm.ds_nome.valid ? contabilistaForm.getFirstErrorFrom('ds_nome', 'Nome') : ''"
+        ></app-input>
+        <app-input
+            label="Número do CRC"
+            [isObrigatorio]="true"
+            formControlName="nu_tipo_crc"
+            col="4"
+            [form]="contabilistaForm"
+            [message]="
+                !contabilistaForm.nu_tipo_crc.valid
+                    ? contabilistaForm.getFirstErrorFrom('nu_tipo_crc', 'Número do CRC')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Classificação"
+            [isObrigatorio]="true"
+            col="4"
+            formControlName="ds_classificacao"
+            [form]="contabilistaForm"
+            type="select"
+            [options]="commonService.classificacaoCrcOptions"
+            [message]="
+                !contabilistaForm.ds_classificacao.valid
+                    ? contabilistaForm.getFirstErrorFrom('ds_classificacao', 'Classificação')
+                    : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="Tipo de Classificação"
+            [isObrigatorio]="true"
+            col="4"
+            formControlName="co_tipo_classificacao_crc"
+            [form]="contabilistaForm"
+            type="select"
+            [options]="commonService.tipoClassificacaoCrcOptions"
+            [message]="
+                !contabilistaForm.co_tipo_classificacao_crc.valid
+                    ? contabilistaForm.getFirstErrorFrom('co_tipo_classificacao_crc', 'Tipo de Classificação')
+                    : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="Digito Verificador"
+            [isObrigatorio]="true"
+            formControlName="co_digito_verificador"
+            col="4"
+            [form]="contabilistaForm"
+            [message]="
+                !contabilistaForm.co_digito_verificador.valid
+                    ? contabilistaForm.getFirstErrorFrom('co_digito_verificador', 'Digito Verificador')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="UF do CRC"
+            [isObrigatorio]="true"
+            col="4"
+            formControlName="co_uf_crc"
+            [form]="contabilistaForm"
+            type="select"
+            [options]="commonService.estadoOptions"
+            keyOp="nu_uf"
+            valueOp="ds_sigla"
+            [message]="
+                !contabilistaForm.co_uf_crc.valid ? contabilistaForm.getFirstErrorFrom('co_uf_crc', 'UF do CRC') : ''
+            "
+        >
+        </app-input>
+    </app-collapse>
+    <app-collapse label="Empresa Contabilista" [loading]="loading" *ngIf="tipoPessoaJuridica">
+        <app-input
+            label="CNPJ"
+            [isObrigatorio]="true"
+            formControlName="co_cnpj"
+            col="4"
+            (change)="preencherNomeByCnpj()"
+            [form]="contabilistaForm"
+            [textMask]="maskFactory.createCnpj()"
+            [message]="!contabilistaForm.co_cnpj.valid ? contabilistaForm.getFirstErrorFrom('co_cnpj', 'CNPJ') : ''"
+        ></app-input>
+        <app-input
+            label="Nome Empresarial"
+            [isObrigatorio]="true"
+            formControlName="ds_nome_empresa"
+            col="7"
+            [form]="contabilistaForm"
+            [message]="
+                !contabilistaForm.ds_nome_empresa.valid
+                    ? contabilistaForm.getFirstErrorFrom('ds_nome_empresa', 'Nome Empresarial')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Número do CRC"
+            [isObrigatorio]="true"
+            formControlName="nu_tipo_crc_empresa"
+            col="4"
+            [form]="contabilistaForm"
+            [message]="
+                !contabilistaForm.nu_tipo_crc_empresa.valid
+                    ? contabilistaForm.getFirstErrorFrom('nu_tipo_crc_empresa', 'Número do CRC')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Classificação"
+            [isObrigatorio]="true"
+            formControlName="ds_classificacao_empresa"
+            col="4"
+            [form]="contabilistaForm"
+            type="select"
+            [options]="commonService.classificacaoCrcOptions"
+            [message]="
+                !contabilistaForm.ds_classificacao_empresa.valid
+                    ? contabilistaForm.getFirstErrorFrom('ds_classificacao_empresa', 'Classificação')
+                    : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="Tipo de Classificação"
+            [isObrigatorio]="true"
+            formControlName="co_tipo_classificacao_crc_empresa"
+            col="4"
+            [form]="contabilistaForm"
+            type="select"
+            [options]="commonService.tipoClassificacaoCrcOptions"
+            [message]="
+                !contabilistaForm.co_tipo_classificacao_crc_empresa.valid
+                    ? contabilistaForm.getFirstErrorFrom('co_tipo_classificacao_crc_empresa', 'Tipo de Classificação')
+                    : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="Digito Verificador"
+            [isObrigatorio]="true"
+            formControlName="co_digito_verificador_empresa"
+            col="4"
+            [form]="contabilistaForm"
+            [message]="
+                !contabilistaForm.co_digito_verificador_empresa.valid
+                    ? contabilistaForm.getFirstErrorFrom('co_digito_verificador_empresa', 'Digito Verificador')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="UF do CRC"
+            [isObrigatorio]="true"
+            formControlName="co_uf_crc_empresa"
+            col="4"
+            [form]="contabilistaForm"
+            type="select"
+            [options]="commonService.estadoOptions"
+            keyOp="co_uf"
+            valueOp="ds_uf"
+            [message]="
+                !contabilistaForm.co_uf_crc_empresa.valid
+                    ? contabilistaForm.getFirstErrorFrom('co_uf_crc_empresa', 'UF do CRC')
+                    : ''
+            "
+        >
+        </app-input>
+    </app-collapse>
+    <app-collapse
+        [label]="tipoPessoaJuridica ? 'Endereço Empresa Contabil' : 'Endereço Contabilista'"
+        [loading]="loading"
+    >
+        <app-input
+            label="UF"
+            [isObrigatorio]="true"
+            formControlName="co_uf"
+            col="7"
+            [form]="contabilistaForm"
+            type="select"
+            [options]="commonService.estadoOptions"
+            keyOp="co_uf"
+            valueOp="ds_sigla"
+            [message]="!contabilistaForm.co_uf.valid ? contabilistaForm.getFirstErrorFrom('co_uf', 'UF') : ''"
+        >
+        </app-input>
+        <app-input
+            label="Municipio"
+            [isObrigatorio]="true"
+            col="7"
+            formControlName="ds_municipio"
+            [form]="contabilistaForm"
+            type="select"
+            [options]="listaMunicipiosContabilista"
+            [message]="
+                !contabilistaForm.ds_municipio.valid
+                    ? contabilistaForm.getFirstErrorFrom('ds_municipio', 'Municipio')
+                    : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="CEP"
+            [isObrigatorio]="true"
+            formControlName="co_cep"
+            col="4"
+            [textMask]="maskFactory.createCep()"
+            [form]="contabilistaForm"
+            [message]="!contabilistaForm.co_cep.valid ? contabilistaForm.getFirstErrorFrom('co_cep', 'CEP') : ''"
+        ></app-input>
+        <app-input
+            label="Logradouro"
+            [isObrigatorio]="true"
+            formControlName="ds_endereco"
+            col="7"
+            [form]="contabilistaForm"
+            type="select"
+            [options]="commonService.logradouroOptions"
+            [message]="
+                !contabilistaForm.ds_endereco.valid
+                    ? contabilistaForm.getFirstErrorFrom('ds_endereco', 'Logradouro')
+                    : ''
+            "
+        >
+        </app-input>
+        <app-input
+            label="Número"
+            [isObrigatorio]="true"
+            formControlName="nu_numero"
+            col="4"
+            [form]="contabilistaForm"
+            [message]="
+                !contabilistaForm.nu_numero.valid ? contabilistaForm.getFirstErrorFrom('nu_numero', 'Número') : ''
+            "
+        ></app-input>
+        <app-input
+            label="Complemento"
+            formControlName="ds_complemento"
+            col="7"
+            [form]="contabilistaForm"
+            [message]="
+                !contabilistaForm.ds_complemento.valid
+                    ? contabilistaForm.getFirstErrorFrom('ds_complemento', 'Complemento')
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            label="Bairro"
+            [isObrigatorio]="true"
+            formControlName="ds_bairro"
+            col="7"
+            [form]="contabilistaForm"
+            [message]="
+                !contabilistaForm.ds_bairro.valid ? contabilistaForm.getFirstErrorFrom('ds_bairro', 'Bairro') : ''
+            "
+        ></app-input>
+        <app-input
+            label="Telefone"
+            formControlName="nu_telefone"
+            col="4"
+            [form]="contabilistaForm"
+            [textMask]="maskFactory.createTelefone()"
+            [message]="
+                !contabilistaForm.nu_telefone.valid ? contabilistaForm.getFirstErrorFrom('nu_telefone', 'Telefone') : ''
+            "
+        ></app-input>
+        <app-input
+            label="Fax"
+            formControlName="co_fax"
+            col="4"
+            [form]="contabilistaForm"
+            [message]="!contabilistaForm.co_fax.valid ? contabilistaForm.getFirstErrorFrom('co_fax', 'Fax') : ''"
+        ></app-input>
+        <app-input
+            label="Email"
+            formControlName="ds_email"
+            col="7"
+            [form]="contabilistaForm"
+            [message]="!contabilistaForm.ds_email.valid ? contabilistaForm.getFirstErrorFrom('ds_email', 'Email') : ''"
+        ></app-input>
+    </app-collapse>
+    <app-card-documentos [dados]="documentos" [loading]="loading"></app-card-documentos>
+    <app-card-anexos [dados]="anexos" [loading]="loading" [isPageForm]="true"></app-card-anexos>
+    <div class="d-flex flex-row-reverse mt-2">
+        <app-button label="Voltar" (click)="voltar()"></app-button>
+        <app-button label="Salvar" (click)="salvar()" [loading]="loadingUpdate"></app-button>
+    </div>
+</app-view-page>
