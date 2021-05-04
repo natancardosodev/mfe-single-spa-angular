@@ -4,6 +4,7 @@
     "scripts": {
         "test": "ng test",
         "e2e": "ng e2e",
+        "mock": "./node_modules/.bin/json-server --watch db/db.json",
         "stylelint:fix": "./node_modules/.bin/stylelint 'src/**/**/*.scss' --fix",
         "stylelint": "./node_modules/.bin/stylelint 'src/**/**/*.scss'",
         "eslint:fix": "./node_modules/.bin/eslint src/app/** --ext .ts --fix",
@@ -78,6 +79,7 @@
         "eslint-plugin-prettier": "^3.1.4",
         "jasmine-core": "~3.4.0",
         "jasmine-spec-reporter": "~4.2.1",
+        "json-server": "^0.16.3",
         "karma": "~4.1.0",
         "karma-chrome-launcher": "~2.2.0",
         "karma-coverage-istanbul-reporter": "~2.0.1",

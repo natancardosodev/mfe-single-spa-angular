@@ -47,15 +47,16 @@ git remote add skeleton git@gitlab.voxtecnologia.com.br:vox/front-end/skeleton-e
     [consulte a doc](https://eslint.org/docs/rules/)
 -   [Outras recomendações...](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/training/construcao.md)
 
-## Mocky de services com a Assets Sigfacil
+## Mock API para testes
+Enquanto não tiver a API pronta, pode se utilizar uma API fake através de um mock. Há um arquivo em `db/db.json` que em cada primeiro nó do json representa um endpoint. Colocando os dados lá e chamando no service conforme exemplo abaixo, obterá a partir do json server uma API fake com os principais métodos http. Ao fazer os ajustes rode em terminal paralelo o comando: `npm run mock`.
 
 ```ts
-public getProcesso(): Observable<any> {
-    const url = 'https://deve-assets-sigfacil.voxtecnologia.com.br/assets/configs/mocky-processo.json';
-    return this.http
-        .get<any>(url, { withCredentials: false, responseType: 'json' })
-        .pipe<any>(catchError((error: HttpErrorResponse) => HttpUtil.tratarErroLogin(error)));
-}
+private urlMock = 'http://localhost:3000/';
+
+public getDadosInscricao = (solicitacao: number): Observable<any> => {
+    return this.http.get(this.urlMock + 'inscricao');
+    // return this.get(`inscricao/solicitacao/${solicitacao}`);
+};
 ```
 
 ## Rotas
