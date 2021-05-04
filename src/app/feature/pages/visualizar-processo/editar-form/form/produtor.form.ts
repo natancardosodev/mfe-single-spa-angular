@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
+import { GeneralsUtil } from '@core/utils/generals.util';
 import { DadosInscricaoInterface } from 'src/app/core/interfaces/pessoa-fisica/dados-inscricao.interface';
 
 export class ProdutorForm extends FormGroup {
     private _errorMessages = {
         required: 'O campo %s é obrigatório.',
-        email: 'Este e-mail não é válido.'
+        email: 'Este e-mail não é válido.',
+        bsDate: 'A data informada é inválida.'
     };
 
     constructor() {
@@ -138,6 +139,25 @@ export class ProdutorForm extends FormGroup {
         return this._errorMessages[Object.keys(this.get(controlName).errors)[0]].replace('%s', label || controlName);
     }
 
+    public markAllAsTouched(): void {
+        Object.keys(this.controls).map((control) => this.get(control).markAsDirty());
+    }
+
+    public updateAll(): void {
+        Object.keys(this.controls).map((control) => this.get(control).updateValueAndValidity());
+    }
+
+    public getDados(): Record<string, string> {
+        const form = this.value;
+
+        return {
+            // @todo completar form
+            protocolo: form.protocolo,
+            no_cpf: form.no_cpf,
+            dt_nascimento: GeneralsUtil.formatDateBrToEn(form.data_nascimento)
+        };
+    }
+
     public setValues(produtor: DadosInscricaoInterface): void {
         this.protocolo.setValue(produtor.protocolo);
         this.no_cpf.setValue(produtor.no_cpf);
@@ -149,7 +169,7 @@ export class ProdutorForm extends FormGroup {
         this.co_uf_emissor.setValue(produtor.co_uf_emissor);
         this.co_sexo.setValue(produtor.co_sexo);
         this.nacionalidade.setValue(null);
-        this.dt_nascimento.setValue(new Date(produtor.data_nascimento).toLocaleDateString('pt-br'));
+        this.dt_nascimento.setValue(GeneralsUtil.formatDateEnToBr(produtor.data_nascimento));
         if (produtor.imovel.endereco_correspondencia) {
             this.co_municipio.setValue(produtor.imovel.endereco_correspondencia.co_municipio);
             this.co_cep.setValue(produtor.imovel.endereco_correspondencia.co_cep);
@@ -161,13 +181,5 @@ export class ProdutorForm extends FormGroup {
             this.ds_email.setValue(produtor.imovel.endereco_correspondencia.ds_email);
             this.co_fax.setValue(null);
         }
-    }
-
-    public markAllAsTouched(): void {
-        Object.keys(this.controls).map((control) => this.get(control).markAsDirty());
-    }
-
-    public updateAll(): void {
-        Object.keys(this.controls).map((control) => this.get(control).updateValueAndValidity());
     }
 }

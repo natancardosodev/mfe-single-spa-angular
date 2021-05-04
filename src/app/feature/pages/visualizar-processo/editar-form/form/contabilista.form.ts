@@ -9,7 +9,8 @@ export class ContabilistaForm extends FormGroup {
         required: 'O campo %s é obrigatório.',
         email: 'Este e-mail não é válido.',
         quantidadeInvalida: 'Quantidade Inválida de dígitos',
-        valorInvalido: 'O valor informado no campo %s é inválido'
+        valorInvalido: 'O valor informado no campo %s é inválido',
+        bsDate: 'A data informada é inválida.'
     };
 
     constructor() {
@@ -193,6 +194,20 @@ export class ContabilistaForm extends FormGroup {
     public getFirstErrorFrom(controlName: string, label: string): string {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         return this._errorMessages[Object.keys(this.get(controlName).errors)[0]].replace('%s', label || controlName);
+    }
+
+    public updateAll(): void {
+        Object.keys(this.controls).map((control) => this.get(control).updateValueAndValidity());
+    }
+
+    public getDados(): Record<string, string> {
+        const form = this.value;
+
+        return {
+            // @todo completar form
+            nu_cpf: form.responsavel.nu_cpf,
+            co_cpf_cnpj: form.co_cpf_cnpj
+        };
     }
 
     public setValues(contabilista: ContabilistaInterface): void {

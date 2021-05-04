@@ -2,30 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { AlertService } from 'lib-ui-interno';
 
-import { Dados } from 'src/app/core/interfaces/pessoa-fisica/dados';
 import {
     AnexoInterface,
     AtividadeInterface,
     DadosInscricaoInterface,
     DocumentoOrgaoInterface
-} from 'src/app/core/interfaces/pessoa-fisica/dados-inscricao.interface';
-import { CommonService } from 'src/app/core/services/common.service';
-import { GeneralsUtil } from 'src/app/core/utils/generals.util';
-import { TextMaskFactory } from 'src/app/core/utils/mask/text-mask-factory';
-import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
+} from '@core/interfaces/pessoa-fisica/dados-inscricao.interface';
+import { Dados } from '@core/interfaces/pessoa-fisica/dados';
+import { CommonService } from '@core/services/common.service';
+import { GeneralsUtil } from '@core/utils/generals.util';
+import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';
+import { SolicitacaoService } from '@feature/services/solicitacao.service';
+import { RotasEnum } from '@core/enums/rotas.enum';
+import { JarvisService } from '@feature/services/jarvis.service';
+import { clearMask } from '@core/configs/regexClearMask';
+import { GatewayReceitaInterface } from '@core/interfaces/jarvis/gateway-receita.interface';
+import { MensagensEnum } from '@core/enums/mensagens.enum';
 import { ContabilistaForm } from './form/contabilista.form';
 import { ImovelForm } from './form/imovel.form';
 import { ProdutorForm } from './form/produtor.form';
-import { RotasEnum } from 'src/app/core/enums/rotas.enum';
-import { JarvisService } from 'src/app/feature/services/jarvis.service';
-import { clearMask } from 'src/app/core/configs/regexClearMask';
-import { GatewayReceitaInterface } from 'src/app/core/interfaces/jarvis/gateway-receita.interface';
-import { AlertService } from 'lib-ui-interno';
-import { MensagensEnum } from 'src/app/core/enums/mensagens.enum';
 
 @Component({
     selector: 'app-editar-form',
@@ -43,13 +44,11 @@ export class EditarFormComponent implements OnInit {
     public atividades: Array<AtividadeInterface>;
     public documentos: Array<DocumentoOrgaoInterface>;
     public anexos: Array<AnexoInterface>;
-    public nuSeqUsuario: number;
     public listaMunicipiosImovel: BehaviorSubject<Array<Dados>> = new BehaviorSubject([]);
     public listaMunicipiosProdutor: BehaviorSubject<Array<Dados>> = new BehaviorSubject([]);
     public listaMunicipiosContabilista: BehaviorSubject<Array<Dados>> = new BehaviorSubject([]);
     public tiposPessoa: BehaviorSubject<Array<Dados>> = new BehaviorSubject([]);
     public listaUf$: Observable<Array<Dados>>;
-    public invalidDateFormate: string;
     public sexos: BehaviorSubject<any> = new BehaviorSubject([]);
     private _produtorForm: ProdutorForm;
     private _imovelForm: ImovelForm;
@@ -79,8 +78,9 @@ export class EditarFormComponent implements OnInit {
 
     constructor(
         private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private titleService: Title,
         private solicitacaoService: SolicitacaoService,
-        private activeRouter: ActivatedRoute,
         private alertService: AlertService,
         private jarvisService: JarvisService,
         private _commonService: CommonService
@@ -91,12 +91,14 @@ export class EditarFormComponent implements OnInit {
         this._produtorForm = new ProdutorForm();
         this._imovelForm = new ImovelForm();
         this._contabilistaForm = new ContabilistaForm();
-        this.invalidDateFormate = MensagensEnum.DATE_INVALID_FORMAT;
+        this.activatedRoute.params.subscribe((params) => {
+            this._solicitacaoId = params['id'] ? params['id'] : null;
+        });
     }
 
     public ngOnInit(): void {
         window.scrollTo(0, 0);
-        this._solicitacaoId = this.activeRouter.snapshot.params.id;
+        this.titleService.setTitle('Visualizar Processo - Skeleton');
         this.getDadosSolicitacao();
         this.disabledFields();
         this.preencherNomeByCpf();
@@ -253,33 +255,9 @@ export class EditarFormComponent implements OnInit {
         }
     }
 
-    public preencherNomeByCnpj(): void {
-        const cnpj = clearMask(this.contabilistaForm.co_cnpj.value);
-        if (cnpj) {
-            if (cnpj.length === 14 && this.contabilistaForm.co_cnpj.valid) {
-                this.jarvisService
-                    .getPessoaCnpj(cnpj)
-                    .pipe(
-                        finalize(() => {
-                            this.loading = false;
-                        })
-                    )
-                    .subscribe(
-                        (response: HttpResponse<GatewayReceitaInterface>) => {
-                            this.contabilistaForm.ds_nome_empresa.setValue(response.body.nome);
-                        },
-                        (error) => {
-                            window.console.error(error);
-                        }
-                    );
-            }
-        }
-    }
-
     public salvar(): void {
         this.produtorForm.markAllAsTouched();
         this.imovelForm.markAllAsTouched();
-        // this.contabilistaForm.markAllAsTouched(); @todo verificar
 
         if (this.validateAllFormFields()) {
             this.loadingUpdate = true;
@@ -290,20 +268,14 @@ export class EditarFormComponent implements OnInit {
                         this.loadingUpdate = false;
                     })
                 )
-                .subscribe(
-                    (response: DadosInscricaoInterface) => {
-                        void this.router.navigate([RotasEnum.EMPRESA_VISUALIZAR, response.nu_seq_usuario]);
-                    },
-                    (error) => {
-                        window.console.error(error);
-                    }
-                );
+                .subscribe((response: DadosInscricaoInterface) => {
+                    GeneralsUtil.navigate(this.router, RotasEnum.EMPRESA_VISUALIZAR, response.nu_seq_usuario);
+                });
         }
     }
 
     public validateAllFormFields(): boolean {
         if (this.produtorForm.invalid || this.imovelForm.invalid) {
-            // || this.contabilistaForm.invalid // @todo verificar
             this.loadingUpdate = false;
             this.alertService.openModal({
                 title: 'Atenção',
@@ -411,7 +383,7 @@ export class EditarFormComponent implements OnInit {
     }
 
     public voltar(): void {
-        void this.router.navigate([RotasEnum.EMPRESA, this._solicitacaoId]);
+        GeneralsUtil.navigate(this.router, RotasEnum.EMPRESA, this._solicitacaoId);
     }
 
     private setOptions(): void {

@@ -21,8 +21,8 @@ export class UrlUtilService {
         return `${env}.${uf}`;
     }
 
-    public getUrlSigfacil(): string {
-        return 'https://' + window.location.host;
+    public getUrlSigfacil(isInterno = false): string {
+        return `https://${window.location.host}${isInterno ? '/sigfacil/' : ''}`;
     }
 
     public mountUrl(rota: string): string {

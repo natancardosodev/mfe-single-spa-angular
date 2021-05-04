@@ -6,7 +6,17 @@ export class ModulosMocky {
                 {
                     id: 1040020253,
                     nome: 'Funcionalidade Skeleton',
-                    rota: '/sigfacil/skeleton/empresa/',
+                    rota: '/interno/empresa/',
+                    modulo: {
+                        id: 104002,
+                        nome: 'Manutenção SIGFácil',
+                        icone: 'fa-wrench'
+                    }
+                },
+                {
+                    id: 1040020253,
+                    nome: 'Funcionalidade Skeleton View Test',
+                    rota: '/interno/empresa/visualizar/11329000',
                     modulo: {
                         id: 104002,
                         nome: 'Manutenção SIGFácil',

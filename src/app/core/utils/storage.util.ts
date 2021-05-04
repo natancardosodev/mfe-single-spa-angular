@@ -11,4 +11,10 @@ export class StorageUtil {
     public static remove(key: string): any {
         return window.sessionStorage.removeItem(key);
     }
+
+    public static removeAll(arrKey: Array<string>): void {
+        arrKey.forEach((key: string) => {
+            StorageUtil.remove(key);
+        });
+    }
 }

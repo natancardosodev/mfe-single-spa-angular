@@ -6,15 +6,16 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalComponent } from 'lib-ui-interno';
 import { take } from 'rxjs/operators';
 
-import { Status } from 'src/app/core/enums/status.enum';
-import { ModalIndeferirComponent } from 'src/app/core/components/modal-indeferir/modal-indeferir.component';
-import { CardObservacaoComponent } from 'src/app/core/components/card-observacao/card-observacao.component';
-import { UserService } from 'src/app/core/services/user.service';
-import { Storage } from 'src/app/core/enums/storage.enum';
-import { StorageUtil } from 'src/app/core/utils/storage.util';
-import { FuncionalidadeEnum } from 'src/app/core/enums/funcionalidade.enum';
-import { PapeisEnum } from 'src/app/core/enums/papeis.enum';
-import { RotasEnum } from 'src/app/core/enums/rotas.enum';
+import { ModalIndeferirComponent } from '@core/components/modal-indeferir/modal-indeferir.component';
+import { CardObservacaoComponent } from '@core/components/card-observacao/card-observacao.component';
+import { Status } from '@core/enums/status.enum';
+import { UserService } from '@core/services/user.service';
+import { Storage } from '@core/enums/storage.enum';
+import { StorageUtil } from '@core/utils/storage.util';
+import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
+import { PapeisEnum } from '@core/enums/papeis.enum';
+import { RotasEnum } from '@core/enums/rotas.enum';
+import { GeneralsUtil } from '@core/utils/generals.util';
 
 @Component({
     selector: 'app-visualizar-pesquisa',
@@ -64,8 +65,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public voltarParaPesquisa(): void {
-        window.scrollTo(0, 0);
-        void this.router.navigate(['']);
+        GeneralsUtil.navigate(this.router, RotasEnum.EMPRESA);
     }
 
     public statusAtualProcesso(status: number): void {
@@ -108,7 +108,6 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public redirectAlterarDados(): void {
-        window.scroll(0, 0);
-        void this.router.navigate([RotasEnum.EMPRESA_EDITAR, this.solicitacao]);
+        GeneralsUtil.navigate(this.router, RotasEnum.EMPRESA_EDITAR, this.solicitacao);
     }
 }

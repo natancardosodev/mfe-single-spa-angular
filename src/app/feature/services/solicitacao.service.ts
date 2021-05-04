@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-
-import { UrlUtilService } from 'src/app/core/services/url-util.service';
-import { BaseService } from 'src/app/core/services/base.service';
-import { DadosInscricaoInterface } from 'src/app/core/interfaces/pessoa-fisica/dados-inscricao.interface';
 import { AlertService } from 'lib-ui-interno';
+
+import { UrlUtilService } from '@core/services/url-util.service';
+import { BaseService } from '@core/services/base.service';
+import { DadosInscricaoInterface } from '@core/interfaces/pessoa-fisica/dados-inscricao.interface';
 
 @Injectable({
     providedIn: 'root'

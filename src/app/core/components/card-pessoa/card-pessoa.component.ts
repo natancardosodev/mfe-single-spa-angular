@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { finalize, take } from 'rxjs/operators';
 
-import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
-import { DadosPessoaInterface } from '../../interfaces/pessoa-fisica/dados-pessoa-interface';
+import { DadosPessoaInterface } from '@core/interfaces/pessoa-fisica/dados-pessoa-interface';
+import { SolicitacaoService } from '@feature/services/solicitacao.service';
 
 @Component({
     selector: 'app-card-pessoa',

@@ -1,6 +1,6 @@
 <app-grid-page>
     <app-input
-        isGrid="true"
+        [isGrid]="true"
         label="Protocolo"
         formControlName="protocolo"
         [form]="pesquisaForm"
@@ -8,7 +8,7 @@
     ></app-input>
 
     <app-input
-        isGrid="true"
+        [isGrid]="true"
         label="CPF"
         formControlName="cpf"
         [textMask]="maskFactory.createCpf()"
@@ -17,7 +17,7 @@
     ></app-input>
 
     <app-input
-        isGrid="true"
+        [isGrid]="true"
         label="Tipo"
         formControlName="tipo"
         col="5"
@@ -28,7 +28,7 @@
     ></app-input>
 
     <app-input
-        isGrid="true"
+        [isGrid]="true"
         label="Status"
         formControlName="statusProcesso"
         col="5"
@@ -39,11 +39,11 @@
     ></app-input>
 
     <app-input
-        isGrid="true"
+        [isGrid]="true"
         label="Data Protocolo"
         formControlName="dataInicial"
         id="dt-procolo"
-        isObrigatorio="true"
+        [isObrigatorio]="true"
         col="5"
         [form]="pesquisaForm"
         [isDate]="true"
@@ -89,7 +89,7 @@
             label="Pesquisar"
             (click)="pesquisar()"
             [loading]="loading"
-            isRight="true"
+            [isRight]="true"
         ></app-button>
     </div>
 </app-grid-page>

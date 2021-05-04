@@ -9,10 +9,10 @@ import { GridColumnDefs, GridSearchParams } from 'grid';
 import { GridOptions } from 'ag-grid';
 import { AlertService } from 'lib-ui-interno';
 
-import { MaskPipe } from 'src/app/shared/pipes/mask.pipe';
-import { PesquisaInterface } from '../../../core/interfaces/pesquisa/pesquisa-interface';
-import { RotasEnum } from '../../../core/enums/rotas.enum';
-import { SolicitacaoService } from '../../services/solicitacao.service';
+import { PesquisaInterface } from '@core/interfaces/pesquisa/pesquisa-interface';
+import { RotasEnum } from '@core/enums/rotas.enum';
+import { SolicitacaoService } from '@feature/services/solicitacao.service';
+import { MaskPipe } from '@shared/pipes/mask.pipe';
 
 @Component({
     selector: 'app-visualizar-processo',

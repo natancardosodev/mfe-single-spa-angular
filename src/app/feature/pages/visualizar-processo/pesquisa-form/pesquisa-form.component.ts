@@ -4,10 +4,10 @@ import { Title } from '@angular/platform-browser';
 
 import { BehaviorSubject } from 'rxjs';
 import { AlertService } from 'lib-ui-interno';
-import { GeneralsUtil } from './../../../../core/utils/generals.util';
-import { TextMaskFactory } from './../../../../core/utils/mask/text-mask-factory';
+import { GeneralsUtil } from '@core/utils/generals.util';
+import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';
+import { PesquisaInterface } from '@core/interfaces/pesquisa/pesquisa-interface';
 import { PesquisaForm } from './pesquisa.form';
-import { PesquisaInterface } from 'src/app/core/interfaces/pesquisa/pesquisa-interface';
 
 @Component({
     selector: 'app-pesquisa-form',

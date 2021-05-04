@@ -20,7 +20,7 @@ export class ObservacaoForm extends FormGroup {
         this.descricao.setValue(data.descricao);
     }
 
-    public getDadosEnvioObservacao(): any {
+    public getDados(): any {
         return {
             descricao: this.value.descricao
         };

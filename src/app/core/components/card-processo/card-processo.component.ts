@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { finalize, take } from 'rxjs/operators';
 
-import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
+import { SolicitacaoService } from '@feature/services/solicitacao.service';
 
 @Component({
     selector: 'app-card-processo',

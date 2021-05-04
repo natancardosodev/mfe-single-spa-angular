@@ -3,7 +3,7 @@
         <app-input
             label="Descrição"
             formControlName="descricao"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             [form]="indeferirForm"
             [message]="!indeferirForm.descricao.valid ? indeferirForm.getFirstErrorFrom('descricao', 'Descrição') : ''"
             type="textarea"

@@ -3,7 +3,7 @@
         <app-input
             label="Protocolo"
             formControlName="protocolo"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             col="5"
             [form]="produtorForm"
             [readOnly]="readonly"
@@ -12,7 +12,7 @@
         <app-input
             label="Número do CPF"
             formControlName="no_cpf"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             col="5"
             [readOnly]="readonly"
             [textMask]="maskFactory.createCpf()"
@@ -21,7 +21,7 @@
         ></app-input>
         <app-input
             label="Nome Completo"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="ds_nome"
             col="9"
             [form]="produtorForm"
@@ -29,7 +29,7 @@
         ></app-input>
         <app-input
             label="Data da Solicitação"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="dt_solicitacao"
             col="5"
             [readOnly]="readonly"
@@ -42,7 +42,7 @@
         ></app-input>
         <app-input
             label="Eventos"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_evento"
             col="6"
             [readOnly]="readonly"
@@ -53,7 +53,7 @@
     <app-collapse label="Dados Produtor Rural" [loading]="loading">
         <app-input
             label="Documento de Identificação"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="nu_documento"
             [form]="produtorForm"
             col="4"
@@ -65,7 +65,7 @@
         ></app-input>
         <app-input
             label="Órgão Emissor"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="ds_orgao_emissor"
             [form]="produtorForm"
             col="4"
@@ -94,7 +94,7 @@
         <app-input
             label="Data de Nascimento"
             formControlName="dt_nascimento"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             col="4"
             [form]="produtorForm"
             type="date"
@@ -136,7 +136,7 @@
     <app-collapse label="Endereço de correspondência e contato" [loading]="loading">
         <app-input
             label="UF"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="uf_pais"
             col="7"
             [form]="produtorForm"
@@ -149,7 +149,7 @@
         </app-input>
         <app-input
             label="Município"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_municipio"
             col="7"
             [form]="produtorForm"
@@ -162,7 +162,7 @@
         </app-input>
         <app-input
             label="CEP"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_cep"
             col="4"
             [textMask]="maskFactory.createCep()"
@@ -183,7 +183,7 @@
         </app-input>
         <app-input
             label="Número"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="nu_numero"
             col="4"
             [form]="produtorForm"
@@ -202,7 +202,7 @@
         ></app-input>
         <app-input
             label="Bairro"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="ds_bairro"
             col="7"
             [form]="produtorForm"
@@ -231,13 +231,10 @@
             [message]="!produtorForm.ds_email.valid ? produtorForm.getFirstErrorFrom('ds_email', 'Email') : ''"
         ></app-input>
     </app-collapse>
-    <app-collapse label="Atividade" [loading]="loading">
-        <app-form-atividade [dadosAtividades]="atividades"></app-form-atividade>
-    </app-collapse>
     <app-collapse label="Dados imóvel" [loading]="loading">
         <app-input
             label="Tipo Logradouro"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_tipo_logradouro"
             col="4"
             [form]="imovelForm"
@@ -252,7 +249,7 @@
         </app-input>
         <app-input
             label="Logradouro"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="ds_endereco"
             col="7"
             [form]="imovelForm"
@@ -260,7 +257,7 @@
         ></app-input>
         <app-input
             label="Número"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="nu_numero_imovel"
             col="4"
             [form]="imovelForm"
@@ -270,7 +267,7 @@
         ></app-input>
         <app-input
             label="Bairro"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="ds_bairro_imovel"
             col="7"
             [form]="imovelForm"
@@ -292,7 +289,7 @@
         </app-input>
         <app-input
             label="Município"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             col="7"
             formControlName="co_municipio"
             [form]="imovelForm"
@@ -315,7 +312,7 @@
         ></app-input>
         <app-input
             label="Tipo de Imóvel"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             col="4"
             formControlName="co_tipo_imovel"
             [form]="imovelForm"
@@ -338,7 +335,7 @@
         ></app-input>
         <app-input
             label="Área total(ha)"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="nu_area_total"
             col="4"
             [form]="imovelForm"
@@ -348,7 +345,7 @@
         ></app-input>
         <app-input
             label="Área de Produção(ha)"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="nu_area_producao"
             col="4"
             [form]="imovelForm"
@@ -417,7 +414,7 @@
             formControlName="tipo_pessoa"
             id="tiposPessoa"
             col="7"
-            isRadio="true"
+            [isRadio]="true"
             [form]="contabilistaForm"
             type="radio"
             [options]="tiposPessoa"
@@ -431,7 +428,7 @@
     <app-collapse label="Responsável Contábil" [loading]="loading">
         <app-input
             label="CPF"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_cpf"
             col="4"
             (change)="preencherNomeByCpf()"
@@ -441,7 +438,7 @@
         ></app-input>
         <app-input
             label="Nome"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="ds_nome"
             col="7"
             [form]="contabilistaForm"
@@ -449,7 +446,7 @@
         ></app-input>
         <app-input
             label="Número do CRC"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="nu_tipo_crc"
             col="4"
             [form]="contabilistaForm"
@@ -461,7 +458,7 @@
         ></app-input>
         <app-input
             label="Classificação"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             col="4"
             formControlName="ds_classificacao"
             [form]="contabilistaForm"
@@ -476,7 +473,7 @@
         </app-input>
         <app-input
             label="Tipo de Classificação"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             col="4"
             formControlName="co_tipo_classificacao_crc"
             [form]="contabilistaForm"
@@ -491,7 +488,7 @@
         </app-input>
         <app-input
             label="Digito Verificador"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_digito_verificador"
             col="4"
             [form]="contabilistaForm"
@@ -503,7 +500,7 @@
         ></app-input>
         <app-input
             label="UF do CRC"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             col="4"
             formControlName="co_uf_crc"
             [form]="contabilistaForm"
@@ -520,7 +517,7 @@
     <app-collapse label="Empresa Contabilista" [loading]="loading" *ngIf="tipoPessoaJuridica">
         <app-input
             label="CNPJ"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_cnpj"
             col="4"
             (change)="preencherNomeByCnpj()"
@@ -530,7 +527,7 @@
         ></app-input>
         <app-input
             label="Nome Empresarial"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="ds_nome_empresa"
             col="7"
             [form]="contabilistaForm"
@@ -542,7 +539,7 @@
         ></app-input>
         <app-input
             label="Número do CRC"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="nu_tipo_crc_empresa"
             col="4"
             [form]="contabilistaForm"
@@ -554,7 +551,7 @@
         ></app-input>
         <app-input
             label="Classificação"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="ds_classificacao_empresa"
             col="4"
             [form]="contabilistaForm"
@@ -569,7 +566,7 @@
         </app-input>
         <app-input
             label="Tipo de Classificação"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_tipo_classificacao_crc_empresa"
             col="4"
             [form]="contabilistaForm"
@@ -584,7 +581,7 @@
         </app-input>
         <app-input
             label="Digito Verificador"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_digito_verificador_empresa"
             col="4"
             [form]="contabilistaForm"
@@ -596,7 +593,7 @@
         ></app-input>
         <app-input
             label="UF do CRC"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_uf_crc_empresa"
             col="4"
             [form]="contabilistaForm"
@@ -618,7 +615,7 @@
     >
         <app-input
             label="UF"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_uf"
             col="7"
             [form]="contabilistaForm"
@@ -631,7 +628,7 @@
         </app-input>
         <app-input
             label="Municipio"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             col="7"
             formControlName="ds_municipio"
             [form]="contabilistaForm"
@@ -646,7 +643,7 @@
         </app-input>
         <app-input
             label="CEP"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="co_cep"
             col="4"
             [textMask]="maskFactory.createCep()"
@@ -655,7 +652,7 @@
         ></app-input>
         <app-input
             label="Logradouro"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="ds_endereco"
             col="7"
             [form]="contabilistaForm"
@@ -670,7 +667,7 @@
         </app-input>
         <app-input
             label="Número"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="nu_numero"
             col="4"
             [form]="contabilistaForm"
@@ -691,7 +688,7 @@
         ></app-input>
         <app-input
             label="Bairro"
-            isObrigatorio="true"
+            [isObrigatorio]="true"
             formControlName="ds_bairro"
             col="7"
             [form]="contabilistaForm"

@@ -119,8 +119,8 @@ export class PesquisaForm extends FormGroup {
     public getValuesFormated(): any {
         return {
             ...this.value,
-            dataInicial: this.value.dataInicial ? new Date(this.value.dataInicial).toLocaleDateString('fr-CA') : null,
-            dataFinal: this.value.dataFinal ? new Date(this.value.dataFinal).toLocaleDateString('fr-CA') : null
+            dataInicial: this.value.dataInicial ? GeneralsUtil.formatDateBrToEn(this.value.dataInicial) : null,
+            dataFinal: this.value.dataFinal ? GeneralsUtil.formatDateBrToEn(this.value.dataFinal) : null
         };
     }
 

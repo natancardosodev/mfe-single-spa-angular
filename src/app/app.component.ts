@@ -2,23 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Subject, Subscription, forkJoin } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import * as sha512 from 'js-sha512';
-import { Menu, MenuFuncionalidade } from 'lib-menu';
-import { LogoInterface } from 'lib-header';
-import { AlertService, LoadingGlobalService } from 'lib-ui-interno';
+import { AlertService, LoadingGlobalService, LogoInterface, Menu, MenuFuncionalidade } from 'lib-ui-interno';
 
-import { StorageUtil } from './core/utils/storage.util';
-import { UrlUtilService } from './core/services/url-util.service';
-import { CommonService } from './core/services/common.service';
-import { UserService } from './core/services/user.service';
-import { SystemInterface } from './core/interfaces/interno/system-interface';
-import { User } from './core/interfaces/interno/user-interface';
-import { Storage } from './core/enums/storage.enum';
-import { FuncionalidadeEnum } from './core/enums/funcionalidade.enum';
-import { RotasEnum } from './core/enums/rotas.enum';
-import { ExternalFilesService } from './core/services/external-files.service';
-import { EnvService } from './core/services/env.service';
+import { StorageUtil } from '@core/utils/storage.util';
+import { UrlUtilService } from '@core/services/url-util.service';
+import { CommonService } from '@core/services/common.service';
+import { UserService } from '@core/services/user.service';
+import { SystemInterface } from '@core/interfaces/interno/system-interface';
+import { User } from '@core/interfaces/interno/user-interface';
+import { Storage } from '@core/enums/storage.enum';
+import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
+import { RotasEnum } from '@core/enums/rotas.enum';
+import { ExternalFilesService } from '@core/services/external-files.service';
+import { EnvService } from '@core/services/env.service';
+import { GeneralsUtil } from '@core/utils/generals.util';
 
 @Component({
     selector: 'app-root',
@@ -26,8 +25,11 @@ import { EnvService } from './core/services/env.service';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    public funcionalidade: MenuFuncionalidade;
+    public funcionalidadesDoProjeto: Array<number> = [];
+    public funcionalidadeAtual: MenuFuncionalidade;
     public idUsuario: Subject<number>;
+    public baseHref: string;
+    public userKey: string;
     private _sistema: Array<SystemInterface>;
     private _usuario: User;
     private _urlLogo: string;
@@ -47,11 +49,17 @@ export class AppComponent implements OnInit {
     ) {
         this.idUsuario = new Subject();
         this._urlLogoSistema = { url: 'assets/images/sigfacil.png', alt: 'string' };
+        this.userKey = Storage.DADOS_USUARIO;
+        this.baseHref = RotasEnum.BASE_HREF;
     }
 
     public ngOnInit(): void {
-        this.loadingGlobal.show();
         this.logarService();
+        this.loadingFuncionalidadesDoProjeto();
+    }
+
+    public ngAfterViewInit(): void {
+        this.loadingGlobal.show();
     }
 
     public get sistema(): Array<SystemInterface> {
@@ -92,8 +100,9 @@ export class AppComponent implements OnInit {
             .pipe(take(1))
             .subscribe(
                 (response: User) => {
+                    this.externalFiles.loadCss(`${this.envService.assetsSigfacil}/css/interno/theme.css`);
                     StorageUtil.store(Storage.DADOS_USUARIO, response);
-                    this.carregarJarvis(response.cpf, response.id);
+                    this.carregarJarvis(response.cpf, response.id); // @todo Caso use o jarvis
                     this.getSystemInfo(response);
                     this.commonService.getAllOptions();
 
@@ -105,6 +114,18 @@ export class AppComponent implements OnInit {
             );
     }
 
+    public updateFuncionalidade(funcionalidade: MenuFuncionalidade): void {
+        this.funcionalidadeAtual = funcionalidade;
+    }
+
+    private loadingFuncionalidadesDoProjeto(): void {
+        Object.keys(FuncionalidadeEnum).map((item) => {
+            if (parseInt(item) >= 0) {
+                this.funcionalidadesDoProjeto.push(parseInt(item));
+            }
+        });
+    }
+
     private getSystemInfo(dadosUsuario): Subscription {
         return forkJoin([
             this.userService.getSystem(),
@@ -112,7 +133,16 @@ export class AppComponent implements OnInit {
             this.userService.getPathLogo(),
             this.userService.getModulos()
         ])
-            .pipe(take(1))
+            .pipe(
+                finalize(
+                    () =>
+                        void (async () => {
+                            await GeneralsUtil.delay(1000);
+                            this.loadingGlobal.hide();
+                        })()
+                ),
+                take(1)
+            )
             .subscribe(
                 ([system, data, path, itensMenu]) => {
                     this._dataSistema = data;
@@ -121,13 +151,9 @@ export class AppComponent implements OnInit {
                     this._urlLogo = path;
                     this._itensMenu = itensMenu;
                     this.validaPermissaoFuncionalidade(this._usuario);
-                    this.removeDuplicidadeFuncionalidades();
-                    this.externalFiles.loadCss(`${this.envService.assetsSigfacil}/css/interno/theme.css`);
-                    this.loadingGlobal.hide();
                 },
                 (error: any) => {
                     if (!error.naoAutorizado) {
-                        this.loadingGlobal.hide();
                         this.alertService.openModal({ title: 'Erro', message: error.message, style: 'danger' });
                     }
                 }
@@ -143,13 +169,7 @@ export class AppComponent implements OnInit {
         const permissao = JSON.stringify(this.itensMenu);
         const rotaInicial = this.router.url.replace(/-/g, '').split('/')[1].toUpperCase() || 'EMPRESA'; // @todo funcionalidade base
 
-        this.itensMenu.forEach((menu) => {
-            menu.funcionalidades.forEach((func) => {
-                if (FuncionalidadeEnum[rotaInicial] === func.id) {
-                    this.funcionalidade = func;
-                }
-            });
-        });
+        this.setFuncionalidadeBreadcrumb(this.itensMenu, rotaInicial);
 
         if (
             (this.router.url.includes(RotasEnum[rotaInicial]) &&
@@ -158,35 +178,28 @@ export class AppComponent implements OnInit {
         ) {
             this.alertService.openModal({ title: 'Erro', message: 'Acesso Negado', style: 'danger' });
             setTimeout(() => {
-                window.location.href = this.urlUtilService.getUrlSigfacil();
+                window.location.href = this.urlUtilService.getUrlSigfacil(true);
             }, 1000);
         }
+    }
+
+    private setFuncionalidadeBreadcrumb(itensMenu: Array<Menu>, keyEnumRotaInicial: string = null) {
+        const keyEnumRota = keyEnumRotaInicial
+            ? keyEnumRotaInicial
+            : this.router.url.replace(/-/g, '').split('/')[1].toUpperCase();
+
+        itensMenu.forEach((menu) => {
+            menu.funcionalidades.forEach((func) => {
+                if (FuncionalidadeEnum[keyEnumRota] === func.id) {
+                    this.funcionalidadeAtual = func;
+                }
+            });
+        });
     }
 
     private carregarJarvis(cpf: string, id: number): void {
         let hash = `${cpf}${id}`;
         hash = sha512.sha512(hash.toString());
         StorageUtil.store(Storage.JARVIS, hash);
-    }
-
-    /**
-     * Remove a duplicidade do link ao clicar no menu lateral para com funcionalidades do mesmo projeto
-     */
-    private removeDuplicidadeFuncionalidades(): void {
-        this._itensMenu = this.itensMenu.map((item: Menu) => {
-            let index = 0;
-            item.funcionalidades.map((funcionalidade) => {
-                if (funcionalidade.rota.match(RotasEnum.BASE)) {
-                    const teste = funcionalidade.rota.replace(RotasEnum.BASE + '/', '');
-                    item.funcionalidades[index].rota = teste;
-                }
-                index++;
-
-                return funcionalidade;
-            });
-            if (item.funcionalidades.length === index) {
-                return item;
-            }
-        });
     }
 }

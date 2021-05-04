@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // import { map, catchError } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
-
-import { Menu } from 'lib-menu';
+import { Menu } from 'lib-ui-interno';
 
 import { User } from '../interfaces/interno/user-interface';
 import { SystemInterface } from '../interfaces/interno/system-interface';

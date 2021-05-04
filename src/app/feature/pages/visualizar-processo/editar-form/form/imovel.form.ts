@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
-import { ImovelInterface } from 'src/app/core/interfaces/pessoa-fisica/dados-inscricao.interface';
+import { MensagensEnum } from '@core/enums/mensagens.enum';
+import { ImovelInterface } from '@core/interfaces/pessoa-fisica/dados-inscricao.interface';
 
 export class ImovelForm extends FormGroup {
     private _errorMessages = {
-        required: 'O campo %s é obrigatório.'
+        required: 'O campo %s é obrigatório.',
+        bsDate: MensagensEnum.DATE_INVALID_FORMAT
     };
 
     constructor() {
@@ -16,7 +18,7 @@ export class ImovelForm extends FormGroup {
             uf_imovel: new FormControl(null, [Validators.required]),
             co_municipio: new FormControl(null, [Validators.required]),
             co_cep_imovel: new FormControl(null, [Validators.required]),
-            co_tipo_imovel: new FormControl(null), // , [Validators.required] @todo add posterior
+            co_tipo_imovel: new FormControl(null),
             nu_area_total: new FormControl(null, [Validators.required]),
             nu_area_producao: new FormControl(null, [Validators.required]),
             ds_ponto_referencia: new FormControl(null),
@@ -103,6 +105,20 @@ export class ImovelForm extends FormGroup {
 
     public markAllAsTouched(): void {
         Object.keys(this.controls).map((control) => this.get(control).markAsDirty());
+    }
+
+    public updateAll(): void {
+        Object.keys(this.controls).map((control) => this.get(control).updateValueAndValidity());
+    }
+
+    public getDados(): Record<string, string> {
+        const form = this.value;
+
+        return {
+            // @todo completar form
+            co_tipo_logradouro: form.endereco.co_tipo_logradouro,
+            ds_endereco: form.endereco.ds_endereco
+        };
     }
 
     public setValues(produtor: ImovelInterface): void {

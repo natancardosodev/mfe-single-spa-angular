@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 import { AlertService } from 'lib-ui-interno';
+import { HttpOptions } from '@core/interfaces/http-options';
 import { UrlUtilService } from './url-util.service';
-import { HttpOptions } from '../interfaces/http-options';
 
 export abstract class BaseService {
     private _baseUrl: string;

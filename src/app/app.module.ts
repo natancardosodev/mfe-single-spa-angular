@@ -6,9 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
-import { HeaderModule } from 'lib-header';
-import { MenuModule } from 'lib-menu';
 import { LibUIModule } from 'lib-ui-interno';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,8 +26,6 @@ import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
         FontAwesomeModule,
         ModalModule.forRoot(),
         SharedModule,
-        HeaderModule,
-        MenuModule,
         LibUIModule
     ],
     providers: [
