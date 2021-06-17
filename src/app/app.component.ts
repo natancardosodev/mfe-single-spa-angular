@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -104,7 +106,7 @@ export class AppComponent implements OnInit {
                     StorageUtil.store(Storage.DADOS_USUARIO, response);
                     this.carregarJarvis(response.cpf, response.id); // @todo Caso use o jarvis
                     this.getSystemInfo(response);
-                    this.commonService.getAllOptions();
+                    this.commonService.loadingAllOptions();
 
                     return typeof response['mensagem'] === 'undefined' || this.urlUtilService.redirectToLogin();
                 },
