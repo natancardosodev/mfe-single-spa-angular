@@ -1,14 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
-import { Observable, forkJoin, BehaviorSubject, Subscription, throwError } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { AlertService } from 'lib-ui-interno';
 
-import { Storage } from '@core/enums/storage.enum';
-import { StorageUtil } from '@core/utils/storage.util';
+import { Storage } from '../enums/storage.enum';
+import { StorageUtil } from '../utils/storage.util';
+
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';
+import { CommonOptionsEnum } from '@core/enums/commonOptions.enum';
+import { DadosInterface, OptionsCommonInterface } from '@core/interfaces/common.interface';
 
 /**
  * @export
@@ -23,10 +27,11 @@ export class CommonService extends BaseService {
     public logradouroOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     public tipoImovelOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     public estadoOptions: BehaviorSubject<any> = new BehaviorSubject([]);
-    public municipioOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     public classificacaoCrcOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     public tipoClassificacaoCrcOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     public escolaridadeOptions: BehaviorSubject<any> = new BehaviorSubject([]);
+
+    private commonOptionsStorageName = 'commonOptions';
     private tipoApi = 'jarvis';
 
     /**
@@ -75,6 +80,8 @@ export class CommonService extends BaseService {
      * @returns {Observable<any>}
      * @memberof CommonService
      */
+    // Caso não seja necessário passar o jarvis, chamar o get como no exemplo abaixo:
+    // Ex: public getOptionsCategoria = (): Observable<any> => this.get('/categoria-denuncia');
     public getOptionsTipoClassificacaoCrc = (): Observable<any> =>
         this.get('/tipo-classificacao-crc/combo', null, this.tipoApi, true);
 
@@ -85,54 +92,132 @@ export class CommonService extends BaseService {
     public getOptionsEscolaridade = (): Observable<any> => this.get('/escolaridade/combo', null, this.tipoApi, true);
 
     /**
+     * Chamar esse método sempre que for necessário carregar as opções de selects dinâmico em qualquer funcionalidade
+     * o mesmo assumira a  tarefa de intentificar se carregara os dados do storage, caso tenha, ou da api.
+     * @returns {void}
      * @memberof CommonService
      */
-    public getAllOptions = (): Subscription | void => {
-        if (!this.hasCommonOptionsInStorage) {
-            return forkJoin([
-                this.getOptionsTipoDocumento(),
-                this.getOptionsLogradouro(),
-                this.getOptionsTipoImovel(),
-                this.getOptionsEstado(),
-                this.getOptionsClassificacaoCrc(),
-                this.getOptionsTipoClassificacaoCrc(),
-                this.getOptionsEscolaridade()
-            ])
-                .pipe(take(1))
-                .subscribe(
-                    ([
-                        tipoDocumentoOptions,
-                        logradouroOptions,
-                        tipoImovelOptions,
-                        estadoOptions,
-                        classificacaoCrcOptions,
-                        tipoClassificacaoCrcOptions,
-                        escolaridadeOptions
-                    ]) => {
-                        this.tipoDocumentoOptions.next(tipoDocumentoOptions);
-                        this.logradouroOptions.next(logradouroOptions);
-                        this.tipoImovelOptions.next(tipoImovelOptions);
-                        this.estadoOptions.next(estadoOptions);
-                        this.classificacaoCrcOptions.next(classificacaoCrcOptions);
-                        this.tipoClassificacaoCrcOptions.next(tipoClassificacaoCrcOptions);
-                        this.escolaridadeOptions.next(escolaridadeOptions);
+    public getOptions(optionsName: Array<CommonOptionsEnum>): void {
+        optionsName.forEach((optionName) => {
+            if (!this.hasOptionInStorage(optionName)) {
+                switch (optionName) {
+                    case CommonOptionsEnum.TIPO_DOCUMENTO_OPTIONS:
+                        this.getOptionsTipoDocumento()
+                            .pipe(take(1))
+                            //  Caso o response não tenha o .body outilizar o exemplo do .subscribe abaixo:
+                            // .subscribe((response) => this.setValuesOption(response, optionName));
+                            .subscribe((response: HttpResponse<any>) => {
+                                this.setValuesOption(response.body as Array<DadosInterface>, optionName);
+                            });
+                        break;
+                    case CommonOptionsEnum.LOGRADOURO_OPTIONS:
+                        this.getOptionsLogradouro()
+                            .pipe(take(1))
+                            .subscribe((response: HttpResponse<any>) => {
+                                this.setValuesOption(response.body as Array<DadosInterface>, optionName);
+                            });
+                        break;
+                    case CommonOptionsEnum.TIPO_IMOVEL_OPTIONS:
+                        this.getOptionsTipoImovel()
+                            .pipe(take(1))
+                            .subscribe((response: HttpResponse<any>) => {
+                                this.setValuesOption(response.body as Array<DadosInterface>, optionName);
+                            });
+                        break;
+                    case CommonOptionsEnum.ESTADO_OPTIONS:
+                        this.getOptionsEstado()
+                            .pipe(take(1))
+                            .subscribe((response: HttpResponse<any>) => {
+                                this.setValuesOption(response.body as Array<DadosInterface>, optionName);
+                            });
+                        break;
+                    case CommonOptionsEnum.CLASSIFICACAO_CRC_OPTIONS:
+                        this.getOptionsClassificacaoCrc()
+                            .pipe(take(1))
+                            .subscribe((response: HttpResponse<any>) => {
+                                this.setValuesOption(response.body as Array<DadosInterface>, optionName);
+                            });
+                        break;
+                    case CommonOptionsEnum.TIPO_CLASSIFICACAO_CRC_OPTIONS:
+                        this.getOptionsTipoClassificacaoCrc()
+                            .pipe(take(1))
+                            .subscribe((response: HttpResponse<any>) => {
+                                this.setValuesOption(response.body as Array<DadosInterface>, optionName);
+                            });
+                        break;
+                    case CommonOptionsEnum.ESCOLARIDADE_OPTIONS:
+                        this.getOptionsEscolaridade()
+                            .pipe(take(1))
+                            .subscribe((response: HttpResponse<any>) => {
+                                this.setValuesOption(response.body as Array<DadosInterface>, optionName);
+                            });
+                        break;
 
-                        this.saveCommonOptionsInStorage({
-                            tipoDocumentoOptions,
-                            logradouroOptions,
-                            tipoImovelOptions,
-                            estadoOptions,
-                            classificacaoCrcOptions,
-                            tipoClassificacaoCrcOptions,
-                            escolaridadeOptions
-                        });
-                    },
-                    (error: HttpErrorResponse) => throwError(new Error(error.error.message))
-                );
-        }
+                    default:
+                        break;
+                }
+            }
+        });
 
         this.loadAllOptionsFromLocalStorage();
-    };
+    }
+
+    /**
+     * @returns {void}
+     * @memberof CommonService
+     */
+    public setValuesOption(value: Array<DadosInterface>, optionName: string): void {
+        const optionBehavior = this[optionName] as BehaviorSubject<any>;
+        const commonOption = {};
+        commonOption[optionName] = value;
+        optionBehavior.next(value);
+        this.saveCommonOptionsInStorage(commonOption);
+    }
+
+    // Essa solução é utilizada caso queira carregar todas as opções de uma única vez como era feito anteriormente
+    public loadingAllOptions(): void {
+        this.loadingOptionsEndereco();
+        this.getOptions([
+            CommonOptionsEnum.TIPO_DOCUMENTO_OPTIONS,
+            CommonOptionsEnum.CLASSIFICACAO_CRC_OPTIONS,
+            CommonOptionsEnum.TIPO_CLASSIFICACAO_CRC_OPTIONS,
+            CommonOptionsEnum.ESCOLARIDADE_OPTIONS
+        ]);
+    }
+
+    public loadingOptionsEndereco(): void {
+        this.getOptions([
+            CommonOptionsEnum.LOGRADOURO_OPTIONS,
+            CommonOptionsEnum.TIPO_IMOVEL_OPTIONS,
+            CommonOptionsEnum.ESTADO_OPTIONS
+        ]);
+    }
+
+    /**
+     * @public
+     * @memberof CommonService
+     */
+    public loadAllOptionsFromLocalStorage(): void {
+        if (StorageUtil.get(this.commonOptionsStorageName)) {
+            const {
+                tipoDocumentoOptions,
+                logradouroOptions,
+                tipoImovelOptions,
+                estadoOptions,
+                classificacaoCrcOptions,
+                tipoClassificacaoCrcOptions,
+                escolaridadeOptions
+            } = StorageUtil.get(this.commonOptionsStorageName);
+
+            this.tipoDocumentoOptions.next(tipoDocumentoOptions);
+            this.logradouroOptions.next(logradouroOptions);
+            this.tipoImovelOptions.next(tipoImovelOptions);
+            this.estadoOptions.next(estadoOptions);
+            this.classificacaoCrcOptions.next(classificacaoCrcOptions);
+            this.tipoClassificacaoCrcOptions.next(tipoClassificacaoCrcOptions);
+            this.escolaridadeOptions.next(escolaridadeOptions);
+        }
+    }
 
     public getAllOptionsFromLocalStorage(): Record<string, string> {
         return this.hasCommonOptionsInStorage ? StorageUtil.get(Storage.COMMON_SERVICE_OPTIONS) : null;
@@ -140,7 +225,6 @@ export class CommonService extends BaseService {
 
     public getValueByKey(optionName: string, key: string): string {
         const options = this.resolve(optionName, this);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         const value = options.filter((op) =>
             op && typeof op.key === 'string' ? op.key === key : parseInt(op.key) === parseInt(key)
         );
@@ -164,35 +248,22 @@ export class CommonService extends BaseService {
     }
 
     /**
+     * Verifica se o option passado tem no storage
+     * @private
+     * @param {CommonOptionsEnum} option
+     * @memberof CommonService
+     */
+    private hasOptionInStorage(option: CommonOptionsEnum): boolean {
+        const commonOptionsSalvos = StorageUtil.get(Storage.COMMON_SERVICE_OPTIONS) as OptionsCommonInterface;
+        return commonOptionsSalvos ? !!commonOptionsSalvos[option] : false;
+    }
+
+    /**
      * @private
      * @param {*} anyOptions
      * @memberof CommonService
      */
     private saveCommonOptionsInStorage(anyOptions: any): void {
         StorageUtil.store(Storage.COMMON_SERVICE_OPTIONS, { ...anyOptions, ...this.getAllOptionsFromLocalStorage() });
-    }
-
-    /**
-     * @private
-     * @memberof CommonService
-     */
-    private loadAllOptionsFromLocalStorage(): void {
-        const {
-            logradouroOptions,
-            tipoDocumentoOptions,
-            tipoImovelOptions,
-            estadoOptions,
-            classificacaoCrcOptions,
-            tipoClassificacaoCrcOptions,
-            escolaridadeOptions
-        } = StorageUtil.get(Storage.COMMON_SERVICE_OPTIONS);
-
-        this.logradouroOptions.next(logradouroOptions.body);
-        this.tipoDocumentoOptions.next(tipoDocumentoOptions.body);
-        this.tipoImovelOptions.next(tipoImovelOptions.body);
-        this.estadoOptions.next(estadoOptions.body);
-        this.classificacaoCrcOptions.next(classificacaoCrcOptions.body);
-        this.tipoClassificacaoCrcOptions.next(tipoClassificacaoCrcOptions.body);
-        this.escolaridadeOptions.next(escolaridadeOptions.body);
     }
 }

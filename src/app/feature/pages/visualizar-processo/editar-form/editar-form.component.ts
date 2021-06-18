@@ -149,6 +149,8 @@ export class EditarFormComponent implements OnInit {
         return;
     }
 
+    public preencherNomeByCnpj(): void {}
+
     public carregarMunicipio(uf: number, tipo: string): void {
         this.loadingUf = true;
         this.jarvisService
