@@ -97,7 +97,9 @@ export class VisualizarProcessoComponent {
         this._sub = this.solicitacaoService
             .getListarProcessos(parametros)
             .pipe(
-                finalize(() => (this.loading = false)),
+                finalize(() => {
+                    this.loading = false;
+                }),
                 take(1)
             )
             .subscribe(

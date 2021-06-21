@@ -24,7 +24,9 @@ export class CardProcessoComponent implements OnInit {
         this.solicitacaoService
             .getDadosProcesso({ solicitacao: this.solicitacao })
             .pipe(
-                finalize(() => (this.loading = false)),
+                finalize(() => {
+                    this.loading = false;
+                }),
                 take(1)
             )
             .subscribe((response: any) => {

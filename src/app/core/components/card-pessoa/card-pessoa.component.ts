@@ -25,7 +25,9 @@ export class CardPessoaComponent implements OnInit {
         this.solicitacaoService
             .getDadosPessoa({ solicitacao: this.solicitacao })
             .pipe(
-                finalize(() => (this.loading = false)),
+                finalize(() => {
+                    this.loading = false;
+                }),
                 take(1)
             )
             .subscribe((response: DadosPessoaInterface) => {

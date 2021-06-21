@@ -40,7 +40,9 @@ export class VisualizarPesquisaComponent implements OnInit {
     ) {
         this.loading = true;
         this.isStatusExigencia = false;
-        this.route.params.pipe(take(1)).subscribe((params) => (this.solicitacao = params['id']));
+        this.route.params.pipe(take(1)).subscribe((params) => {
+            this.solicitacao = params['id'];
+        });
     }
 
     public get hasAcessoInserir(): boolean {
