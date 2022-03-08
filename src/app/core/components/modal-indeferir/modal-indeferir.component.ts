@@ -14,7 +14,7 @@ import { IndeferirForm } from './indeferir.form';
 })
 export class ModalIndeferirComponent implements OnInit {
     @Input() public solicitacao: number;
-    @ViewChild('modal', { static: false }) modal: ModalComponent;
+    @ViewChild('modal') modal: ModalComponent;
     @Output() public finalizandoIndeferir: EventEmitter<any>;
     public loading: boolean;
     public isCollapsed: boolean;

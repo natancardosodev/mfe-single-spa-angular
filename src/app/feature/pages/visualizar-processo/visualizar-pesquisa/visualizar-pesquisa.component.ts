@@ -23,9 +23,9 @@ import { GeneralsUtil } from '@core/utils/generals.util';
     styleUrls: ['./visualizar-pesquisa.component.scss']
 })
 export class VisualizarPesquisaComponent implements OnInit {
-    @ViewChild(CardObservacaoComponent, { static: false }) observacao: CardObservacaoComponent;
-    @ViewChild(ModalIndeferirComponent, { static: false }) modalIndeferir: ModalIndeferirComponent;
-    @ViewChild('modalDeferir', { static: false }) modalDeferir: ModalComponent;
+    @ViewChild(CardObservacaoComponent) observacao: CardObservacaoComponent;
+    @ViewChild(ModalIndeferirComponent) modalIndeferir: ModalIndeferirComponent;
+    @ViewChild('modalDeferir') modalDeferir: ModalComponent;
     public loading: boolean;
     public modalRef: BsModalRef;
     public solicitacao: number;

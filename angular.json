@@ -23,7 +23,7 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
                         "baseHref": "/interno/",
-                        "aot": false,
+                        "aot": true,
                         "assets": [
                             "src/favicon.ico",
                             "src/assets"
@@ -46,7 +46,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -55,7 +54,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "homologacao": {
@@ -70,7 +73,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -79,7 +81,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "demo": {
@@ -94,7 +100,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -103,7 +108,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "deve": {
@@ -112,7 +121,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -141,7 +149,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -150,7 +157,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "deve-dois": {
@@ -165,7 +176,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -174,7 +184,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "deve-tres": {
@@ -189,7 +203,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -198,7 +211,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "deve-quatro": {
@@ -213,7 +230,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -222,7 +238,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "deve-cinco": {
@@ -237,7 +257,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -246,7 +265,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "deve-seis": {
@@ -261,7 +284,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -270,7 +292,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "deve-sete": {
@@ -285,7 +311,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -294,7 +319,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "deve-oito": {
@@ -309,7 +338,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -318,7 +346,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "deve-nove": {
@@ -333,7 +365,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -342,7 +373,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "deve-dez": {
@@ -357,7 +392,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -366,7 +400,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "qa-um": {
@@ -381,7 +419,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -390,7 +427,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "qa-dois": {
@@ -405,7 +446,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -414,7 +454,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "qa-tres": {
@@ -429,7 +473,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -438,7 +481,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "qa-quatro": {
@@ -453,7 +500,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -462,7 +508,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "qa-cinco": {
@@ -477,7 +527,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -486,7 +535,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "qa-seis": {
@@ -501,7 +554,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -510,7 +562,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "qa-sete": {
@@ -525,7 +581,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -534,7 +589,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "qa-oito": {
@@ -549,7 +608,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -558,7 +616,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "qa-nove": {
@@ -573,7 +635,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -582,7 +643,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         },
                         "qa-dez": {
@@ -597,7 +662,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": false,
@@ -606,7 +670,11 @@
                                     "type": "initial",
                                     "maximumWarning": "4mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         }
                     }
