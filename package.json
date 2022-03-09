@@ -69,7 +69,6 @@
         "@types/jasminewd2": "~2.0.3",
         "@types/node": "^12.11.1",
         "@typescript-eslint/eslint-plugin": "^3.10.1",
-        "@typescript-eslint/eslint-plugin-tslint": "^3.10.1",
         "@typescript-eslint/parser": "^3.10.1",
         "check-node-version": "^4.0.3",
         "eslint": "^7.7.0",

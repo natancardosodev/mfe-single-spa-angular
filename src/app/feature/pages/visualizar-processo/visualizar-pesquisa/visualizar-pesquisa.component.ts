@@ -68,6 +68,7 @@ export class VisualizarPesquisaComponent implements OnInit {
         navigate(this.router, RotasEnum.EMPRESA);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public statusAtualProcesso(status: number): void {}
 
     public openModal(modal: ElementRef): void {

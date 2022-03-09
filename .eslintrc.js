@@ -23,7 +23,7 @@ module.exports = {
         warnOnUnsupportedTypeScriptVersion: false,
         extraFileExtensions: ['html', 'scss']
     },
-    plugins: ['@typescript-eslint', '@typescript-eslint/tslint'],
+    plugins: ['@typescript-eslint'],
     rules: {
         '@typescript-eslint/indent': 'off',
         '@typescript-eslint/prefer-regexp-exec': 'off',
