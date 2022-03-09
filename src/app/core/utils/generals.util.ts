@@ -31,6 +31,15 @@ export function cleanParams(params: any): any {
     return params;
 }
 
+export function montarUrlPortais(env: Array<string>, baseHref: string): string {
+    const urls = env.map((ambiente) => {
+        return `https://${ambiente}.voxtecnologia.com.br/${baseHref}`;
+    });
+
+    // eslint-disable-next-line @typescript-eslint/quotes
+    return `'${urls.toString().split(',').join("', '")}'`;
+}
+
 export function idGenerator(label: string, idExtra?: number): string {
     if (label === undefined) {
         const radomNumber = Math.floor(Math.random() * 100);
