@@ -1,16 +1,28 @@
-<app-loading-global></app-loading-global>
+<app-loading-global [assetsSigfacil]="assetsSigfacil"></app-loading-global>
 <app-alert></app-alert>
 
 <div *ngIf="usuario">
-    <app-header [sistema]="sistema" [usuario]="usuario" [urlApi]="urlApi" [subDomain]="subDomain" [logoEntidade]="urlLogo"
-        [logoSistema]="urlLogoSistema" [horario]="dataSistema" [userKey]="userKey">
+    <app-header
+        [sistema]="sistema"
+        [usuario]="usuario"
+        [urlApi]="urlApi"
+        [subDomain]="subDomain"
+        [logoEntidade]="urlLogo"
+        [logoSistema]="urlLogoSistema"
+        [horario]="dataSistema"
+        [userKey]="userKey"
+    >
     </app-header>
 
     <main class="container container-base">
         <div class="row">
             <aside class="col-md-3">
-                <app-menu-lateral [modulos]="itensMenu" [funcionalidadesDoProjeto]="funcionalidadesDoProjeto"
-                    (changeAlteracao)="updateFuncionalidade($event)" [baseHref]="baseHref">
+                <app-menu-lateral
+                    [modulos]="itensMenu"
+                    [funcionalidadesDoProjeto]="funcionalidadesDoProjeto"
+                    (changeAlteracao)="updateFuncionalidade($event)"
+                    [baseHref]="baseHref"
+                >
                 </app-menu-lateral>
             </aside>
             <section class="col-9 content-app">

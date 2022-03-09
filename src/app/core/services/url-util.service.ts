@@ -29,6 +29,10 @@ export class UrlUtilService {
         return `${this.env.api}${rota}`;
     }
 
+    public mountUrlAssets(rota = ''): string {
+        return `${this.env.assetsSigfacil}${rota}`;
+    }
+
     public mountUrlJarvis(rota = ''): string {
         return `${this.env.jarvis}${rota}`;
     }

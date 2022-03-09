@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 // import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
 import { Menu } from 'lib-ui-interno';
 
-import { User } from '../interfaces/interno/user-interface';
-import { SystemInterface } from '../interfaces/interno/system-interface';
-import { UserMocky } from '../mockys/interno/user-mocky';
-import { PathLogoMocky } from '../mockys/interno/path-logo-mocky';
-import { HoraMocky } from '../mockys/interno/hora-mocky';
-import { SystemMocky } from '../mockys/interno/system-mocky';
-import { ModulosMocky } from '../mockys/interno/modulos-mocky';
+import { tratarErroLogin } from '@core/utils/generals.util';
+import { User } from '@core/interfaces/interno/user-interface';
+import { UserMocky } from '@core/mockys/interno/user-mocky';
+import { PathLogoMocky } from '@core/mockys/interno/path-logo-mocky';
+import { SystemInterface } from '@core/interfaces/interno/system-interface';
+import { HoraMocky } from '@core/mockys/interno/hora-mocky';
+import { SystemMocky } from '@core/mockys/interno/system-mocky';
+import { ModulosMocky } from '@core/mockys/interno/modulos-mocky';
+import { UrlUtilService } from './url-util.service';
 
 @Injectable({
     providedIn: 'root'
@@ -21,10 +24,18 @@ export class UserService {
     private _user: Observable<User>;
     private _setUserInfo: Subject<User>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private urlUtilService: UrlUtilService) {
         this._setUserInfo = new Subject();
         this._checkModuloMenu = new Subject();
         this._user = this._setUserInfo.asObservable();
+    }
+
+    public getManifest(): Observable<any> {
+        const url = this.urlUtilService.mountUrlAssets(`/manifest.json?v=${new Date().toISOString()}`);
+
+        return this.http
+            .get<any>(url, { withCredentials: true, responseType: 'json' })
+            .pipe<any>(catchError((error: HttpErrorResponse) => tratarErroLogin(error)));
     }
 
     /**
