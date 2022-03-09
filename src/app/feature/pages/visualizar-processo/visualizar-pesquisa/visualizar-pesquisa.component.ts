@@ -9,12 +9,10 @@ import { take } from 'rxjs/operators';
 import { ModalIndeferirComponent } from '@core/components/modal-indeferir/modal-indeferir.component';
 import { CardObservacaoComponent } from '@core/components/card-observacao/card-observacao.component';
 import { UserService } from '@core/services/user.service';
-import { Storage } from '@core/enums/storage.enum';
-import { StorageUtil } from '@core/utils/storage.util';
 import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
-import { PapeisEnum } from '@core/enums/papeis.enum';
 import { RotasEnum } from '@core/enums/rotas.enum';
 import { navigate } from '@core/utils/generals.util';
+import { UserPermissoes } from '@core/interfaces/interno/user-interface';
 
 @Component({
     selector: 'app-visualizar-pesquisa',
@@ -44,20 +42,8 @@ export class VisualizarPesquisaComponent implements OnInit {
         });
     }
 
-    public get hasAcessoInserir(): boolean {
-        return this.userService.checkPermissaoLiberada(
-            StorageUtil.get(Storage.DADOS_USUARIO),
-            FuncionalidadeEnum.EMPRESA,
-            [PapeisEnum.INSERIR]
-        );
-    }
-
-    public get hasAcessoAlterar(): boolean {
-        return this.userService.checkPermissaoLiberada(
-            StorageUtil.get(Storage.DADOS_USUARIO),
-            FuncionalidadeEnum.EMPRESA,
-            [PapeisEnum.ALTERAR]
-        );
+    public get permissoes(): UserPermissoes {
+        return this.userService.getPermissoesByFuncionalidade(FuncionalidadeEnum.EMPRESA);
     }
 
     ngOnInit(): void {

@@ -14,8 +14,8 @@
 
         <div class="d-flex flex-row-reverse mt-2">
             <app-button label="Indeferir" (click)="openModalIndeferir()"></app-button>
-            <app-button label="Deferir" (click)="openModalDeferir()" *ngIf="hasAcessoInserir"></app-button>
-            <app-button label="Alterar" (click)="redirectAlterarDados()" *ngIf="hasAcessoAlterar"></app-button>
+            <app-button label="Deferir" (click)="openModalDeferir()" *ngIf="permissoes.inserir"></app-button>
+            <app-button label="Alterar" (click)="redirectAlterarDados()" *ngIf="permissoes.alterar"></app-button>
             <app-button label="Voltar" (click)="voltarParaPesquisa()"></app-button>
         </div>
     </div>

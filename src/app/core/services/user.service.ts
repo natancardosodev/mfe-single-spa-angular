@@ -7,7 +7,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { Menu } from 'lib-ui-interno';
 
 import { tratarErroLogin } from '@core/utils/generals.util';
-import { User } from '@core/interfaces/interno/user-interface';
+import { User, UserPermissoes } from '@core/interfaces/interno/user-interface';
 import { UserMocky } from '@core/mockys/interno/user-mocky';
 import { PathLogoMocky } from '@core/mockys/interno/path-logo-mocky';
 import { SystemInterface } from '@core/interfaces/interno/system-interface';
@@ -15,6 +15,8 @@ import { HoraMocky } from '@core/mockys/interno/hora-mocky';
 import { SystemMocky } from '@core/mockys/interno/system-mocky';
 import { ModulosMocky } from '@core/mockys/interno/modulos-mocky';
 import { UrlUtilService } from './url-util.service';
+import { StorageUtil } from '@core/utils/storage.util';
+import { Storage } from '@core/enums/storage.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -144,30 +146,18 @@ export class UserService {
         return this._checkModuloMenu.asObservable();
     }
 
-    /**
-     * Checar se na funcionalidade acessada o usuário tem algum papel com
-     * permissão de acesso (Alterar, excluir, etc) para essa funcionalidade
-     */
-    public checkPermissaoLiberada(
-        dadosUsuario: User,
-        funcionalidadeAcessada: number,
-        permissaoNecessaria: Array<string>
-    ): boolean {
-        let hasPermissao = false;
-        dadosUsuario.papel.forEach((p) => {
-            const papeisUsuario = p.split('_');
-            const funcionalidadePermitida = String(papeisUsuario[1]);
-            const acessoPermitido = papeisUsuario[2];
+    public getPermissoesByFuncionalidade(idFuncionalidade: number): UserPermissoes {
+        const roles = Object.values(StorageUtil.get(Storage.DADOS_USUARIO)['papel'])
+            .filter((permissao: string) => {
+                return permissao.includes(idFuncionalidade.toString()) ? permissao : null;
+            })
+            .join('');
 
-            if (String(funcionalidadeAcessada) === funcionalidadePermitida) {
-                permissaoNecessaria.filter(() => {
-                    if (permissaoNecessaria.indexOf(acessoPermitido) !== -1) {
-                        return (hasPermissao = true);
-                    }
-                });
-            }
-        });
-
-        return hasPermissao ? true : false;
+        return {
+            inserir: roles.includes('INSERIR'),
+            alterar: roles.includes('ALTERAR'),
+            excluir: roles.includes('EXCLUIR'),
+            visualizar: roles.includes('VISUALIZAR')
+        };
     }
 }
