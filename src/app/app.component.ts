@@ -157,6 +157,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked, On
             )
             .subscribe(
                 ([system, data, path, itensMenu, manifest]) => {
+                    this.externalFiles.loadCss('/fontawesome/css/all.min', this.assetsSigfacil);
                     this.externalFiles.loadCss('/styles/interno/theme', this.assetsSigfacil, manifest.hash);
                     this._dataSistema = data;
                     this._sistema = system;

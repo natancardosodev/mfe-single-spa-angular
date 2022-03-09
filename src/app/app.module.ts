@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LibUIModule } from 'lib-ui-interno';
 
@@ -23,7 +21,6 @@ import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        FontAwesomeModule,
         ModalModule.forRoot(),
         SharedModule,
         LibUIModule
@@ -38,7 +35,5 @@ import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
-    constructor(library: FaIconLibrary) {
-        library.addIconPacks(fas);
-    }
+    constructor() {}
 }
