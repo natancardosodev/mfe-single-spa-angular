@@ -3,8 +3,8 @@ import { EnvironmentInterface } from '@core/interfaces/enviroment-interface';
 export const environment: EnvironmentInterface = {
     production: true,
     uri: {
-        api: 'https://demo-nova-funcionalidade-service.voxtecnologia.com.br',
-        oauth: 'https://demo-nova-funcionalidade-service.voxtecnologia.com.br/connect/vox',
+        api: 'https://demo-nova-funcionalidade-internal-service.voxtecnologia.com.br',
+        oauth: 'https://demo.voxtecnologia.com.br',
         assetsSigfacil: 'https://demo-assets-sigfacil.voxtecnologia.com.br',
         jarvis: 'https://demo-jarvis.voxtecnologia.com.br',
         projeto: 'https://demo.voxtecnologia.com.br/sigfacil/nova-funcionalidade',
