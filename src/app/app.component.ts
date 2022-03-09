@@ -165,18 +165,22 @@ export class AppComponent implements OnInit {
     /**
      * Validação a partir das rotas principais, desconsiderando as subrotas que deve-se colocar no RotasEnum
      * Verifica-se o id da funcionalidade em comum.s_sistema_funcionalidade que deve-se colocar no FuncionalidadeEnum
+     * Define o breadcrumb pela funcionalidade atual
      * @param dadosUsuario
      */
     private validaPermissaoFuncionalidade(dadosUsuario: User) {
         const permissao = JSON.stringify(this.itensMenu);
-        const rotaInicial = this.router.url.replace(/-/g, '').split('/')[1].toUpperCase() || 'EMPRESA'; // @todo funcionalidade base
+        const rotaFormatada = (() => {
+            const rota = this.router.url.replace(/[0-9]|-/g, '').split('/');
+            return rota.length > 2 ? `${rota[1]}${rota[2]}` : `${rota[1]}`;
+        })().toUpperCase();
 
-        this.setFuncionalidadeBreadcrumb(this.itensMenu, rotaInicial);
+        this.setFuncionalidadeBreadcrumb(this.itensMenu, rotaFormatada);
 
         if (
-            (this.router.url.includes(RotasEnum[rotaInicial]) &&
-                !permissao.includes(String(FuncionalidadeEnum[rotaInicial]))) ||
-            dadosUsuario.papel.length == 0
+            this.router.url.includes(RotasEnum[rotaFormatada]) &&
+            !permissao.includes(String(FuncionalidadeEnum[rotaFormatada])) &&
+            !dadosUsuario.papel.toString().includes(String(FuncionalidadeEnum[rotaFormatada]))
         ) {
             this.alertService.openModal({ title: 'Erro', message: 'Acesso Negado', style: 'danger' });
             setTimeout(() => {

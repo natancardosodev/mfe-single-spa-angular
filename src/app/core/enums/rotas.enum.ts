@@ -1,9 +1,11 @@
 export enum RotasEnum {
     BASE_HREF = '/interno/', // @todo funcionalidade base
+    // ROTAS BASE DAS FUNCIONALIDADES
     EMPRESA = 'empresa',
+    MIGRAR = 'migrar',
+    // ROTAS SECUNDÁRIAS
     EMPRESA_VISUALIZAR = 'empresa/visualizar',
     EMPRESA_EDITAR = 'empresa/editar',
     EMPRESA_INCLUIR = 'empresa/incluir',
-    MIGRAR = 'migrar',
     MIGRAR_VISUALIZAR = 'migrar/visualizar'
 }
