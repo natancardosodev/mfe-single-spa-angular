@@ -295,11 +295,7 @@
             [form]="imovelForm"
             type="select"
             [options]="listaMunicipiosImovel"
-            [message]="
-                !imovelForm.co_municipio.valid
-                    ? imovelForm.getFirstErrorFrom('co_municipio', 'Município')
-                    : ''
-            "
+            [message]="!imovelForm.co_municipio.valid ? imovelForm.getFirstErrorFrom('co_municipio', 'Município') : ''"
         >
         </app-input>
         <app-input
@@ -359,21 +355,13 @@
             label="Latitude"
             formControlName="nu_latitude"
             [form]="imovelForm"
-            [message]="
-                !imovelForm.nu_latitude.valid
-                    ? imovelForm.getFirstErrorFrom('nu_latitude', 'Latitude')
-                    : ''
-            "
+            [message]="!imovelForm.nu_latitude.valid ? imovelForm.getFirstErrorFrom('nu_latitude', 'Latitude') : ''"
         ></app-input>
         <app-input
             label="Longitude"
             formControlName="nu_longitude"
             [form]="imovelForm"
-            [message]="
-                !imovelForm.nu_longitude.valid
-                    ? imovelForm.getFirstErrorFrom('nu_longitude', 'Longitude')
-                    : ''
-            "
+            [message]="!imovelForm.nu_longitude.valid ? imovelForm.getFirstErrorFrom('nu_longitude', 'Longitude') : ''"
         ></app-input>
         <app-input
             label="Inscrição Rural"

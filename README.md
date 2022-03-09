@@ -2,7 +2,7 @@
 
 ## Pre-requisitos
 
--   Node 12.13.0
+-   Node 12.18.2
 -   NPM 5.10.0
 
 ## Requisitos
@@ -40,15 +40,18 @@ git remote add skeleton git@gitlab.voxtecnologia.com.br:vox/front-end/skeleton-e
 
 ## Recomendações
 
--   Utilizar VSCode com as extensões `dbaeumer.vscode-eslint esbenp.prettier-vscode` e permitir a integração do ESLint
-    do node_modules.
+-   Utilizar VSCode com as extensões `esbenp.prettier-vscode` e permitir a integração do ESLint do node_modules.
 -   Executar `npm run lint:fix` antes de commitar e corrigir os erros
 -   Não conseguindo resolver um erro de lint utilize o `disable-eslint-next-line` com a regra, mas antes
     [consulte a doc](https://eslint.org/docs/rules/)
 -   [Outras recomendações...](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/training/construcao.md)
 
 ## Mock API para testes
-Enquanto não tiver a API pronta, pode se utilizar uma API fake através de um mock. Há um arquivo em `db/db.json` que em cada primeiro nó do json representa um endpoint. Colocando os dados lá e chamando no service conforme exemplo abaixo, obterá a partir do json server uma API fake com os principais métodos http. Ao fazer os ajustes rode em terminal paralelo o comando: `npm run mock`.
+
+Enquanto não tiver a API pronta, pode se utilizar uma API fake através de um mock. Há um arquivo em `db/db.json` que em
+cada primeiro nó do json representa um endpoint. Colocando os dados lá e chamando no service conforme exemplo abaixo,
+obterá a partir do json server uma API fake com os principais métodos http. Ao fazer os ajustes rode em terminal
+paralelo o comando: `npm run mock`.
 
 ```ts
 private urlMock = 'http://localhost:3000/';
@@ -91,8 +94,13 @@ Será salvo no banco na coluna ds_url: `/sigfacil/funcionalidade-pai/subfuncao/`
 Deve-se duplicar o `src/app/feature/pages/visualizar-processo`
 
 ### Utilizar Jarvis ou Assets Sigfacil pelo Skeleton
-- Devido a política de CORS esses serviços só funcionam dentram de produtos vox, como localhost é teste, se faz necessário habilitar a [extensão de navegador CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf) durante os testes.
+
+-   Devido a política de CORS esses serviços só funcionam dentram de produtos vox, como localhost é teste, se faz
+    necessário habilitar a
+    [extensão de navegador CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf)
+    durante os testes.
 
 ### Para não utilizar o Jarvis realize as seguintes remoções:
-- this.carregarJarvis() e this.commonService.getAllOptions() no src/app/app.component.ts
-- CommonService e JarvisInterceptor nos providers de src/app/app.module.ts
+
+-   this.carregarJarvis() e this.commonService.getAllOptions() no src/app/app.component.ts
+-   CommonService e JarvisInterceptor nos providers de src/app/app.module.ts

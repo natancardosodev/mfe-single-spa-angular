@@ -2,17 +2,12 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode", // OLD: dbaeumer.vscode-eslint
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
+    "explorer.compactFolders": false,
+    "workbench.editor.wrapTabs": true,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-    "[javascript, typescript]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "eslint.alwaysShowStatus": true,
-        "eslint.validate": [
-            "javascript",
-            "typescript"
-        ]
-    }
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false
 }
