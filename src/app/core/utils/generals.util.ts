@@ -67,3 +67,16 @@ export function tratarErroLogin(erro: HttpErrorResponse): Observable<never> {
     }
     throwErrorAPI();
 }
+
+export function generateQueryParamsByObject(obj: Record<any, any>): string {
+    let params = '?';
+    const tamanhoObj = Object.keys(obj).length;
+
+    if (tamanhoObj) {
+        Object.keys(obj).forEach((key, index) => {
+            params = `${params}${key}=${obj[key]}${index + 1 < tamanhoObj ? '&' : ''}`;
+        });
+    }
+
+    return tamanhoObj ? params : '';
+}
