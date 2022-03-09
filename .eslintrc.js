@@ -20,6 +20,7 @@ module.exports = {
         project: 'tsconfig.json',
         ecmaVersion: 2020,
         sourceType: 'module',
+        warnOnUnsupportedTypeScriptVersion: false,
         extraFileExtensions: ['html', 'scss']
     },
     plugins: ['@typescript-eslint', '@typescript-eslint/tslint'],
