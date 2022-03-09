@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
-import { GeneralsUtil } from '@core/utils/generals.util';
+import { formatDateBrToEn, formatDateEnToBr } from '@core/utils/date.util';
 import { DadosInscricaoInterface } from 'src/app/core/interfaces/pessoa-fisica/dados-inscricao.interface';
 
 export class ProdutorForm extends FormGroup {
@@ -154,7 +154,7 @@ export class ProdutorForm extends FormGroup {
             // @todo completar form
             protocolo: form.protocolo,
             no_cpf: form.no_cpf,
-            dt_nascimento: GeneralsUtil.formatDateBrToEn(form.data_nascimento)
+            dt_nascimento: formatDateBrToEn(form.data_nascimento)
         };
     }
 
@@ -169,7 +169,8 @@ export class ProdutorForm extends FormGroup {
         this.co_uf_emissor.setValue(produtor.co_uf_emissor);
         this.co_sexo.setValue(produtor.co_sexo);
         this.nacionalidade.setValue(null);
-        this.dt_nascimento.setValue(GeneralsUtil.formatDateEnToBr(produtor.data_nascimento));
+        this.dt_nascimento.setValue(formatDateEnToBr(produtor.data_nascimento));
+
         if (produtor.imovel.endereco_correspondencia) {
             this.co_municipio.setValue(produtor.imovel.endereco_correspondencia.co_municipio);
             this.co_cep.setValue(produtor.imovel.endereco_correspondencia.co_cep);

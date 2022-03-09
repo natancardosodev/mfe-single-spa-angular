@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { isNullOrUndefined } from 'util';
+import { isNullOrUndefined } from '@core/utils/generals.util';
 
 import { EnvService } from './env.service';
 

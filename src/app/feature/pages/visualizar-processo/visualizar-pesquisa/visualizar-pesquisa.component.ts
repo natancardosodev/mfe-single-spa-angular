@@ -15,7 +15,7 @@ import { StorageUtil } from '@core/utils/storage.util';
 import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
 import { PapeisEnum } from '@core/enums/papeis.enum';
 import { RotasEnum } from '@core/enums/rotas.enum';
-import { GeneralsUtil } from '@core/utils/generals.util';
+import { navigate } from '@core/utils/generals.util';
 
 @Component({
     selector: 'app-visualizar-pesquisa',
@@ -67,7 +67,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public voltarParaPesquisa(): void {
-        GeneralsUtil.navigate(this.router, RotasEnum.EMPRESA);
+        navigate(this.router, RotasEnum.EMPRESA);
     }
 
     public statusAtualProcesso(status: number): void {
@@ -110,6 +110,6 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public redirectAlterarDados(): void {
-        GeneralsUtil.navigate(this.router, RotasEnum.EMPRESA_EDITAR, this.solicitacao);
+        navigate(this.router, RotasEnum.EMPRESA_EDITAR, this.solicitacao);
     }
 }

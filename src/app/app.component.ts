@@ -19,7 +19,7 @@ import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
 import { RotasEnum } from '@core/enums/rotas.enum';
 import { ExternalFilesService } from '@core/services/external-files.service';
 import { EnvService } from '@core/services/env.service';
-import { GeneralsUtil } from '@core/utils/generals.util';
+import { delay } from '@core/utils/generals.util';
 
 @Component({
     selector: 'app-root',
@@ -139,7 +139,7 @@ export class AppComponent implements OnInit {
                 finalize(
                     () =>
                         void (async () => {
-                            await GeneralsUtil.delay(1000);
+                            await delay(1000);
                             this.loadingGlobal.hide();
                         })()
                 ),

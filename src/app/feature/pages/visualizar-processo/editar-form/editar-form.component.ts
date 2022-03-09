@@ -16,7 +16,6 @@ import {
 } from '@core/interfaces/pessoa-fisica/dados-inscricao.interface';
 import { Dados } from '@core/interfaces/pessoa-fisica/dados';
 import { CommonService } from '@core/services/common.service';
-import { GeneralsUtil } from '@core/utils/generals.util';
 import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
 import { RotasEnum } from '@core/enums/rotas.enum';
@@ -27,6 +26,7 @@ import { MensagensEnum } from '@core/enums/mensagens.enum';
 import { ContabilistaForm } from './form/contabilista.form';
 import { ImovelForm } from './form/imovel.form';
 import { ProdutorForm } from './form/produtor.form';
+import { delay, navigate } from '@core/utils/generals.util';
 
 @Component({
     selector: 'app-editar-form',
@@ -119,7 +119,7 @@ export class EditarFormComponent implements OnInit {
                 finalize(
                     () =>
                         void (async () => {
-                            await GeneralsUtil.delay(1000);
+                            await delay(1000);
                             this.loading = false;
                         })()
                 )
@@ -159,7 +159,7 @@ export class EditarFormComponent implements OnInit {
                 finalize(
                     () =>
                         void (async () => {
-                            await GeneralsUtil.delay(1000);
+                            await delay(1000);
                             this.loadingUf = false;
                         })()
                 )
@@ -271,7 +271,7 @@ export class EditarFormComponent implements OnInit {
                     })
                 )
                 .subscribe((response: DadosInscricaoInterface) => {
-                    GeneralsUtil.navigate(this.router, RotasEnum.EMPRESA_VISUALIZAR, response.nu_seq_usuario);
+                    navigate(this.router, RotasEnum.EMPRESA_VISUALIZAR, response.nu_seq_usuario);
                 });
         }
     }
@@ -385,7 +385,7 @@ export class EditarFormComponent implements OnInit {
     }
 
     public voltar(): void {
-        GeneralsUtil.navigate(this.router, RotasEnum.EMPRESA, this._solicitacaoId);
+        navigate(this.router, RotasEnum.EMPRESA, this._solicitacaoId);
     }
 
     private setOptions(): void {
