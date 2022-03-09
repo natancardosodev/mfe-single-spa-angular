@@ -6,7 +6,7 @@ import { ImovelInterface } from '@core/interfaces/pessoa-fisica/dados-inscricao.
 export class ImovelForm extends FormGroup {
     private _errorMessages = {
         required: 'O campo %s é obrigatório.',
-        bsDate: MensagensEnum.DATE_INVALID_FORMAT
+        bsDate: MensagensEnum.DATA_INVALIDA
     };
 
     constructor() {

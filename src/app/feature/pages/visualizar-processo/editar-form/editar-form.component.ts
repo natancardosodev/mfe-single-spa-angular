@@ -280,7 +280,7 @@ export class EditarFormComponent implements OnInit {
             this.loadingUpdate = false;
             this.alertService.openModal({
                 title: 'Atenção',
-                message: MensagensEnum.VALIDA_CAMPOS_OBRIGATORIOS,
+                message: MensagensEnum.CAMPOS_OBRIGATORIOS,
                 style: 'warning'
             });
             return false;
