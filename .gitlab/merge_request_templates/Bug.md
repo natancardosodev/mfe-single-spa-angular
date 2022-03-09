@@ -21,9 +21,9 @@
 
 -   [ ] Liberação de Módulo para determinada UF
 -   [ ] Adequação visual / textual
--   [ ] Estrutural do projeto, sem alterar a regra de negócio
 -   [ ] Pequena correção de issue
         [Sentry](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/imersao/sentry-angular.md#sentry-angular)
+-   [ ] Estrutural do projeto, sem alterar a regra de negócio
 -   [ ] Alteração Lógica ou Comportamental
 -   [ ] Atualização de biblioteca / framework
 -   [ ] Grande alteração visual
