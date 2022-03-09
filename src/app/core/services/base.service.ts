@@ -1,15 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, take } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
+
+import * as Sentry from '@sentry/angular';
 import { AlertService } from 'lib-ui-interno';
+
 import { HttpOptions } from '@core/interfaces/http-options';
+import { cleanParams, throwErrorAPI } from '@core/utils/generals.util';
+import { MensagensEnum } from '@core/enums/mensagens.enum';
 import { UrlUtilService } from './url-util.service';
 
 export abstract class BaseService {
     private _baseUrl: string;
     private _options: HttpOptions;
     private _optionsJarvis: HttpOptions;
+    private _msgApiFora: Record<string, string>;
 
     constructor(
         baseUrl: string = null,
@@ -21,10 +27,13 @@ export abstract class BaseService {
         this.options = {
             withCredentials: true,
             responseType: 'json',
-            headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' })
+            headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
         };
         this.optionsJarvis = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        };
+        this._msgApiFora = {
+            message: MensagensEnum.API_FORA
         };
     }
 
@@ -52,32 +61,50 @@ export abstract class BaseService {
         this._optionsJarvis = optionsJarvis;
     }
 
-    get = (url?: string, params?: any, tipoApi?: string, isHideAlert?: boolean): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, tipoApi), 'get', params, null, tipoApi).pipe(
+    get = (
+        url?: string,
+        params?: any,
+        tipoApi?: string,
+        isHideAlert?: boolean,
+        customOptions?: HttpOptions
+    ): Observable<any> => {
+        return this.sendRequest(this.getUrl(url, tipoApi), 'get', params, null, tipoApi, customOptions).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
-                return this.tratarErro(erro);
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
+                return throwErrorAPI();
             })
         );
     };
 
-    post = (url?: string, body?: any, tipoApi?: string, isHideAlert?: boolean): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, tipoApi), 'post', null, body, tipoApi).pipe(
+    post = (
+        url?: string,
+        body?: any,
+        tipoApi?: string,
+        isHideAlert?: boolean,
+        customOptions?: HttpOptions
+    ): Observable<any> => {
+        return this.sendRequest(this.getUrl(url, tipoApi), 'post', null, body, tipoApi, customOptions).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
-                return this.tratarErro(erro);
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
+                return throwErrorAPI();
             })
         );
     };
 
-    put = (url?: string, body?: any, tipoApi?: string, isHideAlert?: boolean): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, tipoApi), 'put', null, body, tipoApi).pipe(
+    put = (
+        url?: string,
+        body?: any,
+        tipoApi?: string,
+        isHideAlert?: boolean,
+        customOptions?: HttpOptions
+    ): Observable<any> => {
+        return this.sendRequest(this.getUrl(url, tipoApi), 'put', null, body, tipoApi, customOptions).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
-                return this.tratarErro(erro);
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
+                return throwErrorAPI();
             })
         );
     };
@@ -86,31 +113,31 @@ export abstract class BaseService {
         url?: string,
         params?: Record<string, string> | any,
         tipoApi?: string,
-        isHideAlert?: boolean
+        isHideAlert?: boolean,
+        customOptions?: HttpOptions
     ): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, tipoApi), 'delete', params, null, tipoApi).pipe(
+        return this.sendRequest(this.getUrl(url, tipoApi), 'delete', params, null, tipoApi, customOptions).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
-                return this.tratarErro(erro);
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
+                return throwErrorAPI();
             })
         );
     };
 
     uploadArquivo = (url?: string, body?: any, tipoApi?: string, isHideAlert?: boolean): Observable<any> => {
-        return this.http
-            .post(this.getUrl(url, tipoApi), body, {
-                withCredentials: true,
-                observe: 'events',
-                reportProgress: true
+        const options: HttpOptions = {
+            withCredentials: true,
+            responseType: 'json',
+            body: body
+        };
+        return this.http.request('post', this.getUrl(url, tipoApi), options).pipe(
+            take(1),
+            catchError((erro: HttpErrorResponse) => {
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
+                return throwErrorAPI();
             })
-            .pipe(
-                take(1),
-                catchError((erro: HttpErrorResponse) => {
-                    isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
-                    return this.tratarErro(erro);
-                })
-            );
+        );
     };
 
     downloadArquivo = (
@@ -129,8 +156,8 @@ export abstract class BaseService {
         return this.http.request(type, this.getUrl(url, tipoApi), this.options).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.error.message ? erro.error.message : erro.message);
-                return this.tratarErro(erro);
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
+                return throwErrorAPI();
             })
         );
     };
@@ -140,10 +167,11 @@ export abstract class BaseService {
         type: string,
         params?: Record<string, string>,
         body?: any,
-        tipoApi?: string
+        tipoApi?: string,
+        customOptions?: HttpOptions
     ): Observable<any> => {
-        this.options = tipoApi === 'jarvis' ? this.optionsJarvis : this.options;
-        this.options['params'] = params ? this.cleanParams(params) : this.options['params'];
+        this.options = customOptions ? customOptions : tipoApi === 'jarvis' ? this.optionsJarvis : this.options;
+        this.options['params'] = !params || typeof params === undefined ? null : cleanParams(params);
         this.options['body'] = body;
         this.options['observe'] = tipoApi === 'jarvis' ? 'response' : 'body';
 
@@ -156,42 +184,38 @@ export abstract class BaseService {
         return this.urlUtilService.montarUrlApi(concatUrl, null, tipoApi);
     }
 
-    public tratarErro(erro: HttpErrorResponse): Observable<never> {
-        let erroMessage = 'Ocorreu um erro na requisição';
-
-        try {
-            erroMessage = String(erro.message);
-        } catch (e) {
-            erroMessage = 'Ocorreu um erro inesperado';
-        }
-
-        return throwError(new Error(erroMessage));
-    }
-
-    public showMessageError(msg: any, style = 'danger'): void {
+    public showMessageError(msg: any, url: string, style = 'danger'): void {
         let msgErr = null;
         const msgDefault = 'Ocorreu um erro na requisição';
-        const iconSuccess = '<i class="fa fa-check" aria-hidden="true"></i> ';
-        const iconDanger = '<i class="fa fa-exclamation-triangle fa-3" aria-hidden="true"></i> ';
-        const icon = style === 'success' ? iconSuccess : iconDanger;
 
-        if (!msg) {
-            msgErr = { message: msgDefault };
+        if (msg === this._msgApiFora) {
+            Sentry.captureMessage(`API FORA OU DESLOGADA: ${url}`);
         }
-        if (JSON.stringify(String(msg)).indexOf('ds_erro') != -1 && Object.keys(msg).length > 0) {
-            const arrayMessageVox = JSON.parse(msg).map((err: Record<string, string>) => {
-                return { message: `<strong> ${icon} Erro ${err.cod_erro}: ${err.ds_erro} </strong>` };
-            });
-            msgErr = { messagesMultiple: arrayMessageVox };
+
+        if (!msgErr && JSON.stringify(msg).toString().includes('message')) {
+            msgErr = { message: `<strong> Erro: ${msg.message} </strong>` };
         }
-        if (String(msg).indexOf('{') != -1 && Object.keys(JSON.parse(msg).erros).length > 0) {
+
+        if (!msgErr && JSON.stringify(msg).toString().includes('ds_retorno')) {
             const arrayMessageSiarco = JSON.parse(msg).erros.map((err: Record<string, string>) => {
-                return { message: `<strong> ${icon} Erro: ${err.ds_retorno} ${err.ds_valor} </strong>` };
+                return { message: `<strong> Erro: ${err.ds_retorno} ${err.ds_valor} </strong>` };
             });
             msgErr = { messagesMultiple: arrayMessageSiarco };
         }
+
+        if (!msgErr && JSON.stringify(msg).toString().includes('[{')) {
+            const arrayMessageVox = msg.map((err: Record<string, string>) => {
+                return { message: `<strong> Erro ${err.cod_erro}: ${err.ds_erro} </strong>` };
+            });
+            msgErr = { messagesMultiple: arrayMessageVox };
+        }
+
+        if (!msgErr && JSON.stringify(msg).toString().includes('{}')) {
+            msgErr = { message: '<strong> Erro: Requisição ou arquivo não encontrado.</strong>' };
+        }
+
         if (!msgErr) {
-            msgErr = { message: `<strong> ${icon} Erro: ${msg} </strong>` };
+            msgErr = { message: msgDefault };
         }
 
         const args = Object.assign(
@@ -203,16 +227,5 @@ export abstract class BaseService {
         );
 
         void this.alertService.openModal(args);
-    }
-
-    private cleanParams(params: any): any {
-        if (params) {
-            Object.keys(params).forEach((key) => {
-                if (params[key] && typeof params[key] === 'object') this.cleanParams(params[key]);
-                else if (params[key] === undefined) delete params[key];
-            });
-        }
-
-        return params;
     }
 }

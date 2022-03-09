@@ -8,7 +8,6 @@ import { take } from 'rxjs/operators';
 
 import { ModalIndeferirComponent } from '@core/components/modal-indeferir/modal-indeferir.component';
 import { CardObservacaoComponent } from '@core/components/card-observacao/card-observacao.component';
-import { Status } from '@core/enums/status.enum';
 import { UserService } from '@core/services/user.service';
 import { Storage } from '@core/enums/storage.enum';
 import { StorageUtil } from '@core/utils/storage.util';
@@ -69,11 +68,7 @@ export class VisualizarPesquisaComponent implements OnInit {
         navigate(this.router, RotasEnum.EMPRESA);
     }
 
-    public statusAtualProcesso(status: number): void {
-        setTimeout(() => {
-            this.isStatusExigencia = status == Status.EXIGENCIA ? true : false;
-        }, 500);
-    }
+    public statusAtualProcesso(status: number): void {}
 
     public openModal(modal: ElementRef): void {
         this.loading = false;
