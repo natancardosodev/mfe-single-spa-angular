@@ -16,7 +16,6 @@ export function isNullOrUndefined(value: any) {
 }
 
 export function navigate(routerInstance: Router, rotaAlvo: RotasEnum, routeParam: string | number = null) {
-    window.scrollTo(0, 0);
     const comandos = routeParam ? [].concat(rotaAlvo, routeParam) : [rotaAlvo];
     void routerInstance.navigate(comandos);
 }

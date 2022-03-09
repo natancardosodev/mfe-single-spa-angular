@@ -97,7 +97,6 @@ export class EditarFormComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        window.scrollTo(0, 0);
         this.titleService.setTitle('Visualizar Processo - Skeleton');
         this.getDadosSolicitacao();
         this.disabledFields();

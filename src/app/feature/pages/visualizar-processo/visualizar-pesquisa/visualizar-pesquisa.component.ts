@@ -63,7 +63,6 @@ export class VisualizarPesquisaComponent implements OnInit {
 
     ngOnInit(): void {
         this.titleService.setTitle('Visualizar Processo - Skeleton');
-        window.scrollTo(0, 0);
     }
 
     public voltarParaPesquisa(): void {
