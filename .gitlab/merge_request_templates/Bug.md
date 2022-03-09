@@ -1,16 +1,16 @@
 | **Tópico**                 | **Descrição**                                                                               |
 | :------------------------- | :------------------------------------------------------------------------------------------ |
-| **Problema / Necessidade** | Descreva o problema ou que foi solicitado fazer.                                            |
-| **Regra**                  | Descreva um pouco a regra                                                                   |
-| **Documentação**           | Link                                                                                        |
-| **O que foi feito?**       | <ul><li>Descreva o que realmente foi alterado</li><li>Pontos da solução empregada</li></ul> |
 | **Mantis**                 | [XXXX](http://mantis.voxtecnologia.com.br/view.php?id=XXXX)                                 |
 | **Dependência de MR**      | <ul><li>MR 1</li><li>MR 2</li></ul>                                                         |
-| **Análise**                | @all                                                                                        |
+| **Problema / Necessidade** | Descreva o problema ou que foi solicitado fazer.                                            |
+| **Regra**                  | Descreva um pouco a regra.                                                                  |
+| **Documentação**           | Link                                                                                        |
+| **O que foi feito?**       | <ul><li>Descreva o que realmente foi alterado</li><li>Pontos da solução empregada</li></ul> |
 | **Página**                 | Link                                                                                        |
-| **Protocolo de Teste**     | Coloque o protocolo ou dados utilizados durante o teste local e o banco.                    |
-| **Informações para o QA**  | Coloque o que deve ser testado e um passo a passo, caso seja necessário.                    |
+| **Dados do teste**         | Coloque o protocolo ou dados utilizados durante o teste local e o banco.                    |
+| **Informações ao QA**      | Coloque o que deve ser testado e um passo a passo, caso seja necessário.                    |
 | **Evidências**             | Imagem antes e depois, por exemplo                                                          |
+| **Análise**                | @all                                                                                        |
 
 #### Pontos de impacto da alteração
 
