@@ -14,11 +14,9 @@ export class CardPessoaComponent implements OnInit {
     @Input() public solicitacao: number;
     public pessoa: DadosPessoaInterface;
     public loading: boolean;
-    public isCollapsed: boolean;
 
     constructor(private solicitacaoService: SolicitacaoService) {
         this.loading = true;
-        this.isCollapsed = false;
     }
 
     public ngOnInit(): void {

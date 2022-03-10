@@ -1,4 +1,289 @@
 {
+    "modulos": [
+        {
+            "nome": "Manutenção SIGFácil",
+            "funcionalidades": [
+                {
+                    "id": 1040020253,
+                    "nome": "Funcionalidade Skeleton Empresa",
+                    "rota": "/sigfacil/skeleton/empresa",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020255,
+                    "nome": "Inscrição Estadual Produtor Rural",
+                    "rota": "/sigfacil/produtor-rural/inscricao-estadual/",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020254,
+                    "nome": "Migrar Arquivamento",
+                    "rota": "/sigfacil/arquivamento/migrar/",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020200,
+                    "nome": "Parecer Ambiental",
+                    "rota": "/sigfacil/parecer-ambiental",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020211,
+                    "nome": "Parecer Jurídico",
+                    "rota": "/ipaam/procurador-juridico/pesquisa",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020209,
+                    "nome": "Emitir Parecer de Áreas Protegidas",
+                    "rota": "/ipaam/diretoria-areas-protegidas",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020208,
+                    "nome": "Homologar Parecer de Áreas Protegidas",
+                    "rota": "/ipaam/gerencia-areas-protegidas",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020206,
+                    "nome": "Homologar Licença DTO",
+                    "descricao": "Homologar Licença DTO",
+                    "rota": "/ipaam/diretoria-tecnica-operacional/pesquisa",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020205,
+                    "nome": "Monitoramento de Condicionantes",
+                    "descricao": "Monitoramento de Condicionantes",
+                    "rota": "/ipaam/monitoramento-condicionantes/pesquisa",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020204,
+                    "nome": "Parecer Monitoramento de Condicionantes",
+                    "descricao": "Parecer Monitoramento de Condicionantes",
+                    "rota": "/ipaam/parecer-monitoramento-condicionantes/pesquisa",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020203,
+                    "nome": "Alteração de Empresa Ambiental",
+                    "descricao": "Alteração de Empresa Ambiental",
+                    "rota": "/ipaam/alteracao-empresa-licenciamento/pesquisa",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020201,
+                    "nome": "Emitir Caracterização de Área",
+                    "rota": "/ipaam/emitir-caracterizacao-area/pesquisa",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020198,
+                    "nome": "Consultar Processo VISA",
+                    "descricao": "Proporciona a consulta por todos os status e usuarios dos processos da VISA municipal",
+                    "rota": "/sigfacil/consultar-processo-visa",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                },
+                {
+                    "id": 1040020197,
+                    "nome": "Realocar Processo Visa",
+                    "descricao": "Realiza a realocação de processos da Visa",
+                    "rota": "/sigfacil/realocar-processo-visa",
+                    "modulo": {
+                        "id": 104002,
+                        "nome": "Manutenção SIGFácil",
+                        "icone": "fa-wrench"
+                    }
+                }
+            ],
+            "icone": "fa-wrench"
+        },
+        {
+            "nome": "Configuração",
+            "funcionalidades": [
+                {
+                    "id": 1040030035,
+                    "nome": "Modelo de documento",
+                    "rota": "/sigfacil/modelo-documento",
+                    "modulo": {
+                        "id": 104003,
+                        "nome": "Configuração",
+                        "icone": "fa-cogs"
+                    }
+                },
+                {
+                    "id": 1040030106,
+                    "nome": "Vinculação Órgão Motivo Indeferimento",
+                    "rota": "/sigfacil/orgao-indeferimento/",
+                    "modulo": {
+                        "id": 104003,
+                        "nome": "Configuração",
+                        "icone": "fa-cogs"
+                    }
+                },
+                {
+                    "id": 1040030105,
+                    "nome": "Vinculação Órgão Exigências",
+                    "rota": "/sigfacil/orgao-exigencia/",
+                    "modulo": {
+                        "id": 104003,
+                        "nome": "Configuração",
+                        "icone": "fa-cogs"
+                    }
+                },
+                {
+                    "id": 1040030103,
+                    "nome": "Cadastro de Computador",
+                    "rota": "/default/cadastro-computador",
+                    "modulo": {
+                        "id": 104003,
+                        "nome": "Configuração",
+                        "icone": "fa-cogs"
+                    }
+                },
+                {
+                    "id": 1040030049,
+                    "nome": "Documento de Arrecadação",
+                    "rota": "/default/parametros-bancarios",
+                    "modulo": {
+                        "id": 104003,
+                        "nome": "Configuração",
+                        "icone": "fa-cogs"
+                    }
+                }
+            ],
+            "icone": "fa-cogs"
+        },
+        {
+            "nome": "Documentos e Obrigações",
+            "funcionalidades": [
+                {
+                    "id": 1040010041,
+                    "nome": "Atividades de Alto Risco",
+                    "rota": "/sigfacil/atividade-alto-risco",
+                    "modulo": {
+                        "id": 104001,
+                        "nome": "Documentos e Obrigações",
+                        "icone": "fa-files-o"
+                    }
+                },
+                {
+                    "id": 1040010029,
+                    "nome": "Obrigação - Baixa",
+                    "rota": "/sigfacil/obrigacao/index/tipo/3",
+                    "modulo": {
+                        "id": 104001,
+                        "nome": "Documentos e Obrigações",
+                        "icone": "fa-files-o"
+                    }
+                },
+                {
+                    "id": 1040010028,
+                    "nome": "Obrigação - Alteração",
+                    "rota": "/sigfacil/obrigacao/index/tipo/2",
+                    "modulo": {
+                        "id": 104001,
+                        "nome": "Documentos e Obrigações",
+                        "icone": "fa-files-o"
+                    }
+                },
+                {
+                    "id": 1040010024,
+                    "nome": "Obrigação  - Abertura",
+                    "rota": "/sigfacil/obrigacao/index/tipo/1",
+                    "modulo": {
+                        "id": 104001,
+                        "nome": "Documentos e Obrigações",
+                        "icone": "fa-files-o"
+                    }
+                }
+            ],
+            "icone": "fa-files-o"
+        }
+    ],
+    "logo": {
+        "url": "https://www-storage.voxtecnologia.com.br/?m=sigfacil.pessoa&f=10459&i=7269d31766b0d1dec7500aa5cafa04b2.png"
+    },
+    "sistema": [
+        {
+            "nome": "SIGFÁCIL",
+            "rota": "sigfacil"
+        },
+        {
+            "nome": "SIGPUB",
+            "rota": "sigfpub"
+        }
+    ],
+    "me": {
+        "id": 849951,
+        "nome": "Automatizacao",
+        "cpf": "21357947836",
+        "papel": [
+            "ROLE_1040020253_VISUALIZAR",
+            "ROLE_1040020253_INSERIR",
+            "ROLE_1040020253_ALTERAR",
+            "ROLE_1040020253_EXCLUIR",
+            "ROLE_1040020254_VISUALIZAR",
+            "ROLE_1040020254_INSERIR",
+            "ROLE_1040020254_ALTERAR",
+            "ROLE_1040020254_EXCLUIR"
+        ],
+        "estado": "MA"
+    },
     "grid": {
         "total": 8,
         "processos": [

@@ -16,13 +16,11 @@ export class CardObservacaoComponent implements OnInit {
     @Input() public statusAtualProcesso: number;
     @Output() public finalizandoProcesso: EventEmitter<any>;
     public loading: boolean;
-    public isCollapsed: boolean;
     public observacoes$: Observable<any>;
     private _observacaoForm: ObservacaoForm;
 
     constructor(private solicitacaoService: SolicitacaoService) {
         this.loading = true;
-        this.isCollapsed = false;
         this._observacaoForm = new ObservacaoForm();
         this.finalizandoProcesso = new EventEmitter();
     }

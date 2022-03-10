@@ -17,13 +17,11 @@ export class ModalIndeferirComponent implements OnInit {
     @ViewChild('modal') modal: ModalComponent;
     @Output() public finalizandoIndeferir: EventEmitter<any>;
     public loading: boolean;
-    public isCollapsed: boolean;
     public modalRef: BsModalRef;
     private _indeferirForm: IndeferirForm;
 
     constructor(private solicitacaoService: SolicitacaoService) {
         this.loading = true;
-        this.isCollapsed = false;
         this.finalizandoIndeferir = new EventEmitter();
         this._indeferirForm = new IndeferirForm();
     }

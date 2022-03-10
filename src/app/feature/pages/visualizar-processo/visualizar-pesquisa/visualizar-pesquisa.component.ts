@@ -23,7 +23,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     @ViewChild(CardObservacaoComponent) observacao: CardObservacaoComponent;
     @ViewChild(ModalIndeferirComponent) modalIndeferir: ModalIndeferirComponent;
     @ViewChild('modalDeferir') modalDeferir: ModalComponent;
-    public loading: boolean;
+    public isLoading: boolean;
     public modalRef: BsModalRef;
     public solicitacao: number;
     public isStatusExigencia: boolean;
@@ -35,7 +35,7 @@ export class VisualizarPesquisaComponent implements OnInit {
         private userService: UserService,
         private modalService: BsModalService
     ) {
-        this.loading = true;
+        this.isLoading = false;
         this.isStatusExigencia = false;
         this.route.params.pipe(take(1)).subscribe((params) => {
             this.solicitacao = params['id'];
@@ -58,7 +58,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     public statusAtualProcesso(status: number): void {}
 
     public openModal(modal: ElementRef): void {
-        this.loading = false;
+        this.isLoading = false;
         this.modalRef = this.modalService.show(modal);
     }
 
@@ -73,7 +73,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public deferir(): void {
-        this.loading = true;
+        this.isLoading = true;
         this.observacao.salvar();
     }
 
@@ -82,7 +82,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public finalizandoProcesso(success: boolean): void {
-        this.loading = false;
+        this.isLoading = false;
         this.closeModal();
 
         if (success) {

@@ -1,5 +1,5 @@
 export enum RotasEnum {
-    BASE_HREF = '/interno/', // @todo funcionalidade base
+    BASE_HREF = '/sigfacil/skeleton/', // @todo funcionalidade base
     // ROTAS BASE DAS FUNCIONALIDADES
     EMPRESA = 'empresa',
     MIGRAR = 'migrar',

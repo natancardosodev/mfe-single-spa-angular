@@ -13,7 +13,8 @@
         ></app-input>
     </section>
     <footer class="row">
-        <app-simple-button label="Cancelar Indeferimento" (click)="closeModal()" class="px-1"> </app-simple-button>
+        <app-simple-button label="Cancelar Indeferimento" (click)="closeModal()" [isSecondary]="true" class="px-1">
+        </app-simple-button>
         <app-simple-button
             label="Confirmar Indeferimento"
             (click)="confirmarIndeferir()"

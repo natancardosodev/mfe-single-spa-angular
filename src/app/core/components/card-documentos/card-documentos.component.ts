@@ -15,11 +15,9 @@ export class CardDocumentosComponent implements OnInit {
     public documentos$: Observable<any>;
     public path: any;
     public loading: boolean;
-    public isCollapsed: boolean;
 
     constructor(private solicitacaoService: SolicitacaoService, private urlUtilService: UrlUtilService) {
         this.loading = true;
-        this.isCollapsed = false;
     }
 
     public ngOnInit(): void {

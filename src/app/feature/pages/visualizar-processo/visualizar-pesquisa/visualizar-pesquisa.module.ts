@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { LibUIModule } from 'lib-ui-interno';
-import { CardProcessoModule } from '@core/components/card-processo/card-processo.module';
 import { CardPessoaModule } from '@core/components/card-pessoa/card-pessoa.module';
 import { CardDocumentosModule } from '@core/components/card-documentos/card-documentos.module';
 import { ModalIndeferirModule } from '@core/components/modal-indeferir/modal-indeferir.module';
@@ -18,7 +17,6 @@ import { VisualizarPesquisaComponent } from './visualizar-pesquisa.component';
         HttpClientModule,
         VisualizarPesquisaRoutingModule,
         LibUIModule,
-        CardProcessoModule,
         CardPessoaModule,
         CardDocumentosModule,
         CardObservacaoModule,

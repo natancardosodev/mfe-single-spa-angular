@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Directive, HostListener } from '@angular/core';
 @Directive({
     selector: '[uppercase]'

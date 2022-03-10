@@ -9,12 +9,13 @@ import { BaseService } from '@core/services/base.service';
 import { User } from '@core/interfaces/interno/user-interface';
 import { StorageUtil } from '@core/utils/storage.util';
 import { Storage } from '@core/enums/storage.enum';
+import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
 
 @Injectable({
     providedIn: 'root'
 })
 export class JarvisService extends BaseService {
-    private tipoApi = 'jarvis';
+    private tipoApi = TiposApisEnum.JARVIS;
     private uf: string;
     private dadosUsuario: User;
 

@@ -45,7 +45,9 @@ export class VisualizarProcessoComponent {
     }
 
     public onRowClicked(dadosLinha: any): void {
-        void this.router.navigate([RotasEnum.EMPRESA_VISUALIZAR, dadosLinha.id]);
+        if (dadosLinha) {
+            void this.router.navigate([RotasEnum.EMPRESA_VISUALIZAR, dadosLinha.id]);
+        }
     }
 
     public get colunasGrid(): Array<GridColumnDefs> {
@@ -118,11 +120,11 @@ export class VisualizarProcessoComponent {
     public formatarDadosPesquisa(dados): Array<any> {
         if (dados) {
             const mask = new MaskPipe();
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             dados = dados.processos.map((processo) => {
                 return {
                     ...processo,
-                    cpf: mask.transform(processo.cpf, 'cpf')
+                    cpf: mask.transform(processo.cpf, 'cpf'),
+                    data_protocolado: mask.transform(processo.data_protocolado, 'data')
                 };
             });
             return dados;

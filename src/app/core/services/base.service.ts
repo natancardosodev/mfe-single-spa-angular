@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
-import * as Sentry from '@sentry/angular';
 import { AlertService } from 'lib-ui-interno';
 
 import { HttpOptions } from '@core/interfaces/http-options';
-import { cleanParams, throwErrorAPI } from '@core/utils/generals.util';
+import { cleanParams } from '@core/utils/generals.util';
 import { MensagensEnum } from '@core/enums/mensagens.enum';
+import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
 import { UrlUtilService } from './url-util.service';
 
 export abstract class BaseService {
@@ -64,15 +63,15 @@ export abstract class BaseService {
     get = (
         url?: string,
         params?: any,
-        tipoApi?: string,
+        tipoApi?: TiposApisEnum,
         isHideAlert?: boolean,
         customOptions?: HttpOptions
     ): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'get', params, null, tipoApi, customOptions).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
-                return throwErrorAPI();
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
+                return of(0);
             })
         );
     };
@@ -80,15 +79,15 @@ export abstract class BaseService {
     post = (
         url?: string,
         body?: any,
-        tipoApi?: string,
+        tipoApi?: TiposApisEnum,
         isHideAlert?: boolean,
         customOptions?: HttpOptions
     ): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'post', null, body, tipoApi, customOptions).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
-                return throwErrorAPI();
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
+                return of(0);
             })
         );
     };
@@ -96,15 +95,15 @@ export abstract class BaseService {
     put = (
         url?: string,
         body?: any,
-        tipoApi?: string,
+        tipoApi?: TiposApisEnum,
         isHideAlert?: boolean,
         customOptions?: HttpOptions
     ): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'put', null, body, tipoApi, customOptions).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
-                return throwErrorAPI();
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
+                return of(0);
             })
         );
     };
@@ -112,20 +111,20 @@ export abstract class BaseService {
     delete = (
         url?: string,
         params?: Record<string, string> | any,
-        tipoApi?: string,
+        tipoApi?: TiposApisEnum,
         isHideAlert?: boolean,
         customOptions?: HttpOptions
     ): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'delete', params, null, tipoApi, customOptions).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
-                return throwErrorAPI();
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
+                return of(0);
             })
         );
     };
 
-    uploadArquivo = (url?: string, body?: any, tipoApi?: string, isHideAlert?: boolean): Observable<any> => {
+    uploadArquivo = (url?: string, body?: any, tipoApi?: TiposApisEnum, isHideAlert?: boolean): Observable<any> => {
         const options: HttpOptions = {
             withCredentials: true,
             responseType: 'json',
@@ -134,8 +133,8 @@ export abstract class BaseService {
         return this.http.request('post', this.getUrl(url, tipoApi), options).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
-                return throwErrorAPI();
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
+                return of(0);
             })
         );
     };
@@ -144,7 +143,7 @@ export abstract class BaseService {
         type?: string,
         url?: string,
         body?: any,
-        tipoApi?: string,
+        tipoApi?: TiposApisEnum,
         isHideAlert?: boolean
     ): Observable<any> => {
         this.options = {
@@ -156,8 +155,8 @@ export abstract class BaseService {
         return this.http.request(type, this.getUrl(url, tipoApi), this.options).pipe(
             take(1),
             catchError((erro: HttpErrorResponse) => {
-                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error, erro.url);
-                return throwErrorAPI();
+                isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
+                return of(0);
             })
         );
     };
@@ -167,7 +166,7 @@ export abstract class BaseService {
         type: string,
         params?: Record<string, string>,
         body?: any,
-        tipoApi?: string,
+        tipoApi?: TiposApisEnum,
         customOptions?: HttpOptions
     ): Observable<any> => {
         this.options = customOptions ? customOptions : tipoApi === 'jarvis' ? this.optionsJarvis : this.options;
@@ -178,19 +177,15 @@ export abstract class BaseService {
         return this.http.request(type, url, this.options);
     };
 
-    public getUrl(url: string, tipoApi?: string): string {
+    public getUrl(url: string, tipoApi?: TiposApisEnum): string {
         const concatUrl = url ? `${this._baseUrl}${url}` : this._baseUrl;
 
         return this.urlUtilService.montarUrlApi(concatUrl, null, tipoApi);
     }
 
-    public showMessageError(msg: any, url: string, style = 'danger'): void {
+    public showMessageError(msg: any, style = 'danger'): void {
         let msgErr = null;
         const msgDefault = 'Ocorreu um erro na requisição';
-
-        if (msg === this._msgApiFora) {
-            Sentry.captureMessage(`API FORA OU DESLOGADA: ${url}`);
-        }
 
         if (!msgErr && JSON.stringify(msg).toString().includes('message')) {
             msgErr = { message: `<strong> Erro: ${msg.message} </strong>` };

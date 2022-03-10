@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -113,8 +112,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked, On
             .subscribe(
                 (response: User) => {
                     StorageUtil.store(Storage.DADOS_USUARIO, response);
-                    // this.commonService.loadingAllOptions(); @todo Caso use o common
-                    // this.carregarJarvis(response.cpf, response.id); @todo Caso use o jarvis
+                    // this.commonService.loadingAllOptions(); // @todo Caso use o common
+                    // this.carregarJarvis(response.cpf, response.id); // @todo Caso use o jarvis
                     this.getSystemInfo(response);
 
                     return isNullOrUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
@@ -186,7 +185,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked, On
         const permissao = JSON.stringify(this.itensMenu);
         const rotaFormatada = (() => {
             const rota = this.router.url.replace(/[0-9]|-/g, '').split('/');
-            return rota.length > 2 ? `${rota[1]}${rota[2]}` : `${rota[1]}`;
+            return rota[1]; // rota.length > 2 ? `${rota[1]}${rota[2]}` : `${rota[1]}`;
         })().toUpperCase();
 
         this.setFuncionalidadeBreadcrumb(this.itensMenu, rotaFormatada);

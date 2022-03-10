@@ -135,7 +135,6 @@ export class ProdutorForm extends FormGroup {
     }
 
     public getFirstErrorFrom(controlName: string, label: string): string {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         return this._errorMessages[Object.keys(this.get(controlName).errors)[0]].replace('%s', label || controlName);
     }
 
@@ -147,14 +146,21 @@ export class ProdutorForm extends FormGroup {
         Object.keys(this.controls).map((control) => this.get(control).updateValueAndValidity());
     }
 
-    public getDados(): Record<string, string> {
+    public getDados(): DadosInscricaoInterface {
         const form = this.value;
 
         return {
-            // @todo completar form
             protocolo: form.protocolo,
             no_cpf: form.no_cpf,
-            dt_nascimento: formatDateBrToEn(form.data_nascimento)
+            nu_seq_solicitacao: form.nu_seq_solicitacao,
+            ds_nome: form.ds_nome,
+            co_sexo: form.co_sexo,
+            co_tipo_documento: form.co_tipo_documento,
+            nu_documento: form.nu_documento,
+            ds_orgao_emissor: form.ds_orgao_emissor,
+            co_uf_emissor: form.co_uf_emissor,
+            ds_escolaridade: form.ds_escolaridade,
+            data_nascimento: form.data_nascimento
         };
     }
 

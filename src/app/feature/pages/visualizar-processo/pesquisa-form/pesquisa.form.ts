@@ -47,7 +47,6 @@ export class PesquisaForm extends FormGroup {
         const prefixoProtocolo = `${ufUsuario}E`;
 
         return (control: AbstractControl): any => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             const ufProtocolo = control.value ? control.value.substring(0, 3).toUpperCase() : '';
             if (ufProtocolo.length > 0 && ufProtocolo !== prefixoProtocolo) {
                 return { valorInvalido: true };
@@ -125,7 +124,6 @@ export class PesquisaForm extends FormGroup {
     }
 
     public getFirstErrorFrom(controlName: string, label: string): string {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         return this._errorMessages[Object.keys(this.get(controlName).errors)[0]].replace('%s', label || controlName);
     }
 
