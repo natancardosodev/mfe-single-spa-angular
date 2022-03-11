@@ -43,7 +43,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public get permissoes(): UserPermissoes {
-        return this.userService.getPermissoesByFuncionalidade(FuncionalidadeEnum.EMPRESA);
+        return this.userService.getPermissoesByFuncionalidade(FuncionalidadeEnum.VISUALIZARPROCESSO);
     }
 
     ngOnInit(): void {
@@ -51,7 +51,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public voltarParaPesquisa(): void {
-        navigate(this.router, RotasEnum.EMPRESA);
+        navigate(this.router, RotasEnum.VISUALIZARPROCESSO);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -91,6 +91,6 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public redirectAlterarDados(): void {
-        navigate(this.router, RotasEnum.EMPRESA_EDITAR, this.solicitacao);
+        navigate(this.router, RotasEnum.VISUALIZARPROCESSO_EDITAR, this.solicitacao);
     }
 }

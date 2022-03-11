@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "skeleton-interno-angular": {
+        "skeleton-internal-front": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -392,57 +392,57 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "skeleton-interno-angular:build"
+                        "browserTarget": "skeleton-internal-front:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "skeleton-interno-angular:build:production"
+                            "browserTarget": "skeleton-internal-front:build:production"
                         },
                         "homologacao": {
-                            "browserTarget": "skeleton-interno-angular:build:homologacao"
+                            "browserTarget": "skeleton-internal-front:build:homologacao"
                         },
                         "demo": {
-                            "browserTarget": "skeleton-interno-angular:build:demo"
+                            "browserTarget": "skeleton-internal-front:build:demo"
                         },
                         "docker": {
-                            "browserTarget": "skeleton-interno-angular:build:docker"
+                            "browserTarget": "skeleton-internal-front:build:docker"
                         },
                         "deve-um": {
-                            "browserTarget": "skeleton-interno-angular:build:deve-um"
+                            "browserTarget": "skeleton-internal-front:build:deve-um"
                         },
                         "deve-dois": {
-                            "browserTarget": "skeleton-interno-angular:build:deve-dois"
+                            "browserTarget": "skeleton-internal-front:build:deve-dois"
                         },
                         "deve-tres": {
-                            "browserTarget": "skeleton-interno-angular:build:deve-tres"
+                            "browserTarget": "skeleton-internal-front:build:deve-tres"
                         },
                         "deve-quatro": {
-                            "browserTarget": "skeleton-interno-angular:build:deve-quatro"
+                            "browserTarget": "skeleton-internal-front:build:deve-quatro"
                         },
                         "deve-cinco": {
-                            "browserTarget": "skeleton-interno-angular:build:deve-cinco"
+                            "browserTarget": "skeleton-internal-front:build:deve-cinco"
                         },
                         "deve-seis": {
-                            "browserTarget": "skeleton-interno-angular:build:deve-seis"
+                            "browserTarget": "skeleton-internal-front:build:deve-seis"
                         },
                         "deve-sete": {
-                            "browserTarget": "skeleton-interno-angular:build:deve-sete"
+                            "browserTarget": "skeleton-internal-front:build:deve-sete"
                         },
                         "deve-oito": {
-                            "browserTarget": "skeleton-interno-angular:build:deve-oito"
+                            "browserTarget": "skeleton-internal-front:build:deve-oito"
                         },
                         "deve-nove": {
-                            "browserTarget": "skeleton-interno-angular:build:deve-nove"
+                            "browserTarget": "skeleton-internal-front:build:deve-nove"
                         },
                         "deve-dez": {
-                            "browserTarget": "skeleton-interno-angular:build:deve-dez"
+                            "browserTarget": "skeleton-internal-front:build:deve-dez"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "skeleton-interno-angular:build"
+                        "browserTarget": "skeleton-internal-front:build"
                     }
                 },
                 "test": {
@@ -461,16 +461,16 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "skeleton-interno-angular:serve"
+                        "devServerTarget": "skeleton-internal-front:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "skeleton-interno-angular:serve:production"
+                            "devServerTarget": "skeleton-internal-front:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "skeleton-interno-angular"
+    "defaultProject": "skeleton-internal-front"
 }
