@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ModalIndeferirComponent } from './modal-indeferir.component';
 
@@ -6,7 +6,7 @@ describe('ModalIndeferirComponent', () => {
     let component: ModalIndeferirComponent;
     let fixture: ComponentFixture<ModalIndeferirComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ModalIndeferirComponent]
         }).compileComponents();

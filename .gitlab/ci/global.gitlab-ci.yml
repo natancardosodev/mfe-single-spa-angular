@@ -41,7 +41,6 @@
     extends:
         - .default-retry
         - .only-default
-        - .default-cache-node_modules
     image: voxtecnologiahub/node-12.14.0
     stage: style
     before_script:

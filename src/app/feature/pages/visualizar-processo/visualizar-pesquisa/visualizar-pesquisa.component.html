@@ -1,7 +1,5 @@
 <section class="main-content-block">
     <div class="content-block">
-        <app-card-processo [solicitacao]="solicitacao"></app-card-processo>
-
         <app-card-pessoa [solicitacao]="solicitacao"></app-card-pessoa>
 
         <app-card-documentos [solicitacao]="solicitacao"></app-card-documentos>
@@ -12,10 +10,10 @@
             (finalizandoProcesso)="finalizandoProcesso($event)"
         ></app-card-observacao>
 
-        <div class="d-flex flex-row-reverse mt-2">
+        <div class="d-flex justify-content-end mt-2">
             <app-button label="Indeferir" (click)="openModalIndeferir()"></app-button>
-            <app-button label="Deferir" (click)="openModalDeferir()" *ngIf="hasAcessoInserir"></app-button>
-            <app-button label="Alterar" (click)="redirectAlterarDados()" *ngIf="hasAcessoAlterar"></app-button>
+            <app-button label="Deferir" (click)="openModalDeferir()" *ngIf="permissoes.inserir"></app-button>
+            <app-button label="Alterar" (click)="redirectAlterarDados()" *ngIf="permissoes.alterar"></app-button>
             <app-button label="Voltar" (click)="voltarParaPesquisa()"></app-button>
         </div>
     </div>
@@ -31,8 +29,8 @@
         <p>Deseja confirmar o deferimento do processo?</p>
     </section>
     <footer class="row">
-        <app-simple-button label="fechar" (click)="closeModal()" class="px-1"> </app-simple-button>
-        <app-simple-button label="salvar" (click)="deferir()" [loading]="loading" [isPrimary]="true" class="px-1">
+        <app-simple-button label="fechar" (click)="closeModal()" [isSecondary]="true" class="px-1"> </app-simple-button>
+        <app-simple-button label="salvar" (click)="deferir()" [loading]="isLoading" [isPrimary]="true" class="px-1">
         </app-simple-button>
     </footer>
 </app-modal>

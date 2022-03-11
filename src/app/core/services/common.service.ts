@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 
@@ -6,13 +5,14 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { AlertService } from 'lib-ui-interno';
 
+import { CommonOptionsEnum } from '@core/enums/common-options.enum';
+import { DadosInterface, OptionsCommonInterface } from '@core/interfaces/sistema/common.interface';
+import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
+
 import { Storage } from '../enums/storage.enum';
 import { StorageUtil } from '../utils/storage.util';
-
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';
-import { CommonOptionsEnum } from '@core/enums/commonOptions.enum';
-import { DadosInterface, OptionsCommonInterface } from '@core/interfaces/common.interface';
 
 /**
  * @export
@@ -32,7 +32,7 @@ export class CommonService extends BaseService {
     public escolaridadeOptions: BehaviorSubject<any> = new BehaviorSubject([]);
 
     private commonOptionsStorageName = 'commonOptions';
-    private tipoApi = 'jarvis';
+    private tipoApi = TiposApisEnum.JARVIS;
 
     /**
      *Creates an instance of CommonService.
@@ -225,6 +225,7 @@ export class CommonService extends BaseService {
 
     public getValueByKey(optionName: string, key: string): string {
         const options = this.resolve(optionName, this);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         const value = options.filter((op) =>
             op && typeof op.key === 'string' ? op.key === key : parseInt(op.key) === parseInt(key)
         );

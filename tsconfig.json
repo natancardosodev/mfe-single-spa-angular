@@ -27,10 +27,14 @@
     ],
     "lib": [
       "es2018",
+      "es2020",
       "dom"
     ]
   },
   "angularCompilerOptions": {
+    "types": [
+      "node"
+    ],
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }

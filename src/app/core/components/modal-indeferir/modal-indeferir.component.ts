@@ -14,16 +14,14 @@ import { IndeferirForm } from './indeferir.form';
 })
 export class ModalIndeferirComponent implements OnInit {
     @Input() public solicitacao: number;
-    @ViewChild('modal', { static: false }) modal: ModalComponent;
+    @ViewChild('modal') modal: ModalComponent;
     @Output() public finalizandoIndeferir: EventEmitter<any>;
     public loading: boolean;
-    public isCollapsed: boolean;
     public modalRef: BsModalRef;
     private _indeferirForm: IndeferirForm;
 
     constructor(private solicitacaoService: SolicitacaoService) {
         this.loading = true;
-        this.isCollapsed = false;
         this.finalizandoIndeferir = new EventEmitter();
         this._indeferirForm = new IndeferirForm();
     }

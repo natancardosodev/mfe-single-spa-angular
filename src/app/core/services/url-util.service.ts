@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { isNullOrUndefined } from 'util';
+import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
+import { isNullOrUndefined } from '@core/utils/generals.util';
 
 import { EnvService } from './env.service';
 
@@ -25,25 +26,31 @@ export class UrlUtilService {
         return `https://${window.location.host}${isInterno ? '/sigfacil/' : ''}`;
     }
 
-    public mountUrl(rota: string): string {
-        return `${this.env.api}${rota}`;
-    }
-
-    public mountUrlJarvis(rota = ''): string {
-        return `${this.env.jarvis}${rota}`;
-    }
-
-    public montarUrlApi(resource: string, parameters?: Record<string, string>, tipoApi?: string): string {
+    public montarUrlApi(
+        resource: string,
+        parameters?: Record<string, string>,
+        tiposApisExtras?: TiposApisEnum
+    ): string {
         const queryString = parameters ? this.objectToQueryString(parameters) : '';
         let baseUrl = '';
 
-        switch (tipoApi) {
-            case 'jarvis':
-                baseUrl = this.mountUrlJarvis();
+        switch (tiposApisExtras) {
+            case TiposApisEnum.SERVICE_API:
+                baseUrl = this.env.api;
                 break;
-            case 'sigfacil':
+            case TiposApisEnum.ASSETS_SIGFACIL:
+                baseUrl = this.env.assetsSigfacil;
+                break;
+            case TiposApisEnum.JARVIS:
+                baseUrl = this.env.jarvis;
+                break;
+            case TiposApisEnum.SIGFACIL:
                 baseUrl = this.getUrlSigfacil();
                 break;
+            case TiposApisEnum.MOCK:
+                baseUrl = 'http://localhost:3000';
+                break;
+
             default:
                 baseUrl = this.getUrlApiBase();
                 break;

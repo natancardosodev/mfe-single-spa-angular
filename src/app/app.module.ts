@@ -1,20 +1,21 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LibUIModule } from 'lib-ui-interno';
+import * as Sentry from '@sentry/angular';
 
+import { GlobalErrorHandler } from '@core/interceptor/global-error-handler';
+import { SharedModule } from '@shared/shared.module';
+import { AuthInterceptor } from '@core/interceptor/auth.interceptor';
+import { JarvisInterceptor } from '@core/interceptor/jarvis.interceptor';
+import { CommonService } from '@core/services/common.service';
+import { UserService } from '@core/services/user.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
-import { CommonService } from './core/services/common.service';
-import { UserService } from './core/services/user.service';
-import { AuthInterceptor } from './core/interceptor/auth.interceptor';
-import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
 
 @NgModule({
     declarations: [AppComponent],
@@ -23,21 +24,47 @@ import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        FontAwesomeModule,
         ModalModule.forRoot(),
         SharedModule,
         LibUIModule
     ],
     providers: [
+        {
+            provide: ErrorHandler,
+            useValue: Sentry.createErrorHandler({
+                showDialog: false
+            })
+        },
+        {
+            provide: Sentry.TraceService,
+            deps: [Router]
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: () => () => {},
+            deps: [Sentry.TraceService],
+            multi: true
+        },
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandler
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JarvisInterceptor,
+            multi: true
+        },
         CommonService,
-        UserService,
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: JarvisInterceptor, multi: true }
+        UserService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
-    constructor(library: FaIconLibrary) {
-        library.addIconPacks(fas);
-    }
+    constructor() {}
 }

@@ -5,14 +5,21 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "explorer.compactFolders": false,
+    "workbench.editor.wrapTabs": true,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-    "[javascript, typescript]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "eslint.alwaysShowStatus": true,
-        "eslint.validate": [
-            "javascript",
-            "typescript"
-        ]
-    }
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false
 }

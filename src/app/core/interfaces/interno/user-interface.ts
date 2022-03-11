@@ -5,3 +5,10 @@ export interface User {
     papel: Array<string>;
     estado: string;
 }
+
+export interface UserPermissoes {
+    inserir: boolean;
+    alterar: boolean;
+    excluir: boolean;
+    visualizar: boolean;
+}

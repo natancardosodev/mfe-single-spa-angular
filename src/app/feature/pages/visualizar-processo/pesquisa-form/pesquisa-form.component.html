@@ -38,21 +38,7 @@
         [message]="!pesquisaForm.statusProcesso.valid ? pesquisaForm.getFirstErrorFrom('statusProcesso', 'Status') : ''"
     ></app-input>
 
-    <app-input
-        [isGrid]="true"
-        label="Data Protocolo"
-        formControlName="dataInicial"
-        id="dt-procolo"
-        [isObrigatorio]="true"
-        col="5"
-        [form]="pesquisaForm"
-        [isDate]="true"
-        [message]="
-            !pesquisaForm.dataInicial.valid ? pesquisaForm.getFirstErrorFrom('dataInicial', 'Data Protocolo') : ''
-        "
-    ></app-input>
-
-    <div class="justify-content-center form-group row col">
+    <div class="form-group row col">
         <label for="data-inicial" class="col-4 col-form-label text-left">Data Protocolo:</label>
         <div class="col-3">
             <app-input

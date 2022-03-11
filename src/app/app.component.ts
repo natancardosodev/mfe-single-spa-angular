@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
-import { Subject, Subscription, forkJoin } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import * as sha512 from 'js-sha512';
 import { AlertService, LoadingGlobalService, LogoInterface, Menu, MenuFuncionalidade } from 'lib-ui-interno';
 
 import { StorageUtil } from '@core/utils/storage.util';
 import { UrlUtilService } from '@core/services/url-util.service';
-import { CommonService } from '@core/services/common.service';
 import { UserService } from '@core/services/user.service';
 import { SystemInterface } from '@core/interfaces/interno/system-interface';
 import { User } from '@core/interfaces/interno/user-interface';
@@ -19,19 +18,20 @@ import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
 import { RotasEnum } from '@core/enums/rotas.enum';
 import { ExternalFilesService } from '@core/services/external-files.service';
 import { EnvService } from '@core/services/env.service';
-import { GeneralsUtil } from '@core/utils/generals.util';
+import { delay, isNullOrUndefined } from '@core/utils/generals.util';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-    public funcionalidadesDoProjeto: Array<number> = [];
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     public funcionalidadeAtual: MenuFuncionalidade;
-    public idUsuario: Subject<number>;
-    public baseHref: string;
+    public funcionalidadesDoProjeto: Array<number> = [];
+    public assetsSigfacil: string;
     public userKey: string;
+    public baseHref: string;
+    public tipoModulo: string;
     private _sistema: Array<SystemInterface>;
     private _usuario: User;
     private _urlLogo: string;
@@ -44,15 +44,15 @@ export class AppComponent implements OnInit {
         private userService: UserService,
         private urlUtilService: UrlUtilService,
         private externalFiles: ExternalFilesService,
+        private title: Title,
         private envService: EnvService,
         private loadingGlobal: LoadingGlobalService,
-        private commonService: CommonService,
         private router: Router
     ) {
-        this.idUsuario = new Subject();
         this._urlLogoSistema = { url: 'assets/images/sigfacil.png', alt: 'string' };
         this.userKey = Storage.DADOS_USUARIO;
         this.baseHref = RotasEnum.BASE_HREF;
+        this.assetsSigfacil = this.envService.assetsSigfacil;
     }
 
     public ngOnInit(): void {
@@ -62,6 +62,11 @@ export class AppComponent implements OnInit {
 
     public ngAfterViewInit(): void {
         this.loadingGlobal.show();
+    }
+
+    public ngOnDestroy(): void {
+        this.getSystemInfo('').unsubscribe();
+        this.logarService().unsubscribe();
     }
 
     public get sistema(): Array<SystemInterface> {
@@ -102,13 +107,12 @@ export class AppComponent implements OnInit {
             .pipe(take(1))
             .subscribe(
                 (response: User) => {
-                    this.externalFiles.loadCss(`${this.envService.assetsSigfacil}/css/interno/theme.css`);
                     StorageUtil.store(Storage.DADOS_USUARIO, response);
-                    this.carregarJarvis(response.cpf, response.id); // @todo Caso use o jarvis
+                    // this.commonService.loadingAllOptions(); // @todo Caso use o common
+                    // this.carregarJarvis(response.cpf, response.id); // @todo Caso use o jarvis
                     this.getSystemInfo(response);
-                    this.commonService.loadingAllOptions();
 
-                    return typeof response['mensagem'] === 'undefined' || this.urlUtilService.redirectToLogin();
+                    return isNullOrUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
                 },
                 (error) => {
                     return error.naoAutorizado && this.urlUtilService.redirectToLogin();
@@ -133,26 +137,31 @@ export class AppComponent implements OnInit {
             this.userService.getSystem(),
             this.userService.getTime(),
             this.userService.getPathLogo(),
-            this.userService.getModulos()
+            this.userService.getModulos(),
+            this.userService.getManifest()
         ])
             .pipe(
                 finalize(
                     () =>
                         void (async () => {
-                            await GeneralsUtil.delay(1000);
+                            await delay(1000);
                             this.loadingGlobal.hide();
                         })()
                 ),
                 take(1)
             )
             .subscribe(
-                ([system, data, path, itensMenu]) => {
+                ([system, data, path, itensMenu, manifest]) => {
+                    this.externalFiles.loadCss('/fontawesome/css/all.min', this.assetsSigfacil);
+                    this.externalFiles.loadCss('/styles/interno/theme', this.assetsSigfacil, manifest.hash);
                     this._dataSistema = data;
-                    this._usuario = dadosUsuario;
                     this._sistema = system;
                     this._urlLogo = path;
                     this._itensMenu = itensMenu;
-                    this.validaPermissaoFuncionalidade(this._usuario);
+                    setTimeout(() => {
+                        this._usuario = dadosUsuario;
+                        this.validaPermissaoFuncionalidade(this._usuario);
+                    }, 1000);
                 },
                 (error: any) => {
                     if (!error.naoAutorizado) {
@@ -165,18 +174,22 @@ export class AppComponent implements OnInit {
     /**
      * Validação a partir das rotas principais, desconsiderando as subrotas que deve-se colocar no RotasEnum
      * Verifica-se o id da funcionalidade em comum.s_sistema_funcionalidade que deve-se colocar no FuncionalidadeEnum
+     * Define o breadcrumb pela funcionalidade atual
      * @param dadosUsuario
      */
     private validaPermissaoFuncionalidade(dadosUsuario: User) {
         const permissao = JSON.stringify(this.itensMenu);
-        const rotaInicial = this.router.url.replace(/-/g, '').split('/')[1].toUpperCase() || 'EMPRESA'; // @todo funcionalidade base
+        const rotaFormatada = (() => {
+            const rota = this.router.url.replace(/[0-9]|-/g, '').split('/');
+            return rota[1]; // rota.length > 2 ? `${rota[1]}${rota[2]}` : `${rota[1]}`;
+        })().toUpperCase();
 
-        this.setFuncionalidadeBreadcrumb(this.itensMenu, rotaInicial);
+        this.setFuncionalidadeBreadcrumb(this.itensMenu, rotaFormatada);
 
         if (
-            (this.router.url.includes(RotasEnum[rotaInicial]) &&
-                !permissao.includes(String(FuncionalidadeEnum[rotaInicial]))) ||
-            dadosUsuario.papel.length == 0
+            this.router.url.includes(RotasEnum[rotaFormatada]) &&
+            !permissao.includes(String(FuncionalidadeEnum[rotaFormatada])) &&
+            !dadosUsuario.papel.toString().includes(String(FuncionalidadeEnum[rotaFormatada]))
         ) {
             this.alertService.openModal({ title: 'Erro', message: 'Acesso Negado', style: 'danger' });
             setTimeout(() => {

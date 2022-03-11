@@ -22,7 +22,13 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
+    imports: [
+        RouterModule.forRoot(appRoutes, {
+            initialNavigation: 'enabled',
+            scrollPositionRestoration: 'enabled',
+            relativeLinkResolution: 'legacy'
+        })
+    ],
     exports: [RouterModule]
 })
 export class AppRoutingModule {}

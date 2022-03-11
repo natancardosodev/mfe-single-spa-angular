@@ -9,10 +9,14 @@ import { GridColumnDefs, GridSearchParams } from 'grid';
 import { GridOptions } from 'ag-grid';
 import { AlertService } from 'lib-ui-interno';
 
-import { PesquisaInterface } from '@core/interfaces/pesquisa/pesquisa-interface';
 import { RotasEnum } from '@core/enums/rotas.enum';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
 import { MaskPipe } from '@shared/pipes/mask.pipe';
+import {
+    DadosGridInterface,
+    GridPesquisaInterface,
+    ParametrosPesquisaInterface
+} from '@core/interfaces/visualizar-processo/pesquisa.interface';
 
 @Component({
     selector: 'app-visualizar-processo',
@@ -22,7 +26,7 @@ import { MaskPipe } from '@shared/pipes/mask.pipe';
 export class VisualizarProcessoComponent {
     public gridView: boolean;
     public loading: boolean;
-    private _dadosGrid: Subject<any>;
+    private _dadosGrid: Subject<Array<DadosGridInterface> | string>;
     private _colunasGrid: Array<GridColumnDefs>;
     private _dataValue: any;
     private _sub: Subscription;
@@ -45,7 +49,9 @@ export class VisualizarProcessoComponent {
     }
 
     public onRowClicked(dadosLinha: any): void {
-        void this.router.navigate([RotasEnum.EMPRESA_VISUALIZAR, dadosLinha.id]);
+        if (dadosLinha) {
+            void this.router.navigate([RotasEnum.EMPRESA_VISUALIZAR, dadosLinha.id]);
+        }
     }
 
     public get colunasGrid(): Array<GridColumnDefs> {
@@ -64,7 +70,7 @@ export class VisualizarProcessoComponent {
         return this._pageConfig;
     }
 
-    public get dadosGrid(): Subject<any> {
+    public get dadosGrid(): Subject<Array<DadosGridInterface> | string> {
         return this._dadosGrid;
     }
 
@@ -84,7 +90,7 @@ export class VisualizarProcessoComponent {
         this.pesquisar(evento.form);
     }
 
-    public pesquisar(formValue: PesquisaInterface, novosParametros = { limit: 50, offset: 0 }): Subscription {
+    public pesquisar(formValue: ParametrosPesquisaInterface, novosParametros = { limit: 50, offset: 0 }): Subscription {
         const { protocolo } = formValue;
 
         if (protocolo) {
@@ -92,7 +98,7 @@ export class VisualizarProcessoComponent {
         }
 
         const parametros = Object.assign(formValue, novosParametros);
-        this._dadosGrid.next('Carregando');
+        this._dadosGrid.next('Carregando...');
         this.loading = true;
         this._sub = this.solicitacaoService
             .getListarProcessos(parametros)
@@ -115,17 +121,17 @@ export class VisualizarProcessoComponent {
         return this._sub;
     }
 
-    public formatarDadosPesquisa(dados): Array<any> {
+    public formatarDadosPesquisa(dados: GridPesquisaInterface): Array<DadosGridInterface> {
         if (dados) {
             const mask = new MaskPipe();
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-            dados = dados.processos.map((processo) => {
+            const dadosFormatted: Array<DadosGridInterface> = dados.processos.map((processo) => {
                 return {
                     ...processo,
-                    cpf: mask.transform(processo.cpf, 'cpf')
+                    cpf: mask.transform(processo.cpf, 'cpf'),
+                    data_protocolado: mask.transform(processo.data_protocolado, 'data')
                 };
             });
-            return dados;
+            return dadosFormatted;
         }
     }
 }

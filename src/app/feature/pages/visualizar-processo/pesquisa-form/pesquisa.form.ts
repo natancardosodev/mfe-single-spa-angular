@@ -4,8 +4,8 @@ import { isValidCpf } from '@brazilian-utils/is-valid-cpf';
 import { clearMask } from 'src/app/core/configs/regexClearMask';
 import { StorageUtil } from 'src/app/core/utils/storage.util';
 import { Storage } from 'src/app/core/enums/storage.enum';
-import { PesquisaInterface } from 'src/app/core/interfaces/pesquisa/pesquisa-interface';
-import { GeneralsUtil } from 'src/app/core/utils/generals.util';
+import { ParametrosPesquisaInterface } from '@core/interfaces/visualizar-processo/pesquisa.interface';
+import { formatDateBrToEn, formatDateEnToBr } from '@core/utils/date.util';
 
 export class PesquisaForm extends FormGroup {
     private _errorMessages = {
@@ -103,7 +103,7 @@ export class PesquisaForm extends FormGroup {
         return this.get('statusProcesso');
     }
 
-    public getDadosForm(): any {
+    public getDadosForm(): ParametrosPesquisaInterface {
         this.deleteControlValuesNull();
         return this.value;
     }
@@ -116,11 +116,11 @@ export class PesquisaForm extends FormGroup {
         return this.get('dataFinal');
     }
 
-    public getValuesFormated(): any {
+    public getValuesFormated(): ParametrosPesquisaInterface {
         return {
             ...this.value,
-            dataInicial: this.value.dataInicial ? GeneralsUtil.formatDateBrToEn(this.value.dataInicial) : null,
-            dataFinal: this.value.dataFinal ? GeneralsUtil.formatDateBrToEn(this.value.dataFinal) : null
+            dataInicial: this.value.dataInicial ? formatDateBrToEn(this.value.dataInicial) : null,
+            dataFinal: this.value.dataFinal ? formatDateBrToEn(this.value.dataFinal) : null
         };
     }
 
@@ -133,13 +133,13 @@ export class PesquisaForm extends FormGroup {
         Object.keys(this.controls).map((control) => this.get(control).markAsTouched());
     }
 
-    public setValues(data: PesquisaInterface): void {
+    public setValues(data: ParametrosPesquisaInterface): void {
         this.protocolo.setValue(data.protocolo);
         this.cpf.setValue(data.cpf);
         this.statusProcesso.setValue(data.statusProcesso);
         this.tipo.setValue(data.tipo);
-        this.dataInicial.setValue(GeneralsUtil.formatDateEnToBr(data.dataInicial));
-        this.dataFinal.setValue(GeneralsUtil.formatDateEnToBr(data.dataFinal));
+        this.dataInicial.setValue(formatDateEnToBr(data.dataInicial));
+        this.dataFinal.setValue(formatDateEnToBr(data.dataFinal));
     }
 
     private deleteControlValuesNull(): void {

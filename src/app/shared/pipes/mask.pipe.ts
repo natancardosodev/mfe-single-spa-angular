@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { formatDateEnToBr } from '@core/utils/date.util';
 
 @Pipe({
     name: 'mask'
@@ -16,13 +17,16 @@ export class MaskPipe implements PipeTransform {
     public initMethods(): void {
         this.acceptedsMasks = {
             cpf: (value: string): string => {
-                return value ? value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '$1.$2.$3-$4') : '';
+                return value ? value.toString().replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '$1.$2.$3-$4') : '';
             },
             cnpj: (value: string): string => {
-                return value ? value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, '$1.$2.$3/$4-$5') : '';
+                return value ? value.toString().replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, '$1.$2.$3/$4-$5') : '';
             },
             cep: (value: string): string => {
-                return value ? value.replace(/(\d{5})(\d{3})/g, '$1-$2') : '';
+                return value ? value.toString().replace(/(\d{5})(\d{3})/g, '$1-$2') : '';
+            },
+            data: (value: string): string => {
+                return formatDateEnToBr(value);
             },
             telefone: (value: string): string => {
                 if (value) {

@@ -3,9 +3,9 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/c
 
 import { Observable } from 'rxjs';
 
-import { StorageUtil } from '../utils/storage.util';
-import { Storage } from '../enums/storage.enum';
-import { EnvService } from '../services/env.service';
+import { EnvService } from '@core/services/env.service';
+import { StorageUtil } from '@core/utils/storage.util';
+import { Storage } from '@core/enums/storage.enum';
 
 @Injectable()
 export class JarvisInterceptor implements HttpInterceptor {

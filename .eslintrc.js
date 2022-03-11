@@ -20,10 +20,12 @@ module.exports = {
         project: 'tsconfig.json',
         ecmaVersion: 2020,
         sourceType: 'module',
+        warnOnUnsupportedTypeScriptVersion: false,
         extraFileExtensions: ['html', 'scss']
     },
-    plugins: ['@typescript-eslint', '@typescript-eslint/tslint'],
+    plugins: ['@typescript-eslint', 'prettier'],
     rules: {
+        'prettier/prettier': 'error',
         '@typescript-eslint/indent': 'off',
         '@typescript-eslint/prefer-regexp-exec': 'off',
         '@typescript-eslint/restrict-template-expressions': 'off',

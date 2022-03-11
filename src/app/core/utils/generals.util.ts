@@ -1,78 +1,82 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
 import { RotasEnum } from '@core/enums/rotas.enum';
 
-export class GeneralsUtil {
-    public static delay(ms: number): Promise<any> {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
+export function delay(ms: number): Promise<any> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-    public static isEmpty(dado: Record<string, string>): boolean {
-        return !Object.keys(dado).length;
-    }
+export function isEmpty(dado: Record<string, any>): boolean {
+    return !Object.keys(dado).length;
+}
 
-    public static navigate(routerInstance: Router, rotaAlvo: RotasEnum, routeParam: string | number = null) {
-        window.scrollTo(0, 0);
-        const comandos = routeParam ? [].concat(rotaAlvo, routeParam) : [rotaAlvo];
-        void routerInstance.navigate(comandos);
-    }
+export function isNullOrUndefined(value: any) {
+    return value === null || value === undefined;
+}
 
-    /**
-     * @returns YYYY-MM-DD HH:mm:ss
-     */
-    public static getDateTime(): string {
-        const date = new Date();
-        return new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-            .toISOString()
-            .replace('T', ' ')
-            .replace('Z', '')
-            .split('.')[0];
-    }
+export function navigate(routerInstance: Router, rotaAlvo: RotasEnum, routeParam: string | number = null) {
+    const comandos = routeParam ? [].concat(rotaAlvo, routeParam) : [rotaAlvo];
+    void routerInstance.navigate(comandos);
+}
 
-    /**
-     * @returns YYYY-MM-DDTHH:mm:ss+00:00
-     */
-    public static getDateTimeUTC(date = null): string {
-        const objDate = new Date(date);
-        const utc = objDate.toString().split('-')[1];
-
-        return (
-            new Date(objDate.getTime() - objDate.getTimezoneOffset() * 60000)
-                .toISOString()
-                .replace('Z', '')
-                .split('.')[0] +
-            '+' +
-            utc.substr(0, 2) +
-            ':' +
-            utc.substr(2, 2)
-        );
-    }
-
-    /**
-     * Formating date from YYYY-MM-DD to MM/DD/YYYY
-     * Alternativa ao new Date().toLocaleDateString('pt-BR')
-     * usado no loadProcessoSession() do component
-     * @param date string
-     */
-    public static formatDateEnToBr(date: string): string {
-        // const [year, month, day] = date.split('-');
-        // return `${day}/${month}/${year}`;
-        return new Date(date).toLocaleDateString('pt-BR', {
-            timeZone: 'UTC'
+export function cleanParams(params: any): any {
+    if (params) {
+        Object.keys(params).forEach((key) => {
+            if (params[key] && typeof params[key] === 'object') cleanParams(params[key]);
+            else if (params[key] === undefined) delete params[key];
         });
     }
 
-    /**
-     * Formating date from MM/DD/YYYY to YYYY-MM-DD
-     * Alternativa ao new Date().toLocaleDateString('fr-CA')
-     * usado no getDados() do form e parseDados() do component
-     * @param date string
-     */
-    public static formatDateBrToEn(date: string) {
-        if (date.toString().includes('GMT')) {
-            return new Date(date).toLocaleDateString('fr-CA');
-        }
+    return params;
+}
 
-        const [day, month, year] = date.split('/');
-        return `${year}-${month}-${day}`;
+export function montarUrlPortais(env: Array<string>, baseHref: string): string {
+    const urls = env.map((ambiente) => {
+        return `https://${ambiente}.voxtecnologia.com.br/${baseHref}`;
+    });
+
+    // eslint-disable-next-line @typescript-eslint/quotes
+    return `'${urls.toString().split(',').join("', '")}'`;
+}
+
+export function idGenerator(label: string, idExtra?: number): string {
+    if (label === undefined) {
+        const radomNumber = Math.floor(Math.random() * 100);
+        return `field-${radomNumber}`;
     }
+
+    label = idExtra !== undefined ? `${label}-${idExtra.toString()}` : label;
+
+    return label
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\ +/g, '-')
+        .replace(/\//g, '-')
+        .replace(/\./g, '')
+        .toLowerCase();
+}
+
+export function throwErrorAPI(): Observable<never> {
+    return throwError(new Error('Erro da API'));
+}
+
+export function tratarErroLogin(erro: HttpErrorResponse): Observable<never> {
+    if (erro.status === 401 || erro.status === 404) {
+        return throwError({ naoAutorizado: true });
+    }
+    throwErrorAPI();
+}
+
+export function generateQueryParamsByObject(obj: Record<any, any>): string {
+    let params = '?';
+    const tamanhoObj = Object.keys(obj).length;
+
+    if (tamanhoObj) {
+        Object.keys(obj).forEach((key, index) => {
+            params = `${params}${key}=${obj[key]}${index + 1 < tamanhoObj ? '&' : ''}`;
+        });
+    }
+
+    return tamanhoObj ? params : '';
 }

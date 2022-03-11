@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Directive, HostListener } from '@angular/core';
 @Directive({
     selector: '[uppercase]'
@@ -8,6 +7,7 @@ export class UppercaseDirective {
 
     @HostListener('input', ['$event'])
     public onKeyUp(event: any) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         event.target['value'] = event.target['value'].toUpperCase();
     }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { finalize, take } from 'rxjs/operators';
 
-import { DadosPessoaInterface } from '@core/interfaces/pessoa-fisica/dados-pessoa-interface';
+import { DadosPessoaInterface } from '@core/interfaces/visualizar-processo/dados-pessoa.interface';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
 
 @Component({
@@ -14,11 +14,9 @@ export class CardPessoaComponent implements OnInit {
     @Input() public solicitacao: number;
     public pessoa: DadosPessoaInterface;
     public loading: boolean;
-    public isCollapsed: boolean;
 
     constructor(private solicitacaoService: SolicitacaoService) {
         this.loading = true;
-        this.isCollapsed = false;
     }
 
     public ngOnInit(): void {

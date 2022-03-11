@@ -8,14 +8,11 @@ import { take } from 'rxjs/operators';
 
 import { ModalIndeferirComponent } from '@core/components/modal-indeferir/modal-indeferir.component';
 import { CardObservacaoComponent } from '@core/components/card-observacao/card-observacao.component';
-import { Status } from '@core/enums/status.enum';
 import { UserService } from '@core/services/user.service';
-import { Storage } from '@core/enums/storage.enum';
-import { StorageUtil } from '@core/utils/storage.util';
 import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
-import { PapeisEnum } from '@core/enums/papeis.enum';
 import { RotasEnum } from '@core/enums/rotas.enum';
-import { GeneralsUtil } from '@core/utils/generals.util';
+import { navigate } from '@core/utils/generals.util';
+import { UserPermissoes } from '@core/interfaces/interno/user-interface';
 
 @Component({
     selector: 'app-visualizar-pesquisa',
@@ -23,10 +20,10 @@ import { GeneralsUtil } from '@core/utils/generals.util';
     styleUrls: ['./visualizar-pesquisa.component.scss']
 })
 export class VisualizarPesquisaComponent implements OnInit {
-    @ViewChild(CardObservacaoComponent, { static: false }) observacao: CardObservacaoComponent;
-    @ViewChild(ModalIndeferirComponent, { static: false }) modalIndeferir: ModalIndeferirComponent;
-    @ViewChild('modalDeferir', { static: false }) modalDeferir: ModalComponent;
-    public loading: boolean;
+    @ViewChild(CardObservacaoComponent) observacao: CardObservacaoComponent;
+    @ViewChild(ModalIndeferirComponent) modalIndeferir: ModalIndeferirComponent;
+    @ViewChild('modalDeferir') modalDeferir: ModalComponent;
+    public isLoading: boolean;
     public modalRef: BsModalRef;
     public solicitacao: number;
     public isStatusExigencia: boolean;
@@ -38,46 +35,30 @@ export class VisualizarPesquisaComponent implements OnInit {
         private userService: UserService,
         private modalService: BsModalService
     ) {
-        this.loading = true;
+        this.isLoading = false;
         this.isStatusExigencia = false;
         this.route.params.pipe(take(1)).subscribe((params) => {
             this.solicitacao = params['id'];
         });
     }
 
-    public get hasAcessoInserir(): boolean {
-        return this.userService.checkPermissaoLiberada(
-            StorageUtil.get(Storage.DADOS_USUARIO),
-            FuncionalidadeEnum.EMPRESA,
-            [PapeisEnum.INSERIR]
-        );
-    }
-
-    public get hasAcessoAlterar(): boolean {
-        return this.userService.checkPermissaoLiberada(
-            StorageUtil.get(Storage.DADOS_USUARIO),
-            FuncionalidadeEnum.EMPRESA,
-            [PapeisEnum.ALTERAR]
-        );
+    public get permissoes(): UserPermissoes {
+        return this.userService.getPermissoesByFuncionalidade(FuncionalidadeEnum.EMPRESA);
     }
 
     ngOnInit(): void {
         this.titleService.setTitle('Visualizar Processo - Skeleton');
-        window.scrollTo(0, 0);
     }
 
     public voltarParaPesquisa(): void {
-        GeneralsUtil.navigate(this.router, RotasEnum.EMPRESA);
+        navigate(this.router, RotasEnum.EMPRESA);
     }
 
-    public statusAtualProcesso(status: number): void {
-        setTimeout(() => {
-            this.isStatusExigencia = status == Status.EXIGENCIA ? true : false;
-        }, 500);
-    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public statusAtualProcesso(status: number): void {}
 
     public openModal(modal: ElementRef): void {
-        this.loading = false;
+        this.isLoading = false;
         this.modalRef = this.modalService.show(modal);
     }
 
@@ -92,7 +73,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public deferir(): void {
-        this.loading = true;
+        this.isLoading = true;
         this.observacao.salvar();
     }
 
@@ -101,7 +82,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public finalizandoProcesso(success: boolean): void {
-        this.loading = false;
+        this.isLoading = false;
         this.closeModal();
 
         if (success) {
@@ -110,6 +91,6 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public redirectAlterarDados(): void {
-        GeneralsUtil.navigate(this.router, RotasEnum.EMPRESA_EDITAR, this.solicitacao);
+        navigate(this.router, RotasEnum.EMPRESA_EDITAR, this.solicitacao);
     }
 }
