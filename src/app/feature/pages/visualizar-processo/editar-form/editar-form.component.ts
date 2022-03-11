@@ -13,7 +13,7 @@ import {
     AtividadeInterface,
     DadosInscricaoInterface,
     DocumentoOrgaoInterface
-} from '@core/interfaces/pessoa-fisica/dados-inscricao.interface';
+} from '@core/interfaces/visualizar-processo/dados-inscricao.interface';
 import { DadosInterface } from '@core/interfaces/sistema/dados.interface';
 import { CommonService } from '@core/services/common.service';
 import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';

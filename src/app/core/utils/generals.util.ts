@@ -7,7 +7,7 @@ export function delay(ms: number): Promise<any> {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function isEmpty(dado: Record<string, string>): boolean {
+export function isEmpty(dado: Record<string, any>): boolean {
     return !Object.keys(dado).length;
 }
 

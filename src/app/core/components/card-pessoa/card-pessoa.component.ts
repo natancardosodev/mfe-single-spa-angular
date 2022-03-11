@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { finalize, take } from 'rxjs/operators';
 
-import { DadosPessoaInterface } from '@core/interfaces/pessoa-fisica/dados-pessoa-interface';
+import { DadosPessoaInterface } from '@core/interfaces/visualizar-processo/dados-pessoa.interface';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
 
 @Component({

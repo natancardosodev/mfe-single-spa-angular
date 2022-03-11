@@ -5,7 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { AlertService } from 'lib-ui-interno';
 
-import { CommonOptionsEnum } from '@core/enums/commonOptions.enum';
+import { CommonOptionsEnum } from '@core/enums/common-options.enum';
 import { DadosInterface, OptionsCommonInterface } from '@core/interfaces/sistema/common.interface';
 import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
 

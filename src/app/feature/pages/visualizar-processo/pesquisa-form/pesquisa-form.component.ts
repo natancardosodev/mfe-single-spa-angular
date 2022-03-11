@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { AlertService } from 'lib-ui-interno';
 import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';
-import { PesquisaInterface } from '@core/interfaces/pesquisa/pesquisa-interface';
+import { ParametrosPesquisaInterface } from '@core/interfaces/visualizar-processo/pesquisa.interface';
 import { PesquisaForm } from './pesquisa.form';
 import { isEmpty } from '@core/utils/generals.util';
 
@@ -22,7 +22,7 @@ export class PesquisaFormComponent implements OnInit {
     public loadingPage: boolean;
     public dateMin: Date;
     public dateMax: Date;
-    private _pesquisa: PesquisaInterface;
+    private _pesquisa: ParametrosPesquisaInterface;
     private _pesquisaForm: PesquisaForm;
     private _maskFactory: TextMaskFactory;
 

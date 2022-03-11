@@ -1,7 +1,7 @@
 import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { FormFieldProdutor } from '@core/enums/form-produtor.enum';
 import { formatDateEnToBr } from '@core/utils/date.util';
-import { DadosInscricaoInterface } from 'src/app/core/interfaces/pessoa-fisica/dados-inscricao.interface';
+import { DadosInscricaoInterface } from '@core/interfaces/visualizar-processo/dados-inscricao.interface';
 
 export class ProdutorForm extends FormGroup {
     private _errorMessages = {

@@ -7,7 +7,7 @@ import { AlertService } from 'lib-ui-interno';
 
 import { UrlUtilService } from '@core/services/url-util.service';
 import { BaseService } from '@core/services/base.service';
-import { DadosInscricaoInterface } from '@core/interfaces/pessoa-fisica/dados-inscricao.interface';
+import { DadosInscricaoInterface } from '@core/interfaces/visualizar-processo/dados-inscricao.interface';
 import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
 
 @Injectable({
