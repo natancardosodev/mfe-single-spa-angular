@@ -1,5 +1,5 @@
 export enum TiposApisEnum {
-    SERVICE = 'service',
+    SERVICE_API = 'service-api',
     JARVIS = 'jarvis',
     SIGFACIL = 'sigfacil',
     ASSETS_SIGFACIL = 'assets-sigfacil',

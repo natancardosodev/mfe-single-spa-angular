@@ -35,7 +35,7 @@ export class UrlUtilService {
         let baseUrl = '';
 
         switch (tiposApisExtras) {
-            case TiposApisEnum.SERVICE:
+            case TiposApisEnum.SERVICE_API:
                 baseUrl = this.env.api;
                 break;
             case TiposApisEnum.ASSETS_SIGFACIL:
