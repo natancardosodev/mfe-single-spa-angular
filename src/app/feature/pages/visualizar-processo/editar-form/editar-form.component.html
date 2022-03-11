@@ -1,83 +1,102 @@
 <app-view-page>
     <app-collapse label="Identificação" [loading]="loading">
         <app-input
-            label="Protocolo"
-            formControlName="protocolo"
+            [label]="formLabelProdutor.protocolo"
+            [formControlName]="formFieldProdutor.protocolo"
             [isObrigatorio]="true"
             col="5"
             [form]="produtorForm"
             [readOnly]="true"
-            [message]="!produtorForm.protocolo.valid ? produtorForm.getFirstErrorFrom('protocolo', 'Protocolo') : ''"
+            [message]="
+                !produtorForm.protocolo.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.protocolo, formLabelProdutor.protocolo)
+                    : ''
+            "
         ></app-input>
         <app-input
-            label="Número do CPF"
-            formControlName="no_cpf"
+            [label]="formLabelProdutor.no_cpf"
+            [formControlName]="formFieldProdutor.no_cpf"
             [isObrigatorio]="true"
             col="5"
             [readOnly]="true"
             [textMask]="maskFactory.createCpf()"
             [form]="produtorForm"
-            [message]="!produtorForm.no_cpf.valid ? produtorForm.getFirstErrorFrom('no_cpf', 'Número CPF') : ''"
+            [message]="
+                !produtorForm.no_cpf.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.no_cpf, formLabelProdutor.no_cpf)
+                    : ''
+            "
         ></app-input>
         <app-input
-            label="Nome Completo"
+            [label]="formLabelProdutor.ds_nome"
             [isObrigatorio]="true"
-            formControlName="ds_nome"
+            [formControlName]="formFieldProdutor.ds_nome"
             col="9"
             [form]="produtorForm"
-            [message]="!produtorForm.ds_nome.valid ? produtorForm.getFirstErrorFrom('ds_nome', 'Nome Completo') : ''"
+            [message]="
+                !produtorForm.ds_nome.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.ds_nome, formLabelProdutor.ds_nome)
+                    : ''
+            "
         ></app-input>
         <app-input
-            label="Data da Solicitação"
+            [label]="formLabelProdutor.dt_solicitacao"
             [isObrigatorio]="true"
-            formControlName="dt_solicitacao"
+            [formControlName]="formFieldProdutor.dt_solicitacao"
             col="5"
             [readOnly]="true"
             [form]="produtorForm"
             [message]="
                 !produtorForm.dt_solicitacao.valid
-                    ? produtorForm.getFirstErrorFrom('dt_solicitacao', 'Data da Solicitação')
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.dt_solicitacao, formLabelProdutor.dt_solicitacao)
                     : ''
             "
         ></app-input>
         <app-input
-            label="Eventos"
+            [label]="formLabelProdutor.co_evento"
             [isObrigatorio]="true"
-            formControlName="co_evento"
+            [formControlName]="formFieldProdutor.co_evento"
             col="6"
             [readOnly]="true"
             [form]="produtorForm"
-            [message]="!produtorForm.co_evento.valid ? produtorForm.getFirstErrorFrom('co_evento', 'Eventos') : ''"
+            [message]="
+                !produtorForm.co_evento.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.co_evento, formLabelProdutor.co_evento)
+                    : ''
+            "
         ></app-input>
     </app-collapse>
     <app-collapse label="Dados Produtor Rural" [loading]="loading">
         <app-input
-            label="Documento de Identificação"
+            [label]="formLabelProdutor.nu_documento"
             [isObrigatorio]="true"
-            formControlName="nu_documento"
+            [formControlName]="formFieldProdutor.nu_documento"
             [form]="produtorForm"
             col="4"
             [message]="
                 !produtorForm.nu_documento.valid
-                    ? produtorForm.getFirstErrorFrom('nu_documento', 'Documento de Identificação')
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.nu_documento, formLabelProdutor.nu_documento)
                     : ''
             "
         ></app-input>
         <app-input
-            label="Órgão Emissor"
+            [label]="formLabelProdutor.ds_orgao_emissor"
             [isObrigatorio]="true"
-            formControlName="ds_orgao_emissor"
+            [formControlName]="formFieldProdutor.ds_orgao_emissor"
             [form]="produtorForm"
             col="4"
             [message]="
                 !produtorForm.ds_orgao_emissor.valid
-                    ? produtorForm.getFirstErrorFrom('ds_orgao_emissor', 'Órgão Emissor')
+                    ? produtorForm.getFirstErrorFrom(
+                          formFieldProdutor.ds_orgao_emissor,
+                          formLabelProdutor.ds_orgao_emissor
+                      )
                     : ''
             "
         ></app-input>
         <app-input
-            label="UF do Emissor"
-            formControlName="co_uf_emissor"
+            [label]="formLabelProdutor.co_uf_emissor"
+            [formControlName]="formFieldProdutor.co_uf_emissor"
             [form]="produtorForm"
             col="4"
             type="select"
@@ -86,39 +105,41 @@
             valueOp="ds_sigla"
             [message]="
                 !produtorForm.co_uf_emissor.valid
-                    ? produtorForm.getFirstErrorFrom('co_uf_emissor', 'UF do Emissor')
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.co_uf_emissor, formLabelProdutor.co_uf_emissor)
                     : ''
             "
         >
         </app-input>
         <app-input
-            label="Data de Nascimento"
-            formControlName="dt_nascimento"
+            [label]="formLabelProdutor.dt_nascimento"
+            [formControlName]="formFieldProdutor.dt_nascimento"
             [isObrigatorio]="true"
             col="4"
             [form]="produtorForm"
             type="date"
             [mensagemStatus]="
                 !produtorForm.dt_nascimento.valid
-                    ? produtorForm.getFirstErrorFrom('dt_nascimento', 'Data de Nascimento')
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.dt_nascimento, formLabelProdutor.dt_nascimento)
                     : ''
             "
         >
         </app-input>
 
         <app-input
-            label="Naturalidade"
-            formControlName="naturalidade"
+            [label]="formLabelProdutor.naturalidade"
+            [formControlName]="formFieldProdutor.naturalidade"
             col="7"
             [form]="produtorForm"
             [message]="
-                !produtorForm.naturalidade.valid ? produtorForm.getFirstErrorFrom('naturalidade', 'Naturalidade') : ''
+                !produtorForm.naturalidade.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.naturalidade, formLabelProdutor.naturalidade)
+                    : ''
             "
         ></app-input>
 
         <app-input
-            label="UF Naturalidade"
-            formControlName="uf_naturalidade"
+            [label]="formLabelProdutor.uf_naturalidade"
+            [formControlName]="formFieldProdutor.uf_naturalidade"
             col="4"
             [form]="produtorForm"
             type="select"
@@ -127,7 +148,10 @@
             valueOp="ds_sigla"
             [message]="
                 !produtorForm.uf_naturalidade.valid
-                    ? produtorForm.getFirstErrorFrom('uf_naturalidade', 'UF Naturalidade')
+                    ? produtorForm.getFirstErrorFrom(
+                          formFieldProdutor.uf_naturalidade,
+                          formLabelProdutor.uf_naturalidade
+                      )
                     : ''
             "
         >
@@ -135,100 +159,132 @@
     </app-collapse>
     <app-collapse label="Endereço de correspondência e contato" [loading]="loading">
         <app-input
-            label="UF"
+            [label]="formLabelProdutor.uf_pais"
             [isObrigatorio]="true"
-            formControlName="uf_pais"
+            [formControlName]="formFieldProdutor.uf_pais"
             col="7"
             [form]="produtorForm"
             type="select"
             [options]="commonService.estadoOptions"
             keyOp="co_uf"
             valueOp="ds_sigla"
-            [message]="!produtorForm.uf_pais.valid ? produtorForm.getFirstErrorFrom('uf_pais', 'UF') : ''"
+            [message]="
+                !produtorForm.uf_pais.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.uf_pais, formLabelProdutor.uf_pais)
+                    : ''
+            "
         >
         </app-input>
         <app-input
-            label="Município"
+            [label]="formLabelProdutor.co_municipio"
             [isObrigatorio]="true"
-            formControlName="co_municipio"
+            [formControlName]="formFieldProdutor.co_municipio"
             col="7"
             [form]="produtorForm"
             type="select"
             [options]="listaMunicipiosProdutor"
             [message]="
-                !produtorForm.co_municipio.valid ? produtorForm.getFirstErrorFrom('co_municipio', 'Município') : ''
+                !produtorForm.co_municipio.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.co_municipio, formLabelProdutor.co_municipio)
+                    : ''
             "
         >
         </app-input>
         <app-input
-            label="CEP"
+            [label]="formLabelProdutor.co_cep"
             [isObrigatorio]="true"
-            formControlName="co_cep"
+            [formControlName]="formFieldProdutor.co_cep"
             col="4"
             [textMask]="maskFactory.createCep()"
             [form]="produtorForm"
-            [message]="!produtorForm.co_cep.valid ? produtorForm.getFirstErrorFrom('co_cep', 'CEP') : ''"
+            [message]="
+                !produtorForm.co_cep.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.co_cep, formLabelProdutor.co_cep)
+                    : ''
+            "
         ></app-input>
         <app-input
-            label="Logradouro"
-            formControlName="ds_endereco"
+            [label]="formLabelProdutor.ds_endereco"
+            [formControlName]="formFieldProdutor.ds_endereco"
             col="7"
             [form]="produtorForm"
             type="select"
             [options]="commonService.logradouroOptions"
             [message]="
-                !produtorForm.ds_endereco.valid ? produtorForm.getFirstErrorFrom('ds_endereco', 'Logradouro') : ''
+                !produtorForm.ds_endereco.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.ds_endereco, formLabelProdutor.ds_endereco)
+                    : ''
             "
         >
         </app-input>
         <app-input
-            label="Número"
+            [label]="formLabelProdutor.nu_numero"
             [isObrigatorio]="true"
-            formControlName="nu_numero"
+            [formControlName]="formFieldProdutor.nu_numero"
             col="4"
             [form]="produtorForm"
-            [message]="!produtorForm.nu_numero.valid ? produtorForm.getFirstErrorFrom('nu_numero', 'Número') : ''"
-        ></app-input>
-        <app-input
-            label="Complemento"
-            formControlName="ds_complemento"
-            col="7"
-            [form]="produtorForm"
             [message]="
-                !produtorForm.ds_complemento.valid
-                    ? produtorForm.getFirstErrorFrom('ds_complemento', 'Complemento')
+                !produtorForm.nu_numero.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.nu_numero, formLabelProdutor.nu_numero)
                     : ''
             "
         ></app-input>
         <app-input
-            label="Bairro"
-            [isObrigatorio]="true"
-            formControlName="ds_bairro"
+            [label]="formLabelProdutor.ds_complemento"
+            [formControlName]="formFieldProdutor.ds_complemento"
             col="7"
             [form]="produtorForm"
-            [message]="!produtorForm.ds_bairro.valid ? produtorForm.getFirstErrorFrom('ds_bairro', 'Bairro') : ''"
+            [message]="
+                !produtorForm.ds_complemento.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.ds_complemento, formLabelProdutor.ds_complemento)
+                    : ''
+            "
         ></app-input>
         <app-input
-            label="Telefone"
-            formControlName="nu_telefone"
+            [label]="formLabelProdutor.ds_bairro"
+            [isObrigatorio]="true"
+            [formControlName]="formFieldProdutor.ds_bairro"
+            col="7"
+            [form]="produtorForm"
+            [message]="
+                !produtorForm.ds_bairro.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.ds_bairro, formLabelProdutor.ds_bairro)
+                    : ''
+            "
+        ></app-input>
+        <app-input
+            [label]="formLabelProdutor.nu_telefone"
+            [formControlName]="formFieldProdutor.nu_telefone"
             col="7"
             [textMask]="maskFactory.createTelefone()"
             [form]="produtorForm"
-            [message]="!produtorForm.nu_telefone.valid ? produtorForm.getFirstErrorFrom('nu_telefone', 'Telefone') : ''"
+            [message]="
+                !produtorForm.nu_telefone.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.nu_telefone, formLabelProdutor.nu_telefone)
+                    : ''
+            "
         ></app-input>
         <app-input
-            label="Fax"
-            formControlName="co_fax"
+            [label]="formLabelProdutor.co_fax"
+            [formControlName]="formFieldProdutor.co_fax"
             col="7"
             [form]="produtorForm"
-            [message]="!produtorForm.co_fax.valid ? produtorForm.getFirstErrorFrom('co_fax', 'Fax') : ''"
+            [message]="
+                !produtorForm.co_fax.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.co_fax, formLabelProdutor.co_fax)
+                    : ''
+            "
         ></app-input>
         <app-input
-            label="Email"
-            formControlName="ds_email"
+            [label]="formLabelProdutor.ds_email"
+            [formControlName]="formFieldProdutor.ds_email"
             col="7"
             [form]="produtorForm"
-            [message]="!produtorForm.ds_email.valid ? produtorForm.getFirstErrorFrom('ds_email', 'Email') : ''"
+            [message]="
+                !produtorForm.ds_email.valid
+                    ? produtorForm.getFirstErrorFrom(formFieldProdutor.ds_email, formLabelProdutor.ds_email)
+                    : ''
+            "
         ></app-input>
     </app-collapse>
     <app-card-documentos [dados]="documentos" [loading]="loading"></app-card-documentos>

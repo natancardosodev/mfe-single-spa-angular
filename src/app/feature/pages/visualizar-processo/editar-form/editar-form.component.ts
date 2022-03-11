@@ -24,6 +24,7 @@ import { clearMask } from '@core/configs/regexClearMask';
 import { GatewayReceitaInterface } from '@core/interfaces/jarvis/gateway-receita.interface';
 import { MensagensEnum } from '@core/enums/mensagens.enum';
 import { delay, navigate } from '@core/utils/generals.util';
+import { FormFieldProdutor, FormLabelProdutor } from '@core/enums/form-produtor.enum';
 import { ProdutorForm } from './produtor.form';
 
 @Component({
@@ -32,6 +33,8 @@ import { ProdutorForm } from './produtor.form';
     styleUrls: ['./editar-form.component.scss']
 })
 export class EditarFormComponent implements OnInit {
+    public formFieldProdutor = FormFieldProdutor;
+    public formLabelProdutor = FormLabelProdutor;
     public loading: boolean;
     public loadingUpdate: boolean;
     public loadingUf: boolean;
