@@ -8,13 +8,14 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { LibUIModule } from 'lib-ui-interno';
 import * as Sentry from '@sentry/angular';
 
+import { GlobalErrorHandler } from '@core/interceptor/global-error-handler';
+import { SharedModule } from '@shared/shared.module';
+import { AuthInterceptor } from '@core/interceptor/auth.interceptor';
+import { JarvisInterceptor } from '@core/interceptor/jarvis.interceptor';
+import { CommonService } from '@core/services/common.service';
+import { UserService } from '@core/services/user.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
-import { CommonService } from './core/services/common.service';
-import { UserService } from './core/services/user.service';
-import { AuthInterceptor } from './core/interceptor/auth.interceptor';
-import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
 
 @NgModule({
     declarations: [AppComponent],
@@ -44,10 +45,22 @@ import { JarvisInterceptor } from './core/interceptor/jarvis.interceptor';
             deps: [Sentry.TraceService],
             multi: true
         },
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandler
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JarvisInterceptor,
+            multi: true
+        },
         CommonService,
-        UserService,
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: JarvisInterceptor, multi: true }
+        UserService
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

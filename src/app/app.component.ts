@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -25,7 +25,7 @@ import { delay, isNullOrUndefined } from '@core/utils/generals.util';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     public funcionalidadeAtual: MenuFuncionalidade;
     public funcionalidadesDoProjeto: Array<number> = [];
     public assetsSigfacil: string;
@@ -62,10 +62,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked, On
 
     public ngAfterViewInit(): void {
         this.loadingGlobal.show();
-    }
-
-    public ngAfterViewChecked(): void {
-        this.title.setTitle(this.funcionalidadeAtual ? this.funcionalidadeAtual.nome : '');
     }
 
     public ngOnDestroy(): void {
