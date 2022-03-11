@@ -1,11 +1,9 @@
 export enum RotasEnum {
     BASE_HREF = '/sigfacil/skeleton/', // @todo funcionalidade base
     // ROTAS BASE DAS FUNCIONALIDADES
-    EMPRESA = 'empresa',
-    MIGRAR = 'migrar',
+    VISUALIZARPROCESSO = 'visualizar-processo',
     // ROTAS SECUNDÁRIAS
-    EMPRESA_VISUALIZAR = 'empresa/visualizar',
-    EMPRESA_EDITAR = 'empresa/editar',
-    EMPRESA_INCLUIR = 'empresa/incluir',
-    MIGRAR_VISUALIZAR = 'migrar/visualizar'
+    VISUALIZARPROCESSO_VISUALIZAR = 'visualizar-processo/visualizar',
+    VISUALIZARPROCESSO_EDITAR = 'visualizar-processo/editar',
+    VISUALIZARPROCESSO_INCLUIR = 'visualizar-processo/incluir'
 }

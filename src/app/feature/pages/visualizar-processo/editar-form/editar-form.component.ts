@@ -158,7 +158,7 @@ export class EditarFormComponent implements OnInit {
                     })
                 )
                 .subscribe((response: DadosInscricaoInterface) => {
-                    navigate(this.router, RotasEnum.EMPRESA_VISUALIZAR, response.nu_seq_usuario);
+                    navigate(this.router, RotasEnum.VISUALIZARPROCESSO_VISUALIZAR, response.nu_seq_usuario);
                 });
         }
     }
@@ -178,7 +178,7 @@ export class EditarFormComponent implements OnInit {
     }
 
     public voltar(): void {
-        navigate(this.router, RotasEnum.EMPRESA, this._solicitacaoId);
+        navigate(this.router, RotasEnum.VISUALIZARPROCESSO, this._solicitacaoId);
     }
 
     private setOptions(): void {

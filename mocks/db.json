@@ -5,8 +5,8 @@
             "funcionalidades": [
                 {
                     "id": 1040020253,
-                    "nome": "Funcionalidade Skeleton Empresa",
-                    "rota": "/sigfacil/skeleton/empresa",
+                    "nome": "Visualizar Processo Skeleton",
+                    "rota": "/sigfacil/skeleton/visualizar-processo",
                     "modulo": {
                         "id": 104002,
                         "nome": "Manutenção SIGFácil",
@@ -100,17 +100,6 @@
                     "nome": "Parecer Monitoramento de Condicionantes",
                     "descricao": "Parecer Monitoramento de Condicionantes",
                     "rota": "/ipaam/parecer-monitoramento-condicionantes/pesquisa",
-                    "modulo": {
-                        "id": 104002,
-                        "nome": "Manutenção SIGFácil",
-                        "icone": "fa-wrench"
-                    }
-                },
-                {
-                    "id": 1040020203,
-                    "nome": "Alteração de Empresa Ambiental",
-                    "descricao": "Alteração de Empresa Ambiental",
-                    "rota": "/ipaam/alteracao-empresa-licenciamento/pesquisa",
                     "modulo": {
                         "id": 104002,
                         "nome": "Manutenção SIGFácil",

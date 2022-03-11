@@ -5,13 +5,13 @@ import { RotasEnum } from './core/enums/rotas.enum';
 
 const appRoutes: Routes = [
     {
-        path: RotasEnum.EMPRESA,
+        path: RotasEnum.VISUALIZARPROCESSO,
         loadChildren: () =>
             import('./feature/pages/visualizar-processo/visualizar-processo.module').then(
                 (m) => m.VisualizarProcessoModule
             )
     },
-    { path: '', redirectTo: RotasEnum.EMPRESA, pathMatch: 'full' },
+    { path: '', redirectTo: RotasEnum.VISUALIZARPROCESSO, pathMatch: 'full' },
     {
         path: '**',
         loadChildren: () =>

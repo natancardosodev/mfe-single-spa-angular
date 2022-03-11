@@ -50,7 +50,7 @@ export class VisualizarProcessoComponent {
 
     public onRowClicked(dadosLinha: any): void {
         if (dadosLinha) {
-            void this.router.navigate([RotasEnum.EMPRESA_VISUALIZAR, dadosLinha.id]);
+            void this.router.navigate([RotasEnum.VISUALIZARPROCESSO_VISUALIZAR, dadosLinha.id]);
         }
     }
 
