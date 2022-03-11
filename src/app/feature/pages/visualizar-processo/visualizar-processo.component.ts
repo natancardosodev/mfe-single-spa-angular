@@ -13,6 +13,7 @@ import { PesquisaInterface } from '@core/interfaces/pesquisa/pesquisa-interface'
 import { RotasEnum } from '@core/enums/rotas.enum';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
 import { MaskPipe } from '@shared/pipes/mask.pipe';
+import { RespostaPesquisa } from '@core/interfaces/pesquisa/resposta-pesquisa-interface';
 
 @Component({
     selector: 'app-visualizar-processo',
@@ -117,17 +118,17 @@ export class VisualizarProcessoComponent {
         return this._sub;
     }
 
-    public formatarDadosPesquisa(dados): Array<any> {
+    public formatarDadosPesquisa(dados: RespostaPesquisa): Array<RespostaPesquisa> {
         if (dados) {
             const mask = new MaskPipe();
-            dados = dados.processos.map((processo) => {
+            const dadosFormatted: Array<RespostaPesquisa> = dados.processos.map((processo) => {
                 return {
                     ...processo,
                     cpf: mask.transform(processo.cpf, 'cpf'),
                     data_protocolado: mask.transform(processo.data_protocolado, 'data')
                 };
             });
-            return dados;
+            return dadosFormatted;
         }
     }
 }

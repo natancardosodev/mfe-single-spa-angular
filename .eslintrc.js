@@ -23,8 +23,9 @@ module.exports = {
         warnOnUnsupportedTypeScriptVersion: false,
         extraFileExtensions: ['html', 'scss']
     },
-    plugins: ['@typescript-eslint'],
+    plugins: ['@typescript-eslint', 'prettier'],
     rules: {
+        'prettier/prettier': 'error',
         '@typescript-eslint/indent': 'off',
         '@typescript-eslint/prefer-regexp-exec': 'off',
         '@typescript-eslint/restrict-template-expressions': 'off',

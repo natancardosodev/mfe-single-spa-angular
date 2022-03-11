@@ -49,6 +49,7 @@ export class MaskPipe implements PipeTransform {
     transform(value: string, format: any): string {
         const maskFn = this.acceptedsMasks[format];
         if (format && maskFn) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             return maskFn(value);
         }
 

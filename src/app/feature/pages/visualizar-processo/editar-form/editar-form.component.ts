@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AlertService } from 'lib-ui-interno';
 
@@ -14,7 +14,7 @@ import {
     DadosInscricaoInterface,
     DocumentoOrgaoInterface
 } from '@core/interfaces/pessoa-fisica/dados-inscricao.interface';
-import { Dados } from '@core/interfaces/pessoa-fisica/dados';
+import { DadosInterface } from '@core/interfaces/sistema/dados.interface';
 import { CommonService } from '@core/services/common.service';
 import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
@@ -43,10 +43,10 @@ export class EditarFormComponent implements OnInit {
     public atividades: Array<AtividadeInterface>;
     public documentos: Array<DocumentoOrgaoInterface>;
     public anexos: Array<AnexoInterface>;
-    public listaMunicipiosImovel: BehaviorSubject<Array<Dados>> = new BehaviorSubject([]);
-    public listaMunicipiosProdutor: BehaviorSubject<Array<Dados>> = new BehaviorSubject([]);
-    public listaMunicipiosContabilista: BehaviorSubject<Array<Dados>> = new BehaviorSubject([]);
-    public tiposPessoaOptions: BehaviorSubject<Array<Dados>> = new BehaviorSubject([]);
+    public listaMunicipiosImovel: BehaviorSubject<Array<DadosInterface>> = new BehaviorSubject([]);
+    public listaMunicipiosProdutor: BehaviorSubject<Array<DadosInterface>> = new BehaviorSubject([]);
+    public listaMunicipiosContabilista: BehaviorSubject<Array<DadosInterface>> = new BehaviorSubject([]);
+    public tiposPessoaOptions: BehaviorSubject<Array<DadosInterface>> = new BehaviorSubject([]);
     public sexosOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     private _produtorForm: ProdutorForm;
     private _solicitacaoId: number;

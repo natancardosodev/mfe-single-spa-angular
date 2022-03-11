@@ -25,7 +25,7 @@ export class SolicitacaoService extends BaseService {
     };
 
     public getDadosInscricao = (solicitacao: number): Observable<any> => {
-        return this.get(`/inscricao`, null, TiposApisEnum.MOCK); // `/inscricao/solicitacao/${solicitacao}`
+        return this.get('/inscricao', null, TiposApisEnum.MOCK); // `/inscricao/solicitacao/${solicitacao}`
     };
 
     public putDadosInscricao(solicitacao: number, data: DadosInscricaoInterface): Observable<any> {
@@ -50,7 +50,7 @@ export class SolicitacaoService extends BaseService {
     };
 
     public postDados = (dados: any): Observable<any> => {
-        return this.post(`/solicitacao/dados`, dados);
+        return this.post('/solicitacao/dados', dados);
     };
 
     public getObservacao = (solicitacao: any): Observable<any> => {

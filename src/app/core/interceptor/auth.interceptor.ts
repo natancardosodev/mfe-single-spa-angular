@@ -14,8 +14,6 @@ export class AuthInterceptor implements HttpInterceptor {
             tap(
                 () => {},
                 (error: HttpErrorResponse) => {
-                    console.log(error);
-
                     if (error && (error.status === 401 || error.status === 302)) {
                         this.urlUtilService.redirectToLogin();
                     }

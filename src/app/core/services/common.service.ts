@@ -6,7 +6,7 @@ import { take } from 'rxjs/operators';
 import { AlertService } from 'lib-ui-interno';
 
 import { CommonOptionsEnum } from '@core/enums/commonOptions.enum';
-import { DadosInterface, OptionsCommonInterface } from '@core/interfaces/common.interface';
+import { DadosInterface, OptionsCommonInterface } from '@core/interfaces/sistema/common.interface';
 import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
 
 import { Storage } from '../enums/storage.enum';
@@ -225,6 +225,7 @@ export class CommonService extends BaseService {
 
     public getValueByKey(optionName: string, key: string): string {
         const options = this.resolve(optionName, this);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         const value = options.filter((op) =>
             op && typeof op.key === 'string' ? op.key === key : parseInt(op.key) === parseInt(key)
         );

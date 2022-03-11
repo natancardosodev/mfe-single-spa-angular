@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { AlertService } from 'lib-ui-interno';
 
-import { HttpOptions } from '@core/interfaces/http-options';
+import { HttpOptions } from '@core/interfaces/sistema/http-options';
 import { cleanParams } from '@core/utils/generals.util';
 import { MensagensEnum } from '@core/enums/mensagens.enum';
 import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
@@ -192,6 +192,7 @@ export abstract class BaseService {
         }
 
         if (!msgErr && JSON.stringify(msg).toString().includes('ds_retorno')) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             const arrayMessageSiarco = JSON.parse(msg).erros.map((err: Record<string, string>) => {
                 return { message: `<strong> Erro: ${err.ds_retorno} ${err.ds_valor} </strong>` };
             });
@@ -199,6 +200,7 @@ export abstract class BaseService {
         }
 
         if (!msgErr && JSON.stringify(msg).toString().includes('[{')) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             const arrayMessageVox = msg.map((err: Record<string, string>) => {
                 return { message: `<strong> Erro ${err.cod_erro}: ${err.ds_erro} </strong>` };
             });

@@ -136,6 +136,7 @@ export class ProdutorForm extends FormGroup {
     }
 
     public getFirstErrorFrom(controlName: string, label: string): string {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         return this._errorMessages[Object.keys(this.get(controlName).errors)[0]].replace('%s', label || controlName);
     }
 

@@ -51,6 +51,7 @@ npm run build
 -   Sass
 -   Análise estática do código e formatação
     -   ESLint
+        [(Necessário extensão VSCode)](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
     -   Stylelint
     -   Prettier
         [(Necessário extensão VSCode)](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
@@ -70,7 +71,8 @@ npm run build
 
 ## Recomendações
 
--   Utilizar VSCode com as extensões `esbenp.prettier-vscode` e permitir a integração do ESLint do node_modules.
+-   Utilizar VSCode com as extensões `dbaeumer.vscode-eslint esbenp.prettier-vscode` e permitir a integração do ESLint
+    do node_modules.
 -   Executar `npm run lint:fix` antes de commitar e corrigir os erros
 -   Não conseguindo resolver um erro de lint utilize o `// eslint-disable-next-line` com a regra, mas antes
     [consulte a doc](https://eslint.org/docs/rules/).

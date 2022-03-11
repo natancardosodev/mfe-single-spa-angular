@@ -152,6 +152,7 @@ export class UserService {
      * @memberof UserService
      */
     public setModulos(param: any): Menu {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         return param.funcionalidades.map((menu) => menu.rota);
     }
 
