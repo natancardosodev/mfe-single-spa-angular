@@ -3,7 +3,7 @@ import { FormGroup, FormControl, AbstractControl, ValidatorFn } from '@angular/f
 import { isValidCpf } from '@brazilian-utils/is-valid-cpf';
 import { clearMask } from 'src/app/core/configs/regexClearMask';
 import { StorageUtil } from 'src/app/core/utils/storage.util';
-import { Storage } from 'src/app/core/enums/storage.enum';
+import { StorageEnum } from 'src/app/core/enums/storage.enum';
 import { ParametrosPesquisaInterface } from '@core/interfaces/visualizar-processo/pesquisa.interface';
 import { formatDateBrToEn, formatDateEnToBr } from '@core/utils/date.util';
 
@@ -43,7 +43,7 @@ export class PesquisaForm extends FormGroup {
     }
 
     public static validaUfProtocolo(): ValidatorFn {
-        const ufUsuario: string = StorageUtil.get(Storage.DADOS_USUARIO).estado;
+        const ufUsuario: string = StorageUtil.get(StorageEnum.DADOS_USUARIO).estado;
         const prefixoProtocolo = `${ufUsuario}E`;
 
         return (control: AbstractControl): any => {

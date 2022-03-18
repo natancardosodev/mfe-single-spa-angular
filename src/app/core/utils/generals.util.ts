@@ -33,7 +33,7 @@ export function cleanParams(params: any): any {
 
 export function montarUrlPortais(env: Array<string>, baseHref: string): string {
     const urls = env.map((ambiente) => {
-        return `https://${ambiente}.voxtecnologia.com.br/${baseHref}`;
+        return `https://${ambiente}.voxtecnologia.com.br${baseHref}`;
     });
 
     // eslint-disable-next-line @typescript-eslint/quotes

@@ -8,7 +8,7 @@ import { UrlUtilService } from '@core/services/url-util.service';
 import { BaseService } from '@core/services/base.service';
 import { User } from '@core/interfaces/interno/user-interface';
 import { StorageUtil } from '@core/utils/storage.util';
-import { Storage } from '@core/enums/storage.enum';
+import { StorageEnum } from '@core/enums/storage.enum';
 import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class JarvisService extends BaseService {
 
     constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
         super('/', http, urlUtilService, alertService);
-        this.dadosUsuario = StorageUtil.get(Storage.DADOS_USUARIO) as User;
+        this.dadosUsuario = StorageUtil.get(StorageEnum.DADOS_USUARIO) as User;
         this.uf = this.dadosUsuario.estado;
     }
 

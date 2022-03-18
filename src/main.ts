@@ -1,5 +1,6 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { RotasEnum } from '@core/enums/rotas.enum';
 import { montarUrlPortais } from '@core/utils/generals.util';
 
 import * as Sentry from '@sentry/angular';
@@ -35,7 +36,7 @@ if (ambientesWithSentry.includes(environment.uri.subDomain)) {
         dsn: 'COLOCAR-URL-DSN-DO-SENTRY-FRONT',
         integrations: [
             new Integrations.BrowserTracing({
-                tracingOrigins: [montarUrlPortais(ambientesWithSentry, 'sigfacil/skeleton')],
+                tracingOrigins: [montarUrlPortais(ambientesWithSentry, RotasEnum.BASE_HREF)],
                 routingInstrumentation: Sentry.routingInstrumentation
             })
         ],

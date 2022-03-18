@@ -5,14 +5,14 @@ import { Observable } from 'rxjs';
 
 import { EnvService } from '@core/services/env.service';
 import { StorageUtil } from '@core/utils/storage.util';
-import { Storage } from '@core/enums/storage.enum';
+import { StorageEnum } from '@core/enums/storage.enum';
 
 @Injectable()
 export class JarvisInterceptor implements HttpInterceptor {
     constructor(private envService: EnvService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token: string = StorageUtil.get(Storage.JARVIS);
+        const token: string = StorageUtil.get(StorageEnum.JARVIS);
         const jarvisUrl = this.envService.jarvis;
 
         if (token && req.url.indexOf(jarvisUrl) !== -1) {

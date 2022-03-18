@@ -9,7 +9,7 @@ import { CommonOptionsEnum } from '@core/enums/common-options.enum';
 import { DadosInterface, OptionsCommonInterface } from '@core/interfaces/sistema/common.interface';
 import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
 
-import { Storage } from '../enums/storage.enum';
+import { StorageEnum } from '../enums/storage.enum';
 import { StorageUtil } from '../utils/storage.util';
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';
@@ -220,7 +220,7 @@ export class CommonService extends BaseService {
     }
 
     public getAllOptionsFromLocalStorage(): Record<string, string> {
-        return this.hasCommonOptionsInStorage ? StorageUtil.get(Storage.COMMON_SERVICE_OPTIONS) : null;
+        return this.hasCommonOptionsInStorage ? StorageUtil.get(StorageEnum.COMMON_SERVICE_OPTIONS) : null;
     }
 
     public getValueByKey(optionName: string, key: string): string {
@@ -245,7 +245,7 @@ export class CommonService extends BaseService {
      * @memberof CommonService
      */
     private get hasCommonOptionsInStorage(): boolean {
-        return sessionStorage.getItem(Storage.COMMON_SERVICE_OPTIONS) !== null;
+        return sessionStorage.getItem(StorageEnum.COMMON_SERVICE_OPTIONS) !== null;
     }
 
     /**
@@ -255,7 +255,7 @@ export class CommonService extends BaseService {
      * @memberof CommonService
      */
     private hasOptionInStorage(option: CommonOptionsEnum): boolean {
-        const commonOptionsSalvos = StorageUtil.get(Storage.COMMON_SERVICE_OPTIONS) as OptionsCommonInterface;
+        const commonOptionsSalvos = StorageUtil.get(StorageEnum.COMMON_SERVICE_OPTIONS) as OptionsCommonInterface;
         return commonOptionsSalvos ? !!commonOptionsSalvos[option] : false;
     }
 
@@ -265,6 +265,9 @@ export class CommonService extends BaseService {
      * @memberof CommonService
      */
     private saveCommonOptionsInStorage(anyOptions: any): void {
-        StorageUtil.store(Storage.COMMON_SERVICE_OPTIONS, { ...anyOptions, ...this.getAllOptionsFromLocalStorage() });
+        StorageUtil.store(StorageEnum.COMMON_SERVICE_OPTIONS, {
+            ...anyOptions,
+            ...this.getAllOptionsFromLocalStorage()
+        });
     }
 }

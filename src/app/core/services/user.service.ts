@@ -10,7 +10,7 @@ import { User, UserPermissoes } from '@core/interfaces/interno/user-interface';
 import { SystemInterface } from '@core/interfaces/interno/system-interface';
 import { UrlUtilService } from './url-util.service';
 import { StorageUtil } from '@core/utils/storage.util';
-import { Storage } from '@core/enums/storage.enum';
+import { StorageEnum } from '@core/enums/storage.enum';
 import { HoraMocky } from './hora-mocky';
 import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
 
@@ -166,7 +166,7 @@ export class UserService {
     }
 
     public getPermissoesByFuncionalidade(idFuncionalidade: number): UserPermissoes {
-        const roles = Object.values(StorageUtil.get(Storage.DADOS_USUARIO)['papel'])
+        const roles = Object.values(StorageUtil.get(StorageEnum.DADOS_USUARIO)['papel'])
             .filter((permissao: string) => {
                 return permissao.includes(idFuncionalidade.toString()) ? permissao : null;
             })

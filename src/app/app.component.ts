@@ -13,7 +13,7 @@ import { UrlUtilService } from '@core/services/url-util.service';
 import { UserService } from '@core/services/user.service';
 import { SystemInterface } from '@core/interfaces/interno/system-interface';
 import { User } from '@core/interfaces/interno/user-interface';
-import { Storage } from '@core/enums/storage.enum';
+import { StorageEnum } from '@core/enums/storage.enum';
 import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
 import { RotasEnum } from '@core/enums/rotas.enum';
 import { ExternalFilesService } from '@core/services/external-files.service';
@@ -107,7 +107,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             .pipe(take(1))
             .subscribe(
                 (response: User) => {
-                    StorageUtil.store(Storage.DADOS_USUARIO, response);
+                    StorageUtil.store(StorageEnum.DADOS_USUARIO, response);
                     // this.commonService.loadingAllOptions(); // @todo Caso use o common
                     // this.carregarJarvis(response.cpf, response.id); // @todo Caso use o jarvis
                     this.getSystemInfo(response);
@@ -215,6 +215,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private carregarJarvis(cpf: string, id: number): void {
         let hash = `${cpf}${id}`;
         hash = sha512.sha512(hash.toString());
-        StorageUtil.store(Storage.JARVIS, hash);
+        StorageUtil.store(StorageEnum.JARVIS, hash);
     }
 }
