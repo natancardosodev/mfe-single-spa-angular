@@ -6,6 +6,7 @@ import { StorageUtil } from 'src/app/core/utils/storage.util';
 import { StorageEnum } from 'src/app/core/enums/sistema/storage.enum';
 import { ParametrosPesquisaInterface } from '@core/interfaces/visualizar-processo/pesquisa.interface';
 import { formatDateBrToEn, formatDateEnToBr } from '@core/utils/date.util';
+import { FormFieldGridPesquisa } from '@core/enums/visualizar-processo/form-grid-pesquisa.enum';
 
 export class PesquisaForm extends FormGroup {
     private _errorMessages = {
@@ -17,12 +18,12 @@ export class PesquisaForm extends FormGroup {
 
     constructor() {
         super({
-            protocolo: new FormControl(null),
-            cpf: new FormControl(null),
-            tipo: new FormControl(null),
-            statusProcesso: new FormControl(null),
-            dataInicial: new FormControl(null),
-            dataFinal: new FormControl(null)
+            [FormFieldGridPesquisa.protocolo]: new FormControl(null),
+            [FormFieldGridPesquisa.cpf]: new FormControl(null),
+            [FormFieldGridPesquisa.tipo]: new FormControl(null),
+            [FormFieldGridPesquisa.statusProcesso]: new FormControl(null),
+            [FormFieldGridPesquisa.dataInicial]: new FormControl(null),
+            [FormFieldGridPesquisa.dataFinal]: new FormControl(null)
         });
 
         this.protocolo.setValidators([PesquisaForm.validaQuantidaDeDigito(13), PesquisaForm.validaUfProtocolo()]);
@@ -88,32 +89,32 @@ export class PesquisaForm extends FormGroup {
     }
 
     public get protocolo(): AbstractControl {
-        return this.get('protocolo');
+        return this.get([FormFieldGridPesquisa.protocolo]);
     }
 
     public get cpf(): AbstractControl {
-        return this.get('cpf');
+        return this.get([FormFieldGridPesquisa.cpf]);
     }
 
     public get tipo(): AbstractControl {
-        return this.get('tipo');
+        return this.get([FormFieldGridPesquisa.tipo]);
     }
 
     public get statusProcesso(): AbstractControl {
-        return this.get('statusProcesso');
+        return this.get([FormFieldGridPesquisa.statusProcesso]);
+    }
+
+    public get dataInicial(): AbstractControl {
+        return this.get([FormFieldGridPesquisa.dataInicial]);
+    }
+
+    public get dataFinal(): AbstractControl {
+        return this.get([FormFieldGridPesquisa.dataFinal]);
     }
 
     public getDadosForm(): ParametrosPesquisaInterface {
         this.deleteControlValuesNull();
         return this.value;
-    }
-
-    public get dataInicial(): AbstractControl {
-        return this.get('dataInicial');
-    }
-
-    public get dataFinal(): AbstractControl {
-        return this.get('dataFinal');
     }
 
     public getValuesFormated(): ParametrosPesquisaInterface {
