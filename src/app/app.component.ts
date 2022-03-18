@@ -12,10 +12,10 @@ import { StorageUtil } from '@core/utils/storage.util';
 import { UrlUtilService } from '@core/services/url-util.service';
 import { UserService } from '@core/services/user.service';
 import { SystemInterface } from '@core/interfaces/interno/system-interface';
-import { User } from '@core/interfaces/interno/user-interface';
-import { Storage } from '@core/enums/storage.enum';
-import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
-import { RotasEnum } from '@core/enums/rotas.enum';
+import { UserInterface } from '@core/interfaces/interno/user-interface';
+import { StorageEnum } from '@core/enums/sistema/storage.enum';
+import { FuncionalidadeEnum } from '@core/enums/interno/funcionalidade.enum';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { ExternalFilesService } from '@core/services/external-files.service';
 import { EnvService } from '@core/services/env.service';
 import { delay, isNullOrUndefined } from '@core/utils/generals.util';
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     public baseHref: string;
     public tipoModulo: string;
     private _sistema: Array<SystemInterface>;
-    private _usuario: User;
+    private _usuario: UserInterface;
     private _urlLogo: string;
     private _dataSistema: string;
     private _urlLogoSistema: LogoInterface;
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         private router: Router
     ) {
         this._urlLogoSistema = { url: 'assets/images/sigfacil.png', alt: 'string' };
-        this.userKey = Storage.DADOS_USUARIO;
+        this.userKey = StorageEnum.DADOS_USUARIO;
         this.baseHref = RotasEnum.BASE_HREF;
         this.assetsSigfacil = this.envService.assetsSigfacil;
     }
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         return this._sistema;
     }
 
-    public get usuario(): User {
+    public get usuario(): UserInterface {
         return this._usuario;
     }
 
@@ -106,8 +106,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             .getUser()
             .pipe(take(1))
             .subscribe(
-                (response: User) => {
-                    StorageUtil.store(Storage.DADOS_USUARIO, response);
+                (response: UserInterface) => {
+                    StorageUtil.store(StorageEnum.DADOS_USUARIO, response);
                     // this.commonService.loadingAllOptions(); // @todo Caso use o common
                     // this.carregarJarvis(response.cpf, response.id); // @todo Caso use o jarvis
                     this.getSystemInfo(response);
@@ -177,7 +177,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      * Define o breadcrumb pela funcionalidade atual
      * @param dadosUsuario
      */
-    private validaPermissaoFuncionalidade(dadosUsuario: User) {
+    private validaPermissaoFuncionalidade(dadosUsuario: UserInterface) {
         const permissao = JSON.stringify(this.itensMenu);
         const rotaFormatada = (() => {
             const rota = this.router.url.replace(/[0-9]|-/g, '').split('/');
@@ -215,6 +215,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private carregarJarvis(cpf: string, id: number): void {
         let hash = `${cpf}${id}`;
         hash = sha512.sha512(hash.toString());
-        StorageUtil.store(Storage.JARVIS, hash);
+        StorageUtil.store(StorageEnum.JARVIS, hash);
     }
 }

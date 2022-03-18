@@ -6,8 +6,8 @@ import { AlertService } from 'lib-ui-interno';
 
 import { HttpOptions } from '@core/interfaces/sistema/http-options';
 import { cleanParams } from '@core/utils/generals.util';
-import { MensagensEnum } from '@core/enums/mensagens.enum';
-import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
+import { MensagensEnum } from '@core/enums/sistema/mensagens.enum';
+import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 import { UrlUtilService } from './url-util.service';
 
 export abstract class BaseService {

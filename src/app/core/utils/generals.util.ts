@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
-import { RotasEnum } from '@core/enums/rotas.enum';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 
 export function delay(ms: number): Promise<any> {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -33,7 +33,7 @@ export function cleanParams(params: any): any {
 
 export function montarUrlPortais(env: Array<string>, baseHref: string): string {
     const urls = env.map((ambiente) => {
-        return `https://${ambiente}.voxtecnologia.com.br/${baseHref}`;
+        return `https://${ambiente}.voxtecnologia.com.br${baseHref}`;
     });
 
     // eslint-disable-next-line @typescript-eslint/quotes

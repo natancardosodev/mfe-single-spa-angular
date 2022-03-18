@@ -1,68 +1,96 @@
 <app-grid-page>
     <app-input
         [isGrid]="true"
-        label="Protocolo"
-        formControlName="protocolo"
+        [label]="formLabelGridPesquisa.protocolo"
+        [formControlName]="formFieldGridPesquisa.protocolo"
         [form]="pesquisaForm"
-        [message]="!pesquisaForm.protocolo.valid ? pesquisaForm.getFirstErrorFrom('protocolo', 'Protocolo') : ''"
+        [message]="
+            !pesquisaForm.protocolo.valid
+                ? pesquisaForm.getFirstErrorFrom(formFieldGridPesquisa.protocolo, formLabelGridPesquisa.protocolo)
+                : ''
+        "
     ></app-input>
 
     <app-input
         [isGrid]="true"
-        label="CPF"
-        formControlName="cpf"
+        [label]="formLabelGridPesquisa.cpf"
+        [formControlName]="formFieldGridPesquisa.cpf"
         [textMask]="maskFactory.createCpf()"
         [form]="pesquisaForm"
-        [message]="!pesquisaForm.cpf.valid ? pesquisaForm.getFirstErrorFrom('cpf', 'CPF') : ''"
+        [message]="
+            !pesquisaForm.cpf.valid
+                ? pesquisaForm.getFirstErrorFrom(formFieldGridPesquisa.cpf, formLabelGridPesquisa.cpf)
+                : ''
+        "
     ></app-input>
 
     <app-input
         [isGrid]="true"
-        label="Tipo"
-        formControlName="tipo"
+        [label]="formLabelGridPesquisa.tipo"
+        [formControlName]="formFieldGridPesquisa.tipo"
         col="5"
         [form]="pesquisaForm"
         type="select"
         [options]="tipos"
-        [message]="!pesquisaForm.tipo.valid ? pesquisaForm.getFirstErrorFrom('tipo', 'Tipo') : ''"
+        [message]="
+            !pesquisaForm.tipo.valid
+                ? pesquisaForm.getFirstErrorFrom(formFieldGridPesquisa.tipo, formLabelGridPesquisa.tipo)
+                : ''
+        "
     ></app-input>
 
     <app-input
         [isGrid]="true"
-        label="Status"
-        formControlName="statusProcesso"
+        [label]="formLabelGridPesquisa.statusProcesso"
+        [formControlName]="formFieldGridPesquisa.statusProcesso"
         col="5"
         [form]="pesquisaForm"
         type="select"
         [options]="statusProcesso"
-        [message]="!pesquisaForm.statusProcesso.valid ? pesquisaForm.getFirstErrorFrom('statusProcesso', 'Status') : ''"
+        [message]="
+            !pesquisaForm.statusProcesso.valid
+                ? pesquisaForm.getFirstErrorFrom(
+                      formFieldGridPesquisa.statusProcesso,
+                      formLabelGridPesquisa.statusProcesso
+                  )
+                : ''
+        "
     ></app-input>
 
     <div class="form-group row col">
         <label for="data-inicial" class="col-4 col-form-label text-left">Data Protocolo:</label>
         <div class="col-3">
             <app-input
-                formControlName="dataInicial"
+                [formControlName]="formFieldGridPesquisa.dataInicial"
                 [maxDate]="dateMax"
                 [form]="pesquisaForm"
                 type="date"
                 col="12"
-                id="data-inicial"
                 [message]="
-                    !pesquisaForm.dataInicial.valid ? pesquisaForm.getFirstErrorFrom('dataInicial', 'Data Inicial') : ''
+                    !pesquisaForm.dataInicial.valid
+                        ? pesquisaForm.getFirstErrorFrom(
+                              formFieldGridPesquisa.dataInicial,
+                              formFieldGridPesquisa.dataInicial
+                          )
+                        : ''
                 "
             >
             </app-input>
         </div>
         <div class="col-3 ml-2">
             <app-input
-                formControlName="dataFinal"
+                [formControlName]="formFieldGridPesquisa.dataFinal"
                 [minDate]="dateMin"
                 [form]="pesquisaForm"
                 type="date"
                 col="12"
                 [message]="
-                    !pesquisaForm.dataFinal.valid ? pesquisaForm.getFirstErrorFrom('dataFinal', 'Data Final') : ''
+                    !pesquisaForm.dataFinal.valid
+                        ? pesquisaForm.getFirstErrorFrom(
+                              formFieldGridPesquisa.dataFinal,
+                              formFieldGridPesquisa.dataFinal
+                          )
+                        : ''
                 "
             >
             </app-input>
@@ -70,12 +98,6 @@
     </div>
 
     <div class="d-flex flex-row-reverse mt-2">
-        <app-button
-            id="pesquisar"
-            label="Pesquisar"
-            (click)="pesquisar()"
-            [loading]="loading"
-            [isRight]="true"
-        ></app-button>
+        <app-button label="Pesquisar" (click)="pesquisar()" [loading]="loading" [isRight]="true"></app-button>
     </div>
 </app-grid-page>

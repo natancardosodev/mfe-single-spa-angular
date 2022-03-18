@@ -4,10 +4,12 @@ import { Title } from '@angular/platform-browser';
 
 import { BehaviorSubject } from 'rxjs';
 import { AlertService } from 'lib-ui-interno';
+
 import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';
 import { ParametrosPesquisaInterface } from '@core/interfaces/visualizar-processo/pesquisa.interface';
-import { PesquisaForm } from './pesquisa.form';
 import { isEmpty } from '@core/utils/generals.util';
+import { FormFieldGridPesquisa, FormLabelGridPesquisa } from '@core/enums/visualizar-processo/form-grid-pesquisa.enum';
+import { PesquisaForm } from './pesquisa.form';
 
 @Component({
     selector: 'app-pesquisa-form',
@@ -17,6 +19,8 @@ import { isEmpty } from '@core/utils/generals.util';
 export class PesquisaFormComponent implements OnInit {
     @Input() public loading: boolean;
     @Output() public dataForm: EventEmitter<any>;
+    public formFieldGridPesquisa = FormFieldGridPesquisa;
+    public formLabelGridPesquisa = FormLabelGridPesquisa;
     public tipos: BehaviorSubject<any> = new BehaviorSubject([]);
     public statusProcesso: BehaviorSubject<any> = new BehaviorSubject([]);
     public loadingPage: boolean;

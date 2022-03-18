@@ -54,7 +54,7 @@ _Alterar as variaveis dentro do arquivo .gitlab-ci.yml_
 
 ##### FRONT END
 
-###### Para projetos com novo skeleton angular:
+###### Para projetos com novo padrão angular:
 
 -   Copie os arquivos de .gitlab/ci/template-front para a raiz do projeto
     -   Verifique o arquivo stylelintrc adequado, considerando o .stylelintrc-antigo.json para projetos antigos, usando

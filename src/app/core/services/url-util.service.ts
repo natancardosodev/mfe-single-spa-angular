@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
+import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 import { isNullOrUndefined } from '@core/utils/generals.util';
 
 import { EnvService } from './env.service';

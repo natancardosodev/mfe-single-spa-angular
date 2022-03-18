@@ -6,21 +6,21 @@ import { Observable, of, Subject } from 'rxjs';
 import { Menu } from 'lib-ui-interno';
 
 import { tratarErroLogin } from '@core/utils/generals.util';
-import { User, UserPermissoes } from '@core/interfaces/interno/user-interface';
+import { UserInterface, UserPermissoes } from '@core/interfaces/interno/user-interface';
 import { SystemInterface } from '@core/interfaces/interno/system-interface';
 import { UrlUtilService } from './url-util.service';
 import { StorageUtil } from '@core/utils/storage.util';
-import { Storage } from '@core/enums/storage.enum';
+import { StorageEnum } from '@core/enums/sistema/storage.enum';
 import { HoraMocky } from './hora-mocky';
-import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
+import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
     private _checkModuloMenu: Subject<any>;
-    private _user: Observable<User>;
-    private _setUserInfo: Subject<User>;
+    private _user: Observable<UserInterface>;
+    private _setUserInfo: Subject<UserInterface>;
 
     constructor(private http: HttpClient, private urlUtilService: UrlUtilService) {
         this._setUserInfo = new Subject();
@@ -45,12 +45,12 @@ export class UserService {
      * @returns {Observable<UserService>}
      * @memberof UsuarioService
      */
-    public getUser(): Observable<User> {
+    public getUser(): Observable<UserInterface> {
         // const url = this.urlUtilService.montarUrlApi('/me');
         const url = this.urlUtilService.montarUrlApi('/me', null, TiposApisEnum.MOCK);
 
         return this.http
-            .get<User>(url, { withCredentials: true, responseType: 'json' })
+            .get<UserInterface>(url, { withCredentials: true, responseType: 'json' })
             .pipe(
                 catchError((erro: HttpErrorResponse) => {
                     return tratarErroLogin(erro);
@@ -63,7 +63,7 @@ export class UserService {
      * @returns
      * @memberof UserService
      */
-    public getUserInfo(): Observable<User> {
+    public getUserInfo(): Observable<UserInterface> {
         return this._user;
     }
 
@@ -166,7 +166,7 @@ export class UserService {
     }
 
     public getPermissoesByFuncionalidade(idFuncionalidade: number): UserPermissoes {
-        const roles = Object.values(StorageUtil.get(Storage.DADOS_USUARIO)['papel'])
+        const roles = Object.values(StorageUtil.get(StorageEnum.DADOS_USUARIO)['papel'])
             .filter((permissao: string) => {
                 return permissao.includes(idFuncionalidade.toString()) ? permissao : null;
             })

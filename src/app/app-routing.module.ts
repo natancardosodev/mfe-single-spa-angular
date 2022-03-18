@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RotasEnum } from './core/enums/rotas.enum';
+import { RotasEnum } from './core/enums/interno/rotas.enum';
 
 const appRoutes: Routes = [
     {
@@ -26,7 +26,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes, {
             initialNavigation: 'enabled',
             scrollPositionRestoration: 'enabled',
-            relativeLinkResolution: 'legacy'
+            relativeLinkResolution: 'corrected'
         })
     ],
     exports: [RouterModule]
