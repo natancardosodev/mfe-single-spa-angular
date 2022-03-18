@@ -5,12 +5,12 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { AlertService } from 'lib-ui-interno';
 
-import { CommonOptionsEnum } from '@core/enums/common-options.enum';
+import { CommonOptionsEnum } from '@core/enums/sistema/common-options.enum';
 import { DadosInterface, OptionsCommonInterface } from '@core/interfaces/sistema/common.interface';
-import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
+import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 
-import { StorageEnum } from '../enums/storage.enum';
-import { StorageUtil } from '../utils/storage.util';
+import { StorageEnum } from '@core/enums/sistema/storage.enum';
+import { StorageUtil } from '@core/utils/storage.util';
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';
 

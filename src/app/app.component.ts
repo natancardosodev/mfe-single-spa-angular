@@ -13,9 +13,9 @@ import { UrlUtilService } from '@core/services/url-util.service';
 import { UserService } from '@core/services/user.service';
 import { SystemInterface } from '@core/interfaces/interno/system-interface';
 import { User } from '@core/interfaces/interno/user-interface';
-import { StorageEnum } from '@core/enums/storage.enum';
-import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
-import { RotasEnum } from '@core/enums/rotas.enum';
+import { StorageEnum } from '@core/enums/sistema/storage.enum';
+import { FuncionalidadeEnum } from '@core/enums/interno/funcionalidade.enum';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { ExternalFilesService } from '@core/services/external-files.service';
 import { EnvService } from '@core/services/env.service';
 import { delay, isNullOrUndefined } from '@core/utils/generals.util';
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         private router: Router
     ) {
         this._urlLogoSistema = { url: 'assets/images/sigfacil.png', alt: 'string' };
-        this.userKey = Storage.DADOS_USUARIO;
+        this.userKey = StorageEnum.DADOS_USUARIO;
         this.baseHref = RotasEnum.BASE_HREF;
         this.assetsSigfacil = this.envService.assetsSigfacil;
     }

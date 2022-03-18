@@ -10,9 +10,9 @@ import { User, UserPermissoes } from '@core/interfaces/interno/user-interface';
 import { SystemInterface } from '@core/interfaces/interno/system-interface';
 import { UrlUtilService } from './url-util.service';
 import { StorageUtil } from '@core/utils/storage.util';
-import { StorageEnum } from '@core/enums/storage.enum';
+import { StorageEnum } from '@core/enums/sistema/storage.enum';
 import { HoraMocky } from './hora-mocky';
-import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
+import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 
 @Injectable({
     providedIn: 'root'

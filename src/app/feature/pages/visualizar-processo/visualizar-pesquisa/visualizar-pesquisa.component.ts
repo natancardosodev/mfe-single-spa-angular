@@ -9,8 +9,8 @@ import { take } from 'rxjs/operators';
 import { ModalIndeferirComponent } from '@core/components/modal-indeferir/modal-indeferir.component';
 import { CardObservacaoComponent } from '@core/components/card-observacao/card-observacao.component';
 import { UserService } from '@core/services/user.service';
-import { FuncionalidadeEnum } from '@core/enums/funcionalidade.enum';
-import { RotasEnum } from '@core/enums/rotas.enum';
+import { FuncionalidadeEnum } from '@core/enums/interno/funcionalidade.enum';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { navigate } from '@core/utils/generals.util';
 import { UserPermissoes } from '@core/interfaces/interno/user-interface';
 

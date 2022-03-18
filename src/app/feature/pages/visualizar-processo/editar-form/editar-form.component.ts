@@ -18,13 +18,13 @@ import { DadosInterface } from '@core/interfaces/sistema/dados.interface';
 import { CommonService } from '@core/services/common.service';
 import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
-import { RotasEnum } from '@core/enums/rotas.enum';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { JarvisService } from '@feature/services/jarvis.service';
 import { clearMask } from '@core/configs/regexClearMask';
 import { GatewayReceitaInterface } from '@core/interfaces/jarvis/gateway-receita.interface';
-import { MensagensEnum } from '@core/enums/mensagens.enum';
+import { MensagensEnum } from '@core/enums/sistema/mensagens.enum';
 import { delay, navigate } from '@core/utils/generals.util';
-import { FormFieldProdutor, FormLabelProdutor } from '@core/enums/form-produtor.enum';
+import { FormFieldProdutor, FormLabelProdutor } from '@core/enums/visualizar-processo/form-produtor.enum';
 import { ProdutorForm } from './produtor.form';
 
 @Component({

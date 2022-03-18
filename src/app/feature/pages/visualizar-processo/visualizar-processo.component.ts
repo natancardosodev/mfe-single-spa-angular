@@ -9,7 +9,7 @@ import { GridColumnDefs, GridSearchParams } from 'grid';
 import { GridOptions } from 'ag-grid';
 import { AlertService } from 'lib-ui-interno';
 
-import { RotasEnum } from '@core/enums/rotas.enum';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
 import { MaskPipe } from '@shared/pipes/mask.pipe';
 import {

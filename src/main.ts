@@ -1,6 +1,6 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { RotasEnum } from '@core/enums/rotas.enum';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { montarUrlPortais } from '@core/utils/generals.util';
 
 import * as Sentry from '@sentry/angular';

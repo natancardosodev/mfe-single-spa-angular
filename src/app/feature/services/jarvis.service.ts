@@ -8,8 +8,8 @@ import { UrlUtilService } from '@core/services/url-util.service';
 import { BaseService } from '@core/services/base.service';
 import { User } from '@core/interfaces/interno/user-interface';
 import { StorageUtil } from '@core/utils/storage.util';
-import { StorageEnum } from '@core/enums/storage.enum';
-import { TiposApisEnum } from '@core/enums/tipo-apis.enum';
+import { StorageEnum } from '@core/enums/sistema/storage.enum';
+import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 
 @Injectable({
     providedIn: 'root'

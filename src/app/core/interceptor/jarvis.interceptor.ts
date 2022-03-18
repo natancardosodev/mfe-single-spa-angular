@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { EnvService } from '@core/services/env.service';
 import { StorageUtil } from '@core/utils/storage.util';
-import { StorageEnum } from '@core/enums/storage.enum';
+import { StorageEnum } from '@core/enums/sistema/storage.enum';
 
 @Injectable()
 export class JarvisInterceptor implements HttpInterceptor {
