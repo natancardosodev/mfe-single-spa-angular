@@ -40,8 +40,12 @@ export function formatDateEnToBr(date: string): string {
  * @param date string
  */
 export function formatDateBrToEn(date: string) {
+    if (!date) {
+        return null;
+    }
+
     if (date.toString().indexOf('GMT') !== -1) {
-        return new Date(date).toLocaleDateString('fr-CA');
+        return new Date(date).toLocaleDateString('fr-CA', { timeZone: 'UTC' });
     }
     const [day, month, year] = date.split('/');
     return `${year}-${month}-${day}`;

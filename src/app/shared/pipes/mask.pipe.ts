@@ -26,7 +26,7 @@ export class MaskPipe implements PipeTransform {
                 return value ? value.toString().replace(/(\d{5})(\d{3})/g, '$1-$2') : '';
             },
             data: (value: string): string => {
-                return formatDateEnToBr(value);
+                return value ? formatDateEnToBr(value) : '';
             },
             telefone: (value: string): string => {
                 if (value) {

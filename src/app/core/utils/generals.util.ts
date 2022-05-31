@@ -57,8 +57,8 @@ export function idGenerator(label: string, idExtra?: number): string {
         .toLowerCase();
 }
 
-export function throwErrorAPI(): Observable<never> {
-    return throwError(new Error('Erro da API'));
+export function throwErrorAPI(msg?: string): Observable<never> {
+    return msg ? throwError(msg) : throwError(new Error('Erro da API'));
 }
 
 export function tratarErroLogin(erro: HttpErrorResponse): Observable<never> {
