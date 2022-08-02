@@ -20,9 +20,9 @@ export function getDateTimeUTC(date?): string {
     return (
         new Date(objDate.getTime() - objDate.getTimezoneOffset() * 60000).toISOString().replace('Z', '').split('.')[0] +
         '+' +
-        utc.substr(0, 2) +
+        utc.slice(0, 2) +
         ':' +
-        utc.substr(2, 2)
+        utc.slice(2, 4)
     );
 }
 

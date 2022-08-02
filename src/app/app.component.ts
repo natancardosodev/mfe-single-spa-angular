@@ -161,7 +161,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     setTimeout(() => {
                         this._usuario = dadosUsuario;
                         this.validaPermissaoFuncionalidade(this._usuario);
-                    }, 1000);
+                    }, 500);
                 },
                 (error: any) => {
                     if (!error.naoAutorizado) {
