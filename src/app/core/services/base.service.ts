@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, take } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AlertService } from 'lib-ui-interno';
 
 import { HttpOptions } from '@core/interfaces/sistema/http-options';
-import { cleanParams } from '@core/utils/generals.util';
+import { cleanParams, throwErrorAPI } from '@core/utils/generals.util';
 import { MensagensEnum } from '@core/enums/sistema/mensagens.enum';
 import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 import { UrlUtilService } from './url-util.service';
@@ -71,7 +71,7 @@ export abstract class BaseService {
             take(1),
             catchError((erro: HttpErrorResponse) => {
                 isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
-                return of(0);
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
             })
         );
     };
@@ -87,7 +87,7 @@ export abstract class BaseService {
             take(1),
             catchError((erro: HttpErrorResponse) => {
                 isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
-                return of(0);
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
             })
         );
     };
@@ -103,7 +103,7 @@ export abstract class BaseService {
             take(1),
             catchError((erro: HttpErrorResponse) => {
                 isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
-                return of(0);
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
             })
         );
     };
@@ -119,7 +119,7 @@ export abstract class BaseService {
             take(1),
             catchError((erro: HttpErrorResponse) => {
                 isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
-                return of(0);
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
             })
         );
     };
@@ -134,7 +134,7 @@ export abstract class BaseService {
             take(1),
             catchError((erro: HttpErrorResponse) => {
                 isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
-                return of(0);
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
             })
         );
     };
@@ -156,7 +156,7 @@ export abstract class BaseService {
             take(1),
             catchError((erro: HttpErrorResponse) => {
                 isHideAlert ? null : this.showMessageError(erro.status === 0 ? this._msgApiFora : erro.error);
-                return of(0);
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
             })
         );
     };
@@ -164,7 +164,7 @@ export abstract class BaseService {
     sendRequest = (
         url: string,
         type: string,
-        params?: Record<string, string>,
+        params?: Record<string, any>,
         body?: any,
         tipoApi?: TiposApisEnum,
         customOptions?: HttpOptions

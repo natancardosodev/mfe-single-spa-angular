@@ -20,9 +20,9 @@ export function getDateTimeUTC(date?): string {
     return (
         new Date(objDate.getTime() - objDate.getTimezoneOffset() * 60000).toISOString().replace('Z', '').split('.')[0] +
         '+' +
-        utc.substr(0, 2) +
+        utc.slice(0, 2) +
         ':' +
-        utc.substr(2, 2)
+        utc.slice(2, 4)
     );
 }
 
@@ -40,8 +40,12 @@ export function formatDateEnToBr(date: string): string {
  * @param date string
  */
 export function formatDateBrToEn(date: string) {
+    if (!date) {
+        return null;
+    }
+
     if (date.toString().indexOf('GMT') !== -1) {
-        return new Date(date).toLocaleDateString('fr-CA');
+        return new Date(date).toLocaleDateString('fr-CA', { timeZone: 'UTC' });
     }
     const [day, month, year] = date.split('/');
     return `${year}-${month}-${day}`;

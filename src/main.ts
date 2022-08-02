@@ -29,7 +29,7 @@ const ambientesWithSentry = [
     'www'
 ];
 const principaisEnvs = ['homologacao', 'demo', 'www'];
-const dataEHora = new Date().toString().split(' ').join('-').substr(4, 14);
+const dataEHora = new Date().toString().split(' ').join('-').slice(4, 18);
 
 if (ambientesWithSentry.includes(environment.uri.subDomain)) {
     Sentry.init({

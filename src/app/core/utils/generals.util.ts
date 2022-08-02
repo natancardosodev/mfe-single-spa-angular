@@ -11,12 +11,25 @@ export function isEmpty(dado: Record<string, any>): boolean {
     return !Object.keys(dado).length;
 }
 
+export function isArrayEmpty(...arrays: Array<any> | null): boolean {
+    return arrays.join('').length === 0;
+}
+
 export function isNullOrUndefined(value: any) {
     return value === null || value === undefined;
 }
 
-export function navigate(routerInstance: Router, rotaAlvo: RotasEnum, routeParam: string | number = null) {
+export function navigate(
+    routerInstance: Router,
+    rotaAlvo: RotasEnum,
+    routeParam: string | number = null,
+    state: any = null
+) {
     const comandos = routeParam ? [].concat(rotaAlvo, routeParam) : [rotaAlvo];
+    if (state) {
+        void routerInstance.navigate(comandos, { state: state });
+        return;
+    }
     void routerInstance.navigate(comandos);
 }
 
@@ -29,6 +42,14 @@ export function cleanParams(params: any): any {
     }
 
     return params;
+}
+
+export function removeEmpty(obj: any): any {
+    Object.keys(obj).forEach(function (key) {
+        (obj[key] && typeof obj[key] === 'object' && removeEmpty(obj[key])) ||
+            ((obj[key] === '' || obj[key] === null) && delete obj[key]);
+    });
+    return obj;
 }
 
 export function montarUrlPortais(env: Array<string>, baseHref: string): string {
@@ -57,8 +78,8 @@ export function idGenerator(label: string, idExtra?: number): string {
         .toLowerCase();
 }
 
-export function throwErrorAPI(): Observable<never> {
-    return throwError(new Error('Erro da API'));
+export function throwErrorAPI(msg?: string): Observable<never> {
+    return msg ? throwError(msg) : throwError(new Error('Erro da API'));
 }
 
 export function tratarErroLogin(erro: HttpErrorResponse): Observable<never> {
