@@ -7,7 +7,7 @@ import { Subject, Subscription } from 'rxjs';
 
 import { GridColumnDefs, GridSearchParams } from 'grid';
 import { GridOptions } from 'ag-grid';
-import { AlertService } from 'lib-ui-interno';
+import { AlertService } from 'lib-vox-ui';
 
 import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';

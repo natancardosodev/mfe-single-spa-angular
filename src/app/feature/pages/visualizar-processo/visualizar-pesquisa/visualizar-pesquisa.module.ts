@@ -1,8 +1,8 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { LibUIModule } from 'lib-ui-interno';
+import { LibVoxUiModule } from 'lib-vox-ui';
 import { CardPessoaModule } from '@core/components/card-pessoa/card-pessoa.module';
 import { CardDocumentosModule } from '@core/components/card-documentos/card-documentos.module';
 import { ModalIndeferirModule } from '@core/components/modal-indeferir/modal-indeferir.module';
@@ -16,13 +16,12 @@ import { VisualizarPesquisaComponent } from './visualizar-pesquisa.component';
         CommonModule,
         HttpClientModule,
         VisualizarPesquisaRoutingModule,
-        LibUIModule,
+        LibVoxUiModule,
         CardPessoaModule,
         CardDocumentosModule,
         CardObservacaoModule,
         ModalIndeferirModule
     ],
-    exports: [VisualizarPesquisaComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    exports: [VisualizarPesquisaComponent]
 })
 export class VisualizarPesquisaModule {}

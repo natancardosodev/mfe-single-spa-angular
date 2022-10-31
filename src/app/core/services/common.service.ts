@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 
 import { Observable, BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { AlertService } from 'lib-ui-interno';
+import { AlertService } from 'lib-vox-ui';
 
 import { CommonOptionsEnum } from '@core/enums/sistema/common-options.enum';
 import { DadosInterface, OptionsCommonInterface } from '@core/interfaces/sistema/common.interface';

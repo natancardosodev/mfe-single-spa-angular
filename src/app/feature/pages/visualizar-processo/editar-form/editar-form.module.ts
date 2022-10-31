@@ -1,7 +1,7 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LibUIModule } from 'lib-ui-interno';
+import { LibVoxUiModule } from 'lib-vox-ui';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgxCurrencyModule } from 'ngx-currency';
 
@@ -18,9 +18,8 @@ import { EditarFormComponent } from './editar-form.component';
         TextMaskModule,
         CardDocumentosModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-        LibUIModule
+        LibVoxUiModule
     ],
-    exports: [EditarFormComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    exports: [EditarFormComponent]
 })
 export class EditarFormModule {}

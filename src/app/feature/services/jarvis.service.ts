@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { AlertService } from 'lib-ui-interno';
+import { AlertService } from 'lib-vox-ui';
 
 import { UrlUtilService } from '@core/services/url-util.service';
 import { BaseService } from '@core/services/base.service';

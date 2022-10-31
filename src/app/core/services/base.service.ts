@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { AlertService } from 'lib-ui-interno';
+import { AlertService } from 'lib-vox-ui';
 
 import { HttpOptions } from '@core/interfaces/sistema/http-options';
 import { cleanParams, throwErrorAPI } from '@core/utils/generals.util';
@@ -169,10 +169,14 @@ export abstract class BaseService {
         tipoApi?: TiposApisEnum,
         customOptions?: HttpOptions
     ): Observable<any> => {
-        this.options = customOptions ? customOptions : tipoApi === 'jarvis' ? this.optionsJarvis : this.options;
+        this.options = customOptions
+            ? customOptions
+            : tipoApi === TiposApisEnum.JARVIS
+            ? this.optionsJarvis
+            : this.options;
         this.options['params'] = !params || typeof params === undefined ? null : cleanParams(params);
         this.options['body'] = body;
-        this.options['observe'] = tipoApi === 'jarvis' ? 'response' : 'body';
+        this.options['observe'] = tipoApi === TiposApisEnum.JARVIS ? 'response' : 'body';
 
         return this.http.request(type, url, this.options);
     };

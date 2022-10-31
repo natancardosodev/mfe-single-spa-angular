@@ -62,7 +62,7 @@ npm run build
     -   feature: components de páginas e serviços
     -   shared: diretivas e pipes
 -   Bibliotecas importantes:
-    -   lib-ui-interno (Vox)
+    -   lib-vox-ui (Vox)
     -   lib-vox-grid (Vox)
     -   ngx-bootstrap v5
     -   font-awesome v5.13.1

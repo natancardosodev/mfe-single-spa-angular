@@ -1,14 +1,13 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LibUIModule } from 'lib-ui-interno';
+import { LibVoxUiModule } from 'lib-vox-ui';
 import { SharedModule } from '@shared/shared.module';
 import { CardPessoaComponent } from './card-pessoa.component';
 
 @NgModule({
     declarations: [CardPessoaComponent],
-    imports: [CommonModule, SharedModule, LibUIModule],
-    exports: [CardPessoaComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    imports: [CommonModule, SharedModule, LibVoxUiModule],
+    exports: [CardPessoaComponent]
 })
 export class CardPessoaModule {}

@@ -11,10 +11,10 @@
         ></app-card-observacao>
 
         <div class="d-flex justify-content-end mt-2">
-            <app-button label="Indeferir" (click)="openModalIndeferir()"></app-button>
-            <app-button label="Deferir" (click)="openModalDeferir()" *ngIf="permissoes.inserir"></app-button>
-            <app-button label="Alterar" (click)="redirectAlterarDados()" *ngIf="permissoes.alterar"></app-button>
-            <app-button label="Voltar" (click)="voltarParaPesquisa()"></app-button>
+            <lib-button label="Indeferir" (click)="openModalIndeferir()"></lib-button>
+            <lib-button label="Deferir" (click)="openModalDeferir()" *ngIf="permissoes.inserir"></lib-button>
+            <lib-button label="Alterar" (click)="redirectAlterarDados()" *ngIf="permissoes.alterar"></lib-button>
+            <lib-button label="Voltar" (click)="voltarParaPesquisa()"></lib-button>
         </div>
     </div>
 </section>
@@ -24,13 +24,14 @@
     (finalizandoIndeferir)="finalizandoProcesso($event)"
 ></app-modal-indeferir>
 
-<app-modal label="Atenção" size="md" #modalDeferir>
+<lib-modal label="Atenção" size="md" #modalDeferir>
     <section class="row col">
         <p>Deseja confirmar o deferimento do processo?</p>
     </section>
     <footer class="row">
-        <app-simple-button label="fechar" (click)="closeModal()" [isSecondary]="true" class="px-1"> </app-simple-button>
-        <app-simple-button label="salvar" (click)="deferir()" [loading]="isLoading" [isPrimary]="true" class="px-1">
-        </app-simple-button>
+        <lib-button label="Fechar" (click)="closeModal()" [isSecondary]="true" [icon]="'empty'" class="px-1">
+        </lib-button>
+        <lib-button label="Salvar" (click)="deferir()" [loading]="isLoading" [icon]="'empty'" class="px-1">
+        </lib-button>
     </footer>
-</app-modal>
+</lib-modal>
