@@ -29,7 +29,7 @@
                             "js-sha512",
                             "core-js-pure"
                         ],
-                        "baseHref": "/sigfacil/skeleton/",
+                        "baseHref": "/skeleton/interno/",
                         "assets": ["src/favicon.ico", "src/assets"],
                         "styles": ["src/styles.scss"],
                         "scripts": [],

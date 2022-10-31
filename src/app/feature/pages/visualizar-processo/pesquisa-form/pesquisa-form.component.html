@@ -1,5 +1,5 @@
-<app-grid-page>
-    <app-input
+<lib-grid-page>
+    <lib-input
         [isGrid]="true"
         [label]="formLabelGridPesquisa.protocolo"
         [formControlName]="formFieldGridPesquisa.protocolo"
@@ -9,9 +9,9 @@
                 ? pesquisaForm.getFirstErrorFrom(formFieldGridPesquisa.protocolo, formLabelGridPesquisa.protocolo)
                 : ''
         "
-    ></app-input>
+    ></lib-input>
 
-    <app-input
+    <lib-input
         [isGrid]="true"
         [label]="formLabelGridPesquisa.cpf"
         [formControlName]="formFieldGridPesquisa.cpf"
@@ -22,9 +22,9 @@
                 ? pesquisaForm.getFirstErrorFrom(formFieldGridPesquisa.cpf, formLabelGridPesquisa.cpf)
                 : ''
         "
-    ></app-input>
+    ></lib-input>
 
-    <app-input
+    <lib-input
         [isGrid]="true"
         [label]="formLabelGridPesquisa.tipo"
         [formControlName]="formFieldGridPesquisa.tipo"
@@ -37,9 +37,9 @@
                 ? pesquisaForm.getFirstErrorFrom(formFieldGridPesquisa.tipo, formLabelGridPesquisa.tipo)
                 : ''
         "
-    ></app-input>
+    ></lib-input>
 
-    <app-input
+    <lib-input
         [isGrid]="true"
         [label]="formLabelGridPesquisa.statusProcesso"
         [formControlName]="formFieldGridPesquisa.statusProcesso"
@@ -55,12 +55,12 @@
                   )
                 : ''
         "
-    ></app-input>
+    ></lib-input>
 
     <div class="form-group row col">
         <label for="data-inicial" class="col-4 col-form-label text-left">Data Protocolo:</label>
         <div class="col-3">
-            <app-input
+            <lib-input
                 [formControlName]="formFieldGridPesquisa.dataInicial"
                 [maxDate]="dateMax"
                 [form]="pesquisaForm"
@@ -75,10 +75,10 @@
                         : ''
                 "
             >
-            </app-input>
+            </lib-input>
         </div>
         <div class="col-3 ml-2">
-            <app-input
+            <lib-input
                 [formControlName]="formFieldGridPesquisa.dataFinal"
                 [minDate]="dateMin"
                 [form]="pesquisaForm"
@@ -93,11 +93,11 @@
                         : ''
                 "
             >
-            </app-input>
+            </lib-input>
         </div>
     </div>
 
     <div class="d-flex flex-row-reverse mt-2">
-        <app-button label="Pesquisar" (click)="pesquisar()" [loading]="loading" [isRight]="true"></app-button>
+        <lib-button label="Pesquisar" (click)="pesquisar()" [loading]="loading"></lib-button>
     </div>
-</app-grid-page>
+</lib-grid-page>

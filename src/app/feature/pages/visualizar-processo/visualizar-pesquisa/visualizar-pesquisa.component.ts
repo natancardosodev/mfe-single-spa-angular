@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ModalComponent } from 'lib-ui-interno';
+import { ModalComponent } from 'lib-vox-ui';
 import { take } from 'rxjs/operators';
 
 import { ModalIndeferirComponent } from '@core/components/modal-indeferir/modal-indeferir.component';

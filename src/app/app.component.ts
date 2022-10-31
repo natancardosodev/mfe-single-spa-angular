@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { Subscription, forkJoin } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import * as sha512 from 'js-sha512';
-import { AlertService, LoadingGlobalService, LogoInterface, Menu, MenuFuncionalidade } from 'lib-ui-interno';
+import { AlertService, LoadingGlobalService, LogoInterface, Menu, MenuFuncionalidade } from 'lib-vox-ui';
 
 import { StorageUtil } from '@core/utils/storage.util';
 import { UrlUtilService } from '@core/services/url-util.service';

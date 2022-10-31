@@ -1,4 +1,4 @@
-<app-collapse label="Observação" [isCollapsed]="false" [loading]="loading">
+<lib-collapse label="Observação" [isCollapsed]="false" [loading]="loading">
     <div *ngIf="statusAtualProcesso == 36">
         <ng-container *ngFor="let observacao of observacoes$ | async">
             <dl>
@@ -22,4 +22,4 @@
             </div>
         </div>
     </form>
-</app-collapse>
+</lib-collapse>

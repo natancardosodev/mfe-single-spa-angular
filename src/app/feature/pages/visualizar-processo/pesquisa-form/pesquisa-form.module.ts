@@ -1,15 +1,14 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TextMaskModule } from 'angular2-text-mask';
-import { LibUIModule } from 'lib-ui-interno';
+import { LibVoxUiModule } from 'lib-vox-ui';
 
 import { PesquisaFormComponent } from './pesquisa-form.component';
 
 @NgModule({
     declarations: [PesquisaFormComponent],
-    imports: [CommonModule, LibUIModule, TextMaskModule],
-    exports: [PesquisaFormComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    imports: [CommonModule, LibVoxUiModule, TextMaskModule],
+    exports: [PesquisaFormComponent]
 })
 export class PesquisaFormModule {}

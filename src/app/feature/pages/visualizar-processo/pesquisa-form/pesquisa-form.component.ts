@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
 import { BehaviorSubject } from 'rxjs';
-import { AlertService } from 'lib-ui-interno';
+import { AlertService } from 'lib-vox-ui';
 
 import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';
 import { ParametrosPesquisaInterface } from '@core/interfaces/visualizar-processo/pesquisa.interface';

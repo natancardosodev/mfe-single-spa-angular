@@ -1,6 +1,6 @@
-<app-view-page>
-    <app-collapse label="Identificação" [loading]="loading">
-        <app-input
+<lib-view-page>
+    <lib-collapse label="Identificação" [loading]="loading">
+        <lib-input
             [label]="formLabelProdutor.protocolo"
             [formControlName]="formFieldProdutor.protocolo"
             [isObrigatorio]="true"
@@ -12,8 +12,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.protocolo, formLabelProdutor.protocolo)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.no_cpf"
             [formControlName]="formFieldProdutor.no_cpf"
             [isObrigatorio]="true"
@@ -26,8 +26,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.no_cpf, formLabelProdutor.no_cpf)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.ds_nome"
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.ds_nome"
@@ -38,8 +38,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.ds_nome, formLabelProdutor.ds_nome)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.dt_solicitacao"
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.dt_solicitacao"
@@ -51,8 +51,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.dt_solicitacao, formLabelProdutor.dt_solicitacao)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.co_evento"
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.co_evento"
@@ -64,10 +64,10 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.co_evento, formLabelProdutor.co_evento)
                     : ''
             "
-        ></app-input>
-    </app-collapse>
-    <app-collapse label="Dados Produtor Rural" [loading]="loading">
-        <app-input
+        ></lib-input>
+    </lib-collapse>
+    <lib-collapse label="Dados Produtor Rural" [loading]="loading">
+        <lib-input
             [label]="formLabelProdutor.nu_documento"
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.nu_documento"
@@ -78,8 +78,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.nu_documento, formLabelProdutor.nu_documento)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.ds_orgao_emissor"
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.ds_orgao_emissor"
@@ -93,8 +93,8 @@
                       )
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.co_uf_emissor"
             [formControlName]="formFieldProdutor.co_uf_emissor"
             [form]="produtorForm"
@@ -109,23 +109,23 @@
                     : ''
             "
         >
-        </app-input>
-        <app-input
+        </lib-input>
+        <lib-input
             [label]="formLabelProdutor.dt_nascimento"
             [formControlName]="formFieldProdutor.dt_nascimento"
             [isObrigatorio]="true"
             col="4"
             [form]="produtorForm"
             type="date"
-            [mensagemStatus]="
+            [message]="
                 !produtorForm.dt_nascimento.valid
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.dt_nascimento, formLabelProdutor.dt_nascimento)
                     : ''
             "
         >
-        </app-input>
+        </lib-input>
 
-        <app-input
+        <lib-input
             [label]="formLabelProdutor.naturalidade"
             [formControlName]="formFieldProdutor.naturalidade"
             col="7"
@@ -135,9 +135,9 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.naturalidade, formLabelProdutor.naturalidade)
                     : ''
             "
-        ></app-input>
+        ></lib-input>
 
-        <app-input
+        <lib-input
             [label]="formLabelProdutor.uf_naturalidade"
             [formControlName]="formFieldProdutor.uf_naturalidade"
             col="4"
@@ -155,10 +155,10 @@
                     : ''
             "
         >
-        </app-input>
-    </app-collapse>
-    <app-collapse label="Endereço de correspondência e contato" [loading]="loading">
-        <app-input
+        </lib-input>
+    </lib-collapse>
+    <lib-collapse label="Endereço de correspondência e contato" [loading]="loading">
+        <lib-input
             [label]="formLabelProdutor.uf_pais"
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.uf_pais"
@@ -174,8 +174,8 @@
                     : ''
             "
         >
-        </app-input>
-        <app-input
+        </lib-input>
+        <lib-input
             [label]="formLabelProdutor.co_municipio"
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.co_municipio"
@@ -189,8 +189,8 @@
                     : ''
             "
         >
-        </app-input>
-        <app-input
+        </lib-input>
+        <lib-input
             [label]="formLabelProdutor.co_cep"
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.co_cep"
@@ -202,8 +202,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.co_cep, formLabelProdutor.co_cep)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.ds_endereco"
             [formControlName]="formFieldProdutor.ds_endereco"
             col="7"
@@ -216,8 +216,8 @@
                     : ''
             "
         >
-        </app-input>
-        <app-input
+        </lib-input>
+        <lib-input
             [label]="formLabelProdutor.nu_numero"
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.nu_numero"
@@ -228,8 +228,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.nu_numero, formLabelProdutor.nu_numero)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.ds_complemento"
             [formControlName]="formFieldProdutor.ds_complemento"
             col="7"
@@ -239,8 +239,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.ds_complemento, formLabelProdutor.ds_complemento)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.ds_bairro"
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.ds_bairro"
@@ -251,8 +251,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.ds_bairro, formLabelProdutor.ds_bairro)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.nu_telefone"
             [formControlName]="formFieldProdutor.nu_telefone"
             col="7"
@@ -263,8 +263,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.nu_telefone, formLabelProdutor.nu_telefone)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.co_fax"
             [formControlName]="formFieldProdutor.co_fax"
             col="7"
@@ -274,8 +274,8 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.co_fax, formLabelProdutor.co_fax)
                     : ''
             "
-        ></app-input>
-        <app-input
+        ></lib-input>
+        <lib-input
             [label]="formLabelProdutor.ds_email"
             [formControlName]="formFieldProdutor.ds_email"
             col="7"
@@ -285,12 +285,10 @@
                     ? produtorForm.getFirstErrorFrom(formFieldProdutor.ds_email, formLabelProdutor.ds_email)
                     : ''
             "
-        ></app-input>
-    </app-collapse>
-    <app-card-documentos [dados]="documentos" [loading]="loading"></app-card-documentos>
-    <app-card-anexos [dados]="anexos" [loading]="loading" [isPageForm]="true"></app-card-anexos>
+        ></lib-input>
+    </lib-collapse>
     <div class="d-flex justify-content-end mt-2">
-        <app-button label="Voltar" (click)="voltar()"></app-button>
-        <app-button label="Salvar" (click)="salvar()" [loading]="loadingUpdate"></app-button>
+        <lib-button label="Voltar" (click)="voltar()"></lib-button>
+        <lib-button label="Salvar" (click)="salvar()" [loading]="loadingUpdate"></lib-button>
     </div>
-</app-view-page>
+</lib-view-page>

@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { finalize, take } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
-import { ModalComponent } from 'lib-ui-interno';
+import { ModalComponent } from 'lib-vox-ui';
 import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
 import { IndeferirForm } from './indeferir.form';
 
@@ -62,7 +62,7 @@ export class ModalIndeferirComponent implements OnInit {
         this.modal.openModal();
     }
     public closeModal(): void {
-        this.modal.closeModal();
+        this.modal.close();
     }
 
     public isFieldValid(form: FormGroup, field: string): boolean {

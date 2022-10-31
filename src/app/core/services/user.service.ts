@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { catchError, map } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
-import { Menu } from 'lib-ui-interno';
+import { Menu } from 'lib-vox-ui';
 
 import { tratarErroLogin } from '@core/utils/generals.util';
 import { UserInterface, UserPermissoes } from '@core/interfaces/interno/user-interface';

@@ -1,11 +1,11 @@
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { LibUIModule } from 'lib-ui-interno';
+import { LibVoxUiModule } from 'lib-vox-ui';
 import * as Sentry from '@sentry/angular';
 
 import { GlobalErrorHandler } from '@core/interceptor/global-error-handler';
@@ -26,7 +26,7 @@ import { AppComponent } from './app.component';
         AppRoutingModule,
         ModalModule.forRoot(),
         SharedModule,
-        LibUIModule
+        LibVoxUiModule.forRoot({ theme: 'interno' })
     ],
     providers: [
         {
@@ -62,8 +62,7 @@ import { AppComponent } from './app.component';
         CommonService,
         UserService
     ],
-    bootstrap: [AppComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    bootstrap: [AppComponent]
 })
 export class AppModule {
     constructor() {}

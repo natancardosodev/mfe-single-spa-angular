@@ -1,6 +1,6 @@
-<app-modal label="Motivo do Indeferimento" size="lg" #modal>
+<lib-modal label="Motivo do Indeferimento" size="lg" #modal>
     <section class="row col">
-        <app-input
+        <lib-input
             label="Descrição"
             formControlName="descricao"
             [isObrigatorio]="true"
@@ -10,17 +10,12 @@
             rows="5"
             col="8"
             class="col"
-        ></app-input>
+        ></lib-input>
     </section>
     <footer class="row">
-        <app-simple-button label="Cancelar Indeferimento" (click)="closeModal()" [isSecondary]="true" class="px-1">
-        </app-simple-button>
-        <app-simple-button
-            label="Confirmar Indeferimento"
-            (click)="confirmarIndeferir()"
-            [loading]="loading"
-            class="px-1"
-        >
-        </app-simple-button>
+        <lib-button label="Cancelar Indeferimento" (click)="closeModal()" [isSecondary]="true" class="px-1">
+        </lib-button>
+        <lib-button label="Confirmar Indeferimento" (click)="confirmarIndeferir()" [loading]="loading" class="px-1">
+        </lib-button>
     </footer>
-</app-modal>
+</lib-modal>

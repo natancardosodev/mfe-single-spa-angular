@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 
 import { BehaviorSubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { AlertService } from 'lib-ui-interno';
+import { AlertService } from 'lib-vox-ui';
 
 import {
     AnexoInterface,
