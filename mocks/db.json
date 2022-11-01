@@ -6,7 +6,7 @@
                 {
                     "id": 1040020253,
                     "nome": "Visualizar Processo Skeleton",
-                    "rota": "/sigfacil/skeleton/visualizar-processo",
+                    "rota": "/skeleton/interno/visualizar-processo/",
                     "modulo": {
                         "id": 104002,
                         "nome": "Manutenção SIGFácil",

@@ -1,0 +1,138 @@
+{
+    "protocolo": "MAL2000000001",
+    "nu_seq_orgao": 9982,
+    "is_espolio": null,
+    "no_cpf": "09920112488",
+    "ds_nome": "Erica Helena",
+    "co_sexo": "F",
+    "co_tipo_documento": 1,
+    "nu_documento": 332626,
+    "ds_orgao_emissor": "SSP",
+    "co_uf_emissor": 100125,
+    "ds_escolaridade": "Educação superior completa",
+    "data_nascimento": "1992-10-09",
+    "dados_evento": [
+        {
+            "dt_evento": "2020-08-25",
+            "co_evento": "110"
+        }
+    ],
+    "atividade": [
+        {
+            "ds_atividade": "Cultivo de milho",
+            "co_atividade": "0111-3/02",
+            "is_atividade_principal": true,
+            "is_exerce_atividade_local": true
+        },
+        {
+            "ds_atividade": "Cultivo de arroz",
+            "co_atividade": "0111-3/01",
+            "is_atividade_principal": false,
+            "is_exerce_atividade_local": true
+        }
+    ],
+    "questionario": [
+        {
+            "co_pergunta": "10001",
+            "ds_pergunta": "Possui Inscrição Estadual?",
+            "ds_resposta": "Não"
+        },
+        {
+            "co_pergunta": "10004",
+            "ds_pergunta": "Área arrendada?",
+            "ds_resposta": "Não"
+        }
+    ],
+    "baixa": {
+        "ds_motivo_baixa": null,
+        "ds_observacao": null
+    },
+    "imovel": {
+        "nu_inscricao_rural": "4564564",
+        "nu_car": "1121545",
+        "nu_ccir": "211561",
+        "nu_sigef": "56656",
+        "endereco": {
+            "co_cep": 65919899,
+            "co_tipo_logradouro": 3,
+            "ds_endereco": "Rural",
+            "nu_numero": "1213",
+            "ds_bairro": "Área Rural de Imperatriz",
+            "ds_complemento": null,
+            "co_municipio": 210530,
+            "co_uf": "21",
+            "ds_ponto_referencia": null,
+            "nu_area_total": 1001,
+            "nu_area_producao": 1001.01,
+            "ds_email": "gmail@gmail.com",
+            "co_ddd": "55",
+            "co_telefone": "5555555555",
+            "coordenadas_geograficas": {
+                "latitude": 123,
+                "longitude": 123
+            }
+        },
+        "endereco_correspondencia": null
+    },
+    "contabilista": null,
+    "anexo": [
+        {
+            "ds_path_anexo": "https://deve-integracao.voxtecnologia.com.br/v1/integracao/arquivo/9982/71f1fe60b6a57a8971c184b9719a7d0ab7566c8526beeaf6cbca05fabd7abda6170e3acdd5a69e6457ce7c1c72aec29a5200e4b79fb39d5d030654ae712199c6b5f4e317db3a25114ad73bbc4e0dea6347c96ee73c5c5c4c7f4156e17f3b6fca27e38718bbc16062d3bcc2280ae85f59e4c4510549b2fdcb8de2ccdba550c169",
+            "co_ip": "187.1.171.194",
+            "ds_navegador": null,
+            "co_tipo_anexo": 3,
+            "ds_descricao": "Escritura do Imóvel"
+        }
+    ],
+    "documento_orgao": [
+        {
+            "ds_orgao": "Secretaria da Fazenda do Estado do Maranhão",
+            "ds_documento": "332626",
+            "ds_status": "Emitido"
+        }
+    ],
+    "andamento": [
+        {
+            "data": "2020-08-25T14:15:02-03:00",
+            "ds_status": "Em análise",
+            "ds_descricao": "",
+            "ds_observacao": null,
+            "ds_usuario": null
+        },
+        {
+            "data": "2020-08-28T16:17:37-03:00",
+            "ds_status": "Emitido",
+            "ds_descricao": "",
+            "ds_observacao": null,
+            "ds_usuario": null
+        },
+        {
+            "data": "2020-08-31T10:25:19-03:00",
+            "ds_status": "Emitido",
+            "ds_descricao": "",
+            "ds_observacao": "PRP2046661023 - G472370000 -    PROIBIDO ATIVIDADE DE BAR, BEM COMO CONSUMO DE BEBIDA ALCOOLICA NO LOCAL. - HORARIO DE FUNCIONAMENTO: DE SEG A SEXTA DAS 8:00 ÀS 18:00, SABADOS DAS 9:00 ÀS 13:00 DOMINGOS E FERIADOS FECHADO.    \nG472960100 - \"HORÁRIO DE FUNCIONAMENTO: DE SEGUNDA A SEXTA DAS 8:00 ÀS 18:00 - SABADO DAS 9:00 ÀS 13:00 - DOMINGOS E FERIADOS FECHADO\". \"EXPRESSAMENTE PROIBIDO NO LOCAL O USO DE CIGARROS, CHARUTOS, CACHIMBOS, NARGUILÉS OU QUALQUER OUTRO PRODUTO FUMÍGENO, DERIVADO OU NÃO DO TABACO, CONFORME ART. 2º E §3º DA LEI FEDERAL 9294/1996, ALTERADA PELA LEI 12.546/2011, E ART. 2º §1º E 2º DA LEI ESTADUAL 16.239/2009.\" \n\nALVARÁ DE LICENÇA CONFORME ART.16 DECRETO 347/2020 JOM 4035  02/04/2020\n\n \n\nALVARÁ PROVIS�\"RIO POR 12 (DOZE) MESES PARA APRESENTAR OS DOCUMENTOS EXIGIDOS PELAS ATIVIDADES DESENVOLVIDAS PELA EMPRESA (VERIFICAR CONSULTA PRÉVIA ATUALIZADA) ART. 12. OS ALVARÁS DE LICENÇA DE LOCALIZAÇÃO E FUNCIONAMENTO EXPEDIDOS NOS TERMOS DO ART. 10, INCISO II, DESTE REGULAMENTO, SERÃO REVOGADOS SUMARIAMENTE AP�\"S DECORRIDO O PRAZO DE VIGÊNCIA, SEM QUE TENHAM SIDO APRESENTADOS PELO REQUERENTE OS DOCUMENTOS E LICENÇAS NECESSÁRIAS AO EXERCÍCIO DE SUAS ATIVIDADES.\n \n\nOBS.: NA SOLICITAÇÃO DO ALVARÁ POR TEMPO INDETERMINADO DEVERÁ APRESENTAR OS DOCUMENTOS EXIGIDOS PELA LEGISLAÇÃO VIGENTE NO MOMENTO DA SOLICITAÇÃO. - CMC: 2596440 - Área: 100",
+            "ds_usuario": null
+        },
+        {
+            "data": "2020-08-31T10:54:55-03:00",
+            "ds_status": "Emitido",
+            "ds_descricao": "",
+            "ds_observacao": "PRP2046661023 - G472370000 -    PROIBIDO ATIVIDADE DE BAR, BEM COMO CONSUMO DE BEBIDA ALCOOLICA NO LOCAL. - HORARIO DE FUNCIONAMENTO: DE SEG A SEXTA DAS 8:00 ÀS 18:00, SABADOS DAS 9:00 ÀS 13:00 DOMINGOS E FERIADOS FECHADO.    \nG472960100 - \"HORÁRIO DE FUNCIONAMENTO: DE SEGUNDA A SEXTA DAS 8:00 ÀS 18:00 - SABADO DAS 9:00 ÀS 13:00 - DOMINGOS E FERIADOS FECHADO\". \"EXPRESSAMENTE PROIBIDO NO LOCAL O USO DE CIGARROS, CHARUTOS, CACHIMBOS, NARGUILÉS OU QUALQUER OUTRO PRODUTO FUMÍGENO, DERIVADO OU NÃO DO TABACO, CONFORME ART. 2º E §3º DA LEI FEDERAL 9294/1996, ALTERADA PELA LEI 12.546/2011, E ART. 2º §1º E 2º DA LEI ESTADUAL 16.239/2009.\" \n\nALVARÁ DE LICENÇA CONFORME ART.16 DECRETO 347/2020 JOM 4035  02/04/2020\n\n \n\nALVARÁ PROVIS�\"RIO POR 12 (DOZE) MESES PARA APRESENTAR OS DOCUMENTOS EXIGIDOS PELAS ATIVIDADES DESENVOLVIDAS PELA EMPRESA (VERIFICAR CONSULTA PRÉVIA ATUALIZADA) ART. 12. OS ALVARÁS DE LICENÇA DE LOCALIZAÇÃO E FUNCIONAMENTO EXPEDIDOS NOS TERMOS DO ART. 10, INCISO II, DESTE REGULAMENTO, SERÃO REVOGADOS SUMARIAMENTE AP�\"S DECORRIDO O PRAZO DE VIGÊNCIA, SEM QUE TENHAM SIDO APRESENTADOS PELO REQUERENTE OS DOCUMENTOS E LICENÇAS NECESSÁRIAS AO EXERCÍCIO DE SUAS ATIVIDADES.\n \n\nOBS.: NA SOLICITAÇÃO DO ALVARÁ POR TEMPO INDETERMINADO DEVERÁ APRESENTAR OS DOCUMENTOS EXIGIDOS PELA LEGISLAÇÃO VIGENTE NO MOMENTO DA SOLICITAÇÃO. - CMC: 2596440 - Área: 100",
+            "ds_usuario": null
+        },
+        {
+            "data": "2020-08-31T10:55:04-03:00",
+            "ds_status": "Emitido",
+            "ds_descricao": "",
+            "ds_observacao": "PRP2046661023 - G472370000 -    PROIBIDO ATIVIDADE DE BAR, BEM COMO CONSUMO DE BEBIDA ALCOOLICA NO LOCAL. - HORARIO DE FUNCIONAMENTO: DE SEG A SEXTA DAS 8:00 ÀS 18:00, SABADOS DAS 9:00 ÀS 13:00 DOMINGOS E FERIADOS FECHADO.    \nG472960100 - \"HORÁRIO DE FUNCIONAMENTO: DE SEGUNDA A SEXTA DAS 8:00 ÀS 18:00 - SABADO DAS 9:00 ÀS 13:00 - DOMINGOS E FERIADOS FECHADO\". \"EXPRESSAMENTE PROIBIDO NO LOCAL O USO DE CIGARROS, CHARUTOS, CACHIMBOS, NARGUILÉS OU QUALQUER OUTRO PRODUTO FUMÍGENO, DERIVADO OU NÃO DO TABACO, CONFORME ART. 2º E §3º DA LEI FEDERAL 9294/1996, ALTERADA PELA LEI 12.546/2011, E ART. 2º §1º E 2º DA LEI ESTADUAL 16.239/2009.\" \n\nALVARÁ DE LICENÇA CONFORME ART.16 DECRETO 347/2020 JOM 4035  02/04/2020\n\n \n\nALVARÁ PROVIS�\"RIO POR 12 (DOZE) MESES PARA APRESENTAR OS DOCUMENTOS EXIGIDOS PELAS ATIVIDADES DESENVOLVIDAS PELA EMPRESA (VERIFICAR CONSULTA PRÉVIA ATUALIZADA) ART. 12. OS ALVARÁS DE LICENÇA DE LOCALIZAÇÃO E FUNCIONAMENTO EXPEDIDOS NOS TERMOS DO ART. 10, INCISO II, DESTE REGULAMENTO, SERÃO REVOGADOS SUMARIAMENTE AP�\"S DECORRIDO O PRAZO DE VIGÊNCIA, SEM QUE TENHAM SIDO APRESENTADOS PELO REQUERENTE OS DOCUMENTOS E LICENÇAS NECESSÁRIAS AO EXERCÍCIO DE SUAS ATIVIDADES.\n \n\nOBS.: NA SOLICITAÇÃO DO ALVARÁ POR TEMPO INDETERMINADO DEVERÁ APRESENTAR OS DOCUMENTOS EXIGIDOS PELA LEGISLAÇÃO VIGENTE NO MOMENTO DA SOLICITAÇÃO. - CMC: 2596440 - Área: 100",
+            "ds_usuario": null
+        },
+        {
+            "data": "2020-09-01T10:12:09-03:00",
+            "ds_status": "Emitido",
+            "ds_descricao": "",
+            "ds_observacao": "PRP2046661023 - G472370000 -    PROIBIDO ATIVIDADE DE BAR, BEM COMO CONSUMO DE BEBIDA ALCOOLICA NO LOCAL. - HORARIO DE FUNCIONAMENTO: DE SEG A SEXTA DAS 8:00 ÀS 18:00, SABADOS DAS 9:00 ÀS 13:00 DOMINGOS E FERIADOS FECHADO.    \nG472960100 - \"HORÁRIO DE FUNCIONAMENTO: DE SEGUNDA A SEXTA DAS 8:00 ÀS 18:00 - SABADO DAS 9:00 ÀS 13:00 - DOMINGOS E FERIADOS FECHADO\". \"EXPRESSAMENTE PROIBIDO NO LOCAL O USO DE CIGARROS, CHARUTOS, CACHIMBOS, NARGUILÉS OU QUALQUER OUTRO PRODUTO FUMÍGENO, DERIVADO OU NÃO DO TABACO, CONFORME ART. 2º E §3º DA LEI FEDERAL 9294/1996, ALTERADA PELA LEI 12.546/2011, E ART. 2º §1º E 2º DA LEI ESTADUAL 16.239/2009.\" \n\nALVARÁ DE LICENÇA CONFORME ART.16 DECRETO 347/2020 JOM 4035  02/04/2020\n\n \n\nALVARÁ PROVIS�\"RIO POR 12 (DOZE) MESES PARA APRESENTAR OS DOCUMENTOS EXIGIDOS PELAS ATIVIDADES DESENVOLVIDAS PELA EMPRESA (VERIFICAR CONSULTA PRÉVIA ATUALIZADA) ART. 12. OS ALVARÁS DE LICENÇA DE LOCALIZAÇÃO E FUNCIONAMENTO EXPEDIDOS NOS TERMOS DO ART. 10, INCISO II, DESTE REGULAMENTO, SERÃO REVOGADOS SUMARIAMENTE AP�\"S DECORRIDO O PRAZO DE VIGÊNCIA, SEM QUE TENHAM SIDO APRESENTADOS PELO REQUERENTE OS DOCUMENTOS E LICENÇAS NECESSÁRIAS AO EXERCÍCIO DE SUAS ATIVIDADES.\n \n\nOBS.: NA SOLICITAÇÃO DO ALVARÁ POR TEMPO INDETERMINADO DEVERÁ APRESENTAR OS DOCUMENTOS EXIGIDOS PELA LEGISLAÇÃO VIGENTE NO MOMENTO DA SOLICITAÇÃO. - CMC: 2596440 - Área: 100",
+            "ds_usuario": null
+        }
+    ]
+}
