@@ -7,7 +7,7 @@ export const environment: EnvironmentInterface = {
         oauth: 'https://homologacao.voxtecnologia.com.br',
         assetsSigfacil: 'https://homologacao-assets-sigfacil.voxtecnologia.com.br',
         jarvis: 'https://homologacao-jarvis.voxtecnologia.com.br',
-        projeto: 'https://homologacao.voxtecnologia.com.br/sigfacil/nova-funcionalidade',
+        projeto: 'https://homologacao.voxtecnologia.com.br/sigfacil/nova-funcionalidade/',
         environments: 'https://homologacao',
         subDomain: 'homologacao'
     }
