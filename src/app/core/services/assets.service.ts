@@ -1,45 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { EnvService } from './env.service';
+import { Observable } from 'rxjs';
+import { BaseService } from './base.service';
+import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
+import { UrlUtilService } from './url-util.service';
+import { AlertService } from 'lib-vox-ui';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AssetsService {
-    constructor(private http: HttpClient, private env: EnvService) {}
+export class AssetsService extends BaseService {
+    private tipoApi = TiposApisEnum.ASSETS_SIGFACIL;
+
+    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
+        super('', http, urlUtilService, alertService);
+    }
 
     public getManifest(): Observable<any> {
-        const url = `${this.env.assetsSigfacil}/manifest.json?v=${new Date().toISOString()}`;
-
-        return this.http
-            .get<any>(url, { withCredentials: true, responseType: 'json' })
-            .pipe<any>(catchError((error: HttpErrorResponse) => void throwError(new Error(error.error.message))));
+        return this.get(`/manifest.json?v=${new Date().toISOString()}`, null, this.tipoApi);
     }
 
     public getDadosSigfacil(): Observable<any> {
-        const url = `${this.env.assetsSigfacil}/assets/configs/sigfacil.json`;
-
-        return this.http
-            .get<any>(url, { withCredentials: true, responseType: 'json' })
-            .pipe<any>(catchError((error: HttpErrorResponse) => void throwError(new Error(error.error.message))));
+        return this.get('/assets/configs/sigfacil.json', null, this.tipoApi);
     }
 
     public getMockyMe(): Observable<any> {
-        const url = `${this.env.assetsSigfacil}/assets/configs/mocky-me.json`;
-
-        return this.http
-            .get<any>(url, { withCredentials: true, responseType: 'json' })
-            .pipe<any>(catchError((error: HttpErrorResponse) => void throwError(new Error(error.error.message))));
+        return this.get('/assets/configs/mocky-me.json', null, this.tipoApi);
     }
 
     public getMockyCep(): Observable<any> {
-        const url = `${this.env.assetsSigfacil}/assets/configs/mocky-cep.json`;
-
-        return this.http
-            .get<any>(url, { withCredentials: true, responseType: 'json' })
-            .pipe<any>(catchError((error: HttpErrorResponse) => void throwError(new Error(error.error.message))));
+        return this.get('/assets/configs/mocky-cep.json', null, this.tipoApi);
     }
 }

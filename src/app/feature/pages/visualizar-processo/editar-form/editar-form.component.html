@@ -19,7 +19,7 @@
             [isObrigatorio]="true"
             col="5"
             [readOnly]="true"
-            [textMask]="maskFactory.createCpf()"
+            formatMask="cpf"
             [form]="produtorForm"
             [message]="
                 !produtorForm.no_cpf.valid
@@ -195,7 +195,7 @@
             [isObrigatorio]="true"
             [formControlName]="formFieldProdutor.co_cep"
             col="4"
-            [textMask]="maskFactory.createCep()"
+            formatMask="cep"
             [form]="produtorForm"
             [message]="
                 !produtorForm.co_cep.valid
@@ -256,7 +256,7 @@
             [label]="formLabelProdutor.nu_telefone"
             [formControlName]="formFieldProdutor.nu_telefone"
             col="7"
-            [textMask]="maskFactory.createTelefone()"
+            formatMask="telefone"
             [form]="produtorForm"
             [message]="
                 !produtorForm.nu_telefone.valid

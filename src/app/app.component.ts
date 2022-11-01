@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 
 import { Subscription, forkJoin } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import * as sha512 from 'js-sha512';
-import { AlertService, LoadingGlobalService, LogoInterface, Menu, MenuFuncionalidade } from 'lib-vox-ui';
+import { LogoInterface, Menu, MenuFuncionalidade } from 'lib-vox-ui/lib/core';
+import { AlertService, LoadingGlobalService } from 'lib-vox-ui';
 
 import { StorageUtil } from '@core/utils/storage.util';
 import { UrlUtilService } from '@core/services/url-util.service';
@@ -19,6 +19,7 @@ import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { ExternalFilesService } from '@core/services/external-files.service';
 import { EnvService } from '@core/services/env.service';
 import { delay, isNullOrUndefined } from '@core/utils/generals.util';
+import { AssetsService } from '@core/services/assets.service';
 
 @Component({
     selector: 'app-root',
@@ -42,9 +43,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(
         private alertService: AlertService,
         private userService: UserService,
+        private assetsService: AssetsService,
         private urlUtilService: UrlUtilService,
         private externalFiles: ExternalFilesService,
-        private title: Title,
         private envService: EnvService,
         private loadingGlobal: LoadingGlobalService,
         private router: Router
@@ -112,7 +113,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     // this.carregarJarvis(response.cpf, response.id); // @todo Caso use o jarvis
                     this.getSystemInfo(response);
 
-                    return isNullOrUndefined(response['mensagem']) || this.urlUtilService.redirectToLogin();
+                    return isNullOrUndefined(response['message']) || this.urlUtilService.redirectToLogin();
                 },
                 (error) => {
                     return error.naoAutorizado && this.urlUtilService.redirectToLogin();
@@ -138,7 +139,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.userService.getTime(),
             this.userService.getPathLogo(),
             this.userService.getModulos(),
-            this.userService.getManifest()
+            this.assetsService.getManifest()
         ])
             .pipe(
                 finalize(

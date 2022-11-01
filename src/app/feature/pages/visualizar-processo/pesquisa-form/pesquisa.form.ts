@@ -1,9 +1,9 @@
 import { FormGroup, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
 
 import { isValidCpf } from '@brazilian-utils/is-valid-cpf';
-import { clearMask } from 'src/app/core/configs/regexClearMask';
-import { StorageUtil } from 'src/app/core/utils/storage.util';
-import { StorageEnum } from 'src/app/core/enums/sistema/storage.enum';
+import { StorageUtil } from '@core/utils/storage.util';
+import { StorageEnum } from '@core/enums/sistema/storage.enum';
+import { clearMask } from '@core/utils/generals.util';
 import { ParametrosPesquisaInterface } from '@core/interfaces/visualizar-processo/pesquisa.interface';
 import { formatDateBrToEn, formatDateEnToBr } from '@core/utils/date.util';
 import { FormFieldGridPesquisa } from '@core/enums/visualizar-processo/form-grid-pesquisa.enum';

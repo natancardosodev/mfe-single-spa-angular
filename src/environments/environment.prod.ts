@@ -7,7 +7,7 @@ export const environment: EnvironmentInterface = {
         oauth: 'https://autenticacao.voxtecnologia.com.br',
         assetsSigfacil: 'https://assets-sigfacil.voxtecnologia.com.br',
         jarvis: 'https://jarvis.voxtecnologia.com.br',
-        projeto: 'https://voxtecnologia.com.br/sigfacil/nova-funcionalidade',
+        projeto: 'https://voxtecnologia.com.br/sigfacil/nova-funcionalidade/',
         environments: 'https://',
         subDomain: 'www'
     }

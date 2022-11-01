@@ -7,7 +7,7 @@ export const environment: EnvironmentInterface = {
         oauth: 'https://deve-cinco.voxtecnologia.com.br',
         assetsSigfacil: 'https://deve-cinco-assets-sigfacil.voxtecnologia.com.br',
         jarvis: 'https://deve-cinco-jarvis.voxtecnologia.com.br',
-        projeto: 'https://deve-cinco.voxtecnologia.com.br/sigfacil/nova-funcionalidade',
+        projeto: 'https://deve-cinco.voxtecnologia.com.br/sigfacil/nova-funcionalidade/',
         environments: 'https://deve-cinco',
         subDomain: 'deve-cinco'
     }
