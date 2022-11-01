@@ -3,5 +3,6 @@ export enum TiposApisEnum {
     JARVIS = 'jarvis',
     SIGFACIL = 'sigfacil',
     ASSETS_SIGFACIL = 'assets-sigfacil',
-    MOCK = 'mock'
+    MOCK = 'mock',
+    STATIC = 'static'
 }

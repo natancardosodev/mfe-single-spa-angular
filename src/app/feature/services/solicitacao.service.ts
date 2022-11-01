@@ -21,11 +21,11 @@ export class SolicitacaoService extends BaseService {
     // Passar Interface
     public getListarProcessos = (processo: any): Observable<any> => {
         // return this.get('/solicitacao', processo);
-        return this.get('/grid', null, TiposApisEnum.MOCK); // @todo remover parametro MOCK
+        return this.get('/grid', null, TiposApisEnum.STATIC); // @todo remover parametro MOCK
     };
 
     public getDadosInscricao = (solicitacao: number): Observable<any> => {
-        return this.get('/inscricao', null, TiposApisEnum.MOCK); // `/inscricao/solicitacao/${solicitacao}`
+        return this.get('/inscricao', null, TiposApisEnum.STATIC); // `/inscricao/solicitacao/${solicitacao}`
     };
 
     public putDadosInscricao(solicitacao: number, data: DadosInscricaoInterface): Observable<any> {
@@ -33,16 +33,16 @@ export class SolicitacaoService extends BaseService {
     }
 
     public getDadosProcesso = (solicitacao: any): Observable<any> => {
-        return this.get('/processo', null, TiposApisEnum.MOCK);
+        return this.get('/processo', null, TiposApisEnum.STATIC);
     };
 
     public getDadosPessoa = (solicitacao: any): Observable<any> => {
         // return this.get('/pessoa', solicitacao);
-        return this.get('/pessoa', null, TiposApisEnum.MOCK);
+        return this.get('/pessoa', null, TiposApisEnum.STATIC);
     };
 
     public getDadosDocumento = (solicitacao: any): Observable<any> => {
-        return this.get('/documento', null, TiposApisEnum.MOCK);
+        return this.get('/documento', null, TiposApisEnum.STATIC);
     };
 
     public putIndeferir = (solicitacao: number, dados: any): Observable<any> => {

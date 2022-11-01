@@ -3,41 +3,39 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { catchError, map } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
-import { Menu } from 'lib-vox-ui';
+import { Menu } from 'lib-vox-ui/lib/core';
+
+import { AlertService } from 'lib-vox-ui';
 
 import { tratarErroLogin } from '@core/utils/generals.util';
 import { UserInterface, UserPermissoes } from '@core/interfaces/interno/user-interface';
 import { SystemInterface } from '@core/interfaces/interno/system-interface';
-import { UrlUtilService } from './url-util.service';
 import { StorageUtil } from '@core/utils/storage.util';
 import { StorageEnum } from '@core/enums/sistema/storage.enum';
-import { HoraMocky } from './hora-mocky';
 import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
+
+import { UrlUtilService } from './url-util.service';
+import { HoraMocky } from './hora-mocky';
+import { BaseService } from './base.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
+export class UserService extends BaseService {
     private _checkModuloMenu: Subject<any>;
     private _user: Observable<UserInterface>;
     private _setUserInfo: Subject<UserInterface>;
+    private _customOptions: Record<string, any>;
 
-    constructor(private http: HttpClient, private urlUtilService: UrlUtilService) {
+    constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
+        super('', http, urlUtilService, alertService);
         this._setUserInfo = new Subject();
         this._checkModuloMenu = new Subject();
         this._user = this._setUserInfo.asObservable();
-    }
-
-    public getManifest(): Observable<any> {
-        const url = this.urlUtilService.montarUrlApi(
-            `/manifest.json?v=${new Date().toISOString()}`,
-            null,
-            TiposApisEnum.ASSETS_SIGFACIL
-        );
-
-        return this.http
-            .get<any>(url, { withCredentials: true, responseType: 'json' })
-            .pipe<any>(catchError((error: HttpErrorResponse) => tratarErroLogin(error)));
+        this._customOptions = {
+            withCredentials: true,
+            responseType: 'json'
+        };
     }
 
     /**
@@ -46,16 +44,7 @@ export class UserService {
      * @memberof UsuarioService
      */
     public getUser(): Observable<UserInterface> {
-        // const url = this.urlUtilService.montarUrlApi('/me');
-        const url = this.urlUtilService.montarUrlApi('/me', null, TiposApisEnum.MOCK);
-
-        return this.http
-            .get<UserInterface>(url, { withCredentials: true, responseType: 'json' })
-            .pipe(
-                catchError((erro: HttpErrorResponse) => {
-                    return tratarErroLogin(erro);
-                })
-            );
+        return this.get('/me', null, TiposApisEnum.STATIC, null, this._customOptions);
     }
 
     /**
@@ -73,14 +62,8 @@ export class UserService {
      * @memberof UserService
      */
     public getPathLogo(): Observable<any> {
-        // const url = this.urlUtilService.montarUrlApi('/me/logo-entidade');
-        const url = this.urlUtilService.montarUrlApi('/logo', null, TiposApisEnum.MOCK);
-
-        return this.http.get(url, { withCredentials: true, responseType: 'text' }).pipe(
-            catchError((erro: HttpErrorResponse) => {
-                return tratarErroLogin(erro);
-            })
-        );
+        // @TODO: trocar por: /me/logo-entidade
+        return this.get('/logo', null, TiposApisEnum.STATIC, null, { withCredentials: true, responseType: 'text' });
     }
 
     /**
@@ -89,13 +72,7 @@ export class UserService {
      * @memberof TimeService
      */
     public getTime(): Observable<string> {
-        // return this.http
-        //     .get<string>(this.urlUtilService.montarUrlApi('/hora'), { withCredentials: true, responseType: 'json' })
-        //     .pipe(
-        //         catchError((erro: HttpErrorResponse) => {
-        //             return tratarErroLogin(erro);
-        //         })
-        //     );
+        // return this.get('/hora', null, null, null, this._customOptions);
         return of(HoraMocky.data);
     }
 
@@ -105,19 +82,8 @@ export class UserService {
      * @memberof SystemAvailableService
      */
     public getSystem(): Observable<Array<SystemInterface>> {
-        // const url = this.urlUtilService.montarUrlApi('/me/sistema');
-        const url = this.urlUtilService.montarUrlApi('/sistema', null, TiposApisEnum.MOCK);
-
-        return this.http
-            .get<Array<SystemInterface>>(url, {
-                withCredentials: true,
-                responseType: 'json'
-            })
-            .pipe(
-                catchError((erro: HttpErrorResponse) => {
-                    return tratarErroLogin(erro);
-                })
-            );
+        // @TODO: trocar por: /me/sistema
+        return this.get('/sistema', null, TiposApisEnum.STATIC, null, this._customOptions);
     }
 
     /**
@@ -127,23 +93,17 @@ export class UserService {
      * @memberof UserService
      */
     public getModulos(): Observable<Array<Menu>> {
-        // const url = this.urlUtilService.montarUrlApi('/me/menu/4');
-        const url = this.urlUtilService.montarUrlApi('/modulos', null, TiposApisEnum.MOCK); // remover ", null, TiposApisEnum.MOCK"
-
-        return this.http
-            .get<Array<Menu>>(url, {
-                withCredentials: true,
-                responseType: 'json'
+        // @TODO: trocar por: /me/menu/4
+        return this.get('/modulos', null, TiposApisEnum.STATIC, null, this._customOptions).pipe(
+            map((modulo) => {
+                this._checkModuloMenu.next(modulo);
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+                return modulo.filter((moduloMenu) => this.setModulos(moduloMenu));
+            }),
+            catchError((erro: HttpErrorResponse) => {
+                return tratarErroLogin(erro);
             })
-            .pipe(
-                map((modulo) => {
-                    this._checkModuloMenu.next(modulo);
-                    return modulo.filter((moduloMenu) => this.setModulos(moduloMenu));
-                }),
-                catchError((erro: HttpErrorResponse) => {
-                    return tratarErroLogin(erro);
-                })
-            );
+        );
     }
 
     /**

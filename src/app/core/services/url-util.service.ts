@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
-import { isNullOrUndefined } from '@core/utils/generals.util';
+import { generateObjectToQueryString, isNullOrUndefined } from '@core/utils/generals.util';
 
 import { EnvService } from './env.service';
 
@@ -31,7 +32,7 @@ export class UrlUtilService {
         parameters?: Record<string, string>,
         tiposApisExtras?: TiposApisEnum
     ): string {
-        const queryString = parameters ? this.objectToQueryString(parameters) : '';
+        const queryString = parameters ? generateObjectToQueryString(parameters) : '';
         let baseUrl = '';
 
         switch (tiposApisExtras) {
@@ -50,6 +51,8 @@ export class UrlUtilService {
             case TiposApisEnum.MOCK:
                 baseUrl = 'http://localhost:3000';
                 break;
+            case TiposApisEnum.STATIC:
+                return this.env.projeto + 'assets/mocks' + resource + '.json';
 
             default:
                 baseUrl = this.getUrlApiBase();
@@ -57,25 +60,6 @@ export class UrlUtilService {
         }
 
         return baseUrl + resource + queryString;
-    }
-
-    /**
-     * transforma um objeto em uma query
-     * @static
-     * @param {any} parameters
-     * @returns {string}
-     * @memberof UrlUtilService
-     */
-    public objectToQueryString(parameters: Record<string, string>): string {
-        const arrayParametro = [];
-
-        for (const property of Object.keys(parameters)) {
-            if (!isNullOrUndefined(parameters[property])) {
-                arrayParametro.push(`${property}=${parameters[property]}`);
-            }
-        }
-
-        return `?${arrayParametro.join('&')}`;
     }
 
     /**
@@ -111,9 +95,5 @@ export class UrlUtilService {
         const queryString = `?${arrayParametros.join('&')}`;
 
         return this.getUrlApiBase() + resource + queryString;
-    }
-
-    public getAuth(): string {
-        return `${this.env.oauth}`;
     }
 }
