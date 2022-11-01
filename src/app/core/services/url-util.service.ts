@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 import { generateObjectToQueryString, isNullOrUndefined } from '@core/utils/generals.util';
 
