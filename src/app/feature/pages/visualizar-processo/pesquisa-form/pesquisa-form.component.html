@@ -15,7 +15,7 @@
         [isGrid]="true"
         [label]="formLabelGridPesquisa.cpf"
         [formControlName]="formFieldGridPesquisa.cpf"
-        [textMask]="maskFactory.createCpf()"
+        formatMask="cpf"
         [form]="pesquisaForm"
         [message]="
             !pesquisaForm.cpf.valid
@@ -28,8 +28,8 @@
         [isGrid]="true"
         [label]="formLabelGridPesquisa.tipo"
         [formControlName]="formFieldGridPesquisa.tipo"
-        col="5"
         [form]="pesquisaForm"
+        col="5"
         type="select"
         [options]="tipos"
         [message]="
@@ -43,8 +43,8 @@
         [isGrid]="true"
         [label]="formLabelGridPesquisa.statusProcesso"
         [formControlName]="formFieldGridPesquisa.statusProcesso"
-        col="5"
         [form]="pesquisaForm"
+        col="5"
         type="select"
         [options]="statusProcesso"
         [message]="
@@ -58,8 +58,9 @@
     ></lib-input>
 
     <div class="form-group row col">
-        <label for="data-inicial" class="col-4 col-form-label text-left">Data Protocolo:</label>
+        <label for="data-inicial" class="col-3 col-form-label text-left">Protocolo:</label>
         <div class="col-3">
+            <span>Data Inicial:</span>
             <lib-input
                 [formControlName]="formFieldGridPesquisa.dataInicial"
                 [maxDate]="dateMax"
@@ -78,6 +79,7 @@
             </lib-input>
         </div>
         <div class="col-3 ml-2">
+            <span>Data Final:</span>
             <lib-input
                 [formControlName]="formFieldGridPesquisa.dataFinal"
                 [minDate]="dateMin"

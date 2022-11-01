@@ -16,14 +16,12 @@ import {
 } from '@core/interfaces/visualizar-processo/dados-inscricao.interface';
 import { DadosInterface } from '@core/interfaces/sistema/dados.interface';
 import { CommonService } from '@core/services/common.service';
-import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
 import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { JarvisService } from '@feature/services/jarvis.service';
-import { clearMask } from '@core/configs/regexClearMask';
 import { GatewayReceitaInterface } from '@core/interfaces/jarvis/gateway-receita.interface';
 import { MensagensEnum } from '@core/enums/sistema/mensagens.enum';
-import { delay, navigate } from '@core/utils/generals.util';
+import { delay, navigate, clearMask } from '@core/utils/generals.util';
 import { FormFieldProdutor, FormLabelProdutor } from '@core/enums/visualizar-processo/form-produtor.enum';
 import { ProdutorForm } from './produtor.form';
 
@@ -50,14 +48,9 @@ export class EditarFormComponent implements OnInit {
     public sexosOptions: BehaviorSubject<any> = new BehaviorSubject([]);
     private _produtorForm: ProdutorForm;
     private _solicitacaoId: number;
-    private _maskFactory: TextMaskFactory;
 
     public get produtorForm(): ProdutorForm {
         return this._produtorForm;
-    }
-
-    public get maskFactory(): TextMaskFactory {
-        return this._maskFactory;
     }
 
     public get commonService(): CommonService {
@@ -73,7 +66,6 @@ export class EditarFormComponent implements OnInit {
         private jarvisService: JarvisService,
         private _commonService: CommonService
     ) {
-        this._maskFactory = new TextMaskFactory();
         this._produtorForm = new ProdutorForm();
         this.activatedRoute.params.subscribe((params) => {
             this._solicitacaoId = params['id'] ? params['id'] : null;

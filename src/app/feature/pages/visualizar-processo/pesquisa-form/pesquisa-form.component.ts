@@ -5,7 +5,6 @@ import { Title } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { AlertService } from 'lib-vox-ui';
 
-import { TextMaskFactory } from '@core/utils/mask/text-mask-factory';
 import { ParametrosPesquisaInterface } from '@core/interfaces/visualizar-processo/pesquisa.interface';
 import { isEmpty } from '@core/utils/generals.util';
 import { FormFieldGridPesquisa, FormLabelGridPesquisa } from '@core/enums/visualizar-processo/form-grid-pesquisa.enum';
@@ -28,11 +27,9 @@ export class PesquisaFormComponent implements OnInit {
     public dateMax: Date;
     private _pesquisa: ParametrosPesquisaInterface;
     private _pesquisaForm: PesquisaForm;
-    private _maskFactory: TextMaskFactory;
 
     constructor(private titleService: Title, private alertService: AlertService) {
         this.dataForm = new EventEmitter();
-        this._maskFactory = new TextMaskFactory();
         this._pesquisaForm = new PesquisaForm();
         this.dateMax = new Date();
         this.loading = false;
@@ -47,10 +44,6 @@ export class PesquisaFormComponent implements OnInit {
 
     public get pesquisaForm(): PesquisaForm {
         return this._pesquisaForm;
-    }
-
-    public get maskFactory(): TextMaskFactory {
-        return this._maskFactory;
     }
 
     public setOptions(): void {
