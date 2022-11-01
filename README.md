@@ -41,7 +41,7 @@ npm run build
 
 ## Acesso
 
--   https://deve.voxtecnologia.com.br/sigfacil/skeleton/visualizar-processo - Visualizar Processo Skeleton
+-   https://deve.voxtecnologia.com.br/skeleton/interno/visualizar-processo - Visualizar Processo Skeleton
 
 ## Tecnologias
 
