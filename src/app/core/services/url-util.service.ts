@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 import { generateObjectToQueryString, isNullOrUndefined } from '@core/utils/generals.util';
 
@@ -31,6 +32,7 @@ export class UrlUtilService {
         parameters?: Record<string, string>,
         tiposApisExtras?: TiposApisEnum
     ): string {
+        const urlPortalHttps = `https://${window.location.host}`;
         const queryString = parameters ? generateObjectToQueryString(parameters) : '';
         let baseUrl = '';
 
@@ -51,7 +53,7 @@ export class UrlUtilService {
                 baseUrl = 'http://localhost:3000';
                 break;
             case TiposApisEnum.STATIC:
-                return this.env.projeto + 'assets/mocks' + resource + '.json';
+                return `${urlPortalHttps}${RotasEnum.BASE_HREF}assets/mocks${resource}.json`;
 
             default:
                 baseUrl = this.getUrlApiBase();
