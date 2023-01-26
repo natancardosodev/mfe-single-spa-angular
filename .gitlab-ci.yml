@@ -1,4 +1,4 @@
-image: voxtecnologiahub/node-12.14.0
+image: voxtecnologiahub/node-14.19.1
 
 variables:
     CUSTOM_PROJECT_PATH: vox/front-end/skeleton-internal-front
