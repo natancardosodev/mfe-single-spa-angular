@@ -5,7 +5,7 @@ export const environment: EnvironmentInterface = {
     uri: {
         api: 'https://deve-cinco-nova-funcionalidade-internal-service.voxtecnologia.com.br',
         oauth: 'https://deve-cinco.voxtecnologia.com.br',
-        assetsSigfacil: 'https://deve-cinco-assets-sigfacil.voxtecnologia.com.br',
+        assetsSigfacil: 'https://deve-cinco-sigfacil.staticvox.com.br',
         jarvis: 'https://deve-cinco-jarvis.voxtecnologia.com.br',
         projeto: 'https://deve-cinco.voxtecnologia.com.br/sigfacil/nova-funcionalidade/',
         environments: 'https://deve-cinco',

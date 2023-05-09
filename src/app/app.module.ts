@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LibVoxUiModule } from 'lib-vox-ui';
-import * as Sentry from '@sentry/angular';
+import * as Sentry from '@sentry/angular-ivy';
 
 import { GlobalErrorHandler } from '@core/interceptor/global-error-handler';
 import { SharedModule } from '@shared/shared.module';

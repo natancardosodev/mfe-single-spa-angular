@@ -3,8 +3,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { montarUrlPortais } from '@core/utils/generals.util';
 
-import * as Sentry from '@sentry/angular';
-import { Integrations } from '@sentry/tracing';
+import * as Sentry from '@sentry/angular-ivy';
+import { BrowserTracing } from '@sentry/tracing';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
@@ -35,7 +35,7 @@ if (ambientesWithSentry.includes(environment.uri.subDomain)) {
     Sentry.init({
         dsn: 'COLOCAR-URL-DSN-DO-SENTRY-FRONT',
         integrations: [
-            new Integrations.BrowserTracing({
+            new BrowserTracing({
                 tracingOrigins: [montarUrlPortais(ambientesWithSentry, RotasEnum.BASE_HREF)],
                 routingInstrumentation: Sentry.routingInstrumentation
             })

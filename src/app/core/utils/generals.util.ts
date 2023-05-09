@@ -1,8 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { environment } from 'src/environments/environment';
+import { MensagensEnum } from '@core/enums/sistema/mensagens.enum';
 
 export function delay(ms: number): Promise<any> {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -18,6 +19,31 @@ export function isArrayEmpty(...arrays: Array<any> | null): boolean {
 
 export function isNullOrUndefined(value: any) {
     return value === null || value === undefined;
+}
+
+export function catchErrorApi(erro: HttpErrorResponse, isHideAlert: boolean) {
+    const msgDefault = {
+        message: MensagensEnum.API_FORA
+    };
+
+    if ([0, HttpStatusCode.Unauthorized].includes(erro.status)) {
+        disableBlockReloadPage();
+    }
+
+    return !isHideAlert ? ([0, HttpStatusCode.Unauthorized].includes(erro.status) ? msgDefault : erro.error) : null;
+}
+
+export const blockReloadPage = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    return (e.returnValue = '');
+};
+
+export function activeBlockReloadPage() {
+    window.addEventListener('beforeunload', blockReloadPage);
+}
+
+export function disableBlockReloadPage() {
+    window.removeEventListener('beforeunload', blockReloadPage, false);
 }
 
 export function navigate(
@@ -79,8 +105,8 @@ export function idGenerator(label: string, idExtra?: number): string {
         .toLowerCase();
 }
 
-export function throwErrorAPI(msg?: string): Observable<never> {
-    return msg ? throwError(msg) : throwError(new Error('Erro da API'));
+export function throwErrorAPI(msg?: string, url = ''): Observable<never> {
+    return msg ? throwError(msg) : throwError(new Error('Erro da API ' + url));
 }
 
 export function tratarErroLogin(erro: HttpErrorResponse): Observable<never> {
