@@ -1,3 +1,6 @@
 **/*.spec.ts
 src/app/app.component.html
 src/app/app.component.scss
+.eslintrc.js
+ngcc.config.js
+karma.conf.js
