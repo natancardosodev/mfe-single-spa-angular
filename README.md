@@ -63,10 +63,10 @@ npm run build
     -   shared: diretivas e pipes
 -   Bibliotecas importantes:
     -   lib-vox-ui (Vox)
+    -   lib-vox-shared-codes (Vox)
     -   lib-vox-grid (Vox)
     -   ngx-bootstrap v5
     -   font-awesome v5.13.1
-    -   angular2-text-mask v9
     -   ngx-currency v2
 
 ## Recomendações
