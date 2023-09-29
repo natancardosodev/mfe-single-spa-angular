@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -33,12 +32,14 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     public userKey: string;
     public baseHref: string;
     public tipoModulo: string;
-    private _sistema: Array<SystemInterface>;
-    private _usuario: UserInterface;
-    private _urlLogo: string;
-    private _dataSistema: string;
-    private _urlLogoSistema: LogoInterface;
-    private _itensMenu: Array<Menu>;
+    public sistema: Array<SystemInterface>;
+    public usuario: UserInterface;
+    public urlApi: string;
+    public subDomain: string;
+    public urlLogo: string;
+    public dataSistema: string;
+    public urlLogoSistema: LogoInterface;
+    public itensMenu: Array<Menu>;
 
     constructor(
         private alertService: AlertService,
@@ -50,10 +51,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         private loadingGlobal: LoadingGlobalService,
         private router: Router
     ) {
-        this._urlLogoSistema = { url: 'assets/images/sigfacil.png', alt: 'string' };
+        this.urlLogoSistema = { url: 'assets/images/sigfacil.png', alt: 'string' };
         this.userKey = StorageEnum.DADOS_USUARIO;
         this.baseHref = RotasEnum.BASE_HREF;
         this.assetsSigfacil = this.envService.assetsSigfacil;
+        this.urlApi = this.urlUtilService.getUrlApiBase();
+        this.subDomain = this.envService.subDomain;
     }
 
     public ngOnInit(): void {
@@ -68,38 +71,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     public ngOnDestroy(): void {
         this.getSystemInfo('').unsubscribe();
         this.logarService().unsubscribe();
-    }
-
-    public get sistema(): Array<SystemInterface> {
-        return this._sistema;
-    }
-
-    public get usuario(): UserInterface {
-        return this._usuario;
-    }
-
-    public get urlLogo(): string {
-        return this._urlLogo;
-    }
-
-    public get urlApi(): string {
-        return this.urlUtilService.getUrlApiBase();
-    }
-
-    public get subDomain(): string {
-        return this.envService.subDomain;
-    }
-
-    public get urlLogoSistema(): LogoInterface {
-        return this._urlLogoSistema;
-    }
-
-    public get dataSistema(): string {
-        return this._dataSistema;
-    }
-
-    public get itensMenu(): Array<Menu> {
-        return this._itensMenu;
     }
 
     public logarService(): Subscription {
@@ -155,13 +126,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 ([system, data, path, itensMenu, manifest]) => {
                     this.externalFiles.loadCss('/fontawesome/css/all.min', this.assetsSigfacil);
                     this.externalFiles.loadCss('/styles/interno/theme', this.assetsSigfacil, manifest.hash);
-                    this._dataSistema = data;
-                    this._sistema = system;
-                    this._urlLogo = path;
-                    this._itensMenu = itensMenu;
+                    this.dataSistema = data;
+                    this.sistema = system;
+                    this.urlLogo = path;
+                    this.itensMenu = itensMenu;
                     setTimeout(() => {
-                        this._usuario = dadosUsuario;
-                        this.validaPermissaoFuncionalidade(this._usuario);
+                        this.usuario = dadosUsuario;
+                        this.validaPermissaoFuncionalidade(this.usuario);
                     }, 500);
                 },
                 (error: any) => {

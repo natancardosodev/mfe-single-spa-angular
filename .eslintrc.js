@@ -9,23 +9,21 @@ module.exports = {
     },
     extends: [
         'eslint:recommended',
-        'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        'plugin:prettier/recommended',
-        'prettier/@typescript-eslint'
+        'prettier'
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
-        project: 'tsconfig.json',
+        tsconfigRootDir: __dirname,
+        project: ['./tsconfig.json'],
+        files: ['*.ts'],
         ecmaVersion: 2020,
         sourceType: 'module',
         warnOnUnsupportedTypeScriptVersion: false,
-        extraFileExtensions: ['html', 'scss']
+        extraFileExtensions: ['.html', '.scss', '.json']
     },
-    plugins: ['@typescript-eslint', 'prettier'],
+    plugins: ['@typescript-eslint'],
     rules: {
-        'prettier/prettier': 'error',
         '@typescript-eslint/indent': 'off',
         '@typescript-eslint/prefer-regexp-exec': 'off',
         '@typescript-eslint/restrict-template-expressions': 'off',
@@ -39,8 +37,23 @@ module.exports = {
         '@typescript-eslint/no-var-requires': 'off',
         'no-useless-escape': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',
-        '@typescript-eslint/member-ordering': 'warn',
-        '@typescript-eslint/array-type': ['error', { default: 'generic' }],
+        '@typescript-eslint/member-ordering': ['warn',
+            {
+                "default": {
+                    "memberTypes": [
+                        "signature",
+                        "decorated-field",
+                        "decorated-set",
+                        "field",
+                    ]
+                }
+            }],
+        '@typescript-eslint/array-type': [
+            'error',
+            {
+                default: 'generic'
+            }
+        ],
         '@typescript-eslint/no-unused-vars': ['error'],
         '@typescript-eslint/no-unsafe-call': ['error'],
         '@typescript-eslint/ban-types': [
@@ -74,7 +87,13 @@ module.exports = {
                 ignoreStatic: true
             }
         ],
-        '@typescript-eslint/quotes': ['error', 'single'],
+        '@typescript-eslint/quotes': [
+            'error',
+            'single',
+            {
+                avoidEscape: true
+            }
+        ],
         '@typescript-eslint/semi': ['error', 'always'],
         'no-console': ['error'],
         'no-trailing-spaces': 'error',
