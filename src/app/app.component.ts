@@ -1,24 +1,25 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import * as sha512 from 'js-sha512';
+import { AlertService, LoadingGlobalService } from 'lib-vox-ui';
+import { LogoInterface, Menu, MenuFuncionalidade } from 'lib-vox-ui/lib/core';
 import { Subscription, forkJoin } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
-import * as sha512 from 'js-sha512';
-import { LogoInterface, Menu, MenuFuncionalidade } from 'lib-vox-ui/lib/core';
-import { AlertService, LoadingGlobalService } from 'lib-vox-ui';
 
-import { StorageUtil } from '@core/utils/storage.util';
-import { UrlUtilService } from '@core/services/url-util.service';
-import { UserService } from '@core/services/user.service';
-import { SystemInterface } from '@core/interfaces/interno/system-interface';
-import { UserInterface } from '@core/interfaces/interno/user-interface';
-import { StorageEnum } from '@core/enums/sistema/storage.enum';
 import { FuncionalidadeEnum } from '@core/enums/interno/funcionalidade.enum';
 import { RotasEnum } from '@core/enums/interno/rotas.enum';
-import { ExternalFilesService } from '@core/services/external-files.service';
-import { EnvService } from '@core/services/env.service';
-import { delay, isNullOrUndefined } from '@core/utils/generals.util';
+import { StorageEnum } from '@core/enums/sistema/storage.enum';
+import { SystemInterface } from '@core/interfaces/interno/system-interface';
+import { UserInterface } from '@core/interfaces/interno/user-interface';
 import { AssetsService } from '@core/services/assets.service';
+import { EnvService } from '@core/services/env.service';
+import { ExternalFilesService } from '@core/services/external-files.service';
+import { UrlUtilService } from '@core/services/url-util.service';
+import { UserService } from '@core/services/user.service';
+import { isNullOrUndefined } from '@core/utils/generals.util';
+import { StorageUtil } from '@core/utils/storage.util';
+import { delay } from 'lib-vox-shared-codes';
 
 @Component({
     selector: 'app-root',
@@ -60,6 +61,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public ngOnInit(): void {
+        this.loadTheme();
         this.logarService();
         this.loadingFuncionalidadesDoProjeto();
     }
@@ -69,6 +71,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
+        this.loadTheme().unsubscribe();
         this.getSystemInfo('').unsubscribe();
         this.logarService().unsubscribe();
     }
@@ -104,36 +107,41 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
-    private getSystemInfo(dadosUsuario): Subscription {
-        return forkJoin([
-            this.userService.getSystem(),
-            this.userService.getTime(),
-            this.userService.getPathLogo(),
-            this.userService.getModulos(),
-            this.assetsService.getManifest()
-        ])
+    private loadTheme(): Subscription {
+        return this.assetsService
+            .getManifest()
             .pipe(
                 finalize(
                     () =>
                         void (async () => {
-                            await delay(1000);
+                            await delay(500);
                             this.loadingGlobal.hide();
                         })()
                 ),
                 take(1)
             )
+            .subscribe((manifest) => {
+                this.externalFiles.loadCss('/fontawesome/css/all.min', this.assetsSigfacil);
+                this.externalFiles.loadCss('/styles/interno/theme', this.assetsSigfacil, manifest.hash);
+            });
+    }
+
+    private getSystemInfo(dadosUsuario): Subscription {
+        return forkJoin([
+            this.userService.getSystem(),
+            this.userService.getTime(),
+            this.userService.getPathLogo(),
+            this.userService.getModulos()
+        ])
+            .pipe(take(1))
             .subscribe(
-                ([system, data, path, itensMenu, manifest]) => {
-                    this.externalFiles.loadCss('/fontawesome/css/all.min', this.assetsSigfacil);
-                    this.externalFiles.loadCss('/styles/interno/theme', this.assetsSigfacil, manifest.hash);
+                ([system, data, path, itensMenu]) => {
                     this.dataSistema = data;
                     this.sistema = system;
                     this.urlLogo = path;
                     this.itensMenu = itensMenu;
-                    setTimeout(() => {
-                        this.usuario = dadosUsuario;
-                        this.validaPermissaoFuncionalidade(this.usuario);
-                    }, 500);
+                    this.usuario = dadosUsuario;
+                    this.validaPermissaoFuncionalidade(this.usuario);
                 },
                 (error: any) => {
                     if (!error.naoAutorizado) {
