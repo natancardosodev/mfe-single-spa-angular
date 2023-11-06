@@ -1,13 +1,1 @@
-<app-pesquisa-form [loading]="loading" (dataForm)="formDataValue($event)"></app-pesquisa-form>
-
-<vox-grid
-    *ngIf="gridView"
-    conteudo="processos"
-    [columnDefs]="colunasGrid"
-    [columnMoving]="true"
-    [mainDataSource]="dadosGrid"
-    [paginationModified]="true"
-    [pageConfig]="pageConfig"
-    (rowClicked)="onRowClicked($event)"
->
-</vox-grid>
+<router-outlet></router-outlet>

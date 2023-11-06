@@ -1,24 +1,24 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VisualizarProcessoComponent } from "./visualizar-processo.component";
+import { VisualizarProcessoComponent } from './visualizar-processo.component';
 
-describe("VisualizarProcessoComponent", () => {
-  let component: VisualizarProcessoComponent;
-  let fixture: ComponentFixture<VisualizarProcessoComponent>;
+describe('VisualizarProcessoComponent', () => {
+    let component: VisualizarProcessoComponent;
+    let fixture: ComponentFixture<VisualizarProcessoComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [VisualizarProcessoComponent],
-    }).compileComponents();
-  }));
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [VisualizarProcessoComponent]
+        }).compileComponents();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(VisualizarProcessoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(VisualizarProcessoComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
