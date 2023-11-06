@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { RotasEnum } from './core/enums/interno/rotas.enum';
 
@@ -11,7 +11,7 @@ const appRoutes: Routes = [
                 (m) => m.VisualizarProcessoModule
             )
     },
-    { path: '', redirectTo: RotasEnum.VISUALIZARPROCESSO, pathMatch: 'full' },
+    // { path: '', redirectTo: RotasEnum.VISUALIZARPROCESSO, pathMatch: 'full' },
     {
         path: '**',
         loadChildren: () =>

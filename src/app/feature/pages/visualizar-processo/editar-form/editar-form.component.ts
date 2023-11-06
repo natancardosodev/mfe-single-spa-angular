@@ -1,28 +1,28 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { AlertService } from 'lib-vox-ui';
 import { BehaviorSubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { AlertService } from 'lib-vox-ui';
 
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
+import { MensagensEnum } from '@core/enums/sistema/mensagens.enum';
+import { FormFieldProdutor, FormLabelProdutor } from '@core/enums/visualizar-processo/form-produtor.enum';
+import { GatewayReceitaInterface } from '@core/interfaces/jarvis/gateway-receita.interface';
+import { DadosInterface } from '@core/interfaces/sistema/dados.interface';
 import {
     AnexoInterface,
     AtividadeInterface,
     DadosInscricaoInterface,
     DocumentoOrgaoInterface
 } from '@core/interfaces/visualizar-processo/dados-inscricao.interface';
-import { DadosInterface } from '@core/interfaces/sistema/dados.interface';
 import { CommonService } from '@core/services/common.service';
-import { SolicitacaoService } from '@feature/services/solicitacao.service';
-import { RotasEnum } from '@core/enums/interno/rotas.enum';
+import { clearMask, delay, navigate } from '@core/utils/generals.util';
 import { JarvisService } from '@feature/services/jarvis.service';
-import { GatewayReceitaInterface } from '@core/interfaces/jarvis/gateway-receita.interface';
-import { MensagensEnum } from '@core/enums/sistema/mensagens.enum';
-import { delay, navigate, clearMask } from '@core/utils/generals.util';
-import { FormFieldProdutor, FormLabelProdutor } from '@core/enums/visualizar-processo/form-produtor.enum';
+import { SolicitacaoService } from '@feature/services/solicitacao.service';
 import { ProdutorForm } from './produtor.form';
 
 @Component({
@@ -170,7 +170,7 @@ export class EditarFormComponent implements OnInit {
     }
 
     public voltar(): void {
-        navigate(this.router, RotasEnum.VISUALIZARPROCESSO, this._solicitacaoId);
+        navigate(this.router, RotasEnum.VISUALIZARPROCESSO_VISUALIZAR, this._solicitacaoId);
     }
 
     private setOptions(): void {
