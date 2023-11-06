@@ -22,7 +22,13 @@
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
-                        "allowedCommonJsDependencies": ["util", "ag-grid-angular", "js-sha512", "core-js-pure"],
+                        "allowedCommonJsDependencies": [
+                            "util",
+                            "ag-grid-angular",
+                            "crypto-js",
+                            "js-sha512",
+                            "core-js-pure"
+                        ],
                         "baseHref": "/skeleton/interno/",
                         "assets": ["src/favicon.ico", "src/assets"],
                         "styles": ["src/styles.scss"],
