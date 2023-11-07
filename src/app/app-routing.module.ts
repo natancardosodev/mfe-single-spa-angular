@@ -11,7 +11,6 @@ const appRoutes: Routes = [
                 (m) => m.VisualizarProcessoModule
             )
     },
-    // { path: '', redirectTo: RotasEnum.VISUALIZARPROCESSO, pathMatch: 'full' },
     {
         path: '**',
         loadChildren: () =>
