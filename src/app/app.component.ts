@@ -10,7 +10,6 @@ import { finalize, take } from 'rxjs/operators';
 import { FuncionalidadeEnum } from '@core/enums/interno/funcionalidade.enum';
 import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { StorageEnum } from '@core/enums/sistema/storage.enum';
-import { SystemInterface } from '@core/interfaces/interno/system-interface';
 import { UserInterface } from '@core/interfaces/interno/user-interface';
 import { AssetsService } from '@core/services/assets.service';
 import { EnvService } from '@core/services/env.service';
@@ -27,20 +26,19 @@ import { delay } from 'lib-vox-shared-codes';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-    public funcionalidadeAtual: MenuFuncionalidade;
     public funcionalidadesDoProjeto: Array<number> = [];
-    public assetsSigfacil: string;
-    public userKey: string;
+    public funcionalidadeAtual: MenuFuncionalidade;
     public baseHref: string;
-    public tipoModulo: string;
-    public sistema: Array<SystemInterface>;
-    public usuario: UserInterface;
+    public userKey: string;
+    public assetsSigfacil: string;
+    public itensMenu: Array<Menu>;
+    public sistema: Array<Record<string, string>>;
+    public usuario: Record<string, string>;
+    public urlLogo: LogoInterface;
     public urlApi: string;
     public subDomain: string;
-    public urlLogo: string;
-    public dataSistema: string;
+    public dataSistema: { hour: string; minute: string };
     public urlLogoSistema: LogoInterface;
-    public itensMenu: Array<Menu>;
 
     constructor(
         private alertService: AlertService,
@@ -110,16 +108,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private loadTheme(): Subscription {
         return this.assetsService
             .getManifest()
-            .pipe(
-                finalize(
-                    () =>
-                        void (async () => {
-                            await delay(500);
-                            this.loadingGlobal.hide();
-                        })()
-                ),
-                take(1)
-            )
+            .pipe(take(1))
             .subscribe((manifest) => {
                 this.externalFiles.loadCss('/fontawesome/css/all.min', this.assetsSigfacil);
                 this.externalFiles.loadCss('/styles/interno/theme', this.assetsSigfacil, manifest.hash);
@@ -133,15 +122,24 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.userService.getPathLogo(),
             this.userService.getModulos()
         ])
-            .pipe(take(1))
+            .pipe(
+                finalize(
+                    () =>
+                        void (async () => {
+                            await delay(500);
+                            this.loadingGlobal.hide();
+                        })()
+                ),
+                take(1)
+            )
             .subscribe(
                 ([system, data, path, itensMenu]) => {
-                    this.dataSistema = data;
-                    this.sistema = system;
+                    this.dataSistema = data as unknown as { hour: string; minute: string };
+                    this.sistema = system as any;
                     this.urlLogo = path;
                     this.itensMenu = itensMenu;
                     this.usuario = dadosUsuario;
-                    this.validaPermissaoFuncionalidade(this.usuario);
+                    this.validaPermissaoFuncionalidade(this.usuario as any);
                 },
                 (error: any) => {
                     if (!error.naoAutorizado) {
