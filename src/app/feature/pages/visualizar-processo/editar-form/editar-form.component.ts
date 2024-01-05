@@ -20,9 +20,10 @@ import {
     DocumentoOrgaoInterface
 } from '@core/interfaces/visualizar-processo/dados-inscricao.interface';
 import { CommonService } from '@core/services/common.service';
-import { clearMask, delay, navigate } from '@core/utils/generals.util';
+import { navigate } from '@core/utils/generals.util';
 import { JarvisService } from '@feature/services/jarvis.service';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
+import { clearMask, delay } from 'lib-vox-shared-codes';
 import { ProdutorForm } from './produtor.form';
 
 @Component({

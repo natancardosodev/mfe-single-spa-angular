@@ -1,19 +1,18 @@
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { LibVoxUiModule } from 'lib-vox-ui';
 import * as Sentry from '@sentry/angular-ivy';
+import { LibVoxUiModule } from 'lib-vox-ui';
 
-import { GlobalErrorHandler } from '@core/interceptor/global-error-handler';
-import { SharedModule } from '@shared/shared.module';
 import { AuthInterceptor } from '@core/interceptor/auth.interceptor';
+import { GlobalErrorHandler } from '@core/interceptor/global-error-handler';
 import { JarvisInterceptor } from '@core/interceptor/jarvis.interceptor';
 import { CommonService } from '@core/services/common.service';
 import { UserService } from '@core/services/user.service';
+import { SharedModule } from '@shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -24,7 +23,6 @@ import { AppComponent } from './app.component';
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        ModalModule.forRoot(),
         SharedModule,
         LibVoxUiModule.forRoot({ theme: 'interno' })
     ],

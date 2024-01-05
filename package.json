@@ -1,6 +1,6 @@
 {
     "name": "skeleton-internal-front",
-    "version": "2.0.0",
+    "version": "1.0.0",
     "scripts": {
         "test": "./node_modules/.bin/ng test",
         "e2e": "./node_modules/.bin/ng e2e",
@@ -55,22 +55,17 @@
         "@brazilian-utils/is-valid-cpf": "^1.0.0-alpha.3",
         "@sentry/angular-ivy": "^7.72.0",
         "@types/node": "^12.20.54",
-        "@types/crypto-js": "^4.1.2",
-        "crypto-js": "^4.1.1",
         "ag-grid": "^16.0.1",
         "ag-grid-angular": "^16.0.0",
-        "grid": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-grid.git#1.7.1",
         "js-sha512": "^0.8.0",
-        "lib-vox-shared-codes": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-shared-codes.git#1.2.1",
-        "lib-vox-ui": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-ui.git#3.25.6",
+        "grid": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-grid.git#1.7.1",
+        "lib-vox-shared-codes": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-shared-codes.git#1.2.4",
+        "lib-vox-ui": "git+ssh://git@gitlab.voxtecnologia.com.br/vox/bibliotecas/front-end/lib-vox-ui.git#3.26.9",
         "ngx-mask": "^12.0.0",
-        "ngx-bootstrap": "^5.6.2",
-        "ngx-currency": "^2.5.3",
         "ngx-skeleton-loader": "^4.0.0",
         "rxjs": "^6.5.3",
         "check-node-version": "^4.2.1",
         "husky": "^8.0.0",
-        "tslib": "^2.0.0",
         "zone.js": "~0.11.4"
     },
     "devDependencies": {

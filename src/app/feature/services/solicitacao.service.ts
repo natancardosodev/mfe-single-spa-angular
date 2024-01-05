@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
 import { AlertService } from 'lib-vox-ui';
+import { Observable } from 'rxjs';
 
-import { UrlUtilService } from '@core/services/url-util.service';
-import { BaseService } from '@core/services/base.service';
 import { DadosInscricaoInterface } from '@core/interfaces/visualizar-processo/dados-inscricao.interface';
-import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
+import { BaseService } from '@core/services/base.service';
+import { UrlUtilService } from '@core/services/url-util.service';
+import { TiposApisEnum } from 'lib-vox-shared-codes';
 
 @Injectable({
     providedIn: 'root'

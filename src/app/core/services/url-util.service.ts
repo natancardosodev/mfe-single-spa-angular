@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RotasEnum } from '@core/enums/interno/rotas.enum';
-import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
-import { generateObjectToQueryString, isNullOrUndefined } from '@core/utils/generals.util';
 
+import { TiposApisEnum, generateObjectToQueryString, urlPortalHttps } from 'lib-vox-shared-codes';
 import { EnvService } from './env.service';
 
 @Injectable({
@@ -19,12 +18,8 @@ export class UrlUtilService {
         return `${this.env.projeto}${rota}`;
     }
 
-    public getUrlBase(env: string, uf: string): string {
-        return `${env}.${uf}`;
-    }
-
     public getUrlSigfacil(isInterno = false): string {
-        return `https://${window.location.host}${isInterno ? '/sigfacil/' : ''}`;
+        return `${urlPortalHttps}${isInterno ? '/sigfacil/' : ''}`;
     }
 
     public montarUrlApi(
@@ -32,13 +27,12 @@ export class UrlUtilService {
         parameters?: Record<string, string>,
         tiposApisExtras?: TiposApisEnum
     ): string {
-        const urlPortalHttps = `https://${window.location.host}`;
         const queryString = parameters ? generateObjectToQueryString(parameters) : '';
         let baseUrl = '';
 
         switch (tiposApisExtras) {
             case TiposApisEnum.SERVICE_API:
-                baseUrl = this.env.api;
+                baseUrl = this.getUrlApiBase();
                 break;
             case TiposApisEnum.ASSETS_SIGFACIL:
                 baseUrl = this.env.assetsSigfacil;
@@ -82,19 +76,5 @@ export class UrlUtilService {
     public redirectToLogout(): string {
         const urlAtual = window.location.href;
         return `${this.getUrlApiBase()}/redirect/logout?url=${this.getUrlApiBase()}logout?url=${urlAtual}`;
-    }
-
-    public montarUrlArray(resource: string, parameters: Record<string, Array<string>>): string {
-        const arrayParametros = Object.keys(parameters).map((property: string) => {
-            if (!isNullOrUndefined(parameters[property])) {
-                const resp: string = property.match('\\[]')
-                    ? parameters[property].map((value) => `${property}=${value}`).join('&')
-                    : `${property}=${parameters[property]}`;
-                return resp;
-            }
-        });
-        const queryString = `?${arrayParametros.join('&')}`;
-
-        return this.getUrlApiBase() + resource + queryString;
     }
 }

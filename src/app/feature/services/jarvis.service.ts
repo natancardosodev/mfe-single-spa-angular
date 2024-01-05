@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
 import { AlertService } from 'lib-vox-ui';
+import { Observable } from 'rxjs';
 
-import { UrlUtilService } from '@core/services/url-util.service';
-import { BaseService } from '@core/services/base.service';
-import { UserInterface } from '@core/interfaces/interno/user-interface';
-import { StorageUtil } from '@core/utils/storage.util';
 import { StorageEnum } from '@core/enums/sistema/storage.enum';
-import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
+import { UserInterface } from '@core/interfaces/interno/user-interface';
+import { BaseService } from '@core/services/base.service';
+import { UrlUtilService } from '@core/services/url-util.service';
+import { StorageUtil } from '@core/utils/storage.util';
+import { TiposApisEnum } from 'lib-vox-shared-codes';
 
 @Injectable({
     providedIn: 'root'

@@ -1,30 +1,29 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalComponent } from 'lib-vox-ui';
 import { take } from 'rxjs/operators';
 
-import { ModalIndeferirComponent } from '@core/components/modal-indeferir/modal-indeferir.component';
 import { CardObservacaoComponent } from '@core/components/card-observacao/card-observacao.component';
-import { UserService } from '@core/services/user.service';
+import { ModalIndeferirComponent } from '@core/components/modal-indeferir/modal-indeferir.component';
 import { FuncionalidadeEnum } from '@core/enums/interno/funcionalidade.enum';
 import { RotasEnum } from '@core/enums/interno/rotas.enum';
-import { navigate } from '@core/utils/generals.util';
 import { UserPermissoes } from '@core/interfaces/interno/user-interface';
+import { ComponentBase } from '@core/models/component-base';
+import { UserService } from '@core/services/user.service';
+import { navigate } from '@core/utils/generals.util';
 
 @Component({
     selector: 'app-visualizar-pesquisa',
     templateUrl: './visualizar-pesquisa.component.html',
     styleUrls: ['./visualizar-pesquisa.component.scss']
 })
-export class VisualizarPesquisaComponent implements OnInit {
+export class VisualizarPesquisaComponent extends ComponentBase implements OnInit {
     @ViewChild(CardObservacaoComponent) observacao: CardObservacaoComponent;
     @ViewChild(ModalIndeferirComponent) modalIndeferir: ModalIndeferirComponent;
     @ViewChild('modalDeferir') modalDeferir: ModalComponent;
     public isLoading: boolean;
-    public modalRef: BsModalRef;
     public solicitacao: number;
     public isStatusExigencia: boolean;
 
@@ -32,9 +31,9 @@ export class VisualizarPesquisaComponent implements OnInit {
         private titleService: Title,
         private router: Router,
         private route: ActivatedRoute,
-        private userService: UserService,
-        private modalService: BsModalService
+        private userService: UserService
     ) {
+        super();
         this.isLoading = false;
         this.isStatusExigencia = false;
         this.route.params.pipe(take(1)).subscribe((params) => {
@@ -57,17 +56,6 @@ export class VisualizarPesquisaComponent implements OnInit {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public statusAtualProcesso(status: number): void {}
 
-    public openModal(modal: ElementRef): void {
-        this.isLoading = false;
-        this.modalRef = this.modalService.show(modal);
-    }
-
-    public closeModal(): void {
-        if (this.modalRef) {
-            this.modalRef.hide();
-        }
-    }
-
     public openModalDeferir(): void {
         this.modalDeferir.openModal();
     }
@@ -78,7 +66,7 @@ export class VisualizarPesquisaComponent implements OnInit {
     }
 
     public openModalIndeferir(): void {
-        this.modalIndeferir.openModal();
+        this.modalIndeferir.openModal({ modalName: 'modalIndeferir' });
     }
 
     public finalizandoProcesso(success: boolean): void {

@@ -1,12 +1,9 @@
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { catchError, take } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { TiposApisEnum, cleanParams } from 'lib-vox-shared-codes';
+import { AlertService, catchErrorApi, throwErrorAPI } from 'lib-vox-ui';
+import { HttpOptions } from 'lib-vox-ui/lib/core';
 import { Observable } from 'rxjs';
-
-import { AlertService } from 'lib-vox-ui';
-
-import { HttpOptions } from '@core/interfaces/sistema/http-options';
-import { catchErrorApi, cleanParams, throwErrorAPI } from '@core/utils/generals.util';
-import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
+import { catchError, take } from 'rxjs/operators';
 import { UrlUtilService } from './url-util.service';
 
 export abstract class BaseService {
@@ -64,7 +61,11 @@ export abstract class BaseService {
     ): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'get', params, null, tipoApi, customOptions).pipe(
             take(1),
-            catchError((erro: HttpErrorResponse) => this.tratarErro(erro, isHideAlert, url))
+            catchError((erro: HttpErrorResponse) => {
+                this.showMessageError(catchErrorApi(erro, isHideAlert), null, null, isHideAlert);
+
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
+            })
         );
     };
 
@@ -77,7 +78,11 @@ export abstract class BaseService {
     ): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'post', null, body, tipoApi, customOptions).pipe(
             take(1),
-            catchError((erro: HttpErrorResponse) => this.tratarErro(erro, isHideAlert, url))
+            catchError((erro: HttpErrorResponse) => {
+                this.showMessageError(catchErrorApi(erro, isHideAlert), null, null, isHideAlert);
+
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
+            })
         );
     };
 
@@ -88,9 +93,13 @@ export abstract class BaseService {
         isHideAlert?: boolean,
         customOptions?: HttpOptions
     ): Observable<any> => {
-        return this.sendRequest(this.getUrl(url, tipoApi), 'get' /* 'put' */, null, body, tipoApi, customOptions).pipe(
+        return this.sendRequest(this.getUrl(url, tipoApi), 'put', null, body, tipoApi, customOptions).pipe(
             take(1),
-            catchError((erro: HttpErrorResponse) => this.tratarErro(erro, isHideAlert, url))
+            catchError((erro: HttpErrorResponse) => {
+                this.showMessageError(catchErrorApi(erro, isHideAlert), null, null, isHideAlert);
+
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
+            })
         );
     };
 
@@ -103,7 +112,11 @@ export abstract class BaseService {
     ): Observable<any> => {
         return this.sendRequest(this.getUrl(url, tipoApi), 'delete', params, null, tipoApi, customOptions).pipe(
             take(1),
-            catchError((erro: HttpErrorResponse) => this.tratarErro(erro, isHideAlert, url))
+            catchError((erro: HttpErrorResponse) => {
+                this.showMessageError(catchErrorApi(erro, isHideAlert), null, null, isHideAlert);
+
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
+            })
         );
     };
 
@@ -115,7 +128,11 @@ export abstract class BaseService {
         };
         return this.http.request('post', this.getUrl(url, tipoApi), options).pipe(
             take(1),
-            catchError((erro: HttpErrorResponse) => this.tratarErro(erro, isHideAlert, url))
+            catchError((erro: HttpErrorResponse) => {
+                this.showMessageError(catchErrorApi(erro, isHideAlert), null, null, isHideAlert);
+
+                return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
+            })
         );
     };
 
@@ -132,7 +149,8 @@ export abstract class BaseService {
                 this.showMessageError(
                     erro.error.message ? erro.error.message : erro.message,
                     erro.status,
-                    this.options.responseType
+                    this.options.responseType,
+                    isHideAlert
                 );
 
                 return isHideAlert ? throwErrorAPI(erro.error) : throwErrorAPI();
@@ -157,7 +175,9 @@ export abstract class BaseService {
         this.options['body'] = body;
         this.options['observe'] = tipoApi === TiposApisEnum.JARVIS ? 'response' : 'body';
 
-        return this.http.request(type, url, this.options);
+        const method = tipoApi === TiposApisEnum.STATIC ? 'get' : type;
+
+        return this.http.request(method, url, this.options);
     };
 
     public getUrl(url: string, tipoApi?: TiposApisEnum): string {
@@ -166,9 +186,20 @@ export abstract class BaseService {
         return this.urlUtilService.montarUrlApi(concatUrl, null, tipoApi);
     }
 
-    public showMessageError(msg: Record<string, any> | Array<any> | any, status?: number, responseType?: string): void {
+    public showMessageError(
+        msg: Record<string, any> | Array<any> | any,
+        status?: number,
+        responseType?: string,
+        isHideAlert = false
+    ): void {
         let msgErr = null;
         const msgDefault = 'Ocorreu um erro na requisição';
+
+        if (isHideAlert) return;
+
+        if (!msgErr && JSON.stringify(msg).toString().includes('message')) {
+            msgErr = { message: `<strong> Erro: ${msg.message} </strong>` };
+        }
 
         if (!msgErr && JSON.stringify(msg).toString().includes('ds_retorno')) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call
@@ -180,10 +211,12 @@ export abstract class BaseService {
 
         if (!msgErr && JSON.stringify(msg).toString().includes('[{')) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-            const arrayMessageVox = msg.error.map((err: Record<string, string>) => {
-                return { message: `<strong> Erro ${err['code']}: ${err['message']} </strong>` };
+            const arrayMessageVox = msg.map((err: Record<string, string>) => {
+                return {
+                    message: `<strong> Erro ${err['cod_erro' || 'code']}: ${err['ds_erro' || 'message']} </strong>`
+                };
             });
-            msgErr = { message: arrayMessageVox[0].message };
+            msgErr = { messagesMultiple: arrayMessageVox };
         }
 
         if (!msgErr && JSON.stringify(msg).toString().includes('{}')) {
@@ -194,10 +227,6 @@ export abstract class BaseService {
             msgErr = { message: 'Arquivo não encontrado' };
         }
 
-        if (!msgErr && JSON.stringify(msg).toString().includes('message')) {
-            msgErr = { message: `<strong> Erro: ${msg.message} </strong>` };
-        }
-
         if (!msgErr) {
             msgErr = { message: msgDefault };
         }
@@ -205,22 +234,11 @@ export abstract class BaseService {
         const args = Object.assign(
             {
                 title: 'Atenção',
-                style: 'danger',
-                isToast: false
+                style: 'danger'
             },
             msgErr
         );
 
         void this.alertService.openModal(args);
-    }
-
-    private tratarErro(erro: HttpErrorResponse, isHideAlert: boolean, url: string): Observable<never> {
-        if (isHideAlert) {
-            return throwErrorAPI(erro.error);
-        }
-
-        this.showMessageError(catchErrorApi(erro, isHideAlert));
-
-        return throwErrorAPI(null, url);
     }
 }
