@@ -3,11 +3,11 @@ import { EnvironmentInterface } from '@core/interfaces/sistema/enviroment-interf
 export const environment: EnvironmentInterface = {
     production: true,
     uri: {
-        api: 'https://homologacao-nova-funcionalidade-internal-service.voxtecnologia.com.br',
-        oauth: 'https://homologacao.voxtecnologia.com.br',
+        api: 'https://homologacao-legacy.{DOMINIO_REDESIM}/api/internal/skeleton',
+        oauth: 'https://homologacao-autenticacao.{DOMINIO_REDESIM}',
         assetsSigfacil: 'https://homologacao-sigfacil.staticvox.com.br',
-        jarvis: 'https://homologacao-jarvis.voxtecnologia.com.br',
-        projeto: 'https://homologacao.voxtecnologia.com.br/sigfacil/nova-funcionalidade/',
+        jarvis: 'https://homologacao-legacy.{DOMINIO_REDESIM}/api/jarvis',
+        projeto: 'https://interno.{DOMINIO_REDESIM}/sigfacil/skeleton',
         environments: 'https://homologacao',
         subDomain: 'homologacao'
     }

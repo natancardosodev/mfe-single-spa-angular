@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { buildDomainRedesim } from 'lib-vox-shared-codes';
 
 import { environment } from 'src/environments/environment';
 
@@ -7,30 +8,30 @@ import { environment } from 'src/environments/environment';
 })
 export class EnvService {
     public get api(): string {
-        return environment.uri.api;
+        return buildDomainRedesim(environment.uri.api);
     }
 
     public get projeto(): string {
-        return environment.uri.projeto;
+        return buildDomainRedesim(environment.uri.projeto);
     }
 
     public get jarvis(): string {
-        return environment.uri.jarvis;
+        return buildDomainRedesim(environment.uri.jarvis);
     }
 
     public get oauth(): string {
-        return environment.uri.oauth;
+        return buildDomainRedesim(environment.uri.oauth);
     }
 
     public get assetsSigfacil(): string {
-        return environment.uri.assetsSigfacil;
+        return buildDomainRedesim(environment.uri.assetsSigfacil);
     }
 
     public get enviromment(): string {
-        return environment.uri.environments;
+        return buildDomainRedesim(environment.uri.environments);
     }
 
     public get subDomain(): string {
-        return environment.uri.subDomain;
+        return buildDomainRedesim(environment.uri.subDomain);
     }
 }

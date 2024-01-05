@@ -3,11 +3,11 @@ import { EnvironmentInterface } from '@core/interfaces/sistema/enviroment-interf
 export const environment: EnvironmentInterface = {
     production: true,
     uri: {
-        api: 'https://demo-nova-funcionalidade-internal-service.voxtecnologia.com.br',
-        oauth: 'https://demo.voxtecnologia.com.br',
+        api: 'https://demo-legacy.{DOMINIO_REDESIM}/api/internal/skeleton',
+        oauth: 'https://demo-autenticacao.{DOMINIO_REDESIM}',
         assetsSigfacil: 'https://demo-sigfacil.staticvox.com.br',
-        jarvis: 'https://demo-jarvis.voxtecnologia.com.br',
-        projeto: 'https://demo.voxtecnologia.com.br/sigfacil/nova-funcionalidade/',
+        jarvis: 'https://demo-legacy.{DOMINIO_REDESIM}/api/jarvis',
+        projeto: 'https://interno.{DOMINIO_REDESIM}/sigfacil/skeleton',
         environments: 'https://demo',
         subDomain: 'demo'
     }
