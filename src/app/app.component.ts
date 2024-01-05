@@ -16,9 +16,8 @@ import { EnvService } from '@core/services/env.service';
 import { ExternalFilesService } from '@core/services/external-files.service';
 import { UrlUtilService } from '@core/services/url-util.service';
 import { UserService } from '@core/services/user.service';
-import { isNullOrUndefined } from '@core/utils/generals.util';
 import { StorageUtil } from '@core/utils/storage.util';
-import { delay } from 'lib-vox-shared-codes';
+import { delay, isNullOrUndefined } from 'lib-vox-shared-codes';
 
 @Component({
     selector: 'app-root',

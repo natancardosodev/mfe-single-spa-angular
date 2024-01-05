@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+import { TiposApisEnum } from 'lib-vox-shared-codes';
+import { AlertService } from 'lib-vox-ui';
 import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
-import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 import { UrlUtilService } from './url-util.service';
-import { AlertService } from 'lib-vox-ui';
 
 @Injectable({
     providedIn: 'root'

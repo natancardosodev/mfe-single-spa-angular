@@ -1,9 +1,7 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { finalize, take } from 'rxjs/operators';
-import { BsModalRef } from 'ngx-bootstrap/modal';
 
-import { ModalComponent } from 'lib-vox-ui';
+import { ComponentBase } from '@core/models/component-base';
 import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
 import { IndeferirForm } from './indeferir.form';
 
@@ -12,15 +10,14 @@ import { IndeferirForm } from './indeferir.form';
     templateUrl: './modal-indeferir.component.html',
     styleUrls: ['./modal-indeferir.component.scss']
 })
-export class ModalIndeferirComponent implements OnInit {
+export class ModalIndeferirComponent extends ComponentBase implements OnInit {
     @Input() public solicitacao: number;
-    @ViewChild('modal') modal: ModalComponent;
     @Output() public finalizandoIndeferir: EventEmitter<any>;
     public loading: boolean;
-    public modalRef: BsModalRef;
     private _indeferirForm: IndeferirForm;
 
     constructor(private solicitacaoService: SolicitacaoService) {
+        super();
         this.loading = true;
         this.finalizandoIndeferir = new EventEmitter();
         this._indeferirForm = new IndeferirForm();
@@ -56,16 +53,5 @@ export class ModalIndeferirComponent implements OnInit {
                     }
                 );
         }
-    }
-
-    public openModal(): void {
-        this.modal.openModal();
-    }
-    public closeModal(): void {
-        this.modal.close();
-    }
-
-    public isFieldValid(form: FormGroup, field: string): boolean {
-        return !form.get(field).valid && form.get(field).dirty;
     }
 }

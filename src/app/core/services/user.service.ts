@@ -1,22 +1,21 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { catchError, map } from 'rxjs/operators';
-import { Observable, of, Subject } from 'rxjs';
 import { Menu } from 'lib-vox-ui/lib/core';
+import { Observable, Subject, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
-import { AlertService } from 'lib-vox-ui';
+import { AlertService, tratarErroLogin } from 'lib-vox-ui';
 
-import { tratarErroLogin } from '@core/utils/generals.util';
-import { UserInterface, UserPermissoes } from '@core/interfaces/interno/user-interface';
-import { SystemInterface } from '@core/interfaces/interno/system-interface';
-import { StorageUtil } from '@core/utils/storage.util';
 import { StorageEnum } from '@core/enums/sistema/storage.enum';
-import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
+import { SystemInterface } from '@core/interfaces/interno/system-interface';
+import { UserInterface, UserPermissoes } from '@core/interfaces/interno/user-interface';
+import { StorageUtil } from '@core/utils/storage.util';
 
-import { UrlUtilService } from './url-util.service';
-import { HoraMocky } from './hora-mocky';
+import { TiposApisEnum } from 'lib-vox-shared-codes';
 import { BaseService } from './base.service';
+import { HoraMocky } from './hora-mocky';
+import { UrlUtilService } from './url-util.service';
 
 @Injectable({
     providedIn: 'root'

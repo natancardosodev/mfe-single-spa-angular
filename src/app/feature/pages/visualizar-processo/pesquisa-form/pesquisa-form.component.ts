@@ -1,13 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { BehaviorSubject } from 'rxjs';
 import { AlertService } from 'lib-vox-ui';
+import { BehaviorSubject } from 'rxjs';
 
-import { ParametrosPesquisaInterface } from '@core/interfaces/visualizar-processo/pesquisa.interface';
-import { isEmpty } from '@core/utils/generals.util';
 import { FormFieldGridPesquisa, FormLabelGridPesquisa } from '@core/enums/visualizar-processo/form-grid-pesquisa.enum';
+import { ParametrosPesquisaInterface } from '@core/interfaces/visualizar-processo/pesquisa.interface';
+import { ComponentBase } from '@core/models/component-base';
+import { isEmpty } from 'lib-vox-shared-codes';
 import { PesquisaForm } from './pesquisa.form';
 
 @Component({
@@ -15,7 +15,7 @@ import { PesquisaForm } from './pesquisa.form';
     templateUrl: './pesquisa-form.component.html',
     styleUrls: ['./pesquisa-form.component.scss']
 })
-export class PesquisaFormComponent implements OnInit {
+export class PesquisaFormComponent extends ComponentBase implements OnInit {
     @Input() public loading: boolean;
     @Output() public dataForm: EventEmitter<any>;
     public formFieldGridPesquisa = FormFieldGridPesquisa;
@@ -28,7 +28,11 @@ export class PesquisaFormComponent implements OnInit {
     private _pesquisa: ParametrosPesquisaInterface;
     private _pesquisaForm: PesquisaForm;
 
-    constructor(private titleService: Title, private alertService: AlertService) {
+    constructor(
+        private titleService: Title,
+        private alertService: AlertService
+    ) {
+        super();
         this.dataForm = new EventEmitter();
         this._pesquisaForm = new PesquisaForm();
         this.dateMax = new Date();
@@ -99,10 +103,6 @@ export class PesquisaFormComponent implements OnInit {
             message: 'Informe pelo menos um campo para pesquisa',
             style: 'warning'
         });
-    }
-
-    public isFieldValid(form: FormGroup, field: string): any {
-        return !form.get(field).valid && form.get(field).dirty;
     }
 
     private setDateMin(): void {

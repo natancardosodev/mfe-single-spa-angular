@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { Observable, BehaviorSubject } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { AlertService } from 'lib-vox-ui';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { CommonOptionsEnum } from '@core/enums/sistema/common-options.enum';
 import { DadosInterface, OptionsCommonInterface } from '@core/interfaces/sistema/common.interface';
-import { TiposApisEnum } from '@core/enums/sistema/tipo-apis.enum';
 
 import { StorageEnum } from '@core/enums/sistema/storage.enum';
 import { StorageUtil } from '@core/utils/storage.util';
+import { TiposApisEnum } from 'lib-vox-shared-codes';
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';
 
