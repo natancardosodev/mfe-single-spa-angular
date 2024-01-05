@@ -1,4 +1,5 @@
 import { ModalComponent } from 'lib-vox-ui';
+import { ActionsTableInterface } from 'lib-vox-ui/lib/core';
 
 export abstract class ComponentBase {
     public modalOpened: ModalComponent;
@@ -21,5 +22,14 @@ export abstract class ComponentBase {
 
     public closeModal = (): void => {
         this.modalOpened.close();
+    };
+
+    /**
+     * Para ações em tabela da lib-vox-ui
+     * @param event
+     */
+    public actionsOnTable = (event: ActionsTableInterface): void => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        this[event.action](event.value);
     };
 }
