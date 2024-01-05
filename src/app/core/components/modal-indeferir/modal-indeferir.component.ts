@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { finalize, take } from 'rxjs/operators';
 
 import { ComponentBase } from '@core/models/component-base';
-import { ModalComponent } from 'lib-vox-ui';
 import { SolicitacaoService } from 'src/app/feature/services/solicitacao.service';
 import { IndeferirForm } from './indeferir.form';
 
@@ -14,7 +13,6 @@ import { IndeferirForm } from './indeferir.form';
 export class ModalIndeferirComponent extends ComponentBase implements OnInit {
     @Input() public solicitacao: number;
     @Output() public finalizandoIndeferir: EventEmitter<any>;
-    public modalOpened: ModalComponent;
     public loading: boolean;
     private _indeferirForm: IndeferirForm;
 

@@ -1,4 +1,3 @@
-import { FormGroup } from '@angular/forms';
 import { ModalComponent } from 'lib-vox-ui';
 
 export abstract class ComponentBase {
@@ -7,8 +6,8 @@ export abstract class ComponentBase {
     constructor() {}
 
     /**
-     * ModalRef é para chamar estando o modal no mesmo component
-     * modalName é para chamar estando o modal noutro component
+     * ModalRef é para chamar estando o modal no mesmo component (ts -> html / html -> html)
+     * modalName é para chamar estando o modal vindo de outro component (ts -> ts)
      */
     public openModal = ({ modalRef, modalName }: { modalRef?: ModalComponent; modalName?: string }): void => {
         const modal = this[modalName] as ModalComponent;
@@ -23,8 +22,4 @@ export abstract class ComponentBase {
     public closeModal = (): void => {
         this.modalOpened.close();
     };
-
-    public isFieldValid(form: FormGroup, field: string): boolean {
-        return !form.get(field).valid && form.get(field).dirty;
-    }
 }
