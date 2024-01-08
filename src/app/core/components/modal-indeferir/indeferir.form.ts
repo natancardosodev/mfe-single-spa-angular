@@ -1,12 +1,12 @@
-import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, AbstractControl, Validators } from '@angular/forms';
 
-export class IndeferirForm extends FormGroup {
+export class IndeferirForm extends UntypedFormGroup {
     private _errorMessages = {
         required: 'O campo %s é obrigatório.'
     };
     constructor() {
         super({
-            descricao: new FormControl(null, [Validators.required])
+            descricao: new UntypedFormControl(null, [Validators.required])
         });
     }
 

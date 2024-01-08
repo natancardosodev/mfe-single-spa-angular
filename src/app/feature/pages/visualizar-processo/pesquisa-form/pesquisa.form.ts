@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
 
 import { isValidCpf } from '@brazilian-utils/is-valid-cpf';
 import { StorageEnum } from '@core/enums/sistema/storage.enum';
@@ -8,7 +8,7 @@ import { formatDateBrToEn, formatDateEnToBr } from '@core/utils/date.util';
 import { StorageUtil } from '@core/utils/storage.util';
 import { clearMask } from 'lib-vox-shared-codes';
 
-export class PesquisaForm extends FormGroup {
+export class PesquisaForm extends UntypedFormGroup {
     private _errorMessages = {
         required: 'O campo %s é obrigatório.',
         quantidadeInvalida: 'Quantidade Inválida de dígitos',
@@ -18,12 +18,12 @@ export class PesquisaForm extends FormGroup {
 
     constructor() {
         super({
-            [FormFieldGridPesquisa.protocolo]: new FormControl(null),
-            [FormFieldGridPesquisa.cpf]: new FormControl(null),
-            [FormFieldGridPesquisa.tipo]: new FormControl(null),
-            [FormFieldGridPesquisa.statusProcesso]: new FormControl(null),
-            [FormFieldGridPesquisa.dataInicial]: new FormControl(null),
-            [FormFieldGridPesquisa.dataFinal]: new FormControl(null)
+            [FormFieldGridPesquisa.protocolo]: new UntypedFormControl(null),
+            [FormFieldGridPesquisa.cpf]: new UntypedFormControl(null),
+            [FormFieldGridPesquisa.tipo]: new UntypedFormControl(null),
+            [FormFieldGridPesquisa.statusProcesso]: new UntypedFormControl(null),
+            [FormFieldGridPesquisa.dataInicial]: new UntypedFormControl(null),
+            [FormFieldGridPesquisa.dataFinal]: new UntypedFormControl(null)
         });
 
         this.protocolo.setValidators([PesquisaForm.validaQuantidaDeDigito(13), PesquisaForm.validaUfProtocolo()]);
@@ -31,13 +31,13 @@ export class PesquisaForm extends FormGroup {
         this.cpf.setValidators([PesquisaForm.validaQuantidaDeDigito(11), PesquisaForm.validaCpf()]);
 
         this.dataInicial.setValidators([
-            PesquisaForm.validaPeriodo(new FormControl(new Date()), this.dataInicial, {
+            PesquisaForm.validaPeriodo(new UntypedFormControl(new Date()), this.dataInicial, {
                 // maiorQueDataAtual: true
             })
         ]);
 
         this.dataFinal.setValidators([
-            PesquisaForm.validaPeriodo(new FormControl(new Date()), this.dataFinal, {
+            PesquisaForm.validaPeriodo(new UntypedFormControl(new Date()), this.dataFinal, {
                 // maiorQueDataAtual: true
             })
         ]);

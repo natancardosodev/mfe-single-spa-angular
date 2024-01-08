@@ -1,9 +1,9 @@
-import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, AbstractControl, Validators } from '@angular/forms';
 import { FormFieldProdutor } from '@core/enums/visualizar-processo/form-produtor.enum';
 import { formatDateEnToBr } from '@core/utils/date.util';
 import { DadosInscricaoInterface } from '@core/interfaces/visualizar-processo/dados-inscricao.interface';
 
-export class ProdutorForm extends FormGroup {
+export class ProdutorForm extends UntypedFormGroup {
     private _errorMessages = {
         required: 'O campo %s é obrigatório.',
         email: 'Este e-mail não é válido.',
@@ -12,30 +12,30 @@ export class ProdutorForm extends FormGroup {
 
     constructor() {
         super({
-            [FormFieldProdutor.protocolo]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.no_cpf]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.ds_nome]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.dt_solicitacao]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.co_evento]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.nu_documento]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.ds_orgao_emissor]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.co_uf_emissor]: new FormControl(null),
-            [FormFieldProdutor.co_sexo]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.nacionalidade]: new FormControl(null),
-            [FormFieldProdutor.estado_civil]: new FormControl(null),
-            [FormFieldProdutor.dt_nascimento]: new FormControl(null),
-            [FormFieldProdutor.naturalidade]: new FormControl(null),
-            [FormFieldProdutor.uf_naturalidade]: new FormControl(null),
-            [FormFieldProdutor.uf_pais]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.co_municipio]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.co_cep]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.ds_endereco]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.nu_numero]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.ds_complemento]: new FormControl(null),
-            [FormFieldProdutor.ds_bairro]: new FormControl(null, [Validators.required]),
-            [FormFieldProdutor.nu_telefone]: new FormControl(null),
-            [FormFieldProdutor.co_fax]: new FormControl(null),
-            [FormFieldProdutor.ds_email]: new FormControl(null, [Validators.email])
+            [FormFieldProdutor.protocolo]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.no_cpf]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.ds_nome]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.dt_solicitacao]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.co_evento]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.nu_documento]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.ds_orgao_emissor]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.co_uf_emissor]: new UntypedFormControl(null),
+            [FormFieldProdutor.co_sexo]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.nacionalidade]: new UntypedFormControl(null),
+            [FormFieldProdutor.estado_civil]: new UntypedFormControl(null),
+            [FormFieldProdutor.dt_nascimento]: new UntypedFormControl(null),
+            [FormFieldProdutor.naturalidade]: new UntypedFormControl(null),
+            [FormFieldProdutor.uf_naturalidade]: new UntypedFormControl(null),
+            [FormFieldProdutor.uf_pais]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.co_municipio]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.co_cep]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.ds_endereco]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.nu_numero]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.ds_complemento]: new UntypedFormControl(null),
+            [FormFieldProdutor.ds_bairro]: new UntypedFormControl(null, [Validators.required]),
+            [FormFieldProdutor.nu_telefone]: new UntypedFormControl(null),
+            [FormFieldProdutor.co_fax]: new UntypedFormControl(null),
+            [FormFieldProdutor.ds_email]: new UntypedFormControl(null, [Validators.email])
         });
     }
 

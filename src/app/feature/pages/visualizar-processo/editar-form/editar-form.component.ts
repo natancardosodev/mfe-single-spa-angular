@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -166,7 +166,7 @@ export class EditarFormComponent implements OnInit {
         return solicitacaoData;
     }
 
-    public isFieldValid(form: FormGroup, field: string): boolean {
+    public isFieldValid(form: UntypedFormGroup, field: string): boolean {
         return !form.get(field).valid && form.get(field).dirty;
     }
 

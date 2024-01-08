@@ -1,9 +1,9 @@
-import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, AbstractControl } from '@angular/forms';
 
-export class ObservacaoForm extends FormGroup {
+export class ObservacaoForm extends UntypedFormGroup {
     constructor() {
         super({
-            descricao: new FormControl(null)
+            descricao: new UntypedFormControl(null)
         });
     }
 
