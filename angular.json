@@ -471,6 +471,5 @@
                 }
             }
         }
-    },
-    "defaultProject": "skeleton-internal-front"
+    }
 }
