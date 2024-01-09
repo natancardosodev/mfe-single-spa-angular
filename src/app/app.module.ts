@@ -1,11 +1,11 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 
 import * as Sentry from '@sentry/angular-ivy';
-import { LibVoxUiModule } from 'lib-vox-ui';
+// import { LibVoxUiModule } from 'lib-vox-ui';
 
 import { AuthInterceptor } from '@core/interceptor/auth.interceptor';
 import { GlobalErrorHandler } from '@core/interceptor/global-error-handler';
@@ -23,8 +23,8 @@ import { AppComponent } from './app.component';
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        SharedModule,
-        LibVoxUiModule.forRoot({ theme: 'interno' })
+        SharedModule
+        // LibVoxUiModule.forRoot({ theme: 'interno' })
     ],
     providers: [
         {
@@ -60,7 +60,8 @@ import { AppComponent } from './app.component';
         CommonService,
         UserService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA] // @todo fix modal lib-vox-ui
 })
 export class AppModule {
     constructor() {}

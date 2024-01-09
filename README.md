@@ -1,28 +1,23 @@
-# Skeleton Projetos Interno Sigfacil Angular
+# Mapeamento Tecnológico dos Projetos Vox
 
 ## Pre-requisitos
 
--   `Node` 12.18.2
--   `npm` 5.10.0
+-   `Node` 20.10.0
+-   `npm` 6.14.16
 
 <details>
 <summary>Instalar node/npm</summary>
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
-nvm install 12.18.2
-npm install -g npm@5.10.0
+nvm install 20.10.0
+npm install -g npm@6.14.16
 ```
 
 </details>
 
 ## Requisitos
 
--   [assets-sigfacil](https://gitlab.voxtecnologia.com.br/vox/front-end/assets-sigfacil)
--   [sigfacil](https://gitlab.voxtecnologia.com.br/vox/sigfacil)
--   [portal](https://gitlab.voxtecnologia.com.br/vox/portal)
--   [security](https://gitlab.voxtecnologia.com.br/vox/security)
--   Projeto XXX Internal Service
 -   apache-files _(Link simbólico com vhosts e certificados SSL)_
     -   [Faça a vinculação com o script vhosts-update.](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/tree/master/scripts#vhosts-update-atualizando-os-arquivos-do-apache)
 -   Feito o fork,
@@ -45,9 +40,9 @@ npm run build
 
 ## Tecnologias
 
--   Angular 12
--   Typescript 4.3
--   ES2020
+-   Angular 17
+-   Typescript 5.2
+-   ES2022
 -   Sass
 -   Análise estática do código e formatação
     -   ESLint

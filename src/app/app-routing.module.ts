@@ -4,13 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 // import { RotasEnum } from './core/enums/interno/rotas.enum';
 
 const appRoutes: Routes = [
-    // {
-    //     path: RotasEnum.VISUALIZARPROCESSO,
-    //     loadChildren: () =>
-    //         import('./feature/pages/visualizar-processo/visualizar-processo.module').then(
-    //             (m) => m.VisualizarProcessoModule
-    //         )
-    // },
+    { path: '', loadChildren: () => import('./feature/pages/home/home.module').then((m) => m.HomeModule) },
+    { path: ':equipe', loadChildren: () => import('./feature/pages/view/view.module').then((m) => m.ViewModule) },
     {
         path: '**',
         loadChildren: () =>
