@@ -10,5 +10,8 @@ export const environment: EnvironmentInterface = {
         projeto: 'https://interno.{DOMINIO_REDESIM}/sigfacil/skeleton',
         environments: 'https://deve',
         subDomain: 'deve'
+    },
+    token: {
+        front: 'K42jWs8czrfPQ5WEwjd_'
     }
 };
