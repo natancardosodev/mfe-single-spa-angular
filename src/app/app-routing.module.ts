@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RotasEnum } from './core/enums/interno/rotas.enum';
+// import { RotasEnum } from './core/enums/interno/rotas.enum';
 
 const appRoutes: Routes = [
-    {
-        path: RotasEnum.VISUALIZARPROCESSO,
-        loadChildren: () =>
-            import('./feature/pages/visualizar-processo/visualizar-processo.module').then(
-                (m) => m.VisualizarProcessoModule
-            )
-    },
+    // {
+    //     path: RotasEnum.VISUALIZARPROCESSO,
+    //     loadChildren: () =>
+    //         import('./feature/pages/visualizar-processo/visualizar-processo.module').then(
+    //             (m) => m.VisualizarProcessoModule
+    //         )
+    // },
     {
         path: '**',
         loadChildren: () =>

@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { AlertService } from 'lib-vox-ui';
-import { Observable } from 'rxjs';
 
-import { DadosInscricaoInterface } from '@core/interfaces/visualizar-processo/dados-inscricao.interface';
 import { BaseService } from '@core/services/base.service';
 import { UrlUtilService } from '@core/services/url-util.service';
-import { TiposApisEnum } from 'lib-vox-shared-codes';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -18,42 +16,12 @@ export class SolicitacaoService extends BaseService {
         super('', http, urlUtilService, alertService);
     }
 
-    // Passar Interface
-    public getListarProcessos = (processo: any): Observable<any> => {
-        // return this.get('/solicitacao', processo);
-        return this.get('/grid', null, TiposApisEnum.STATIC); // @todo remover parametro MOCK
-    };
+    public getPackageOfProject = (projectId: number, tokenGit: string): Observable<{ content?: string }> => {
+        const headers = new HttpHeaders({ 'PRIVATE-TOKEN': tokenGit }); // 'K42jWs8czrfPQ5WEwjd_'
 
-    public getDadosInscricao = (solicitacao: number): Observable<any> => {
-        return this.get('/inscricao', null, TiposApisEnum.STATIC); // `/inscricao/solicitacao/${solicitacao}`
-    };
-
-    public putDadosInscricao(solicitacao: number, data: DadosInscricaoInterface): Observable<any> {
-        return this.put(`/inscricao/solicitacao/${solicitacao}`, data);
-    }
-
-    public getDadosProcesso = (solicitacao: any): Observable<any> => {
-        return this.get('/processo', null, TiposApisEnum.STATIC);
-    };
-
-    public getDadosPessoa = (solicitacao: any): Observable<any> => {
-        // return this.get('/pessoa', solicitacao);
-        return this.get('/pessoa', null, TiposApisEnum.STATIC);
-    };
-
-    public getDadosDocumento = (solicitacao: any): Observable<any> => {
-        return this.get('/documento', null, TiposApisEnum.STATIC);
-    };
-
-    public putIndeferir = (solicitacao: number, dados: any): Observable<any> => {
-        return this.put(`/solicitacao/indeferir/${solicitacao}`, dados);
-    };
-
-    public postDados = (dados: any): Observable<any> => {
-        return this.post('/solicitacao/dados', dados);
-    };
-
-    public getObservacao = (solicitacao: any): Observable<any> => {
-        return this.get('/solicitacao/observacao', solicitacao);
+        return this.http.get(
+            `https://gitlab.voxtecnologia.com.br/api/v4/projects/${projectId}/repository/files/package.json?ref=master`,
+            { headers: headers }
+        );
     };
 }

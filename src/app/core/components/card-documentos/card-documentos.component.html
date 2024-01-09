@@ -1,8 +1,0 @@
-<lib-collapse label="Documentos" [isCollapsed]="false" [loading]="loading">
-    <lib-table
-        [isLoading]="!tableData"
-        [headers]="['Documento', 'Data', 'Ações']"
-        [body]="tableData"
-        (actions)="actionsOnTable($event)"
-    ></lib-table>
-</lib-collapse>

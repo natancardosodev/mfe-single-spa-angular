@@ -12,5 +12,8 @@
     "explorer.compactFolders": false,
     "workbench.editor.wrapTabs": true,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+    "[ignore]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    }
 }
