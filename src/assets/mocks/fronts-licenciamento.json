@@ -1,0 +1,319 @@
+{
+    "title": "Projetos Front do Registro Empresarial",
+    "filenameLibs": "package.json",
+    "branch": "master",
+    "colorPrimary": "#ccc",
+    "colorSecondary": "#ddd",
+    "projects": [
+        {
+            "title": "interno-ipaam",
+            "id": 106,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/alteracao-empresa-licenciamento/ - / analise-parecer-tecnico/ - /analise-pesca/ - /bombeiros/ - /caracterizacao-area/ - /classificacao-atividades/ - /consulta-processos/ - /credenciamento/ - /diretoria-juridica/ - /laudo-vistoria-veicular/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:06:00 / 00:12:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "ipaam-licenciamento",
+            "id": 157,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:06:00 - 00:12:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "slim-interno-app",
+            "id": 159,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:16:00 / 00:25:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "interno-visa-app",
+            "id": 104,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:11:00 / 01:30:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "slim-app",
+            "id": 158,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:08:00 / 00:28:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "slim-external-front",
+            "id": 4156,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:10:00 / X"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "denuncia-internal-front",
+            "id": 1603,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:10:00 / 00:30:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "denuncia-external-front",
+            "id": 1534,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:07:30 / 00:27:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "solicitacao-external-front",
+            "id": 4419,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:10:00 / X"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "credenciamento-external-front",
+            "id": 4418,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:12:00 / X"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        }
+    ]
+}
