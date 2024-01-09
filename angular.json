@@ -29,7 +29,7 @@
                             "js-sha512",
                             "core-js-pure"
                         ],
-                        "baseHref": "/skeleton/interno/",
+                        "baseHref": "/portal-dev/tech/",
                         "assets": ["src/favicon.ico", "src/assets"],
                         "styles": [],
                         "scripts": [],
@@ -392,57 +392,57 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                      "buildTarget": "skeleton-internal-front:build"
+                        "buildTarget": "skeleton-internal-front:build"
                     },
                     "configurations": {
                         "production": {
-                          "buildTarget": "skeleton-internal-front:build:production"
+                            "buildTarget": "skeleton-internal-front:build:production"
                         },
                         "homologacao": {
-                          "buildTarget": "skeleton-internal-front:build:homologacao"
+                            "buildTarget": "skeleton-internal-front:build:homologacao"
                         },
                         "demo": {
-                          "buildTarget": "skeleton-internal-front:build:demo"
+                            "buildTarget": "skeleton-internal-front:build:demo"
                         },
                         "docker": {
-                          "buildTarget": "skeleton-internal-front:build:docker"
+                            "buildTarget": "skeleton-internal-front:build:docker"
                         },
                         "deve-um": {
-                          "buildTarget": "skeleton-internal-front:build:deve-um"
+                            "buildTarget": "skeleton-internal-front:build:deve-um"
                         },
                         "deve-dois": {
-                          "buildTarget": "skeleton-internal-front:build:deve-dois"
+                            "buildTarget": "skeleton-internal-front:build:deve-dois"
                         },
                         "deve-tres": {
-                          "buildTarget": "skeleton-internal-front:build:deve-tres"
+                            "buildTarget": "skeleton-internal-front:build:deve-tres"
                         },
                         "deve-quatro": {
-                          "buildTarget": "skeleton-internal-front:build:deve-quatro"
+                            "buildTarget": "skeleton-internal-front:build:deve-quatro"
                         },
                         "deve-cinco": {
-                          "buildTarget": "skeleton-internal-front:build:deve-cinco"
+                            "buildTarget": "skeleton-internal-front:build:deve-cinco"
                         },
                         "deve-seis": {
-                          "buildTarget": "skeleton-internal-front:build:deve-seis"
+                            "buildTarget": "skeleton-internal-front:build:deve-seis"
                         },
                         "deve-sete": {
-                          "buildTarget": "skeleton-internal-front:build:deve-sete"
+                            "buildTarget": "skeleton-internal-front:build:deve-sete"
                         },
                         "deve-oito": {
-                          "buildTarget": "skeleton-internal-front:build:deve-oito"
+                            "buildTarget": "skeleton-internal-front:build:deve-oito"
                         },
                         "deve-nove": {
-                          "buildTarget": "skeleton-internal-front:build:deve-nove"
+                            "buildTarget": "skeleton-internal-front:build:deve-nove"
                         },
                         "deve-dez": {
-                          "buildTarget": "skeleton-internal-front:build:deve-dez"
+                            "buildTarget": "skeleton-internal-front:build:deve-dez"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                      "buildTarget": "skeleton-internal-front:build"
+                        "buildTarget": "skeleton-internal-front:build"
                     }
                 },
                 "test": {

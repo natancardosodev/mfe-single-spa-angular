@@ -1,39 +1,4 @@
-<lib-loading-global [assetsSigfacil]="assetsSigfacil"></lib-loading-global>
 <lib-alert></lib-alert>
 <lib-toast></lib-toast>
 
-<div *ngIf="usuario">
-    <lib-header
-        [sistema]="sistema"
-        [usuario]="usuario"
-        [urlApi]="urlApi"
-        [subDomain]="subDomain"
-        [logoEntidade]="urlLogo"
-        [logoSistema]="urlLogoSistema"
-        [horario]="dataSistema"
-        [userKey]="userKey"
-    >
-    </lib-header>
-
-    <main class="container container-base">
-        <div class="row">
-            <aside class="col-md-3">
-                <lib-menu-lateral
-                    [modulos]="itensMenu"
-                    [funcionalidadesDoProjeto]="funcionalidadesDoProjeto"
-                    (changeAlteracao)="updateFuncionalidade($event)"
-                    [baseHref]="baseHref"
-                >
-                </lib-menu-lateral>
-            </aside>
-            <section class="col-9 content-app">
-                <div class="system-content">
-                    <lib-breadcrumb [getFuncionalidade]="funcionalidadeAtual" [baseHref]="baseHref"></lib-breadcrumb>
-                    <router-outlet></router-outlet>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <lib-footer></lib-footer>
-</div>
+<router-outlet></router-outlet>
