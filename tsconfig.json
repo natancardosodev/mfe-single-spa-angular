@@ -1,42 +1,27 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@core/*": [
-        "./src/app/core/*"
-      ],
-      "@feature/*": [
-        "./src/app/feature/*"
-      ],
-      "@shared/*": [
-        "./src/app/shared/*"
-      ]
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@core/*": ["./src/app/core/*"],
+            "@feature/*": ["./src/app/feature/*"]
+        },
+        "outDir": "./dist/out-tsc",
+        "sourceMap": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "ES2022",
+        "typeRoots": ["node_modules/@types"],
+        "lib": ["es2018", "es2020", "dom"],
+        "useDefineForClassFields": false
     },
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "ES2022",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "es2020",
-      "dom"
-    ],
-    "useDefineForClassFields": false
-  },
-  "angularCompilerOptions": {
-    "types": [
-      "node"
-    ],
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
-  }
+    "angularCompilerOptions": {
+        "types": ["node"],
+        "fullTemplateTypeCheck": true,
+        "strictInjectionParameters": true
+    }
 }

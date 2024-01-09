@@ -27,7 +27,9 @@ npm install -g npm@6.14.16
 ## Instalação
 
 ```shell
-npm install
+nvm install 20.10.0
+nvm use 20
+npm i --force
 
 npm run start
 # ou
@@ -36,7 +38,7 @@ npm run build
 
 ## Acesso
 
--   https://deve.voxtecnologia.com.br/skeleton/interno/visualizar-processo - Visualizar Processo Skeleton
+-   https://deve-front.voxtecnologia.com.br/portal-dev/tech/
 
 ## Tecnologias
 
