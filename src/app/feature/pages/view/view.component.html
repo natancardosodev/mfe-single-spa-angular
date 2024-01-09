@@ -1,10 +1,32 @@
-@for (item of dados; track dados) {
-    {{ item.key }}
-    <ul>
-        @for (it of item.value; track it.key) {
-            <li>{{ it.key }}: {{ it.value }}</li>
-        } @empty {
-            Lista não encontrada.
+@if (dataProjects) {
+    <h1>{{ dataProjects.title }}</h1>
+
+    <a [routerLink]="['/']"> Voltar </a>
+
+    @for (item of dataProjects.projects; track item.id) {
+        @defer {
+            <h2>{{ item.title }}</h2>
+            <ul>
+                @for (it of item.details; track it.title) {
+                    <li>{{ it.title }}: {{ it.description }}</li>
+                } @empty {
+                    Lista não encontrada.
+                }
+            </ul>
+            <h3>Bibliotecas</h3>
+            <ul>
+                @for (it of item.libs; track it.key) {
+                    <li>{{ it.key }}: {{ it.value }}</li>
+                } @empty {
+                    Lista não encontrada.
+                }
+            </ul>
+        } @placeholder {
+            <p>Carregando dados...</p>
+        } @error {
+            <p>Ocorreu um erro na requisição.</p>
         }
-    </ul>
+    }
+} @else {
+    <p>Sem dados</p>
 }

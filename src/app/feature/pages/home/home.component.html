@@ -1,11 +1,19 @@
-<ul>
-    @for (item of lista; track lista.id) {
-        <a [routerLink]="['/', item.route]">
-            <li>
-                {{ item.label }}
-            </li>
-        </a>
-    } @empty {
-        Lista não encontrada.
-    }
-</ul>
+@if (lista) {
+    <ul>
+        @for (item of lista; track lista.id) {
+            @defer {
+                <a [routerLink]="['/', item.route]">
+                    <li>
+                        {{ item.label }}
+                    </li>
+                </a>
+            } @placeholder {
+                <p>Carregando dados...</p>
+            } @error {
+                <p>Ocorreu um erro na requisição.</p>
+            }
+        } @empty {
+            Lista não encontrada.
+        }
+    </ul>
+}
