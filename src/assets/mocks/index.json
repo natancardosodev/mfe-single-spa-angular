@@ -2,11 +2,13 @@
     {
         "id": 1,
         "label": "Projetos Front do Registro Empresarial",
-        "route": "fronts-re"
+        "route": "fronts-re",
+        "color": "#263085"
     },
     {
         "id": 2,
         "label": "Projetos Front do Licenciamento",
-        "route": "fronts-licenciamento"
+        "route": "fronts-licenciamento",
+        "color": "#105F64"
     }
 ]
