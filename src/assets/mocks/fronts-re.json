@@ -1,0 +1,412 @@
+{
+    "title": "Projetos Front do Registro Empresarial",
+    "filenameLibs": "package.json",
+    "branch": "master",
+    "colorPrimary": "#263085",
+    "colorSecondary": "#ddd",
+    "projects": [
+        {
+            "title": "produtor-rural-front",
+            "id": 1313,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/produtor-rural/solicitante - /produtor-rural/inscricao-estadual/alteracao - /produtor-rural/inscricao-estadual/baixa"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:11:00 / 00:27:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "produtor-rural-internal-front",
+            "id": 1640,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/produtor-rural/inscricao-estadual/editar - /produtor-rural/inscricao-estadual/incluir - /produtor-rural/inscricao-estadual/emitir - /produtor-rural/inscricao-estadual/visualizar"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:07:30 / 00:21:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "poligono-internal-front",
+            "id": 2425,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/poligono/cadastro - /poligono/editar - /poligono/visualizar"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:12:00 / 00:21:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "empresa-integrador-front",
+            "id": 198,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/alterar-empresa/consultar - /alterar-empresa/incluir - /alterar-empresa/bloqueio"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:05:00 / 00:28:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "sigfacil-external-front",
+            "id": 2790,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/acoes/ - /sobre-o-portal/ - /servicos/ - /fale-conosco/ - /manuais/ - /municipios-integrados/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:15:00 / 00:30:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "analise-livro-front",
+            "id": 105,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/emitir-parecer-livro-empresa/pesquisar - /emitir-parecer-livro-empresa/visualizar-processo - /emitir-parecer-livro-empresa/rechancela - /emitir-parecer-livro-empresa/esclarecer-exigencias-livro"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:05:00 / 00:16:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "eventos-oficio-front",
+            "id": 109,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/processos-oficios/ - /processos-judiciais/ - /processos-administrativos/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:06:00 / 00:24:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "exportar-dados-internal-front",
+            "id": 4040,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/dados/exportar/ - /dados/exportar/solicitar - /dados/exportar/visualizar"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:09:30 / x"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "arquivamento-empresa-internal-front",
+            "id": 1771,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/historico/ - /historico/empresa/visualizar/ - /historico/empresa/editar/ - /historico/empresa/incluir/ - /historico/migrar/ - /historico/matriz/ - /historico/alterar/ - /historico/incluir/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:12:00 / 00:21:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "pessoa-fisica-internal-front",
+            "id": 1545,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Interna"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/visualizar-processo/ - /visualizar-processo-livro/ - /parecer/ - /analise-livro/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:05:00 / 00:20:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "pessoa-fisica-external-front",
+            "id": 1411,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/leiloeiro/consulta/ - /leiloeiro/relacao/ - /tradutor/consulta/ - /tradutor/relacao/ - /leiloeiro/emissao-livro/gerar-processo/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:06:00 / 00:25:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "livro-internal-front",
+            "id": 3486,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/livro/ - /livro/migrar/ - /livro/migrar/visualizar/ - /livro/migrar/editar/ - /livro/migrar/incluir/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:05:00 / 00:15:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        },
+        {
+            "title": "recurso-plenario-external-front",
+            "id": 4837,
+            "libs": [],
+            "details": [
+                {
+                    "title": "Tecnologia",
+                    "description": "SPA Angular 12"
+                },
+                {
+                    "title": "Tipo",
+                    "description": "Funcionalidade Externa"
+                },
+                {
+                    "title": "Rotas das Funcionalidades",
+                    "description": "/solicitante/ - /acompanhar/ - /protocolo-andamento/ - /identificacao-empresa/"
+                },
+                {
+                    "title": "Tempo Médio do Deploy",
+                    "description": "00:11:00 / 00:27:00"
+                },
+                {
+                    "title": "Lib Vox UI",
+                    "description": "A detalhar"
+                },
+                {
+                    "title": "Testes unitários",
+                    "description": "A definir"
+                }
+            ]
+        }
+    ]
+}
