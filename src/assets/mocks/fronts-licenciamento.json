@@ -1,8 +1,8 @@
 {
-    "title": "Projetos Front do Registro Empresarial",
+    "title": "Projetos Front do Licenciamento",
     "filenameLibs": "package.json",
     "branch": "master",
-    "colorPrimary": "#ccc",
+    "colorPrimary": "#105F64",
     "colorSecondary": "#ddd",
     "projects": [
         {

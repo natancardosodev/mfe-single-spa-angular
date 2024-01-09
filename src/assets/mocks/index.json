@@ -2,11 +2,11 @@
     {
         "id": 1,
         "label": "Projetos Front do Registro Empresarial",
-        "route": "front-re"
+        "route": "fronts-re"
     },
     {
         "id": 2,
         "label": "Projetos Front do Licenciamento",
-        "route": "front-licenciamento"
+        "route": "fronts-licenciamento"
     }
 ]
