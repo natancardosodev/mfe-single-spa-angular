@@ -171,7 +171,7 @@ export abstract class BaseService {
             : tipoApi === TiposApisEnum.JARVIS
             ? this.optionsJarvis
             : this.options;
-        this.options['params'] = !params || typeof params === undefined ? null : cleanParams(params);
+        this.options['params'] = !params || typeof params === 'undefined' ? null : cleanParams(params);
         this.options['body'] = body;
         this.options['observe'] = tipoApi === TiposApisEnum.JARVIS ? 'response' : 'body';
 

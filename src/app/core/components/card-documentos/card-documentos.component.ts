@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { ComponentBase } from '@core/models/component-base';
 import { UrlUtilService } from '@core/services/url-util.service';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
+import { MaskPipe } from '@shared/pipes/mask.pipe';
 import { TableItemInterface } from 'lib-vox-ui/lib/core';
-import { MaskPipe } from 'lib-vox-ui/lib/core/pipes/mask.pipe';
 import { finalize, take } from 'rxjs/operators';
 
 @Component({
