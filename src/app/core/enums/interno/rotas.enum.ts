@@ -1,5 +1,5 @@
 export enum RotasEnum {
-    BASE_HREF = '/skeleton/interno/', // @todo funcionalidade base
+    BASE_HREF = '/portal-dev/tech/', // @todo funcionalidade base
     // ROTAS BASE DAS FUNCIONALIDADES
     VISUALIZARPROCESSO = 'visualizar-processo',
     // ROTAS SECUNDÁRIAS

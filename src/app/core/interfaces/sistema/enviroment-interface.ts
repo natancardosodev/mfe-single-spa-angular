@@ -9,4 +9,7 @@ export interface EnvironmentInterface {
         environments: string;
         subDomain: string;
     };
+    token?: {
+        front: string;
+    };
 }

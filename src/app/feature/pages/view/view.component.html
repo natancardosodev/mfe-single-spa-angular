@@ -1,2 +1,10 @@
-<p>view works!</p>
-<p>{{ equipe }}</p>
+@for (item of dados; track dados) {
+    {{ item.key }}
+    <ul>
+        @for (it of item.value; track it.key) {
+            <li>{{ it.key }}: {{ it.value }}</li>
+        } @empty {
+            Lista não encontrada.
+        }
+    </ul>
+}

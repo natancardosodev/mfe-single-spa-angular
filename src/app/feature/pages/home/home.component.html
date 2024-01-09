@@ -1,1 +1,11 @@
-<p>home works!</p>
+<ul>
+    @for (item of lista; track lista.id) {
+        <a [routerLink]="['/', item.route]">
+            <li>
+                {{ item.label }}
+            </li>
+        </a>
+    } @empty {
+        Lista não encontrada.
+    }
+</ul>
