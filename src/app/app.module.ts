@@ -7,12 +7,8 @@ import { Router } from '@angular/router';
 import * as Sentry from '@sentry/angular-ivy';
 // import { LibVoxUiModule } from 'lib-vox-ui';
 
-import { AuthInterceptor } from '@core/interceptor/auth.interceptor';
 import { GlobalErrorHandler } from '@core/interceptor/global-error-handler';
 import { JarvisInterceptor } from '@core/interceptor/jarvis.interceptor';
-import { CommonService } from '@core/services/common.service';
-import { UserService } from '@core/services/user.service';
-import { SharedModule } from '@shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -22,8 +18,7 @@ import { AppComponent } from './app.component';
         HttpClientModule,
         BrowserModule,
         BrowserAnimationsModule,
-        AppRoutingModule,
-        SharedModule
+        AppRoutingModule
         // LibVoxUiModule.forRoot({ theme: 'interno' })
     ],
     providers: [
@@ -49,16 +44,9 @@ import { AppComponent } from './app.component';
         },
         {
             provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
-            multi: true
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
             useClass: JarvisInterceptor,
             multi: true
-        },
-        CommonService,
-        UserService
+        }
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA] // @todo fix modal lib-vox-ui

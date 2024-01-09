@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "label": "Projetos Front do Registro Empresarial",
+        "route": "front-re"
+    },
+    {
+        "id": 2,
+        "label": "Projetos Front do Licenciamento",
+        "route": "front-licenciamento"
+    }
+]
