@@ -1,0 +1,58 @@
+.grid-home {
+    font-family: Inter, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    align-items: center;
+
+    .nav {
+        display: flex;
+        justify-content: flex-end;
+        flex: 1;
+
+        &__column {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: baseline;
+            width: 50%;
+        }
+
+        h1 {
+            width: 85%;
+            font-size: 32px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+            align-items: flex-start;
+            padding-left: 0;
+            a {
+                display: block;
+                color: #ffffff;
+                text-decoration: none;
+                padding: 12px;
+                width: 100%;
+                text-align: center;
+                opacity: 0.9;
+                border-radius: 5px;
+                font-weight: 500;
+                font-size: 18px;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .bg-card {
+        background: url('/portal-dev/tech/assets/images/bg-card-home.png');
+        flex: 1;
+        height: 100%;
+    }
+}

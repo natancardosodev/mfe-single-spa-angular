@@ -1,19 +1,29 @@
-@if (lista) {
-    <ul>
-        @for (item of lista; track lista.id) {
-            @defer {
-                <a [routerLink]="['/', item.route]">
-                    <li>
-                        {{ item.label }}
-                    </li>
-                </a>
-            } @placeholder {
-                <p>Carregando dados...</p>
-            } @error {
-                <p>Ocorreu um erro na requisição.</p>
+<div class="grid-home">
+    <div class="nav">
+        <div class="nav__column">
+            <img src="assets/images/logo-vox.png" alt="Vox Tecnologia" />
+            <h1>Mapeamento Tecnológico de Projetos</h1>
+
+            @if (lista) {
+                <ul>
+                    @for (item of lista; track lista.id) {
+                        @defer {
+                            <a [routerLink]="['/', item.route]" [style]="['background:'] + item.color">
+                                <li>
+                                    {{ item.label }}
+                                </li>
+                            </a>
+                        } @placeholder {
+                            <p>Carregando dados...</p>
+                        } @error {
+                            <p>Ocorreu um erro na requisição.</p>
+                        }
+                    } @empty {
+                        Lista não encontrada.
+                    }
+                </ul>
             }
-        } @empty {
-            Lista não encontrada.
-        }
-    </ul>
-}
+        </div>
+    </div>
+    <div class="bg-card"></div>
+</div>
