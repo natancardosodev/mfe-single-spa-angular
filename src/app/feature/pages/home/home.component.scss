@@ -14,7 +14,7 @@
             flex-direction: column;
             justify-content: left;
             align-items: baseline;
-            width: 50%;
+            max-width: 450px;
         }
 
         h1 {
@@ -30,6 +30,7 @@
             justify-content: center;
             align-items: flex-start;
             padding-left: 0;
+
             a {
                 display: block;
                 color: #ffffff;
