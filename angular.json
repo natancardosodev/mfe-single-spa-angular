@@ -31,7 +31,7 @@
                         ],
                         "baseHref": "/portal-dev/tech/",
                         "assets": ["src/favicon.ico", "src/assets"],
-                        "styles": [],
+                        "styles": ["src/styles.scss"],
                         "scripts": [],
                         "vendorChunk": true,
                         "extractLicenses": false,
