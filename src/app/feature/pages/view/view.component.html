@@ -1,9 +1,25 @@
 @if (dataProjects) {
     <header [style]="['background:'] + dataProjects.colorPrimary">
         <div class="wrapper">
-            <h1>{{ dataProjects.title }}</h1>
+            <div class="header__title">
+                <h1>{{ dataProjects.title }}</h1>
+                <div class="header__title--btns">
+                    <button [style]="['color:'] + dataProjects.colorPrimary" type="button">
+                        <i class="fa-solid fa-rotate"></i>Recarregar
+                    </button>
+                    <button [style]="['color:'] + dataProjects.colorPrimary" [routerLink]="['/']" type="button">
+                        <i class="fa-solid fa-chevron-left"></i>Voltar
+                    </button>
+                </div>
+            </div>
+
+            <div class="header__form">
+                <form action="" id="pesquisa">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input class="search" type="text" placeholder="Pesquise Por uma Tecnologia" />
+                </form>
+            </div>
         </div>
-        <a [routerLink]="['/']"> Voltar </a>
     </header>
 
     <main class="wrapper">
