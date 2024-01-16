@@ -12,6 +12,9 @@ import { Dados, isNullOrUndefined } from 'lib-vox-shared-codes';
 export class ViewComponent implements OnInit {
     public equipe: string;
     public dataProjects: DataProjectsI;
+    public showDetails: boolean = true;
+    public showLibs: boolean = true;
+    public showMoreLibs: boolean = true;
 
     constructor(
         private solicitacaoService: SolicitacaoService,
@@ -56,5 +59,13 @@ export class ViewComponent implements OnInit {
         }
 
         return arrayParametro;
+    }
+
+    public showHideDetails() {
+        this.showDetails = !this.showDetails;
+    }
+
+    public showHideLibs() {
+        this.showLibs = !this.showLibs;
     }
 }

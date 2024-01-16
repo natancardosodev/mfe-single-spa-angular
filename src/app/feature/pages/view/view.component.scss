@@ -9,7 +9,6 @@ header {
     }
 
     .header {
-
         &__title {
             display: flex;
             justify-content: space-between;
@@ -68,9 +67,6 @@ header {
                     opacity: 0.4;
                 }
             }
-
-            &--filters {
-            }
         }
     }
 }
@@ -81,12 +77,12 @@ main {
 
     h2 {
         font-size: 32px;
-        margin: 48px 0 32px;
+        margin: 32px 0 0 0;
     }
 
     h3 {
         font-size: 28px;
-        margin: 48px 0 32px;
+        margin: 32px 0 0 0;
     }
 
     ul {
@@ -94,6 +90,7 @@ main {
         gap: 24px;
         flex-wrap: wrap;
         padding: 0;
+        margin-top: 40px;
     }
 
     .list-card {
@@ -125,9 +122,34 @@ main {
             width: 95%;
         }
     }
+
+    .btn-vermais {
+        border-radius: 5px;
+        background: #ffffff;
+        padding: 12px;
+        border: none;
+        display: flex;
+        gap: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 auto;
+        color: #37658d;
+
+        &:hover {
+            background: #ebebeb;
+            cursor: pointer;
+        }
+    }
 }
 
 /* Toggle */
+
+.show {
+    display: block;
+}
+.hide {
+    display: none;
+}
 
 .toggle {
     cursor: pointer;
