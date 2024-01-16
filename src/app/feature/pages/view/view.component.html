@@ -21,13 +21,13 @@
 
                 <div class="header__form--filters">
                     <label class="toggle">
-                        <input class="toggle-checkbox" type="checkbox" checked />
+                        <input (click)="showHideDetails()" class="toggle-checkbox" type="checkbox" checked />
                         <div class="toggle-switch"></div>
                         <span class="toggle-label">Detalhes</span>
                     </label>
 
                     <label class="toggle">
-                        <input class="toggle-checkbox" type="checkbox" checked />
+                        <input (click)="showHideLibs()" class="toggle-checkbox" type="checkbox" checked />
                         <div class="toggle-switch"></div>
                         <span class="toggle-label">Bibliotecas</span>
                     </label>
@@ -41,30 +41,38 @@
             @defer {
                 <div class="project">
                     <h2>{{ item.title }}</h2>
-                    <ul>
-                        @for (it of item.details; track it.title) {
-                            <li class="list-card">
-                                <b>{{ it.title }}:</b>
+                    <div [ngClass]="showDetails ? 'show' : 'hide'">
+                        <ul>
+                            @for (it of item.details; track it.title) {
+                                <li class="list-card">
+                                    <b>{{ it.title }}:</b>
 
-                                {{ it.description }}
+                                    {{ it.description }}
+                                </li>
+                            } @empty {
+                                Lista não encontrada.
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div [ngClass]="showLibs ? 'show' : 'hide'">
+                    <h3>Bibliotecas</h3>
+                    <ul>
+                        @for (it of item.libs; track it.key) {
+                            <li class="list-lib" *ngIf="$index < 16 || !showMoreLibs">
+                                <span
+                                    ><b>{{ it.key }}:</b> {{ it.value }}
+                                </span>
                             </li>
                         } @empty {
                             Lista não encontrada.
                         }
                     </ul>
+                    <button class="btn-vermais" (click)="showMoreLibs = !showMoreLibs">
+                        <i class="fa-solid {{ showMoreLibs ? 'fa-plus' : 'fa-minus' }}"></i>
+                        {{ showMoreLibs ? 'Ver mais' : 'Ver menos' }}
+                    </button>
                 </div>
-                <h3>Bibliotecas</h3>
-                <ul>
-                    @for (it of item.libs; track it.key) {
-                        <li class="list-lib">
-                            <span>
-                                <b>{{ it.key }}:</b> {{ it.value }}
-                            </span>
-                        </li>
-                    } @empty {
-                        Lista não encontrada.
-                    }
-                </ul>
             } @placeholder {
                 <p>Carregando dados...</p>
             } @error {
