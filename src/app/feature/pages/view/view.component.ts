@@ -15,6 +15,7 @@ export class ViewComponent implements OnInit {
     public showDetails: boolean = true;
     public showLibs: boolean = true;
     public showMoreLibs: boolean = true;
+    public filter: string;
 
     constructor(
         private solicitacaoService: SolicitacaoService,

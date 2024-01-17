@@ -16,7 +16,12 @@
             <div class="header__form">
                 <form action="">
                     <i class="fas fa-search" aria-hidden="true"></i>
-                    <input class="search" type="text" placeholder="Pesquise Por uma Tecnologia" />
+                    <input
+                        class="search"
+                        type="text"
+                        placeholder="Pesquise Por uma Tecnologia"
+                        (input)="filter = $event.target.value"
+                    />
                 </form>
 
                 <div class="header__form--filters">
@@ -58,7 +63,7 @@
                 <div [ngClass]="showLibs ? 'show' : 'hide'">
                     <h3>Bibliotecas</h3>
                     <ul>
-                        @for (it of item.libs; track it.key) {
+                        @for (it of item.libs | searchFilter: filter; track it.key) {
                             <li class="list-lib" *ngIf="$index < 16 || !showMoreLibs">
                                 <span
                                     ><b>{{ it.key }}:</b> {{ it.value }}
