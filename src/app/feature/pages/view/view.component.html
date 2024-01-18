@@ -62,22 +62,22 @@
                 </div>
                 <div [ngClass]="showLibs ? 'show' : 'hide'">
                     <h3>Bibliotecas</h3>
+
                     <ul>
-                        @for (it of item.libs | searchFilter: filter; track it.key) {
-                            <li class="list-lib" *ngIf="$index < 16 || !showMoreLibs">
+                        <ng-container *ngFor="let it of item.libs | searchFilter: filter; let i = index">
+                            <li class="list-lib" *ngIf="i < 16 || !showMoreLibs">
                                 <span
                                     ><b>{{ it.key }}:</b> {{ it.value }}
                                 </span>
                             </li>
-                        } @empty {
-                            Lista não encontrada.
-                        }
+                        </ng-container>
                     </ul>
                     <button class="btn-vermais" (click)="showMoreLibs = !showMoreLibs">
                         <i class="fa-solid {{ showMoreLibs ? 'fa-plus' : 'fa-minus' }}"></i>
                         {{ showMoreLibs ? 'Ver mais' : 'Ver menos' }}
                     </button>
                 </div>
+                <hr />
             } @placeholder {
                 <p>Carregando dados...</p>
             } @error {
