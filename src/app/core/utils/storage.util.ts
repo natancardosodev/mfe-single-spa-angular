@@ -1,11 +1,11 @@
 export class StorageUtil {
     public static store(key: string, dados: any): void {
         const dadosStorage = btoa(JSON.stringify(dados));
-        window.sessionStorage.setItem(key, dadosStorage);
+        window.localStorage.setItem(key, dadosStorage);
     }
 
     public static get(key: string): any {
-        return window.sessionStorage.getItem(key) ? JSON.parse(atob(sessionStorage.getItem(key))) : null;
+        return window.localStorage.getItem(key) ? JSON.parse(atob(localStorage.getItem(key))) : null;
     }
 
     public static remove(key: string): any {
