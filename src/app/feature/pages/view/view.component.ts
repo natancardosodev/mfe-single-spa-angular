@@ -18,6 +18,7 @@ export class ViewComponent implements OnInit {
     public showDetails: boolean = true;
     public showLibs: boolean = true;
     public showMoreLibs: boolean = true;
+    public filter: string;
 
     constructor(
         private solicitacaoService: SolicitacaoService,
@@ -37,7 +38,6 @@ export class ViewComponent implements OnInit {
         if (!this.dataProjects) {
             this.solicitacaoService.getProjects(this.equipe).subscribe((response: DataProjectsI) => {
                 this.dataProjects = response;
-                StorageUtil.store('data_' + this.equipe, this.dataProjects);
 
                 if (!isNullOrUndefined(this.dataProjects)) {
                     this.dataProjects.projects.forEach((item, index) => {
@@ -58,6 +58,7 @@ export class ViewComponent implements OnInit {
                                     ];
                                 }
                                 this.dataProjects.projects[index].libs = libs;
+                                StorageUtil.store('data_' + this.equipe, this.dataProjects);
                             });
                     });
                 }
