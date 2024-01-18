@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TiposProjectEnum } from '@core/enums/sistema/tipos-project.enum';
 import { DataProjectsI } from '@core/interfaces/mapeamento.interface';
+import { StorageUtil } from '@core/utils/storage.util';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
-import { Dados, StorageUtil, isNullOrUndefined } from 'lib-vox-shared-codes';
+import { Dados, isNullOrUndefined } from 'lib-vox-shared-codes';
 import { environment } from 'src/environments/environment';
 
 @Component({

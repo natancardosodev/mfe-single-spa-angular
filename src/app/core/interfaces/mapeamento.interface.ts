@@ -32,3 +32,10 @@ export interface LibsI {
     require?: string;
     'require-dev'?: string;
 }
+
+export interface IndexI {
+    id: number;
+    label: string;
+    route: string;
+    color: string;
+}

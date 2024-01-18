@@ -6,7 +6,7 @@
 
             @if (lista) {
                 <ul>
-                    @for (item of lista; track lista.id) {
+                    @for (item of lista; track lista) {
                         @defer {
                             <a [routerLink]="['/', item.route]" [style]="['background:'] + item.color">
                                 <li>
