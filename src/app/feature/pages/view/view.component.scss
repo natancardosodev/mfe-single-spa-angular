@@ -9,7 +9,6 @@ header {
     }
 
     .header {
-
         &__title {
             display: flex;
             justify-content: space-between;
@@ -82,8 +81,9 @@ main {
     }
 
     h3 {
-        font-size: 28px;
+        font-size: 26px;
         margin: 32px 0 0;
+        color: #757575;
     }
 
     ul {
