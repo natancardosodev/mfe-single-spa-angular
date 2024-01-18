@@ -4,11 +4,8 @@ import { Injectable } from '@angular/core';
 import { AlertService } from 'lib-vox-ui';
 import { Observable } from 'rxjs';
 
-import { StorageEnum } from '@core/enums/sistema/storage.enum';
-import { UserInterface } from '@core/interfaces/interno/user-interface';
 import { BaseService } from '@core/services/base.service';
 import { UrlUtilService } from '@core/services/url-util.service';
-import { StorageUtil } from '@core/utils/storage.util';
 import { TiposApisEnum } from 'lib-vox-shared-codes';
 
 @Injectable({
@@ -17,12 +14,9 @@ import { TiposApisEnum } from 'lib-vox-shared-codes';
 export class JarvisService extends BaseService {
     private tipoApi = TiposApisEnum.JARVIS;
     private uf: string;
-    private dadosUsuario: UserInterface;
 
     constructor(http: HttpClient, urlUtilService: UrlUtilService, alertService: AlertService) {
         super('/', http, urlUtilService, alertService);
-        this.dadosUsuario = StorageUtil.get(StorageEnum.DADOS_USUARIO) as UserInterface;
-        this.uf = this.dadosUsuario.estado;
     }
 
     /**

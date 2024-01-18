@@ -4,7 +4,7 @@
             <div class="header__title">
                 <h1>{{ dataProjects.title }}</h1>
                 <div class="header__title--btns">
-                    <button [style]="['color:'] + dataProjects.colorPrimary" type="button">
+                    <button [style]="['color:'] + dataProjects.colorPrimary" type="button" (click)="reloadData()">
                         <i class="fa-solid fa-rotate"></i>Recarregar
                     </button>
                     <button [style]="['color:'] + dataProjects.colorPrimary" [routerLink]="['/']" type="button">
