@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataProjectsI } from '@core/interfaces/mapeamento.interface';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
-import { Dados, isNullOrUndefined } from 'lib-vox-shared-codes';
+import { Dados, StorageUtil, isNullOrUndefined } from 'lib-vox-shared-codes';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-view',
@@ -23,7 +24,7 @@ export class ViewComponent implements OnInit {
         this.activatedRoute.params.subscribe((params) => {
             this.equipe = params['equipe'];
         });
-        this.dataProjects = null;
+        this.dataProjects = StorageUtil.get('data_' + this.equipe);
     }
 
     ngOnInit(): void {
@@ -31,23 +32,26 @@ export class ViewComponent implements OnInit {
     }
 
     public getDados() {
-        this.solicitacaoService.getProjects('mock-' + this.equipe).subscribe((response: DataProjectsI) => {
-            this.dataProjects = response;
-            // @todo aguardar task 338579
-            // if (!isNullOrUndefined(this.dataProjects)) {
-            //     this.dataProjects.projects.forEach((item, index) => {
-            //         this.solicitacaoService
-            //             .getPackageOfProject(item.id, environment.token.front)
-            //             .subscribe((response) => {
-            //                 const libs = [
-            //                     ...this.getFields(JSON.parse(atob(response.content)).dependencies),
-            //                     ...this.getFields(JSON.parse(atob(response.content)).devDependencies)
-            //                 ];
-            //                 this.dataProjects.projects[index].libs = libs;
-            //             });
-            //     });
-            // }
-        });
+        if (!this.dataProjects) {
+            this.solicitacaoService.getProjects(this.equipe).subscribe((response: DataProjectsI) => {
+                this.dataProjects = response;
+                StorageUtil.store('data_' + this.equipe, this.dataProjects);
+
+                if (!isNullOrUndefined(this.dataProjects)) {
+                    this.dataProjects.projects.forEach((item, index) => {
+                        this.solicitacaoService
+                            .getPackageOfProject(item.id, environment.token.front)
+                            .subscribe((response) => {
+                                const libs = [
+                                    ...this.getFields(JSON.parse(atob(response.content)).dependencies),
+                                    ...this.getFields(JSON.parse(atob(response.content)).devDependencies)
+                                ];
+                                this.dataProjects.projects[index].libs = libs;
+                            });
+                    });
+                }
+            });
+        }
     }
 
     public getFields(parameters: Record<string, string>): Array<Dados> {
@@ -67,5 +71,10 @@ export class ViewComponent implements OnInit {
 
     public showHideLibs() {
         this.showLibs = !this.showLibs;
+    }
+
+    public reloadData(): void {
+        StorageUtil.remove('data_' + this.equipe);
+        window.location.reload();
     }
 }
