@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TiposProjectEnum } from '@core/enums/sistema/tipos-project.enum';
 import { DataProjectsI } from '@core/interfaces/mapeamento.interface';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
 import { Dados, StorageUtil, isNullOrUndefined } from 'lib-vox-shared-codes';
@@ -42,10 +43,19 @@ export class ViewComponent implements OnInit {
                         this.solicitacaoService
                             .getPackageOfProject(item.id, environment.token.front)
                             .subscribe((response) => {
-                                const libs = [
-                                    ...this.getFields(JSON.parse(atob(response.content)).dependencies),
-                                    ...this.getFields(JSON.parse(atob(response.content)).devDependencies)
-                                ];
+                                let libs = null;
+                                if (this.dataProjects.filenameLibs === TiposProjectEnum.FRONT) {
+                                    libs = [
+                                        ...this.getFields(JSON.parse(atob(response.content)).dependencies),
+                                        ...this.getFields(JSON.parse(atob(response.content)).devDependencies)
+                                    ];
+                                }
+                                if (this.dataProjects.filenameLibs === TiposProjectEnum.BACK) {
+                                    libs = [
+                                        ...this.getFields(JSON.parse(atob(response.content)).require),
+                                        ...this.getFields(JSON.parse(atob(response.content))['require-dev'])
+                                    ];
+                                }
                                 this.dataProjects.projects[index].libs = libs;
                             });
                     });

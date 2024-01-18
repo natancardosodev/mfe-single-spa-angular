@@ -17,11 +17,18 @@ export interface DataProjectsI {
 export interface ProjectI {
     title: string;
     id: number;
-    libs: Array<any>;
+    libs: Array<Dados>;
     details: Array<DetailI>;
 }
 
 export interface DetailI {
     title: string;
     description: string;
+}
+
+export interface LibsI {
+    dependencies?: string;
+    devDependencies?: string;
+    require?: string;
+    'require-dev'?: string;
 }
