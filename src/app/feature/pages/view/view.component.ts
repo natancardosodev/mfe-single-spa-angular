@@ -18,7 +18,8 @@ export class ViewComponent implements OnInit {
     public showDetails: boolean = true;
     public showLibs: boolean = true;
     public showMoreLibs: boolean = true;
-    public filter: string;
+    public filterDetails: string;
+    public filterLibs: string;
 
     constructor(
         private solicitacaoService: SolicitacaoService,

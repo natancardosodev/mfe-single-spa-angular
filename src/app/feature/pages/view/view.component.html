@@ -19,8 +19,16 @@
                     <input
                         class="search"
                         type="text"
-                        placeholder="Pesquise Por uma Tecnologia"
-                        (input)="filter = $event.target.value"
+                        placeholder="Pesquise pelos detalhes"
+                        (input)="filterDetails = $event.target.value"
+                    />
+
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input
+                        class="search"
+                        type="text"
+                        placeholder="Pesquise por uma tecnologia"
+                        (input)="filterLibs = $event.target.value"
                     />
                 </form>
 
@@ -42,20 +50,18 @@
     </header>
 
     <main class="wrapper">
-        @for (item of dataProjects.projects; track item.id) {
+        @for (item of dataProjects.projects | searchFilter: filterDetails || filterLibs; track item.id) {
             @defer {
                 <div class="project">
                     <h2>{{ item.title }}</h2>
                     <div [ngClass]="showDetails ? 'show' : 'hide'">
                         <ul>
-                            @for (it of item.details; track it.title) {
+                            @for (it of item.details | searchFilter: filterDetails; track it.title) {
                                 <li class="list-card">
                                     <b>{{ it.title }}:</b>
 
                                     {{ it.description }}
                                 </li>
-                            } @empty {
-                                Lista não encontrada.
                             }
                         </ul>
                     </div>
@@ -64,7 +70,7 @@
                     <h3>Bibliotecas</h3>
 
                     <ul>
-                        <ng-container *ngFor="let it of item.libs | searchFilter: filter; let i = index">
+                        <ng-container *ngFor="let it of item.libs | searchFilter: filterLibs; let i = index">
                             <li class="list-lib" *ngIf="i < 16 || !showMoreLibs">
                                 <span
                                     ><b>{{ it.key }}:</b> {{ it.value }}
