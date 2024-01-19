@@ -70,13 +70,13 @@
                     <h3>Bibliotecas</h3>
 
                     <ul>
-                        <ng-container *ngFor="let it of item.libs | searchFilter: filterLibs; let i = index">
-                            <li class="list-lib" *ngIf="i < 16 || !showMoreLibs">
+                        @for (it of item.libs | searchFilter: filterLibs; track it.title) {
+                            <li class="list-lib" *ngIf="$index < 16 || !showMoreLibs">
                                 <span
                                     ><b>{{ it.key }}:</b> {{ it.value }}
                                 </span>
                             </li>
-                        </ng-container>
+                        }
                     </ul>
                     <button class="btn-vermais" (click)="showMoreLibs = !showMoreLibs">
                         <i class="fa-solid {{ showMoreLibs ? 'fa-plus' : 'fa-minus' }}"></i>
@@ -89,6 +89,8 @@
             } @error {
                 <p>Ocorreu um erro na requisição.</p>
             }
+        } @empty {
+            <p>Sem dados para a pesquisa.</p>
         }
     </main>
 } @else {
