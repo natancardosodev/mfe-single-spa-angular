@@ -72,12 +72,14 @@
                     <ul>
                         @for (it of item.libs | searchFilter: filterLibs; track it.title) {
                             <li class="list-lib" *ngIf="$index < 16 || !showMoreLibs">
-                                <span
+                                <!-- todo: melhorar visual do tooltip -->
+                                <span title="{{ it.key }}: {{ it.value }}"
                                     ><b>{{ it.key }}:</b> {{ it.value }}
                                 </span>
                             </li>
                         }
                     </ul>
+                    <!-- @todo segregar em array bool showMoreLibs[$index] -->
                     <button class="btn-vermais" (click)="showMoreLibs = !showMoreLibs">
                         <i class="fa-solid {{ showMoreLibs ? 'fa-plus' : 'fa-minus' }}"></i>
                         {{ showMoreLibs ? 'Ver mais' : 'Ver menos' }}
