@@ -1,12 +1,15 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { EmptyRouteComponent } from '@feature/pages/empty-route/empty-route.component';
 
+const baseHref = RotasEnum.BASE_HREF.split('/')[1];
+
 const appRoutes: Routes = [
-    { path: 'micro-ng', loadChildren: () => import('./feature/pages/home/home.module').then((m) => m.HomeModule) },
+    { path: baseHref, loadChildren: () => import('./feature/pages/home/home.module').then((m) => m.HomeModule) },
     {
-        path: 'micro-ng/:equipe',
+        path: baseHref + '/:equipe',
         loadChildren: () => import('./feature/pages/view/view.module').then((m) => m.ViewModule)
     },
     {

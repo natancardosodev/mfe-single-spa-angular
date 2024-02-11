@@ -13,7 +13,7 @@
         "lint": "npm run eslint && npm run stylelint",
         "clear": "rm -rf dist",
         "serve": "ng serve --disable-host-check --port 4200 --live-reload false",
-        "check-version": "./node_modules/.bin/check-node-version --node 20.10.0 --npm 10.2.3",
+        "check-version": "./node_modules/.bin/check-node-version --node 20 --npm 10",
         "pre-build": "npm run check-version && npm run clear",
         "dev": "./node_modules/.bin/ng serve --open",
         "watch": "./node_modules/.bin/ng build --output-path dist --watch",

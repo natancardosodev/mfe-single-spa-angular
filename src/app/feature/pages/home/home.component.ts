@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
 import { IndexI } from '@core/interfaces/mapeamento.interface';
 import { StorageUtil } from '@core/utils/storage.util';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
@@ -12,6 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 export class HomeComponent implements OnInit {
     public lista$: BehaviorSubject<Array<IndexI>> = new BehaviorSubject(StorageUtil.get('indexDt'));
     public lista: Array<IndexI>;
+    public baseHref = RotasEnum.BASE_HREF;
 
     constructor(private solicitacaoService: SolicitacaoService) {}
 

@@ -1,14 +1,14 @@
 <div class="grid-home">
     <div class="nav">
         <div class="nav__column">
-            <img src="https://deve.testes.com/micro-ng/assets/images/logo.png" alt="Logo" />
+            <img [src]="baseHref + 'assets/images/logo.png'" class="logo" alt="Logo" />
             <h1>Mapeamento Tecnológico de Projetos</h1>
 
             @if (lista) {
                 <ul>
                     @for (item of lista; track lista) {
                         @defer {
-                            <a [routerLink]="['/micro-ng/', item.route]" [style]="['background:'] + item.color">
+                            <a [routerLink]="[baseHref, item.route]" [style]="['background:'] + item.color">
                                 <li>
                                     {{ item.label }}
                                 </li>
