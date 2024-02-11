@@ -1,7 +1,5 @@
 # Micro-frontend Angular com Single-SPA
 
-Precisa executar o projeto https://github.com/natancardosodev/root-config
-
 ## Pre-requisitos
 
 -   `Node` 20.10.0
@@ -34,7 +32,9 @@ npm run build
 
 ## Acesso
 
--   https://deve.testes.com/
+Acesso via [Projeto Root Config](https://github.com/natancardosodev/root-config)
+
+-   https://deve.testes.com/ ou http://localhost:9000
 
 ## Tecnologias
 
