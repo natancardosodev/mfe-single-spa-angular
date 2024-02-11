@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'appx-root',
+    selector: 'mfe-app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
