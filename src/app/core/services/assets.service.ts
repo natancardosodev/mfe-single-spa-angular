@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { TiposApisEnum } from 'lib-vox-shared-codes';
-import { AlertService } from 'lib-vox-ui';
+import { AlertService } from '@core/components/alert/alert.service';
+import { TiposApisEnum } from '@shared/enums/tipo-apis.enum';
 import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
 import { UrlUtilService } from './url-util.service';

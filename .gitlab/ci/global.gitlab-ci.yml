@@ -41,7 +41,7 @@
     extends:
         - .default-retry
         - .only-default
-    image: voxtecnologiahub/node-14.19.1
+    image: node:20
     stage: style
     before_script:
         - npm install

@@ -1,4 +1,8 @@
-import { Dados } from 'lib-vox-shared-codes';
+export interface Dados {
+    key: string | number | boolean;
+    value: string | number | boolean;
+    name?: string;
+}
 
 export interface DadosEquipeI {
     key: string;

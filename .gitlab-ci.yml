@@ -1,7 +1,7 @@
-image: voxtecnologiahub/node-14.19.1
+image: node:20
 
 variables:
-    CUSTOM_PROJECT_PATH: vox/front-end/skeleton-internal-front
+    CUSTOM_PROJECT_PATH: mfe-angular
     RUN_LINT_CSS: npm run stylelint
     RUN_LINT_JS: npm run eslint
 

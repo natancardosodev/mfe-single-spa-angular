@@ -4,11 +4,10 @@ export const environment: EnvironmentInterface = {
     production: true,
     deployUrl: 'https://deve.testes.com/micro-ng/',
     uri: {
-        api: 'https://legacy.{DOMINIO_REDESIM}/api/internal/skeleton',
-        oauth: 'https://autenticacao.{DOMINIO_REDESIM}',
-        assetsSigfacil: 'https:/sigfacil.staticvox.com.br',
-        jarvis: 'https://www.{DOMINIO_REDESIM}/api/jarvis',
-        projeto: 'https://interno.{DOMINIO_REDESIM}/sigfacil/skeleton',
+        api: 'https://api.testes.com/internal/skeleton',
+        oauth: 'https://autenticacao.testes.com',
+        assetsSigfacil: 'https:/sigfacil.staticwsx.com.br',
+        projeto: 'https://testes.com',
         environments: 'https://',
         subDomain: 'www'
     }

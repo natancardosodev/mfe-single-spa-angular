@@ -56,9 +56,6 @@ Acesso via [Projeto Root Config](https://github.com/natancardosodev/root-config)
     -   feature: components de páginas e serviços
     -   shared: diretivas e pipes
 -   Bibliotecas importantes:
-    -   lib-vox-ui (Vox)
-    -   lib-vox-shared-codes (Vox)
-    -   lib-vox-grid (Vox)
     -   ngx-bootstrap v5
     -   font-awesome v5.13.1
     -   ngx-currency v2
@@ -70,15 +67,12 @@ Acesso via [Projeto Root Config](https://github.com/natancardosodev/root-config)
 -   Executar `npm run lint:fix` antes de commitar e corrigir os erros
 -   Não conseguindo resolver um erro de lint utilize o `// eslint-disable-next-line` com a regra, mas antes
     [consulte a doc](https://eslint.org/docs/rules/).
--   [Recomendações na construção](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/training/construcao.md)
--   [Arquitetura do projeto](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/imersao/arquitetura.md)
--   [Solução de erros comuns](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/imersao/issues.md)
 
 ## Alias Vhost Apache2
 
 ```conf
-Alias /micro-ng /vox/mapeamento-tecnologico/dist
-<Directory /vox/mapeamento-tecnologico/dist>
+Alias /micro-ng /www/mfe-angular/dist
+<Directory /www/mfe-angular/dist>
         Options FollowSymLinks
         AllowOverride None
         Require all granted

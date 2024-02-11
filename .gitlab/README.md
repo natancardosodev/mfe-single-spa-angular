@@ -17,8 +17,8 @@ _Obs.: Caso o projeto exista uma path com nome .gitlab remover!_
 
 ---
 
-      cd /vox/PROJETO
-      git clone git@gitlab.voxtecnologia.com.br:vox/arquitetura/gitlab-templates.git .gitlab
+      cd /wsx/PROJETO
+      git clone git@gitlab.wsxtecnologia.com.br:wsx/arquitetura/gitlab-templates.git .gitlab
 
 ---
 
@@ -47,7 +47,7 @@ _Alterar as variaveis dentro do arquivo .gitlab-ci.yml_
 
 ---
 
-    CUSTOM_PROJECT_PATH: /vox/portal
+    CUSTOM_PROJECT_PATH: /wsx/portal
     SONAR_KEY_PROJECT: portal
 
 ---
@@ -90,7 +90,7 @@ _Alterar as variaveis dentro do arquivo .gitlab-ci.yml_
 
 ---
 
-    CUSTOM_PROJECT_PATH: vox/GRUPO/PROJETO
+    CUSTOM_PROJECT_PATH: wsx/GRUPO/PROJETO
     SONAR_KEY_PROJECT: analise-livro-front
     NPM_BUILD: build-gitlab-ci
 
@@ -125,7 +125,7 @@ _Alterar as variaveis dentro do arquivo .gitlab-ci.yml_
 
 ---
 
-    CUSTOM_PROJECT_PATH: vox/GRUPO/PROJETO
+    CUSTOM_PROJECT_PATH: wsx/GRUPO/PROJETO
     SONAR_KEY_PROJECT: assinatura-web
 
 ---

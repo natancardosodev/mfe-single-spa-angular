@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-// import { RotasEnum } from '@core/enums/interno/rotas.enum';
 
-import { TiposApisEnum, generateObjectToQueryString, urlPortalHttps } from 'lib-vox-shared-codes';
+import { RotasEnum } from '@core/enums/interno/rotas.enum';
+import { TiposApisEnum } from '@shared/enums/tipo-apis.enum';
+import { generateObjectToQueryString } from '@shared/utils/manipulate-data';
+import { urlPortalHttps } from '@shared/utils/mount-urls.util';
 import { EnvService } from './env.service';
 
 @Injectable({
@@ -47,7 +49,7 @@ export class UrlUtilService {
                 baseUrl = 'http://localhost:3000';
                 break;
             case TiposApisEnum.STATIC:
-                return `https://deve.testes.com/micro-ng/assets/mocks${resource}.json`;
+                return `${this.env.projeto}${RotasEnum.BASE_HREF}assets/mocks${resource}.json`;
 
             default:
                 baseUrl = this.getUrlApiBase();

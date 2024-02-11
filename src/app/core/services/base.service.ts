@@ -1,7 +1,9 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { TiposApisEnum, cleanParams } from 'lib-vox-shared-codes';
-import { AlertService, catchErrorApi, throwErrorAPI } from 'lib-vox-ui';
-import { HttpOptions } from 'lib-vox-ui/lib/core';
+import { AlertService } from '@core/components/alert/alert.service';
+import { HttpOptions } from '@core/interfaces/sistema/http-options';
+import { TiposApisEnum } from '@shared/enums/tipo-apis.enum';
+import { catchErrorApi, throwErrorAPI } from '@shared/utils/handle-api';
+import { cleanParams } from '@shared/utils/manipulate-data';
 import { Observable } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 import { UrlUtilService } from './url-util.service';
@@ -169,8 +171,8 @@ export abstract class BaseService {
         this.options = customOptions
             ? customOptions
             : tipoApi === TiposApisEnum.JARVIS
-            ? this.optionsJarvis
-            : this.options;
+              ? this.optionsJarvis
+              : this.options;
         this.options['params'] = !params || typeof params === 'undefined' ? null : cleanParams(params);
         this.options['body'] = body;
         this.options['observe'] = tipoApi === TiposApisEnum.JARVIS ? 'response' : 'body';
@@ -211,12 +213,12 @@ export abstract class BaseService {
 
         if (!msgErr && JSON.stringify(msg).toString().includes('[{')) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-            const arrayMessageVox = msg.map((err: Record<string, string>) => {
+            const arrayMessage = msg.map((err: Record<string, string>) => {
                 return {
                     message: `<strong> Erro ${err['cod_erro' || 'code']}: ${err['ds_erro' || 'message']} </strong>`
                 };
             });
-            msgErr = { messagesMultiple: arrayMessageVox };
+            msgErr = { messagesMultiple: arrayMessage };
         }
 
         if (!msgErr && JSON.stringify(msg).toString().includes('{}')) {

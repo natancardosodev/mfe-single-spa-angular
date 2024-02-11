@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IndexI } from '@core/interfaces/mapeamento.interface';
+import { StorageUtil } from '@core/utils/storage.util';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
-import { StorageUtil } from 'lib-vox-shared-codes';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({

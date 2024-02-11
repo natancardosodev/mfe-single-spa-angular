@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { AlertService } from 'lib-vox-ui';
+import { AlertService } from '@core/components/alert/alert.service';
 
 import { BaseService } from '@core/services/base.service';
 import { UrlUtilService } from '@core/services/url-util.service';
-import { TiposApisEnum } from 'lib-vox-shared-codes';
+import { TiposApisEnum } from '@shared/enums/tipo-apis.enum';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -29,7 +28,7 @@ export class SolicitacaoService extends BaseService {
         const headers = new HttpHeaders({ 'PRIVATE-TOKEN': tokenGit }); // 'K42jWs8czrfPQ5WEwjd_'
 
         return this.http.get(
-            `https://gitlab.voxtecnologia.com.br/api/v4/projects/${projectId}/repository/files/package.json?ref=master`,
+            `https://gitlab.com.br/api/v4/projects/${projectId}/repository/files/package.json?ref=master`,
             { headers: headers }
         );
     };
