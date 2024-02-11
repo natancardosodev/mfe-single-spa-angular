@@ -2,7 +2,7 @@ import { EnvironmentInterface } from '@core/interfaces/sistema/enviroment-interf
 
 export const environment: EnvironmentInterface = {
     production: true,
-    deployUrl: 'https://front.voxtecnologia.com.br/micro-ng/',
+    deployUrl: 'https://deve.testes.com/micro-ng/',
     uri: {
         api: 'https://legacy.{DOMINIO_REDESIM}/api/internal/skeleton',
         oauth: 'https://autenticacao.{DOMINIO_REDESIM}',

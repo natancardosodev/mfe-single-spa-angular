@@ -1,4 +1,6 @@
-# Mapeamento Tecnológico dos Projetos Vox
+# Micro-frontend Angular com Single-SPA
+
+Precisa executar o projeto https://github.com/natancardosodev/root-config
 
 ## Pre-requisitos
 
@@ -16,14 +18,6 @@ npm install -g npm@6.14.16
 
 </details>
 
-## Requisitos
-
--   apache-files _(Link simbólico com vhosts e certificados SSL)_
-    -   [Faça a vinculação com o script vhosts-update.](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/tree/master/scripts#vhosts-update-atualizando-os-arquivos-do-apache)
--   Feito o fork,
-    [habilite o Shared Runners](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/imersao/gitlab-ci.md#habilite-o-shared-runners)
-    para execução das pipelines do Gitlab CI.
-
 ## Instalação
 
 ```shell
@@ -33,16 +27,19 @@ npm i --force
 
 npm run start
 # ou
+npm run serve
+# ou
 npm run build
 ```
 
 ## Acesso
 
--   https://deve.testes.com/micro-ng/
+-   https://deve.testes.com/
 
 ## Tecnologias
 
 -   Angular 17
+-   Single-SPA e single-spa-angular
 -   Typescript 5.2
 -   ES2022
 -   Sass
