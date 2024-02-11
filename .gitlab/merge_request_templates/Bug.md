@@ -1,6 +1,5 @@
 | **Tópico**                 | **Descrição**                                                                               |
 | :------------------------- | :------------------------------------------------------------------------------------------ |
-| **Mantis**                 | [XXXX](http://mantis.voxtecnologia.com.br/view.php?id=XXXX)                                 |
 | **Dependência de MR**      | <ul><li>MR 1</li><li>MR 2</li></ul>                                                         |
 | **Problema / Necessidade** | Descreva o problema ou que foi solicitado fazer.                                            |
 | **Regra**                  | Descreva um pouco a regra.                                                                  |
@@ -14,7 +13,6 @@
 
 #### Pontos de impacto da alteração
 
--   [ ] Junta Digital - Autenticação
 -   [ ] Consulta Prévia Localização
 
 #### Nível de impacto
@@ -22,7 +20,6 @@
 -   [ ] Liberação de Módulo para determinada UF
 -   [ ] Adequação visual / textual
 -   [ ] Pequena correção de issue
-        [Sentry](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/imersao/sentry-angular.md#sentry-angular)
 -   [ ] Estrutural do projeto, sem alterar a regra de negócio
 -   [ ] Alteração Lógica ou Comportamental
 -   [ ] Atualização de biblioteca / framework

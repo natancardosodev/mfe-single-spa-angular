@@ -1,14 +1,14 @@
 [
     {
         "id": 1,
-        "label": "Projetos Front do Registro Empresarial",
-        "route": "fronts-re",
+        "label": "Projetos Front Mega Pack",
+        "route": "fronts-mega-pack",
         "color": "#263085"
     },
     {
         "id": 2,
-        "label": "Projetos Front do Licenciamento",
-        "route": "fronts-licenciamento",
+        "label": "Projetos Front Standard",
+        "route": "fronts-standard",
         "color": "#105F64"
     }
 ]

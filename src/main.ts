@@ -3,9 +3,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import * as Sentry from '@sentry/angular-ivy';
 
-import { UFsLiberadas } from '@core/configs/mapeamento-servicos';
-import { RotasEnum } from '@core/enums/interno/rotas.enum';
-import { montarUrlPortais } from 'lib-vox-shared-codes';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
@@ -33,10 +30,10 @@ const dataEHora = new Date().toString().split(' ').join('-').slice(4, 18);
 
 if (ambientesWithSentry.includes(environment.uri.subDomain)) {
     Sentry.init({
-        dsn: 'COLOCAR-URL-DSN-DO-SENTRY-FRONT', // solicitar cadastro a equipe de configuração
+        dsn: 'COLOCAR-URL-DSN-DO-SENTRY-FRONT',
         integrations: [
             new Sentry.BrowserTracing({
-                tracePropagationTargets: [montarUrlPortais(ambientesWithSentry, UFsLiberadas, RotasEnum.BASE_HREF)],
+                tracePropagationTargets: [],
                 routingInstrumentation: Sentry.routingInstrumentation
             }),
             new Sentry.Replay()

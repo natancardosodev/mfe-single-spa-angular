@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TiposProjectEnum } from '@core/enums/sistema/tipos-project.enum';
 import { DataProjectsI } from '@core/interfaces/mapeamento.interface';
 import { StorageUtil } from '@core/utils/storage.util';
 import { SolicitacaoService } from '@feature/services/solicitacao.service';
-import { Dados, isNullOrUndefined } from 'lib-vox-shared-codes';
-import { environment } from 'src/environments/environment';
+import { Dados } from '@shared/interfaces/dados.interface';
+import { isNullOrUndefined } from '@shared/utils/manipulate-data';
 
 @Component({
     selector: 'app-view',
@@ -40,29 +39,30 @@ export class ViewComponent implements OnInit {
             this.solicitacaoService.getProjects(this.equipe).subscribe((response: DataProjectsI) => {
                 this.dataProjects = response;
 
-                if (!isNullOrUndefined(this.dataProjects)) {
-                    this.dataProjects.projects.forEach((item, index) => {
-                        this.solicitacaoService
-                            .getPackageOfProject(item.id, environment.token.front)
-                            .subscribe((response) => {
-                                let libs = null;
-                                if (this.dataProjects.filenameLibs === TiposProjectEnum.FRONT) {
-                                    libs = [
-                                        ...this.getFields(JSON.parse(atob(response.content)).dependencies),
-                                        ...this.getFields(JSON.parse(atob(response.content)).devDependencies)
-                                    ];
-                                }
-                                if (this.dataProjects.filenameLibs === TiposProjectEnum.BACK) {
-                                    libs = [
-                                        ...this.getFields(JSON.parse(atob(response.content)).require),
-                                        ...this.getFields(JSON.parse(atob(response.content))['require-dev'])
-                                    ];
-                                }
-                                this.dataProjects.projects[index].libs = libs;
-                                StorageUtil.store('data_' + this.equipe, this.dataProjects);
-                            });
-                    });
-                }
+                // @todo consumo gitlab
+                // if (!isNullOrUndefined(this.dataProjects)) {
+                //     this.dataProjects.projects.forEach((item, index) => {
+                //         this.solicitacaoService
+                //             .getPackageOfProject(item.id, environment.token.front)
+                //             .subscribe((response) => {
+                //                 let libs = null;
+                //                 if (this.dataProjects.filenameLibs === TiposProjectEnum.FRONT) {
+                //                     libs = [
+                //                         ...this.getFields(JSON.parse(atob(response.content)).dependencies),
+                //                         ...this.getFields(JSON.parse(atob(response.content)).devDependencies)
+                //                     ];
+                //                 }
+                //                 if (this.dataProjects.filenameLibs === TiposProjectEnum.BACK) {
+                //                     libs = [
+                //                         ...this.getFields(JSON.parse(atob(response.content)).require),
+                //                         ...this.getFields(JSON.parse(atob(response.content))['require-dev'])
+                //                     ];
+                //                 }
+                //                 this.dataProjects.projects[index].libs = libs;
+                //                 StorageUtil.store('data_' + this.equipe, this.dataProjects);
+                //             });
+                //     });
+                // }
             });
         }
     }

@@ -3,14 +3,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [RouterTestingModule],
-                declarations: [AppComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [RouterTestingModule],
+            declarations: [AppComponent]
+        }).compileComponents();
+    }));
 
     it('should create the app', () => {
         const fixture = TestBed.createComponent(AppComponent);
@@ -18,16 +16,16 @@ describe('AppComponent', () => {
         expect(app).toBeTruthy();
     });
 
-    it(`should have as title 'skeleton-internal-front'`, () => {
+    it(`should have as title 'mfe-angular'`, () => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
-        expect(app.title).toEqual('skeleton-internal-front');
+        expect(app.title).toEqual('mfe-angular');
     });
 
     it('should render title in a h1 tag', () => {
         const fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('h1').textContent).toContain('Welcome to skeleton-internal-front!');
+        expect(compiled.querySelector('h1').textContent).toContain('Welcome to mfe-angular!');
     });
 });
