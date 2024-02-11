@@ -39,9 +39,6 @@ export class UrlUtilService {
             case TiposApisEnum.ASSETS_SIGFACIL:
                 baseUrl = this.env.assetsSigfacil;
                 break;
-            case TiposApisEnum.JARVIS:
-                baseUrl = this.env.jarvis;
-                break;
             case TiposApisEnum.SIGFACIL:
                 baseUrl = this.getUrlSigfacil();
                 break;

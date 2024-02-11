@@ -9,7 +9,9 @@ export const uf = env.includes('front')
     ? 'al'
     : window.location.host.replace(/.+\.([\w]{2})\.gov.+/i, '$1').split('.')[0];
 
-export const municipio = /\.(.*?)\.gov/.exec(window.location.hostname)[1].match(/(.*?)\./)[1];
+export const municipio = /\.(.*?)\.gov/.exec(window.location.hostname)
+    ? /\.(.*?)\.gov/.exec(window.location.hostname)[1].match(/(.*?)\./)[1]
+    : null;
 
 export const ufSeq: number = UfSeqEnum[uf.toUpperCase()];
 
