@@ -38,7 +38,7 @@ npm run build
 
 ## Acesso
 
--   https://deve-front.voxtecnologia.com.br/portal-dev/tech/
+-   https://deve.testes.com/micro-ng/
 
 ## Tecnologias
 

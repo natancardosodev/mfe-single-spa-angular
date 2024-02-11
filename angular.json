@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "skeleton-internal-front": {
+        "appX": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -15,30 +15,24 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-builders/custom-webpack:browser",
                     "options": {
                         "outputPath": "dist",
                         "index": "src/index.html",
-                        "main": "src/main.ts",
+                        "main": "src/main.single-spa.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
-                        "allowedCommonJsDependencies": [
-                            "util",
-                            "ag-grid-angular",
-                            "crypto-js",
-                            "js-sha512",
-                            "core-js-pure"
-                        ],
-                        "baseHref": "/portal-dev/tech/",
+                        "baseHref": "/",
                         "assets": ["src/favicon.ico", "src/assets"],
-                        "styles": ["src/styles.scss"],
+                        "styles": [],
                         "scripts": [],
-                        "vendorChunk": true,
-                        "extractLicenses": false,
-                        "buildOptimizer": false,
-                        "sourceMap": true,
-                        "optimization": false,
-                        "namedChunks": true
+                        "deployUrl": "https://deve.testes.com/micro-ng/",
+                        "allowedCommonJsDependencies": ["js-sha512", "single-spa-angular", "crypto-js"],
+                        "customWebpackConfig": {
+                            "path": "./extra-webpack.config.js",
+                            "libraryName": "appX",
+                            "libraryTarget": "umd"
+                        }
                     },
                     "configurations": {
                         "production": {
@@ -90,20 +84,22 @@
                     "defaultConfiguration": ""
                 },
                 "serve": {
-                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "builder": "@angular-builders/custom-webpack:dev-server",
                     "options": {
-                        "buildTarget": "skeleton-internal-front:build"
+                        "buildTarget": "appX:build",
+                        "proxyConfig": "./src/proxy.conf.json",
+                        "port": 4201
                     },
                     "configurations": {
                         "production": {
-                            "buildTarget": "skeleton-internal-front:build:production"
+                            "buildTarget": "appX:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "buildTarget": "skeleton-internal-front:build"
+                        "buildTarget": "appX:build"
                     }
                 },
                 "test": {
@@ -122,11 +118,11 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "skeleton-internal-front:serve"
+                        "devServerTarget": "appX:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "skeleton-internal-front:serve:production"
+                            "devServerTarget": "appX:serve:production"
                         }
                     }
                 }

@@ -12,6 +12,7 @@
         "lint:fix": "npm run eslint:fix && npm run stylelint:fix",
         "lint": "npm run eslint && npm run stylelint",
         "clear": "rm -rf dist",
+        "serve": "ng serve --disable-host-check --port 4200 --live-reload false",
         "check-version": "./node_modules/.bin/check-node-version --node 20.10.0 --npm 10.2.3",
         "pre-build": "npm run check-version && npm run clear",
         "dev": "./node_modules/.bin/ng serve --open",
@@ -38,6 +39,7 @@
         "node": ">=20.10.0"
     },
     "dependencies": {
+        "@angular-builders/custom-webpack": "^17",
         "@angular-devkit/build-angular": "^17.0.9",
         "@angular/animations": "^17.0.8",
         "@angular/cli": "^17.0.9",
@@ -61,6 +63,8 @@
         "ngx-mask": "^12.0.0",
         "ngx-skeleton-loader": "^8.1.0",
         "rxjs": "^7.8.1",
+        "single-spa": ">= 5.4",
+        "single-spa-angular": "^9.0.1",
         "zone.js": "~0.14.2"
     },
     "devDependencies": {
