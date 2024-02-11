@@ -1,4 +1,4 @@
-# Mapeamento Tecnológico dos Projetos Vox
+# Micro-frontend Angular com Single-SPA
 
 ## Pre-requisitos
 
@@ -16,14 +16,6 @@ npm install -g npm@6.14.16
 
 </details>
 
-## Requisitos
-
--   apache-files _(Link simbólico com vhosts e certificados SSL)_
-    -   [Faça a vinculação com o script vhosts-update.](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/tree/master/scripts#vhosts-update-atualizando-os-arquivos-do-apache)
--   Feito o fork,
-    [habilite o Shared Runners](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/imersao/gitlab-ci.md#habilite-o-shared-runners)
-    para execução das pipelines do Gitlab CI.
-
 ## Instalação
 
 ```shell
@@ -33,16 +25,21 @@ npm i --force
 
 npm run start
 # ou
+npm run serve
+# ou
 npm run build
 ```
 
 ## Acesso
 
--   https://deve-front.voxtecnologia.com.br/portal-dev/tech/
+Acesso via [Projeto Root Config](https://github.com/natancardosodev/root-config)
+
+-   https://deve.testes.com/ ou http://localhost:9000
 
 ## Tecnologias
 
 -   Angular 17
+-   Single-SPA e single-spa-angular
 -   Typescript 5.2
 -   ES2022
 -   Sass
@@ -76,3 +73,23 @@ npm run build
 -   [Recomendações na construção](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/training/construcao.md)
 -   [Arquitetura do projeto](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/imersao/arquitetura.md)
 -   [Solução de erros comuns](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/imersao/issues.md)
+
+## Alias Vhost Apache2
+
+```conf
+Alias /micro-ng /vox/mapeamento-tecnologico/dist
+<Directory /vox/mapeamento-tecnologico/dist>
+        Options FollowSymLinks
+        AllowOverride None
+        Require all granted
+        <IfModule mod_rewrite.c>
+                Options -MultiViews
+                RewriteEngine On
+                RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+                RewriteRule ^(.*) - [E=BASE:%1]
+                RewriteCond %{REQUEST_FILENAME} -f
+                RewriteRule .? - [L]
+                RewriteRule .? %{ENV:BASE}/index.html [L]
+        </IfModule>
+</Directory>
+```

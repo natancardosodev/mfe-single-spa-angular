@@ -9,11 +9,12 @@ import * as Sentry from '@sentry/angular-ivy';
 
 import { GlobalErrorHandler } from '@core/interceptor/global-error-handler';
 import { JarvisInterceptor } from '@core/interceptor/jarvis.interceptor';
+import { EmptyRouteComponent } from '@feature/pages/empty-route/empty-route.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, EmptyRouteComponent],
     imports: [
         HttpClientModule,
         BrowserModule,

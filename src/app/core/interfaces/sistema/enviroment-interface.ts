@@ -1,5 +1,6 @@
 export interface EnvironmentInterface {
     production: boolean;
+    deployUrl: string;
     uri: {
         oauth: string;
         api: string;

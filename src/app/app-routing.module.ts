@@ -1,17 +1,17 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-// import { RotasEnum } from './core/enums/interno/rotas.enum';
+import { EmptyRouteComponent } from '@feature/pages/empty-route/empty-route.component';
 
 const appRoutes: Routes = [
-    { path: '', loadChildren: () => import('./feature/pages/home/home.module').then((m) => m.HomeModule) },
-    { path: ':equipe', loadChildren: () => import('./feature/pages/view/view.module').then((m) => m.ViewModule) },
+    { path: 'micro-ng', loadChildren: () => import('./feature/pages/home/home.module').then((m) => m.HomeModule) },
+    {
+        path: 'micro-ng/:equipe',
+        loadChildren: () => import('./feature/pages/view/view.module').then((m) => m.ViewModule)
+    },
     {
         path: '**',
-        loadChildren: () =>
-            import('./feature/pages/pagina-nao-encontrada/pagina-nao-encontrada.module').then(
-                (m) => m.PaginaNaoEncontradaModule
-            )
+        component: EmptyRouteComponent
     }
 ];
 
@@ -22,6 +22,7 @@ const appRoutes: Routes = [
             scrollPositionRestoration: 'enabled'
         })
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
 })
 export class AppRoutingModule {}

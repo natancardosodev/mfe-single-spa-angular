@@ -1,5 +1,5 @@
 export enum RotasEnum {
-    BASE_HREF = '/portal-dev/tech/',
+    BASE_HREF = '/micro-ng/',
     // ROTAS BASE DAS FUNCIONALIDADES
     VISUALIZARPROCESSO = 'visualizar-processo',
     // ROTAS SECUNDÁRIAS
