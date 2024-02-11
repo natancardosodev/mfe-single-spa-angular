@@ -73,3 +73,23 @@ Acesso via [Projeto Root Config](https://github.com/natancardosodev/root-config)
 -   [Recomendações na construção](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/training/construcao.md)
 -   [Arquitetura do projeto](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/imersao/arquitetura.md)
 -   [Solução de erros comuns](https://gitlab.voxtecnologia.com.br/vox/front-end/docs-dev/blob/master/imersao/issues.md)
+
+## Alias Vhost Apache2
+
+```conf
+Alias /micro-ng /vox/mapeamento-tecnologico/dist
+<Directory /vox/mapeamento-tecnologico/dist>
+        Options FollowSymLinks
+        AllowOverride None
+        Require all granted
+        <IfModule mod_rewrite.c>
+                Options -MultiViews
+                RewriteEngine On
+                RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+                RewriteRule ^(.*) - [E=BASE:%1]
+                RewriteCond %{REQUEST_FILENAME} -f
+                RewriteRule .? - [L]
+                RewriteRule .? %{ENV:BASE}/index.html [L]
+        </IfModule>
+</Directory>
+```
