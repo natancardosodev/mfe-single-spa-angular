@@ -1,3 +1,5 @@
+$baseHref: '/micro-ng/';
+
 .grid-home {
     display: flex;
     flex-direction: row;
@@ -55,7 +57,7 @@
     }
 
     .bg-card {
-        background: url('/micro-ng/assets/images/bg-card-home.png');
+        background: url($baseHref + 'assets/images/bg-card-home.png');
         flex: 1;
         height: 100%;
         background-size: cover;

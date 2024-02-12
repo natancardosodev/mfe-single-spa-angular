@@ -25,7 +25,7 @@ export const getUrlAssets = (type: string) => {
         : `https://${isProd ? '' : env + '-'}${type}.staticwsx.com.br`;
 };
 
-export const urlAssetsSigfacil = getUrlAssets('sigfacil');
+export const urlCdn = getUrlAssets('sigfacil');
 
 export const urlAssetsSlim = getUrlAssets('slim');
 

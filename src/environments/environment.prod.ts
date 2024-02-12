@@ -2,13 +2,13 @@ import { EnvironmentInterface } from '@core/interfaces/sistema/enviroment-interf
 
 export const environment: EnvironmentInterface = {
     production: true,
-    deployUrl: 'https://deve.testes.com/micro-ng/',
     uri: {
         api: 'https://api.testes.com/internal/skeleton',
         oauth: 'https://autenticacao.testes.com',
-        assetsSigfacil: 'https:/sigfacil.staticwsx.com.br',
-        projeto: 'https://testes.com',
-        environments: 'https://',
+        cdn: 'https:/sigfacil.staticwsx.com.br',
         subDomain: 'www'
+    },
+    token: {
+        front: 'S67jNs8czrfP46WEwjd_'
     }
 };

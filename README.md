@@ -4,6 +4,7 @@
 
 -   `Node` 20.10.0
 -   `npm` 6.14.16
+-   [Aplicativo contêiner](https://github.com/natancardosodev/root-config) com single-spa.
 
 <details>
 <summary>Instalar node/npm</summary>
@@ -34,7 +35,17 @@ npm run build
 
 Acesso via [Projeto Root Config](https://github.com/natancardosodev/root-config)
 
--   https://deve.testes.com/ ou http://localhost:9000
+-   https://mfe.testes.com/
+
+## Observação sobre microfrontends
+
+Esta aplicação só roda via single-spa que é uma estrutura para microfrontends. Para executar da forma normal terá que
+ajustar o:
+
+-   `tsconfig.app.json` (trocando o main.ts),
+-   `angular.json` (trocando @angular-builders/custom-webpack:browser por @angular-devkit/build-angular:browser,
+    trocando o main.ts e retirando o deployUrl),
+-   `AppRoutingModule` (retirando o baseHref das rotas).
 
 ## Tecnologias
 
@@ -67,23 +78,3 @@ Acesso via [Projeto Root Config](https://github.com/natancardosodev/root-config)
 -   Executar `npm run lint:fix` antes de commitar e corrigir os erros
 -   Não conseguindo resolver um erro de lint utilize o `// eslint-disable-next-line` com a regra, mas antes
     [consulte a doc](https://eslint.org/docs/rules/).
-
-## Alias Vhost Apache2
-
-```conf
-Alias /micro-ng /www/mfe-angular/dist
-<Directory /www/mfe-angular/dist>
-        Options FollowSymLinks
-        AllowOverride None
-        Require all granted
-        <IfModule mod_rewrite.c>
-                Options -MultiViews
-                RewriteEngine On
-                RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
-                RewriteRule ^(.*) - [E=BASE:%1]
-                RewriteCond %{REQUEST_FILENAME} -f
-                RewriteRule .? - [L]
-                RewriteRule .? %{ENV:BASE}/index.html [L]
-        </IfModule>
-</Directory>
-```

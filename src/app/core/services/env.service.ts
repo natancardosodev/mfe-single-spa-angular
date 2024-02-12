@@ -10,20 +10,12 @@ export class EnvService {
         return environment.uri.api;
     }
 
-    public get projeto(): string {
-        return environment.uri.projeto;
-    }
-
     public get oauth(): string {
         return environment.uri.oauth;
     }
 
-    public get assetsSigfacil(): string {
-        return environment.uri.assetsSigfacil;
-    }
-
-    public get enviromment(): string {
-        return environment.uri.environments;
+    public get cdn(): string {
+        return environment.uri.cdn;
     }
 
     public get subDomain(): string {
