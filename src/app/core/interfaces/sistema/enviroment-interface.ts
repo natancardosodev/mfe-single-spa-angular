@@ -1,12 +1,9 @@
 export interface EnvironmentInterface {
     production: boolean;
-    deployUrl: string;
     uri: {
         oauth: string;
         api: string;
-        projeto: string;
-        assetsSigfacil: string;
-        environments: string;
+        cdn: string;
         subDomain: string;
     };
     token?: {

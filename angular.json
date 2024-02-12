@@ -22,11 +22,11 @@
                         "main": "src/main.single-spa.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
-                        "baseHref": "/",
+                        "baseHref": "/micro-ng/",
                         "assets": ["src/favicon.ico", "src/assets"],
                         "styles": [],
                         "scripts": [],
-                        "deployUrl": "https://deve.testes.com/micro-ng/",
+                        "deployUrl": "/micro-ng/",
                         "allowedCommonJsDependencies": ["js-sha512", "single-spa-angular", "crypto-js"],
                         "customWebpackConfig": {
                             "path": "./extra-webpack.config.js",
